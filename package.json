@@ -1,0 +1,53 @@
+{
+    "name": "riza",
+    "version": "1.0.37",
+    "description": "Riza Framework",
+    "type": "module",
+    "main": "src/main.js",
+    "scripts": {
+        "test": "echo Ok",
+        "requirements": "yarn global add --ignore-optional parcel http-server",
+        "deploy": "npm run build && node ./local/deploy.js",
+        "commit": "npm run build && node ./local/commit.js",
+        "build": "parcel build --no-cache --target target_dist src/_export.js --no-source-maps",
+        "watch": "parcel watch --no-cache --target target_local src/_export.js --no-hmr",
+        "serve": "http-server -c-1 -p 8080 ./local"
+    },
+    "target_dist": "dist/riza.js",
+    "target_local": "local/riza.js",
+    "targets": {
+        "target_local": {
+            "isLibrary": false,
+            "engines": {
+                "browsers": "since 2020-01"
+            }
+        },
+        "target_dist": {
+            "isLibrary": false,
+            "engines": {
+                "browsers": "since 2020-01"
+            }
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rsthn/riza.git"
+    },
+    "author": "RedStar Technologies",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rsthn/riza/issues"
+    },
+    "homepage": "https://github.com/rsthn/riza#readme",
+    "files": [
+        "dist/",
+        "src/",
+        "LICENSE",
+        "README.md"
+    ],
+    "dependencies": {
+        "@rsthn/rin": "^2.0.29",
+        "base-64": "^1.0.0",
+        "node-fetch": "^2.6.1"
+    }
+}

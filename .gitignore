@@ -1,0 +1,7 @@
+--*
+.svn
+.cache
+node_modules
+custom/
+local/
+.parcel-cache
