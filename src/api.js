@@ -39,7 +39,7 @@ export default
 	/**
 	**	Number of retries to execute each API call before giving up and invoking error handlers.
 	*/
-	retries: 1,
+	retries: 0,
 
 	/**
 	**	Level of the current request. Used to detect nested requests.
@@ -243,7 +243,7 @@ export default
 			credentials: 'include',
 			mode: 'cors',
 			headers: {
-				'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9',
+				'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9'
 			},
 			method: httpMethod,
 			body: null,

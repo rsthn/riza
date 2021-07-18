@@ -439,7 +439,7 @@ const Element =
 	**
 	**		"click .button": "doSomething",		(Delegated Event)
 	**		"click .button": function() { },	(Delegated Event)
-	**		"myevt @this": "...",				(Self Event)
+	**		"myevt &this": "...",				(Self Event)
 	**		"myevt": "...",						(Element Event)
 	**		"myevt @objName": "...",			(EventDispatcher Event)
 	**		"#propname": "...",					(Property Changed Event)
@@ -472,9 +472,9 @@ const Element =
 				name = name.substr(0, j);
 			}
 
-			if (selector.substr(0,1) == '@')
+			if (selector[0] == '@')
 			{
-				if (selector.substr(1) != 'this')
+				if (selector != '@this')
 				{
 					this[selector.substr(1)].addEventListener(name, hdl);
 					continue;
@@ -482,9 +482,13 @@ const Element =
 
 				selector = this;
 			}
-
-			if (selector[0] == '&')
-				selector = "[data-ref='"+selector.substr(1)+"']";
+			else if (selector[0] == '&')
+			{
+				if (selector != '&this')
+					selector = "[data-ref='"+selector.substr(1)+"']";
+				else
+					selector = this;
+			}
 
 			if (name.substr(0, 1) == '#')
 			{
@@ -784,6 +788,8 @@ const Element =
 		let self = this;
 		let modified = false;
 		let list;
+
+		if (!this.isRoot) return;
 
 		let _list_watch_length = this._list_watch.length;
 		let _list_visible_length = this._list_visible.length;

@@ -14,5 +14,5 @@
 **	USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import * as _riza from './main.js';
+import * as _riza from './main';
 export default riza = _riza;
