@@ -124,7 +124,25 @@ export default Element.register ('r-select',
 		if ('blank' in this.dataset)
 			s += '<option value="">'+this.dataset.blank+'</option>';
 
-		list.forEach(i => s += '<option value="'+i.get(value)+'">'+i.get(label)+'</option>');
+		if (list[0].has('group'))
+		{
+			let groups = { };
+			list.forEach(i => groups[i.get('group')] = null);
+
+			for (let i in groups)
+				groups[i] = { name: i, list: [] };
+
+			list.forEach(i => groups[i.get('group')].list.push(i));
+
+			groups = Object.values(groups);
+			groups.forEach(g => {
+				s += '<optgroup label="'+g.name+'">';
+				g.list.forEach(i => s += '<option value="'+i.get(value)+'">'+i.get(label)+'</option>');
+				s += '</optgroup>';
+			});
+		}
+		else
+			list.forEach(i => s += '<option value="'+i.get(value)+'">'+i.get(label)+'</option>');
 
 		this.container.innerHTML = s;
 		this.container.value = this.container.dataset.value;
