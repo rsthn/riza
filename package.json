@@ -1,9 +1,12 @@
 {
     "name": "riza",
-    "version": "1.0.39",
+    "version": "1.0.40",
     "description": "Riza Framework",
     "type": "module",
     "main": "src/main.js",
+    "bin": {
+        "riza": "bin/cli.js"
+    },
     "scripts": {
         "test": "echo Ok",
         "requirements": "yarn global add --ignore-optional parcel http-server",
@@ -19,13 +22,13 @@
         "target_local": {
             "isLibrary": false,
             "engines": {
-                "browsers": "since 2020-01"
+                "browsers": "since 2021-01"
             }
         },
         "target_dist": {
             "isLibrary": false,
             "engines": {
-                "browsers": "since 2020-01"
+                "browsers": "since 2021-01"
             }
         }
     },
@@ -42,11 +45,12 @@
     "files": [
         "dist/",
         "src/",
+        "bin/",
         "LICENSE",
         "README.md"
     ],
     "dependencies": {
-        "@rsthn/rin": "^2.0.29",
+        "@rsthn/rin": "^2.0.32",
         "base-64": "^1.0.0",
         "node-fetch": "^2.6.1"
     }

@@ -803,7 +803,7 @@ const Element =
 				j.remove();
 
 			list[i]._template = Template.compile(list[i].innerHTML);
-			list[i]._watch = new RegExp("^(" + list[i].dataset.watch + ")$");
+			list[i]._watch = new RegExp('^(' + list[i].dataset.watch + ')$');
 			list[i].innerHTML = '';
 
 			list[i].removeAttribute('data-watch');
@@ -816,7 +816,7 @@ const Element =
 				j.remove();
 
 			this._template = Template.compile(this.innerHTML);
-			this._watch = new RegExp("^(" + this.dataset.selfWatch + ")$");
+			this._watch = new RegExp('^(' + this.dataset.selfWatch + ')$');
 			this.innerHTML = '';
 
 			this.removeAttribute('data-self-watch');
@@ -1432,7 +1432,7 @@ const Element =
 	**
 	**	Toggles a CSS class on the element.
 	*/
-	":toggleClass": function (args, evt)
+	':toggleClass': function (args, evt)
 	{
 		let elem = evt.source;
 
@@ -1452,7 +1452,7 @@ const Element =
 	**
 	**	Adds the CSS class to the element and any click outside will cause it to be removed.
 	*/
-	":volatileClass": function (args, evt)
+	':volatileClass': function (args, evt)
 	{
 		let elem = evt.source;
 
@@ -1469,6 +1469,41 @@ const Element =
 		};
 
 		window.addEventListener('click', fn, true);
+	},
+
+	/**
+	**	:toggleClassUnique <className> <parentSelector> <childSelector>
+	**
+	**	Toggles a CSS class on the element and only one element in the selected parent can have the class.
+	*/
+	':toggleClassUnique': function (args, evt)
+	{
+		let elem = evt.source;
+		if (!elem) return;
+
+		if (elem.classList.contains(args[1]))
+		{
+			elem.classList.remove(args[1]);
+		}
+		else
+		{
+			elem.querySelectorParent(args[2]).querySelectorAll(args[3]).forEach(elem => elem.classList.remove(args[1]));
+			elem.classList.add(args[1]);
+		}
+	},
+
+	/**
+	**	:setClassUnique <className> <parentSelector> <childSelector>
+	**
+	**	Sets a CSS class on the element and only that element in the selected parent can have the class.
+	*/
+	':setClassUnique': function (args, evt)
+	{
+		let elem = evt.source;
+		if (!elem) return;
+
+		elem.querySelectorParent(args[2]).querySelectorAll(args[3]).forEach(elem => elem.classList.remove(args[1]));
+		elem.classList.add(args[1]);
 	}
 };
 

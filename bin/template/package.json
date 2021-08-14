@@ -1,0 +1,25 @@
+{
+	"name": "riza-project",
+	"version": "1.0.0",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"requirements": "yarn global add --ignore-optional parcel shx http-server",
+		"clean": "shx rm -f main.min.*",
+		"build": "yarn clean && parcel build --target browser src/main.js --no-cache",
+		"watch": "yarn clean && parcel watch --target browser src/main.js --no-hmr",
+		"serve": "http-server -c-1 -p 8080 ./"
+	},
+	"browser": "main.min.js",
+    "targets": {
+        "browser": {
+			"includeNodeModules": true,
+            "engines": {
+                "browsers": "since 2021-01"
+            }
+        }
+    },
+	"dependencies": {
+		"riza": "^1.*"
+	}
+}

@@ -169,6 +169,8 @@ export default Element.register ('r-tabs',
 			else
 				link.classList.remove('active');
 		});
+
+		this.dispatch('tabChanged', { name: exceptName });
 	},
 
 	/**

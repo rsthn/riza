@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@rsthn/rin@^2.0.29":
-  version "2.0.29"
-  resolved "https://registry.yarnpkg.com/@rsthn/rin/-/rin-2.0.29.tgz#559eb619f71c1844c02bb86c63daa30cdc182723"
-  integrity sha512-KRgjSAeyyN9vy9Ow/IGkaLydT0wcg9R2lHMAYEHNYFOjPAwankTD63ZArI/KBxlfEoYEWTZYIykce0Yp76NgiQ==
+"@rsthn/rin@^2.0.32":
+  version "2.0.32"
+  resolved "https://registry.yarnpkg.com/@rsthn/rin/-/rin-2.0.32.tgz#63a2d35e1edc26fd49920acec85d7f4e5a4e31c7"
+  integrity sha512-0Dwipq8+G9k6u3kIIIQuEhgEKU8+WfF/KfTK9eUw2MMrexb4ByqvVuv1HqBciLQwZv95TRVBus3MARXmtcEI/A==
   dependencies:
     base-64 "^1.0.0"
     node-fetch "^2.6.1"
