@@ -13,7 +13,7 @@ const BLANK = '\x1B[0m';
 const WHITE = '\x1B[97m';
 
 function msg (type, message) {
-	console.log(WHITE + 'froxel: ' + type + message + BLANK);
+	console.log(WHITE + 'riza: ' + type + message + BLANK);
 }
 
 function run (command)

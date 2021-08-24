@@ -24,12 +24,25 @@ if (!('fetch' in global))
 **	API interface utility functions.
 */
 
-export default
+const Api =
 {
+	/**
+	**	Flags constants.
+	*/
+	REQUEST_PACKAGE_SUPPORTED:	0x01,
+	REQ64_SUPPORTED: 			0x02,
+	JSON_RESPONSE_SUPPORTED: 	0x04,
+	XML_RESPONSE_SUPPORTED: 	0x08,
+
 	/**
 	**	Target URL for all the API requests. Set by calling `setEndPoint`.
 	*/
 	apiUrl: "/api",
+
+	/**
+	**	Capabilities flag.
+	*/
+	flags: 0,
 
 	/**
 	**	Indicates if all request data will be packed into a req64 parameter instead of individual fields.
@@ -59,9 +72,13 @@ export default
 	/**
 	**	Sets the API end-point URL address.
 	*/
-	setEndPoint: function (apiUrl)
+	setEndPoint: function (apiUrl, flags=null)
 	{
+		if (flags === null)
+			flags = Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED;
+
 		this.apiUrl = apiUrl;
+		this.flags = flags;
 	},
 
 	/**
@@ -77,6 +94,9 @@ export default
 	*/
 	packageBegin: function ()
 	{
+		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
+			return;
+
 		this._requestPackage++;
 	},
 
@@ -85,6 +105,9 @@ export default
 	*/
 	packageEnd: function (callback)
 	{
+		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
+			return;
+
 		if (!this._requestPackage)
 			return;
 
@@ -99,6 +122,11 @@ export default
 	*/
 	packRequests: function (callback, responseCallback=null)
 	{
+		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
+		{
+			return;
+		}
+
 		this.packageBegin();
 		callback();
 		this.packageEnd(responseCallback);
@@ -109,6 +137,9 @@ export default
 	*/
 	packageSend: function (callback)
 	{
+		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
+			return;
+
 		if (!this._packageData.length)
 			return;
 
@@ -225,7 +256,7 @@ export default
 		if (retries === undefined)
 			retries = this.retries;
 
-		if (this._requestPackage)
+		if (this._requestPackage && (this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
 		{
 			if (!(params instanceof FormData))
 				params = {...params};
@@ -250,71 +281,98 @@ export default
 			multipart: false
 		};
 
-		if (!(data instanceof FormData))
+		if (typeof(data) !== 'string' && !(data instanceof Blob))
 		{
-			data = new FormData();
-
-			for (let i in params)
+			if (!(data instanceof FormData))
 			{
-				if ((params[i] instanceof File) || (params[i] instanceof Blob))
-					data.append(i, params[i], params[i].name);
-				else
-					data.append(i, params[i]);
+				data = new FormData();
+
+				for (let i in params)
+				{
+					if ((params[i] instanceof File) || (params[i] instanceof Blob))
+						data.append(i, params[i], params[i].name);
+					else
+						data.append(i, params[i]);
+				}
 			}
-		}
-
-		for (let i of data.entries())
-		{
-			if ((i[1] instanceof File) || (i[1] instanceof Blob))
-			{
-				options.method = 'POST';
-				options.multipart = true;
-				break;
-			}
-		}
-
-		if (this.useReq64 && !options.multipart)
-		{
-			let tmp = new FormData();
-			tmp.append('req64', base64.encode(this.encodeParams(data)));
-			data = tmp;
-		}
-
-		if (options.method == 'auto')
-		{
-			let l = 0;
-
-			options.method = 'GET';
 
 			for (let i of data.entries())
 			{
-				l += i[0].length + i[1].length + 2;
-
-				if (l > 960)
+				if ((i[1] instanceof File) || (i[1] instanceof Blob))
 				{
 					options.method = 'POST';
+					options.multipart = true;
 					break;
 				}
-			}	
-		}
+			}
 
-		if (options.method == 'GET')
-		{
-			url += '&' + this.encodeParams(data);
+			if (this.useReq64 && (this.flags & Api.REQ64_SUPPORTED) && !options.multipart)
+			{
+				let tmp = new FormData();
+				tmp.append('req64', base64.encode(this.encodeParams(data)));
+				data = tmp;
+			}
+
+			if (options.method == 'auto')
+			{
+				let l = 0;
+
+				options.method = 'GET';
+
+				for (let i of data.entries())
+				{
+					l += i[0].length + i[1].length + 2;
+
+					if (l > 960)
+					{
+						options.method = 'POST';
+						break;
+					}
+				}	
+			}
+
+			if (options.method == 'GET')
+			{
+				url += '&' + this.encodeParams(data);
+			}
+			else
+			{
+				if (!options.multipart)
+				{
+					options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+					options.body = this.encodeParams(data);
+				}
+				else
+					options.body = data;
+			}
 		}
 		else
 		{
-			if (!options.multipart)
+			if (typeof(data) === 'string')
 			{
-				options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-				options.body = this.encodeParams(data);
+				if (data[0] === '<')
+				{
+					if (data.endsWith('</soap:Envelope>'))
+						options.headers['Content-Type'] = 'application/soap+xml';
+					else
+						options.headers['Content-Type'] = 'application/xml';
+				}
+				else
+				{
+					if (data[0] === '{')
+						options.headers['Content-Type'] = 'application/json';
+					else
+						options.headers['Content-Type'] = 'application/octet-stream';
+				}
 			}
 			else
-				options.body = data;
+				options.headers['Content-Type'] = data.type;
+
+			options.body = data;
 		}
 
 		global.fetch(url, options)
-		.then(result => result.json())
+		.then(result => this.decodeResult(result))
 		.then(result =>
 		{
 			this._hideProgress();
@@ -334,6 +392,56 @@ export default
 				this.apiCall (data, success, failure, httpMethod, retries-1);
 			}
 		});
+	},
+
+	/**
+	**	Decodes a result obtained using fetch into a usable object.
+	*/
+	decodeResult: function (result)
+	{
+		let type = result.headers.get('content-type').split(';')[0].toLowerCase();
+
+		if ((this.flags & Api.JSON_RESPONSE_SUPPORTED) && type.indexOf('json') !== -1)
+			return result.json();
+
+		if ((this.flags & Api.XML_RESPONSE_SUPPORTED) && type.indexOf('xml') !== -1)
+		{
+			return new Promise((resolve, reject) =>
+			{
+				result.text().then(data =>
+				{
+					data = (new DOMParser).parseFromString(data, 'text/xml');
+					resolve(data);
+				})
+				.catch(reject);
+			});
+		}
+
+		return result.blob();
+	},
+
+	/**
+	**	Makes a blob with the specified data and type.
+	*/
+	getBlob: function (data, type)
+	{
+		return new Blob ([data], { type: type });
+	},
+
+	/**
+	**	Provided access to the base64 module to encode/decode data.
+	*/
+	base64:
+	{
+		encode: function (value)
+		{
+			return base64.encode(value);
+		},
+
+		decode: function (value)
+		{
+			return base64.decode(value);
+		}
 	},
 
 	/**
@@ -370,3 +478,5 @@ export default
 		return this.apiUrl + (this.apiUrl.indexOf('?') == -1 ? '?' : '&') + this.encodeParams(data);
 	}
 };
+
+export default Api;

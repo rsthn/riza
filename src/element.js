@@ -1448,6 +1448,23 @@ const Element =
 	},
 
 	/**
+	**	:setClass <className> [<selector>]
+	**
+	**	Sets a CSS class on the element.
+	*/
+	':setClass': function (args, evt)
+	{
+		let elem = evt.source;
+
+		if ('2' in args)
+			elem = document.querySelector(args[2]);
+
+		if (!elem) return;
+
+		elem.classList.add(args[1]);
+	},
+
+	/**
 	**	:volatileClass <className> [<selector>]
 	**
 	**	Adds the CSS class to the element and any click outside will cause it to be removed.
