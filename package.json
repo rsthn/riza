@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "1.0.42",
+    "version": "1.0.43",
     "description": "Riza Framework",
     "type": "module",
     "main": "src/main.js",
@@ -53,6 +53,6 @@
         "@rsthn/rin": "^2.0.32",
         "base-64": "^1.0.0",
         "fs-extra": "^10.0.0",
-        "node-fetch": "^2.6.1"
+        "node-fetch": "^2.6.2"
     }
 }

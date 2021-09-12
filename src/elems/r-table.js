@@ -138,7 +138,7 @@ export default Element.register ('r-table',
 	*/
 	setSource: function (source)
 	{
-		if (!source || !Rin.isTypeOf(DataSource, source) || this.source === source)
+		if (!source || !Rin.isInstanceOf(source, DataSource) || this.source === source)
 			return;
 
 		if (this.source != null)

@@ -53,8 +53,6 @@ const Element =
 	**	Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
 	*/
 	isReady: 0,
-	readyReenter: 0,
-	readyLocked: 0,
 
 	/**
 	**	All children elements having the `data-ref` attribute are added to this map (and to the element itself).
@@ -122,6 +120,8 @@ const Element =
 			this.setModel (tmp, false);
 		}
 
+		this._mutationObserver = true;
+
 		Object.keys(this._super).reverse().forEach(i =>
 		{
 			if ('init' in this._super[i])
@@ -133,7 +133,130 @@ const Element =
 		if (this.events)
 			this.bindEvents (this.events);
 
-		this.checkReady();
+		const ready = () =>
+		{
+			this.isReady = 1;
+
+			if ('model' in this.dataset)
+			{
+				let ref = this.getFieldByPath(this.dataset.model);
+				if (ref) this.setModel(ref);
+			}
+ 
+			Object.keys(this._super).reverse().forEach(i =>
+			{
+				if ('ready' in this._super[i])
+					this._super[i].ready();
+			});
+
+			this.ready();
+
+			if (this.root && this.dataset.ref)
+				this.root.onRefAdded (this.dataset.ref, this);
+
+			this.collectWatchers();
+
+			let root = this.findCustomParent(this);
+			if (root)
+			{
+				// Added element using append/prepend on the root but there are no mutation handlers.
+				if (!root._mutationHandler)
+				{
+					if (root.isReady == 2)
+					{
+						this.rready();
+						this.isReady = 2;
+					}
+				}
+				else
+					root._mutationHandler();
+			}
+
+			return root;
+		};
+
+		let timeout = null;
+
+		this._mutationHandler = () =>
+		{
+			if (this.childNodes.length == 0)
+				return;
+
+			let is_ready = true;
+
+			this.querySelectorAll('[data-_custom]').forEach(i =>
+			{
+				let root = this.findCustomParent(i);
+				if (root !== this) return;
+
+				if (!i.isReady) {
+console.log(this.tagName + ' NOT READY => ' + i.tagName);
+					is_ready = false;
+				}
+			});
+console.log(this.tagName + ' => ' + is_ready);
+			if (!is_ready) return;
+
+			if (timeout) clearTimeout(timeout);
+
+			timeout = setTimeout(() =>
+			{
+				timeout = null;
+
+				let is_ready = true;
+				let list = [];
+
+				this.querySelectorAll('[data-_custom]').forEach(i =>
+				{
+					let root = this.findCustomParent(i);
+					if (root !== this) return;
+
+					if (!i.isReady) is_ready = false;
+					if (i.isReady != 2) list.push(i);
+				});
+console.log('timeout ' + this.tagName + ' => ' + is_ready);
+				if (!is_ready) return;
+
+				for (let elem of this.querySelectorAll('[data-_pending=true]'))
+				{
+					let root = this.findRoot(elem.parentElement);
+					if (root !== this) continue;
+
+					if (elem.dataset._linked != 'true')
+					{
+//console.log('INIT ' + this.tagName + ' CONNECT ' + elem.tagName);//violet
+						this[elem.dataset.ref] = elem;
+						this.refs[elem.dataset.ref] = elem;
+
+						elem.connectReference(this);
+					}
+				}
+
+				this._mutationHandler = null;
+				this._mutationObserver.disconnect();
+				this._mutationObserver = null;
+
+				let root = ready();
+
+				for (let i of list)
+				{
+					i.rready();
+					i.isReady = 2;
+				}
+
+				if (!root)
+				{
+					this.isReady = 2;
+					this.rready();
+				}
+			},
+			50);
+		};
+
+		this._mutationObserver = new MutationObserver (this._mutationHandler);
+		this._mutationObserver.observe(this, { attributes: false, childList: true, subtree: false });
+
+		this._mutationHandler();
 	},
 
 	/**
@@ -155,120 +278,6 @@ const Element =
 	*/
 	rready: function()
 	{
-	},
-
-	/*
-	**
-	*/
-	notifyReady: function()
-	{
-		this.checkReady(true);
-	},
-
-	/*
-	** 
-	*/
-	checkReady: function(forced=false)
-	{
-		if (this.childNodes.length == 0 && !forced)
-			return;
-
-		if (this.readyLocked)
-		{
-			this.readyReenter = true;
-			return;
-		}
-
-		let list = [];
-
-		let isReady = Array.from(this.querySelectorAll('[data-_custom]')).every(i =>
-		{
-			let root = this.findCustomParent(i);
-			if (root !== this) return true;
-
-			if (i.isReady !== 2 && !i.readyLocked)
-				list.push(i);
-
-			return i.isReady ? true : false;
-		});
-
-		if (!isReady) return;
-
-		this.readyLocked++;
-
-		for (let elem of this.querySelectorAll('[data-_pending=true]'))
-		{
-			let root = this.findRoot(elem.parentElement);
-			if (root !== this) continue;
-
-			if (elem.dataset._linked !== 'true')
-			{
-				this[elem.dataset.ref] = elem;
-				this.refs[elem.dataset.ref] = elem;
-
-				elem.connectReference(this);
-			}
-		}
-
-		if (!this.isReady)
-		{
-			this.isReady = 1;
-
-			// Link models set dinamically.
-			if ('model' in this.dataset)
-			{
-				let ref = this.getFieldByPath(this.dataset.model);
-				if (ref) this.setModel(ref);
-			}
-
-			// Run ready methods in class hierarchy.
-			Object.keys(this._super).reverse().forEach(i =>
-			{
-				if ('ready' in this._super[i])
-					this._super[i].ready();
-			});
-
-			this.ready();
-			this.collectWatchers();
-
-			// Notify attached reference to root element.
-			if (this.root)
-			{
-				if (this.dataset.ref)
-					this.root.onRefAdded (this.dataset.ref, this);
-
-				this.root.checkReady();
-			}
-		}
-		else
-			this.collectWatchers();
-
-		let root = this.findCustomParent(this);
-		if (root && root.isReady === 2 && this.isReady !== 2)
-		{
-			this.rready();
-			this.isReady = 2;
-		}
-
-		for (let i of list)
-		{
-			i.rready();
-			i.isReady = 2;
-		}
-
-		if (!root && this.isReady !== 2)
-		{
-			this.isReady = 2;
-			this.rready();
-		}
-
-		this.readyLocked--;
-
-		if (this.readyReenter && !this.readyLocked)
-		{
-			this.readyReenter = false;
-			this.checkReady();
-		}
 	},
 
 	/*
@@ -666,7 +675,7 @@ const Element =
 	},
 
 	/**
-	**	Creates an event object for later dispatch.
+	**	Creates X
 	*/
 	createEventObject: function(eventName, args, bubbles)
 	{
@@ -703,11 +712,68 @@ const Element =
 	*/
 	setInnerHTML: function (value)
 	{
-		this.readyLocked++;
-		this.innerHTML = value;
-		this.readyLocked--;
+		if (this._mutationObserver === null)
+		{
+			let timeout = null;
 
-		this.checkReady();
+			this._mutationHandler = () =>
+			{
+				if (this.childNodes.length == 0)
+					return;
+
+				let is_ready = true;
+
+				this.querySelectorAll('[data-_custom]').forEach(i =>
+				{
+					let root = this.findCustomParent(i);
+					if (root !== this) return;
+
+					if (!i.isReady) is_ready = false;
+				});
+
+				if (!is_ready) return;
+
+				if (timeout) clearTimeout(timeout);
+
+				timeout = setTimeout(() =>
+				{
+					timeout = null;
+
+					let is_ready = true;
+					let list = [];
+
+					this.querySelectorAll('[data-_custom]').forEach(i =>
+					{
+						let root = this.findCustomParent(i);
+						if (root !== this) return;
+
+						if (!i.isReady) is_ready = false;
+						if (i.isReady != 2) list.push(i);
+					});
+
+					if (!is_ready) return;
+
+					this._mutationHandler = null;
+
+					this._mutationObserver.disconnect();
+					this._mutationObserver = null;
+
+					for (let i of list)
+					{
+						i.rready();
+						i.isReady = 2;
+					}
+
+					this.collectWatchers();
+				},
+				50);
+			};
+
+			this._mutationObserver = new MutationObserver (this._mutationHandler);
+			this._mutationObserver.observe(this, { attributes: false, childList: true, subtree: false });
+		}
+
+		this.innerHTML = value;
 	},
 
 	/**
@@ -929,10 +995,10 @@ const Element =
 
 		for (let i = 0; i < this._list_visible.length; i++)
 		{
-			if (!!this._list_visible[i]._visible(data, 'arg'))
+			if (this._list_visible[i]._visible(data, 'arg'))
 				this._list_visible[i].style.removeProperty('display');
 			else
-				this._list_visible[i].style.setProperty('display', 'none', 'important');
+				this._list_visible[i].style.display = 'none';
 		}
 
 		this.onModelChanged(evt, args);
@@ -1096,7 +1162,7 @@ const Element =
 				while (elem != null)
 				{
 // if (this.dataset.ref) console.log(this.tagName + ' ' + this.dataset.ref + ' SEARCH ' + elem.tagName + ' , isRoot=' + elem.isRoot); //violet
-					if ('isRoot' in elem && elem.isRoot === true)
+					if ('isRoot' in elem && elem.isRoot == true)
 						return elem;
 
 					elem = elem.parentElement;
@@ -1111,7 +1177,7 @@ const Element =
 
 				while (elem != null)
 				{
-					if (elem.dataset._custom === 'true')
+					if (elem.dataset._custom == 'true')
 						return elem;
 
 					elem = elem.parentElement;

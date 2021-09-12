@@ -33,6 +33,7 @@ const Api =
 	REQ64_SUPPORTED: 			0x02,
 	JSON_RESPONSE_SUPPORTED: 	0x04,
 	XML_RESPONSE_SUPPORTED: 	0x08,
+	INCLUDE_CREDENTIALS:		0x10,
 
 	/**
 	**	Target URL for all the API requests. Set by calling `setEndPoint`.
@@ -75,7 +76,7 @@ const Api =
 	setEndPoint: function (apiUrl, flags=null)
 	{
 		if (flags === null)
-			flags = Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED;
+			flags = Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED | Api.INCLUDE_CREDENTIALS;
 
 		this.apiUrl = apiUrl;
 		this.flags = flags;
@@ -214,9 +215,15 @@ const Api =
 	*/
 	_hideProgress: function ()
 	{
-		if ('document' in global) {
+		if ('document' in global)
+		{
 			this._requestLevel--;
-			if (!this._requestLevel) global.document.documentElement.classList.remove('busy');
+			if (this._requestLevel) return;
+
+			setTimeout(() => {
+				if (this._requestLevel === 0)
+					global.document.documentElement.classList.remove('busy');
+			}, 250);
 		}
 	},
 
@@ -271,7 +278,6 @@ const Api =
 
 		let options =
 		{
-			credentials: 'include',
 			mode: 'cors',
 			headers: {
 				'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9'
@@ -280,6 +286,9 @@ const Api =
 			body: null,
 			multipart: false
 		};
+
+		if (this.flags & Api.INCLUDE_CREDENTIALS)
+			options.credentials = 'include';
 
 		if (typeof(data) !== 'string' && !(data instanceof Blob))
 		{

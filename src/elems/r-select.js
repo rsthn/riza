@@ -76,7 +76,7 @@ export default Element.register ('r-select',
 	*/
 	setList: function (list)
 	{
-		if (!list || !Rin.isTypeOf(ModelList, list) || this.list === list)
+		if (!list || !Rin.isInstanceOf(list, ModelList) || this.list === list)
 			return;
 
 		if (this.list != null)
