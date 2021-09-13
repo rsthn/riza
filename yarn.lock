@@ -3,9 +3,9 @@
 
 
 "@rsthn/rin@^2.0.32":
-  version "2.0.32"
-  resolved "https://registry.yarnpkg.com/@rsthn/rin/-/rin-2.0.32.tgz#63a2d35e1edc26fd49920acec85d7f4e5a4e31c7"
-  integrity sha512-0Dwipq8+G9k6u3kIIIQuEhgEKU8+WfF/KfTK9eUw2MMrexb4ByqvVuv1HqBciLQwZv95TRVBus3MARXmtcEI/A==
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/@rsthn/rin/-/rin-2.0.33.tgz#88891bf07e797eaf5f0a9ca9ebe9e226bfd9ec05"
+  integrity sha512-Gxga3IIiIwfGpY2+F9SIJoT7o8yhZiSi6eK9VvUnXC2dN0I4oXYuCKf5lvdXzCTdIPGyog7hB9jjZCqW5eKtMQ==
   dependencies:
     base-64 "^1.0.0"
     node-fetch "^2.6.1"
