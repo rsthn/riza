@@ -15,7 +15,7 @@
 */
 
 /*
-	<r-list data-list="window.dataList1" data-container=".x-data" data-wrap="false|true">
+	<r-list data-list="window.dataList1" data-container=".x-data" data-wrap="true|false">
 
 		<template data-mode="static|dynamic">
 		</template>
@@ -67,7 +67,12 @@ export default Element.register ('r-list',
 	ready: function()
 	{
 		this.container = this.querySelector(this.dataset.container || '.x-data');
-		if (!this.container) this.container = this;
+		if (!this.container)
+		{
+			this.container = document.createElement('div');
+			this.container.className = 'x-data';
+			this.appendChild(this.container);
+		}
 
 		let tmp = this.template_elem = this.querySelector('template');
 		if (tmp)
@@ -162,6 +167,9 @@ export default Element.register ('r-list',
 			if (this.list.dataSource)
 				this.list.dataSource.removeEventListener (this.eid+':*');
 
+			if (this.list.dataList)
+				this.list.dataList.removeEventListener (this.eid+':*');
+
 			this.list.removeEventListener (this.eid+':*');
 		}
 
@@ -171,6 +179,12 @@ export default Element.register ('r-list',
 		{
 			this.list.dataSource.addEventListener (this.eid+':listLoading', this.onLoading, this);
 			this.list.dataSource.addEventListener (this.eid+':listLoaded', this.onLoaded, this);
+		}
+
+		if (this.list.dataList)
+		{
+			this.list.dataList.addEventListener (this.eid+':listLoading', this.onLoading, this);
+			this.list.dataList.addEventListener (this.eid+':listLoaded', this.onLoaded, this);
 		}
 
 		this.list.addEventListener (this.eid+':itemsCleared', this.onItemsCleared, this);
@@ -255,7 +269,7 @@ export default Element.register ('r-list',
 
 		for (let data of this.list.getData())
 		{
-			if (this.dataset.wrap == 'true')
+			if (this.dataset.wrap != 'false')
 				this.container.append(this.buildItem(this.list.itemId[i++], data));
 			else
 				this.container.innerHTML += this.buildItem(this.list.itemId[i++], data, true);
@@ -269,7 +283,7 @@ export default Element.register ('r-list',
 	*/
 	onItemRemoved: function(evt, args)
 	{
-		if (this.dataset.wrap != 'true')
+		if (this.dataset.wrap == 'false')
 		{
 			this.onItemsChanged();
 			return;
@@ -289,7 +303,7 @@ export default Element.register ('r-list',
 	{
 		if (this.isDynamicTemplate) return;
 
-		if (this.dataset.wrap != 'true')
+		if (this.dataset.wrap == 'false')
 		{
 			this.onItemsChanged();
 			return;
@@ -308,19 +322,27 @@ export default Element.register ('r-list',
 	{
 		if (args.position == 'head')
 		{
-			if (this.dataset.wrap == 'true')
+			if (this.dataset.wrap != 'false')
 				this.container.prepend(this.buildItem(args.id, args.item));
 			else
 				this.container.innerHTML = this.buildItem(args.id, args.item, true) + this.container.innerHTML;
 		}
 		else
 		{
-			if (this.dataset.wrap == 'true')
+			if (this.dataset.wrap != 'false')
 				this.container.append(this.buildItem(args.id, args.item));
 			else
 				this.container.innerHTML += this.buildItem(args.id, args.item, true);
 		}
 
 		this.setEmpty(false);
+	},
+
+	/**
+	 * 	Forces re-rendering of the element.
+	 */
+	refresh: function()
+	{
+		this.onItemsChanged();
 	}
 });

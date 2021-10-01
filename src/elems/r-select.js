@@ -146,5 +146,13 @@ export default Element.register ('r-select',
 
 		this.container.innerHTML = s;
 		this.container.value = this.container.dataset.value;
+	},
+
+	/**
+	 * 	Forces re-rendering of the element.
+	 */
+	refresh: function()
+	{
+		this.onItemsChanged();
 	}
 });
