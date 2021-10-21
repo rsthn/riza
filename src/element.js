@@ -76,20 +76,22 @@ const Element =
 	*/
 	events:
 	{
-		'click [data-action]': function(evt) {
+		'click [data-action]': function(evt)
+		{
 			let opts = evt.source.dataset.action.split(' ');
 
 			if (opts[0] in this)
-				this[opts[0]] ({ ...evt.source.dataset, ...opts, length: opts.length }, evt);
+				this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
 			else
 				evt.continuePropagation = true;
 		},
 
-		'keyup(13) input[data-enter]': function(evt) {
+		'keyup(13) input[data-enter]': function(evt)
+		{
 			let opts = evt.source.dataset.enter.split(' ');
 
 			if (opts[0] in this)
-				this[opts[0]] ({ ...evt.source.dataset, ...opts, length: opts.length }, evt);
+				this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
 			else
 				evt.continuePropagation = true;
 		}
