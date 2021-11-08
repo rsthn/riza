@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "1.0.46",
+    "version": "1.0.47",
     "description": "Riza Framework",
     "type": "module",
     "main": "src/main.js",
@@ -12,20 +12,23 @@
         "requirements": "yarn global add --ignore-optional parcel http-server",
         "deploy": "npm run build && node ./local/deploy.js",
         "commit": "npm run build && node ./local/commit.js",
-        "build": "parcel build --no-cache --target target_dist src/_export.js --no-source-maps",
-        "watch": "parcel watch --no-cache --target target_local src/_export.js --no-hmr",
-        "serve": "http-server -c-1 -p 8080 ./local"
+        "build:cjs": "parcel build --no-cache --target target_cjs src/_export.js --no-source-maps",
+        "build:esm": "parcel build --no-cache --target target_esm src/main.js --no-source-maps",
+        "build": "npm run build:cjs && npm run build:esm"
     },
-    "target_dist": "dist/riza.js",
-    "target_local": "local/riza.js",
+    "target_esm": "dist/riza.js",
+    "target_cjs": "dist/riza.cjs.js",
     "targets": {
-        "target_local": {
-            "isLibrary": false,
+        "target_esm": {
+            "isLibrary": true,
+            "context": "browser",
+            "outputFormat": "esmodule",
+            "optimize": true,
             "engines": {
                 "browsers": "since 2021-01"
             }
         },
-        "target_dist": {
+        "target_cjs": {
             "isLibrary": false,
             "engines": {
                 "browsers": "since 2021-01"

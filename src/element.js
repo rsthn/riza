@@ -17,63 +17,62 @@
 import { Rin, Model, Template } from '@rsthn/rin';
 
 /**
-**	Map containing the original prototypes for all registered elements.
-*/
+ * 	Map containing the original prototypes for all registered elements.
+ */
 const elementPrototypes = { };
 
 /**
-**	Map containing the final classes for all registered elements.
-*/
+ * 	Map containing the final classes for all registered elements.
+ */
 const elementClasses = { };
 
-
-/*
-**	Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
-**	self or child-elements, and several utility methods.
-*/
+/**
+ * 	Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
+ * 	self or child-elements, and several utility methods.
+ */
 
 const Element = 
 {
 	/**
-	**	Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
-	*/
+	 * 	Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
+	 */
 	eid: null,
 
 	/**
-	**	Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
-	*/
+	 * 	Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
+	 */
 	isRoot: true,
 
 	/**
-	**	Root element to which this element is attached (when applicable).
-	*/
+	 * 	Root element to which this element is attached (when applicable).
+	 */
 	root: null,
 
 	/**
-	**	Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
-	*/
+	 * 	Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
+	 */
 	isReady: 0,
 	readyReenter: 0,
 	readyLocked: 0,
 
 	/**
-	**	All children elements having the `data-ref` attribute are added to this map (and to the element itself).
-	*/
+	 * 	All children elements having the `data-ref` attribute are added to this map (and to the element itself).
+	 */
 	refs: null,
 
 	/**
-	**	Model type (class) for the element's model.
-	*/
+	 * 	Model type (class) for the element's model.
+	 */
 	modelt: Model,
 
 	/**
-	**	Data model related to the element.
-	*/
+	 * 	Data model related to the element.
+	 */
 	model: null,
 
 	/**
-	**	Events map.
-	*/
+	 * 	Events map.
+	 */
 	events:
 	{
 		'click [data-action]': function(evt)
@@ -98,8 +97,8 @@ const Element =
 	},
 
 	/**
-	**	Element constructor.
-	*/
+	 * 	Element constructor.
+	 */
 	__ctor: function()
 	{
 		this._list_watch = [];
@@ -135,88 +134,45 @@ const Element =
 		if (this.events)
 			this.bindEvents (this.events);
 
-		this.checkReady();
+		if (this.tagName.toLowerCase() !== 'r-dom-probe')
+			this.appendChild(document.createElement('r-dom-probe'));
+		else
+			this.markReady();
 	},
 
 	/**
-	**	Initializes the element. Called after construction of the instance.
-	*/
+	 * 	Initializes the element. Called after construction of the instance.
+	 */
 	init: function()
 	{
 	},
 
 	/**
-	**	Executed when the children of the element are ready.
-	*/
+	 * 	Executed when the children of the element are ready.
+	 */
 	ready: function()
 	{
 	},
 
 	/**
-	**	Executed after ready and after the root is also ready.
-	*/
+	 * 	Executed after ready and after the root is also ready.
+	 */
 	rready: function()
 	{
 	},
 
-	/*
-	**
-	*/
-	notifyReady: function()
+	/**
+	 * 	Marks the element as ready.
+	 */
+	markReady: function()
 	{
-		this.checkReady(true);
-	},
-
-	/*
-	** 
-	*/
-	checkReady: function(forced=false)
-	{
-		if (this.childNodes.length == 0 && !forced)
-			return;
-
-		if (this.readyLocked)
-		{
-			this.readyReenter = true;
-			return;
-		}
-
-		let list = [];
-
-		let isReady = Array.from(this.querySelectorAll('[data-_custom]')).every(i =>
-		{
-			let root = this.findCustomParent(i);
-			if (root !== this) return true;
-
-			if (i.isReady !== 2 && !i.readyLocked)
-				list.push(i);
-
-			return i.isReady ? true : false;
-		});
-
-		if (!isReady) return;
-
 		this.readyLocked++;
-
-		for (let elem of this.querySelectorAll('[data-_pending=true]'))
-		{
-			let root = this.findRoot(elem.parentElement);
-			if (root !== this) continue;
-
-			if (elem.dataset._linked !== 'true')
-			{
-				this[elem.dataset.ref] = elem;
-				this.refs[elem.dataset.ref] = elem;
-
-				elem.connectReference(this);
-			}
-		}
 
 		if (!this.isReady)
 		{
 			this.isReady = 1;
 
-			// Link models set dinamically.
+			// Set model is `model` property was set in the element.
 			if ('model' in this.dataset)
 			{
 				let ref = this.getFieldByPath(this.dataset.model);
@@ -233,7 +189,7 @@ const Element =
 			this.ready();
 			this.collectWatchers();
 
-			// Notify attached reference to root element.
+			// Notify "attached reference" to root element.
 			if (this.root)
 			{
 				if (this.dataset.ref)
@@ -252,12 +208,6 @@ const Element =
 			this.isReady = 2;
 		}
 
-		for (let i of list)
-		{
-			i.rready();
-			i.isReady = 2;
-		}
-
 		if (!root && this.isReady !== 2)
 		{
 			this.isReady = 2;
@@ -273,9 +223,47 @@ const Element =
 		}
 	},
 
-	/*
-	**	Returns the value of a field given its path. Starts from `global`, unless the first item in the path is `this`, in which case it will start from the element.
-	*/
+	/**
+	 *	Checks if all children are ready and fires the appropriate function (`ready` and/or `rready`).
+	 */
+	checkReady: function()
+	{
+		if (this.childNodes.length == 0)
+			return;
+
+		if (this.readyLocked)
+		{
+			this.readyReenter = true;
+			return;
+		}
+
+		let isReady = true;
+
+		let result = document.evaluate(".//*[contains(name(),'-')]", this, null, XPathResult.ANY_TYPE, null);
+
+		while (true)
+		{
+			let elem = result.iterateNext();
+			if (!elem) break;
+
+			if (elem === this)
+				continue;
+
+			let root = this.findCustomParent(elem);
+			if (root !== this) continue;
+
+			if (!elem.isReady)
+				isReady = false;
+		}
+
+		if (!isReady) return;
+
+		this.markReady();
+	},
+
+	/**
+	 * 	Returns the value of a field given its path. Starts from `global`, unless the first item in the path is `this`, in which case it will start from the element.
+	 */
 	getFieldByPath: function(path)
 	{
 		if (!path) return null;
@@ -302,16 +290,16 @@ const Element =
 	},
 
 	/**
-	**	Returns the root of the element (that is, the `root` property). If not set it will attempt to find the root first.
-	*/
+	 * 	Returns the root of the element (that is, the `root` property). If not set it will attempt to find the root first.
+	 */
 	getRoot: function()
 	{
 		return this.root ? this.root : (this.root = this.findRoot());
 	},
 
 	/**
-	**	Sets the model of the element and executes the `modelChanged` event handler (unless `update` is set to false).
-	*/
+	 * 	Sets the model of the element and executes the `modelChanged` event handler (unless `update` is set to false).
+	 */
 	setModel: function (model, update=true)
 	{
 		if (!model) return this;
@@ -343,16 +331,16 @@ const Element =
 	},
 
 	/**
-	**	Returns the model of the element. Added for symmetry only, exactly the same as accesing public property `model` of this class.
-	*/
+	 * 	Returns the model of the element. Added for symmetry only, exactly the same as accesing public property `model` of this class.
+	 */
 	getModel: function ()
 	{
 		return this.model;
 	},
 
-	/*
-	**	Adds one or more CSS classes (separated by space) to the element.
-	*/
+	/**
+	 * 	Adds one or more CSS classes (separated by space) to the element.
+	 */
 	addClass: function (classString)
 	{
 		if (!classString) return this;
@@ -371,9 +359,9 @@ const Element =
 		return this;
 	},
 
-	/*
-	**	Removes one or more CSS classes (separated by space) from the element.
-	*/
+	/**
+	 * 	Removes one or more CSS classes (separated by space) from the element.
+	 */
 	removeClass: function (classString)
 	{
 		if (!classString) return this;
@@ -392,9 +380,9 @@ const Element =
 		return this;
 	},
 
-	/*
-	**	Sets one or more style properties to the element (separated by semi-colon).
-	*/
+	/**
+	 * 	Sets one or more style properties to the element (separated by semi-colon).
+	 */
 	setStyle: function (styleString)
 	{
 		if (!styleString) return this;
@@ -414,17 +402,17 @@ const Element =
 		return this;
 	},
 
-	/*
-	**	Returns the width of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
-	*/
+	/**
+	 * 	Returns the width of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+	 */
 	getWidth: function (elem=null)
 	{
 		return (elem || this).getBoundingClientRect().width;
 	},
 
-	/*
-	**	Returns the height of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
-	*/
+	/**
+	 * 	Returns the height of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+	 */
 	getHeight: function (elem=null)
 	{
 		return (elem || this).getBoundingClientRect().height;
@@ -709,7 +697,8 @@ const Element =
 		this.innerHTML = value;
 		this.readyLocked--;
 
-		this.checkReady();
+		if (this.tagName.toLowerCase() !== 'r-dom-probe')
+			this.appendChild(document.createElement('r-dom-probe'));
 	},
 
 	/**
@@ -1097,7 +1086,6 @@ const Element =
 
 				while (elem != null)
 				{
-// if (this.dataset.ref) console.log(this.tagName + ' ' + this.dataset.ref + ' SEARCH ' + elem.tagName + ' , isRoot=' + elem.isRoot); //violet
 					if ('isRoot' in elem && elem.isRoot === true)
 						return elem;
 
@@ -1131,22 +1119,13 @@ const Element =
 					{
 						if (this.dataset.ref)
 						{
-//console.log('>> REF ' + this.dataset.ref + ' FOR ' + root.tagName);//violet
 							root[this.dataset.ref] = this;
 							root.refs[this.dataset.ref] = this;
 						}
 
-						delete this.dataset._pending;
-
-						this.dataset._linked = 'true';
 						this.root = root;
 					}
-					else
-						this.dataset._pending = 'true';
 				}
-
-				//if (this.root && (flags & 2) == 2 && this.dataset.ref)
-				//	this.root.onRefAdded (this.dataset.ref);
 			}
 
 			connectedCallback ()
@@ -1180,9 +1159,6 @@ const Element =
 						delete this.root.refs[this.dataset.ref];
 					}
 
-					delete this.dataset._pending;
-
-					this.dataset._linked = 'false';
 					this.root = null;
 				}
 
@@ -1464,6 +1440,9 @@ const Element =
 };
 
 Element.register('r-elem', {
+});
+
+Element.register ('r-dom-probe', {
 });
 
 /* ****************************************** */
