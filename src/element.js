@@ -56,11 +56,6 @@ const Element =
 	readyLocked: 0,
 
 	/**
-	 * 	All children elements having the `data-ref` attribute are added to this map (and to the element itself).
-	 */
-	refs: null,
-
-	/**
 	 * 	Model type (class) for the element's model.
 	 */
 	modelt: Model,
@@ -113,7 +108,6 @@ const Element =
 
 		this.style.display = 'block';
 
-		this.refs = { };
 		this.eid = Math.random().toString().substr(2);
 
 		if (this.model != null)
@@ -129,15 +123,20 @@ const Element =
 				this._super[i].init();
 		});
 
+		if (Element.debug)
+			console.log('>> ' + this.tagName + ' INIT ON ' + this.parentElement.tagName);
+
 		this.init();
 
 		if (this.events)
 			this.bindEvents (this.events);
 
-		if (this.tagName.toLowerCase() !== 'r-dom-probe')
-			this.appendChild(document.createElement('r-dom-probe'));
-		else
-			this.markReady();
+		setTimeout(() => {
+			if (this.tagName.toLowerCase() !== 'r-dom-probe')
+				this.appendChild(document.createElement('r-dom-probe'));
+			else
+				this.markReady();
+		}, 0);
 	},
 
 	/**
@@ -164,7 +163,7 @@ const Element =
 	/**
 	 * 	Marks the element as ready.
 	 */
-	markReady: function()
+	markReady: function (list=null)
 	{
 		this.readyLocked++;
 
@@ -186,35 +185,58 @@ const Element =
 					this._super[i].ready();
 			});
 
+			if (Element.debug)
+				console.log('>> ' + this.tagName + ' READY');
+
 			this.ready();
 			this.collectWatchers();
-
-			// Notify "attached reference" to root element.
-			if (this.root)
-			{
-				if (this.dataset.ref)
-					this.root.onRefAdded (this.dataset.ref, this);
-
-				this.root.checkReady();
-			}
 		}
 		else
 			this.collectWatchers();
 
 		let root = this.findCustomParent(this);
 
+		if (Element.debug)
+			console.log(this.tagName + ' ROOT IS ' + (root ? root.tagName : 'NULL'));
+
 		if (root && root.isReady === 0 && this.isReady != 0)
 			root.checkReady();
 
+		let rootReady = false;
+
 		if (root && root.isReady === 2 && this.isReady !== 2)
 		{
-			this.rready();
-			this.isReady = 2;
+			this.getRoot();
+
+			if (this.root && this.dataset.ref)
+			{
+				if (Element.debug)
+					console.log(this.tagName + ' REF AS `' + this.dataset.ref + '` ON ' + this.root.tagName);
+
+				this.root[this.dataset.ref] = this;
+				this.root.onRefAdded (this.dataset.ref, this);
+			}
+
+			rootReady = true;
 		}
 
 		if (!root && this.isReady !== 2)
 		{
+			rootReady = true;
+		}
+
+		if (rootReady)
+		{
 			this.isReady = 2;
+
+			if (list !== null) {
+				for (let elem of list)
+					elem.checkReady();
+			}
+
+			if (Element.debug)
+				console.log('>> ' + this.tagName + ' RREADY');
+
 			this.rready();
 		}
 
@@ -225,6 +247,9 @@ const Element =
 			this.readyReenter = false;
 			this.checkReady();
 		}
+
+		if (this.tagName.toLowerCase() === 'r-dom-probe')
+			this.remove();
 	},
 
 	/**
@@ -242,8 +267,12 @@ const Element =
 		}
 
 		let isReady = true;
+		let list = [];
 
 		let result = document.evaluate(".//*[contains(name(),'-')]", this, null, XPathResult.ANY_TYPE, null);
+
+		if (Element.debug)
+			console.log('# CHECKING ' + this.tagName);
 
 		while (true)
 		{
@@ -256,13 +285,18 @@ const Element =
 			let root = this.findCustomParent(elem);
 			if (root !== this) continue;
 
+			if (Element.debug)
+				console.log('   ' + elem.tagName + ' = ' + elem.isReady);
+
 			if (!elem.isReady)
 				isReady = false;
+
+			list.push(elem);
 		}
 
 		if (!isReady) return;
 
-		this.markReady();
+		this.markReady(list);
 	},
 
 	/**
@@ -700,9 +734,6 @@ const Element =
 		this.readyLocked++;
 		this.innerHTML = value;
 		this.readyLocked--;
-
-		if (this.tagName.toLowerCase() !== 'r-dom-probe')
-			this.appendChild(document.createElement('r-dom-probe'));
 	},
 
 	/**
@@ -1070,6 +1101,9 @@ const Element =
 				super();
 				this.invokeConstructor = true;
 
+				if (Element.debug)
+					console.log('CREATED ' + this.tagName);
+
 				this._super = { };
 
 				for (let i of Object.entries(this.constructor.prototype._super))
@@ -1105,7 +1139,7 @@ const Element =
 
 				while (elem != null)
 				{
-					if (elem.dataset._custom === 'true')
+					if (elem.tagName.indexOf('-') !== -1)
 						return elem;
 
 					elem = elem.parentElement;
@@ -1122,10 +1156,7 @@ const Element =
 					if (root != null)
 					{
 						if (this.dataset.ref)
-						{
 							root[this.dataset.ref] = this;
-							root.refs[this.dataset.ref] = this;
-						}
 
 						this.root = root;
 					}
@@ -1139,8 +1170,6 @@ const Element =
 				if (this.invokeConstructor)
 				{
 					this.invokeConstructor = false;
-					this.dataset._custom = 'true';
-
 					this.__ctor();
 				}
 
@@ -1160,7 +1189,6 @@ const Element =
 						this.root.onRefRemoved (this.dataset.ref, this);
 
 						delete this.root[this.dataset.ref];
-						delete this.root.refs[this.dataset.ref];
 					}
 
 					this.root = null;
@@ -1442,6 +1470,8 @@ const Element =
 		elem.classList.add(args[1]);
 	}
 };
+
+Element.debug = false;
 
 Element.register('r-elem', {
 });

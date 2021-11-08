@@ -21,7 +21,7 @@ import _DataSource from './data-source.js'; export const DataSource = _DataSourc
 import _DataList from './data-list.js'; export const DataList = _DataList;
 import _Easing from './easing.js'; export const Easing = _Easing;
 import _Anim from './anim.js'; export const Anim = _Anim;
-import _Elements from './elements.js';
+import _Elements from './elements.js'; export const Elements = _Elements;
 import _Utils from './utils.js'; export const Utils = _Utils;
 
 import * as _Rin from '@rsthn/rin';
