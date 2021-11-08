@@ -202,6 +202,10 @@ const Element =
 			this.collectWatchers();
 
 		let root = this.findCustomParent(this);
+
+		if (root && root.isReady === 0 && this.isReady != 0)
+			root.checkReady();
+
 		if (root && root.isReady === 2 && this.isReady !== 2)
 		{
 			this.rready();
