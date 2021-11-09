@@ -15,7 +15,7 @@
 */
 
 import _Router from './router.js'; export const Router = _Router;
-import _Element from './element.js'; export const Element = _Element;
+import _Element from './element.js'; export const Element = _Element; export const CElement = _Element;
 import _Api from './api.js'; export const Api = _Api;
 import _DataSource from './data-source.js'; export const DataSource = _DataSource;
 import _DataList from './data-list.js'; export const DataList = _DataList;

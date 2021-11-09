@@ -68,7 +68,7 @@ export default Element.register ('r-form',
 		let def = { };
 		let names = this.model.get();
 
-		this.querySelectorAll("[data-field]").forEach((i) =>
+		this.querySelectorAll('[data-field]').forEach((i) =>
 		{
 			i.name = i.dataset.field;
 			names[i.name] = i.type;
@@ -295,8 +295,9 @@ export default Element.register ('r-form',
 
 		if (r.message && (tmp = this.querySelector('.message.success')) != null)
 		{
-			tmp.innerHTML = this.filterString(r.message, r).replace(/\n/g, "<br/>");
+			tmp.innerHTML = this.filterString(r.message, r).replace(/\n/g, '<br/>');
 			tmp.classList.remove('x-hidden');
+			tmp.onanimationend = () => tmp.classList.add('x-hidden');
 		}
 	},
 
@@ -320,7 +321,7 @@ export default Element.register ('r-form',
 
 				let tmp = document.createElement('span');
 				tmp.classList.add('field-error');
-				tmp.innerHTML = this.filterString(r.fields[i], r).replace(/\n/g, "<br/>");
+				tmp.innerHTML = this.filterString(r.fields[i], r).replace(/\n/g, '<br/>');
 
 				f.classList.add('field-error');
 				f.classList.add('is-invalid');
@@ -337,16 +338,18 @@ export default Element.register ('r-form',
 
 			if (r.error && (tmp = this.querySelector('.message.error')) != null)
 			{
-				tmp.innerHTML = this.filterString(r.error, r).replace(/\n/g, "<br/>");
+				tmp.innerHTML = this.filterString(r.error, r).replace(/\n/g, '<br/>');
 				tmp.classList.remove('x-hidden');
+				tmp.onanimationend = () => tmp.classList.add('x-hidden');
 			}
 		}
 		else
 		{
 			if ((tmp = this.querySelector('.message.error')) != null)
 			{
-				tmp.innerHTML = this.filterString(r.error, r).replace(/\n/g, "<br/>") || ('Error: ' + r.response);
+				tmp.innerHTML = this.filterString(r.error, r).replace(/\n/g, '<br/>') || ('Error: ' + r.response);
 				tmp.classList.remove('x-hidden');
+				tmp.onanimationend = () => tmp.classList.add('x-hidden');
 			}
 		}
 	},
