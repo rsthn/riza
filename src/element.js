@@ -237,6 +237,12 @@ const Element =
 			if (Element.debug)
 				console.log('>> ' + this.tagName + ' RREADY');
 
+			Object.keys(this._super).reverse().forEach(i =>
+			{
+				if ('rready' in this._super[i])
+					this._super[i].rready();
+			});
+		
 			this.rready();
 		}
 

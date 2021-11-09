@@ -17,10 +17,12 @@
 /*
 	<r-table data-source="window.dataSource1">
 		<table>
-			<tr>
-				<th>A</th>
-				<th>B</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>A</th>
+					<th>B</th>
+				</tr>
+			</thead>
 
 			<tbody class="x-data">
 				<tr>
