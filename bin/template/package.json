@@ -1,25 +1,28 @@
 {
-	"name": "riza-project",
-	"version": "1.0.0",
-	"type": "module",
-	"private": true,
-	"scripts": {
-		"requirements": "yarn global add --ignore-optional parcel shx http-server",
-		"clean": "shx rm -f main.min.*",
-		"build": "yarn clean && parcel build --target browser src/main.js --no-cache",
-		"watch": "yarn clean && parcel watch --target browser src/main.js --no-hmr",
-		"serve": "http-server -c-1 -p 8080 ./"
-	},
-	"browser": "main.min.js",
-    "targets": {
-        "browser": {
-			"includeNodeModules": true,
-            "engines": {
-                "browsers": "since 2021-01"
-            }
-        }
-    },
-	"dependencies": {
-		"riza": "^1.*"
-	}
+   "name": "riza-app",
+   "type": "module",
+   "version": "1.0.0",
+   "private": true,
+   "scripts": {
+      "test": "echo Place your tests here && exit 1",
+      "requirements": "yarn global add parcel cross-env shx",
+      "clean:prod": "shx rm -rf prod",
+      "prebuild:prod": "shx mkdir -p prod && shx cp -r src/static prod",
+      "watch:prod": "yarn clean:prod && yarn prebuild:prod && cross-env NODE_ENV=production parcel watch --dist-dir prod src/index.html --no-cache --public-url ./ --no-source-maps --no-hmr",
+      "build:prod": "yarn clean:prod && yarn prebuild:prod && cross-env NODE_ENV=production parcel build src/index.html --dist-dir prod --no-cache --public-url ./ --no-source-maps",
+      "clean": "shx rm -rf dist",
+      "prebuild": "shx mkdir -p dist && shx cp -r src/static dist",
+      "watch": "yarn clean && yarn prebuild && parcel watch --dist-dir dist src/index.html --no-cache --public-url ./ --no-source-maps --no-hmr",
+      "build": "yarn clean && yarn prebuild && parcel build src/index.html --dist-dir dist --no-cache --public-url ./ --no-source-maps"
+   },
+   "author": "RedStar Technologies",
+   "browserslist": [
+      "since 2021-01"
+   ],
+   "dependencies": {
+      "@fortawesome/fontawesome-free": "^5.15",
+      "@popperjs/core": "^2.9",
+      "bootstrap": "^5.0",
+      "riza": "^1.0"
+   }
 }
