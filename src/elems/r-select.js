@@ -40,14 +40,18 @@ export default Element.register ('r-select',
 		this.container = document.createElement('select');
 		this.parentElement.insertBefore(this.container, this);
 
+		let list = [];
+
 		for (let attr of this.attributes)
 		{
 			if (attr.nodeName.startsWith('data-_') || attr.nodeName == 'data-list' || attr.nodeName == 'data-blank')
 				continue;
 
 			this.container.setAttribute(attr.nodeName, attr.nodeValue);
-			this.removeAttribute(attr.nodeName);
+			list.push(attr.nodeName);
 		}
+
+		list.forEach(i => this.removeAttribute(i));
 
 		this.textContent = ' ';
 		this.style.display = 'none';
