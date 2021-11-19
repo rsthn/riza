@@ -4,15 +4,14 @@ Riza is a library that provides functionality to build custom elements, support 
 
 ## Installation
 
-You can use npm to install the library, or download the standalone `riza.js` file from the `dist` folder and include it in your index.html file, in the latter case an object named `riza` will be available in the global scope.
+You can use npm/yarn to install the library, or download the standalone file from the `dist` folder (either CJS or ESM) and include it in your index.html file.
 
-<small>**NOTE:** When using the web distribution, all definitions exported by [Rin](https://github.com/rsthn/rin/) will be available as exports from the `riza` object.</small>
+<small>**NOTE:** When using the web distribution, all definitions exported by [Rin](https://github.com/rsthn/rin/) will be available as exports right from the `riza` object.</small>
 
 ```sh
-npm i riza
+npm install riza
 ```
-
 
 ## Documentation
 
-Visit our [docs](./docs/README.md) folder to view documentation of the exported classes and elements.
+View the [docs](./docs/README.md) folder to view documentation of the exported classes and elements.
