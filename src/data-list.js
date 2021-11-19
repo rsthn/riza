@@ -18,7 +18,7 @@ import { Model, ModelList } from '@rsthn/rin';
 import Api from './api.js';
 
 /*
-**	Provides several methods to quickly interface with a remote data-source as defined by Wind.
+**	Provides an interface to connect with a listing API function.
 */
 
 export default ModelList.extend
@@ -91,5 +91,5 @@ export default ModelList.extend
 		};
 
 		this._timeout = setTimeout(fn, this.debounceDelay);
-	},
+	}
 });

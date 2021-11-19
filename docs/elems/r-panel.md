@@ -8,6 +8,25 @@ Content panel with router support. Useful to easily show/hide content based on t
 
 <br/>
 
+# Events
+
+### `panelShown`
+### `panelHidden`
+
+<br/>
+
+# Methods
+
+### void `show` (bool silent=false)
+Shows the panel visible by adding `active` class to the element. If `silent` is true and `data-route` enabled, the current route will not be updated. Fires `panelShown` event.
+
+<br/>
+
+### void `hide` ()
+Hides the panel by removing the `active` class from the element. Fires `panelHidden` event.
+
+<br/>
+
 ## CSS
 
 ```css
@@ -66,22 +85,3 @@ r-panel:not(.active) {
 <a href="#account/panel1">Show Panel 1</a>
 <a href="#account/panel2">Show Panel 2</a>
 ```
-
-<br/>
-
-# Events
-
-### `panelShown`
-### `panelHidden`
-
-<br/>
-
-# Methods
-
-### void `show` (bool silent=false)
-Shows the panel visible by adding `active` class to the element. If `silent` is true and `data-route` enabled, the current route will not be updated. Fires `panelShown` event.
-
-<br/>
-
-### void `hide` ()
-Hides the panel by removing the `active` class from the element. Fires `panelHidden` event.

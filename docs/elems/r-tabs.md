@@ -6,9 +6,28 @@ Tab selection is done by locating an immediate children of the `container` havin
 
 |Attribute|Required|Description
 |---------|--------|-----------
-|`data-container`|Optional|Selector of the container holding the tab content. If not specified it will be assumed that the next sibling is the container.
+|`data-container`|Optional|Selector of the container holding the tabs content. If not specified it will be assumed that the next sibling is the container.
 |`data-base-route`|Optional|Specifies the base-route to use when detecting route change events. Use the at symbol `@` in place of the name of the selected tab. For example, base-route `/settings/@/` will cause tab named `test` to be selected if route `/settings/test/` is detected.
-|`data-initial`|Optional|Name of the initial tab to show. If not set, use `selectTab` method to manually select a tab.
+|`data-initial`|Optional|Name of the initial tab to show. If not set, use the `selectTab` method to manually select a tab.
+
+<br/>
+
+# Events
+
+### `tabShown` { string name, HTMLElement el } 
+### `tabHidden` { string name, HTMLElement el }
+
+<br/>
+
+# Methods
+
+### void `showTab` (string name)
+Shows the tab with the specified name, ignores `data-base-route` and current route as well.
+
+<br/>
+
+### void `selectTab` (string name)
+Shows a tab given its name. The route will be changed automatically if `data-base-route` is enabled.
 
 <br/>
 
@@ -24,7 +43,31 @@ r-tabs [data-name].active {
 }
 ```
 
-## Example
+## Minimum Example
+
+```html
+<r-tabs>
+    <a data-name="tab1">Tab-1</a>
+    <a data-name="tab2">Tab-2</a>
+    <a data-name="tab3">Tab-3</a>
+</r-tabs>
+
+<div>
+    <div data-name="tab1">
+        This is tab-1.
+    </div>
+
+    <div data-name="tab2">
+        This is tab-2.
+    </div>
+
+    <div data-name="tab3">
+        This is tab-3.
+    </div>
+</div>
+```
+
+## Example with Routes and Container
 
 ```html
 <r-tabs data-container="div.tab-container" data-base-route="@" data-initial="tab1">
@@ -82,22 +125,3 @@ r-tabs [data-name].active {
     </div>
 </div>
 ```
-
-<br/>
-
-# Events
-
-### `tabShown` { string name, HTMLElement el } 
-### `tabHidden` { string name, HTMLElement el }
-
-<br/>
-
-# Methods
-
-### void `showTab` (string name)
-Shows the tab with the specified name, ignores `data-base-route` and current route as well.
-
-<br/>
-
-### void `selectTab` (string name)
-Shows a tab given its name. The route will be changed automatically if `data-base-route` is enabled.

@@ -15,4 +15,4 @@ npm i riza
 
 ## Documentation
 
-Visit our [docs](./docs) folder to view documentation of the exported classes and elements.
+Visit our [docs](./docs/README.md) folder to view documentation of the exported classes and elements.

@@ -4,7 +4,7 @@ Generic item with support to be connected to any model by using its `data-model`
 
 |Attribute|Required|Description
 |---------|--------|-----------
-|`data-model`|Optional|Path to a Model object to be used in the element. If none provided, the internal model will be used.
+|`data-model`|Optional|Path to a `Model` object to be used with the element. If none provided, the internal model will be used.
 
 <br/>
 
@@ -19,7 +19,7 @@ Generic item with support to be connected to any model by using its `data-model`
 ```
 
 ```js
-const { Model } = require('riza');
+import { Model } from 'riza';
 
 window.m = new Model();
 

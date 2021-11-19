@@ -1,8 +1,12 @@
-# Documentation
+# Modules
 
 - [Api](./api.md) - Interface for Wind-compliant web services.
 - [Router](./router.md) - Module to handle local routes (hash locations).
+
+# Classes
+
 - [DataSource](./data-source.md) - Class to directly connect to a remote data source.
+- [DataList](./data-list.md) - Provides an interface to connect with a listing API function.
 - [Element](./element.md) - Base class for custom elements.
 
 # Elements
