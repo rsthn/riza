@@ -2,6 +2,9 @@
 import { Api, Model, Element } from 'riza';
 import Workflow from './workflow.js';
 
+import Dialog from './elems/dialog.js';
+import CustomDialog from './elems/custom-dialog.js';
+
 /**
  * 	The API end point is loaded from the active .env file.
  */
@@ -93,25 +96,71 @@ global.returnTo = function (name, args, keepCurrent=false)
 	return Workflow.returnTo(name, args, keepCurrent);
 };
 
-global.popupInfo = function (text)
+global.popupInfo = function (text, options=null)
 {
-	alert(text);
+	let dialog = new CustomDialog();
+	document.body.appendChild(dialog);
+
+	dialog.setType('info');
+	dialog.model.set('title', global.messages.info);
+	dialog.model.set('text', text);
+
+	dialog.model.set('buttons', [
+		{ value: true, label: global.messages.ok, class: 'btn-primary px-4' },
+	]);
+
+	if (options)
+		dialog.model.set(options);
+
+	runAfter(0, () => dialog.show());
+
+	global.lastDialog = dialog;
+	return dialog.wait();
 };
 
-global.popupError = function (text)
+global.popupError = function (text, options=null)
 {
-	alert(text);
+	let dialog = new CustomDialog();
+	document.body.appendChild(dialog);
+
+	dialog.setType('error');
+	dialog.model.set('title', global.messages.error);
+	dialog.model.set('text', text);
+
+	dialog.model.set('buttons', [
+		{ value: true, label: global.messages.ok, class: 'btn-primary px-4' },
+	]);
+
+	if (options)
+		dialog.model.set(options);
+
+	runAfter(0, () => dialog.show());
+
+	global.lastDialog = dialog;
+	return dialog.wait();
 };
 
-global.popupConfirm = function (text)
+global.popupConfirm = function (text, options=null)
 {
-	return new Promise((resolve, reject) =>
-	{
-		if (confirm(text))
-			resolve();
-		else
-			reject();
-	});
+	let dialog = new CustomDialog();
+	document.body.appendChild(dialog);
+
+	dialog.setType('confirm');
+	dialog.model.set('title', global.messages.confirm);
+	dialog.model.set('text', text);
+
+	dialog.model.set('buttons', [
+		{ value: true, label: global.messages.yes, class: 'btn-primary px-4' },
+		{ value: false, label: global.messages.no }
+	]);
+
+	if (options)
+		dialog.model.set(options);
+
+	runAfter(0, () => dialog.show());
+
+	global.lastDialog = dialog;
+	return dialog.wait();
 };
 
 
@@ -124,7 +173,7 @@ Element.register('r-app',
 	/**
 	 * 	Starts the app workflow.
 	 */
-	ready: function()
+	rready: function()
 	{
 		Workflow.start(this.querySelector('.app-container'));
 	},

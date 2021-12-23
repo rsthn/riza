@@ -56,6 +56,16 @@ r-app {
 	display: block; overflow: hidden; text-overflow: ellipsis !important; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
 }
 
+.fs-01 { font-size: 0.1em; }
+.fs-02 { font-size: 0.2em; }
+.fs-03 { font-size: 0.3em; }
+.fs-04 { font-size: 0.4em; }
+.fs-05 { font-size: 0.5em; }
+.fs-06 { font-size: 0.6em; }
+.fs-07 { font-size: 0.7em; }
+.fs-08 { font-size: 0.8em; }
+.fs-09 { font-size: 0.9em; }
+
 .fs-10 { font-size: 1.0em; }
 .fs-11 { font-size: 1.1em; }
 .fs-12 { font-size: 1.2em; }
@@ -103,4 +113,13 @@ r-form.busy .spinner:after, .r-form.busy .spinner:after {
 
 span.field-error {
 	color: #f00; font-size: 0.8em;
+}
+
+/* *** */
+r-panel {
+	display: block;
+}
+
+r-panel:not(.active) {
+	display: none;
 }

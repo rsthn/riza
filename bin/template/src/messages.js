@@ -5,6 +5,15 @@
 
 export default
 {
+	'info': 'Information',
+	'error': 'Error',
+	'confirm': 'Confirm',
+
+	'ok': 'Ok',
+	'cancel': 'Cancel',
+	'yes': 'Yes',
+	'no': 'No',
+
 	'required:true': 'Field is required.',
 	'required:image': 'Select an image file.',
 
