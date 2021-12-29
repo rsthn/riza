@@ -150,8 +150,8 @@ global.popupConfirm = function (text, options=null)
 	dialog.model.set('text', text);
 
 	dialog.model.set('buttons', [
-		{ value: true, label: global.messages.yes, class: 'btn-primary px-4' },
-		{ value: false, label: global.messages.no }
+		{ value: false, label: global.messages.no },
+		{ value: true, label: global.messages.yes, class: 'btn-primary px-4' }
 	]);
 
 	if (options)

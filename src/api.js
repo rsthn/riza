@@ -56,6 +56,11 @@ const Api =
 	retries: 0,
 
 	/**
+	**	Headers for the request.
+	*/
+	headers: { },
+
+	/**
 	**	Level of the current request. Used to detect nested requests.
 	*/
 	_requestLevel: 0,
@@ -228,6 +233,19 @@ const Api =
 	},
 
 	/**
+	 * 	Sets an HTTP header.
+	 */
+	header: function (name, value)
+	{
+		if (value === null)
+			delete this.headers[name];
+		else
+			this.headers[name] = value;
+
+		return this;
+	},
+
+	/**
 	**	Returns a parameter string for a GET request given an object with fields.
 	*/
 	encodeParams: function (obj)
@@ -280,7 +298,8 @@ const Api =
 		{
 			mode: 'cors',
 			headers: {
-				'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9'
+				'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9',
+				...this.headers
 			},
 			method: httpMethod,
 			body: null,
