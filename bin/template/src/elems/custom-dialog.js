@@ -22,7 +22,7 @@ const CustomDialog = Element.register('custom-dialog',
 			<div>
 				<div class="mb-4" data-watch="text">[!text]</div>
 
-				<div class="text-end" data-watch="buttons">
+				<div class="buttons text-end" data-watch="buttons">
 					[each i [buttons] [@
 						<span class="btn btn-sm px-3 ms-1 [? [i.class] [i.class] btn-secondary]" data-action="action" data-index="[i#]">[i.label]</span>
 					]]

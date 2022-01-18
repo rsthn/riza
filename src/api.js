@@ -85,6 +85,8 @@ const Api =
 
 		this.apiUrl = apiUrl;
 		this.flags = flags;
+
+		return this;
 	},
 
 	/**

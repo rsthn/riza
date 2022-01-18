@@ -7,7 +7,7 @@ body {
 }
 
 * {
-	font-family: Poppins;
+	font-family: "Poppins", sans-serif;
 }
 
 *:not(input):not(textarea) {
