@@ -68,7 +68,11 @@ const Utils =
 		var reader = new FileReader();
 
 		reader.onload = function(e) {
-			callback (e.target.result);
+			callback (e.target.result, null);
+		};
+
+		reader.onerror = function(e) {
+			callback (null, e);
 		};
 
 		reader.readAsDataURL(file);
@@ -123,8 +127,10 @@ const Utils =
 				return;
 			}
 
-			Utils.loadAsDataUrl (fileList[i], function(url) {
-				result.push({ name: fileList[i].name, size: fileList[i].size, url: url });
+			Utils.loadAsDataUrl (fileList[i], function(url, err) {
+				if (!err) {
+					result.push({ name: fileList[i].name, size: fileList[i].size, url: url });
+				}
 				loadNext(i+1);
 			});
 		};

@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "1.0.57",
+    "version": "1.0.58",
     "description": "Riza Framework",
     "type": "module",
     "main": "src/main.js",
