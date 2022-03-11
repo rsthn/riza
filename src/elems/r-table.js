@@ -56,7 +56,7 @@
 		[data-sort]			Added to th/td elements in thead, marks the column as sortable.
 */
 
-import { Rin, Template } from '@rsthn/rin';
+import { Rinn, Template } from 'rinn';
 import Element from '../element.js';
 import DataSource from '../data-source.js';
 
@@ -140,7 +140,7 @@ export default Element.register ('r-table',
 	*/
 	setSource: function (source)
 	{
-		if (!source || !Rin.isInstanceOf(source, DataSource) || this.source === source)
+		if (!source || !Rinn.isInstanceOf(source, DataSource) || this.source === source)
 			return;
 
 		if (this.source != null)

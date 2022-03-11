@@ -18,7 +18,7 @@
 	<r-select data-list="window.dataList1" data-blank=""></r-select>
 */
 
-import { Rin, ModelList } from '@rsthn/rin';
+import { Rinn, ModelList } from 'rinn';
 import Element from '../element.js';
 
 /*
@@ -80,7 +80,7 @@ export default Element.register ('r-select',
 	*/
 	setList: function (list)
 	{
-		if (!list || !Rin.isInstanceOf(list, ModelList) || this.list === list)
+		if (!list || !Rinn.isInstanceOf(list, ModelList) || this.list === list)
 			return;
 
 		if (this.list != null)

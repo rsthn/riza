@@ -277,7 +277,14 @@ const Api =
 	{
 		let url = this.apiUrl + '?_=' + Date.now();
 
-		if (httpMethod != 'GET' && httpMethod != 'POST')
+		if (httpMethod)
+		{
+			httpMethod = httpMethod.toUpperCase();
+
+			if (httpMethod != 'GET' && httpMethod != 'POST')
+				httpMethod = 'auto';
+		}
+		else
 			httpMethod = 'auto';
 
 		if (retries === undefined)

@@ -41,7 +41,7 @@
 		.x-loading 			Visible when the list is loading.
 */
 
-import { Rin, ModelList, Template } from '@rsthn/rin';
+import { Rinn, ModelList, Template } from 'rinn';
 import Element from '../element.js';
 
 /*
@@ -159,7 +159,7 @@ export default Element.register ('r-list',
 	*/
 	setList: function (list)
 	{
-		if (!list || !Rin.isInstanceOf(list, ModelList) || this.list === list)
+		if (!list || !Rinn.isInstanceOf(list, ModelList) || this.list === list)
 			return;
 
 		if (this.list != null)

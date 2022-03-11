@@ -1,1 +1,3777 @@
-function $parcel$export(e,t,i,n){Object.defineProperty(e,t,{get:i,set:n,enumerable:!0,configurable:!0})}var $parcel$global="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{};function $parcel$interopDefault(e){return e&&e.__esModule?e.default:e}var $parcel$modules={},$parcel$inits={},parcelRequire=$parcel$global.parcelRequirefebd;null==parcelRequire&&(parcelRequire=function(e){if(e in $parcel$modules)return $parcel$modules[e].exports;if(e in $parcel$inits){var t=$parcel$inits[e];delete $parcel$inits[e];var i={id:e,exports:{}};return $parcel$modules[e]=i,t.call(i.exports,i,i.exports),i.exports}var n=new Error("Cannot find module '"+e+"'");throw n.code="MODULE_NOT_FOUND",n},parcelRequire.register=function(e,t){$parcel$inits[e]=t},$parcel$global.parcelRequirefebd=parcelRequire),parcelRequire.register("lfbt7",(function(module,exports){$parcel$export(module.exports,"default",(function(){return $f773e51ba99e5461$export$2e2bcd8739ae039}));var $js9rW=parcelRequire("js9rW"),$f773e51ba99e5461$export$2e2bcd8739ae039={_getref:function(value,obj){return"string"==typeof value?("#"==value.substr(0,1)?value=obj.get(value.substr(1)):"@"==value.substr(0,1)&&(value=obj[value.substr(1)]),"string"==typeof value?eval(value):value):value},type:function(e,t,i,n){switch(t){case"int":if(n=parseInt(n),isNaN(n))throw new Error(t);break;case"float":if(n=parseFloat(n),isNaN(n))throw new Error(t);break;case"string":n=null==n?"":n.toString();break;case"bit":if(!0===n||!1===n){n=n?1:0;break}if(n=parseInt(n),isNaN(n))throw new Error(t);n=n?1:0;break;case"array":if("array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n))break;if(null==n){n=[];break}throw new Error(t);case"bool":if("true"===n||!0===n){n=!0;break}if("false"===n||!1===n){n=!1;break}throw new Error(t)}return n},model:function(e,t,i,n){var s=this._getref(t,e);if(!s)throw new Error(t);return n?s.ensure(n):new s},cls:function(e,t,i,n){var s=this._getref(t,e);return n?$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.ensureTypeOf(s,n):new s},arrayof:function(e,t,i,n){var s=this._getref(t,e);if(n||(n=[]),!s||"array"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n))throw new Error(t);for(var r=0;r<n.length;r++)n[r]=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.ensureTypeOf(s,n[r]);return n},arraynull:function(e,t,i,n){var s=!1;if("object"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(t)&&(t.remove&&(s=t.remove),t=t.value),t)return n;if("array"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n))throw new Error(t);for(var r=0;r<n.length;r++)if(null==n[r]){if(!s)throw new Error(t);n.splice(r--,1)}return n},arraycompliant:function(e,t,i,n){var s=!1;if("object"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(t)&&(t.remove&&(s=t.remove),t=t.value),!t)return n;if("array"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n))throw new Error(t);for(var r=0;r<n.length;r++)if(null!=n[r]&&!n[r].isCompliant()){if(!s)throw new Error(t);n.splice(r--,1)}return n},required:function(e,t,i,n){if(null==n)throw new Error(t?"":"null");if("array"===$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n)){if(0==n.length)throw new Error(t?"":"null")}else if(0==n.toString().length)throw new Error(t?"":"null");return n},minlen:function(e,t,i,n){if(n.toString().length<t)throw new Error(t);return n},maxlen:function(e,t,i,n){if(n.toString().length>t)throw new Error(t);return n},minval:function(e,t,i,n){if(parseFloat(n)<t)throw new Error(t);return n},maxval:function(e,t,i,n){if(parseFloat(n)>t)throw new Error(t);return n},mincount:function(e,t,i,n){if("array"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n)||n.length<t)throw new Error(t);return n},maxcount:function(e,t,i,n){if("array"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n)||n.length>t)throw new Error(t);return n},pattern:function(e,t,i,n){if(!$js9rW.default[t].test(n.toString()))throw new Error(t);return n},inset:function(e,t,i,n){if("array"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(t)){if(!new RegExp("^("+t.toString()+")$").test(n.toString()))throw new Error(t);return n}if(-1==t.indexOf(n.toString()))throw new Error(t.join("|"));return n},upper:function(e,t,i,n){return t?n.toString().toUpperCase():n},lower:function(e,t,i,n){return t?n.toString().toLowerCase():n}}}));let $32b7d6fbb0a54bbf$var$Rin={};var $32b7d6fbb0a54bbf$export$2e2bcd8739ae039=$32b7d6fbb0a54bbf$var$Rin;$32b7d6fbb0a54bbf$var$Rin.invokeLater=function(e){e&&setTimeout((function(){e()}),10)},$32b7d6fbb0a54bbf$var$Rin.wait=function(e){return new Promise((function(t,i){setTimeout(t,e)}))},$32b7d6fbb0a54bbf$var$Rin.typeOf=function(e){return e instanceof Array?"array":null===e?"null":(typeof e).toString().toLowerCase()},$32b7d6fbb0a54bbf$var$Rin.isArrayOrObject=function(e){switch($32b7d6fbb0a54bbf$var$Rin.typeOf(e)){case"array":case"object":return!0}return!1},$32b7d6fbb0a54bbf$var$Rin.clone=function(e){let t=$32b7d6fbb0a54bbf$var$Rin.typeOf(e);if("array"===t){t=[];for(let i=0;i<e.length;i++)t.push($32b7d6fbb0a54bbf$var$Rin.clone(e[i]))}else if("object"===t){if("clone"in e&&"function"==typeof e.clone)return e.clone();t={};for(let i in e)t[i]=$32b7d6fbb0a54bbf$var$Rin.clone(e[i])}else t=e;return t},$32b7d6fbb0a54bbf$var$Rin.merge=function(e,...t){if("array"==$32b7d6fbb0a54bbf$var$Rin.typeOf(e))for(let i=0;i<t.length;i++){let n=t[i];if("array"!=$32b7d6fbb0a54bbf$var$Rin.typeOf(n))e.push(n);else for(let t=0;t<n.length;t++)e.push($32b7d6fbb0a54bbf$var$Rin.clone(n[t]))}else if("object"==$32b7d6fbb0a54bbf$var$Rin.typeOf(e))for(let i=0;i<t.length;i++){let n=t[i];if("object"==$32b7d6fbb0a54bbf$var$Rin.typeOf(n))for(let t in n)$32b7d6fbb0a54bbf$var$Rin.isArrayOrObject(n[t])?t in e?$32b7d6fbb0a54bbf$var$Rin.merge(e[t],n[t]):e[t]=$32b7d6fbb0a54bbf$var$Rin.clone(n[t]):e[t]=n[t]}return e},$32b7d6fbb0a54bbf$var$Rin.override=function(e,...t){for(let i=0;i<t.length;i++)for(let n in t[i])e[n]=t[i][n];return e},$32b7d6fbb0a54bbf$var$Rin.partialCompare=function(e,t){if(null==e||null==t)return!1;if(e===t)return!0;for(var i in t)if(e[i]!=t[i])return!1;return!0},$32b7d6fbb0a54bbf$var$Rin.arrayFind=function(e,t,i){for(var n=0;e&&n<e.length;n++)if(this.partialCompare(e[n],t))return i?e[n]:n;return!!i&&null},$32b7d6fbb0a54bbf$var$Rin.isInstanceOf=function(e,t){return!(!e||!t||"object"!=typeof e)&&(e instanceof t||"isInstanceOf"in e&&e.isInstanceOf(t))},$32b7d6fbb0a54bbf$var$Rin.indexOf=function(e,t,i=!1){if(i){for(let i=0;i<e.length;i++)if(e[i]===t)return i;return-1}for(let i in e)if(e[i]===t)return i;return-1},$32b7d6fbb0a54bbf$var$Rin.escape=function(e){return(e+"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")},$32b7d6fbb0a54bbf$var$Rin.ensureTypeOf=function(e,t){return!t||!e||t instanceof e||t.isInstanceOf&&e.prototype.className&&t.isInstanceOf(e.prototype.className)?t:new e(t)},$32b7d6fbb0a54bbf$var$Rin.serialize=function(e){return JSON.stringify(e)},$32b7d6fbb0a54bbf$var$Rin.deserialize=function(e){return JSON.parse(e)},$32b7d6fbb0a54bbf$var$Rin.hookAppend=function(e,t,i,n=!0){const s=e[t];return e[t]=n?function(...e){if(!1!==s.apply(this,e))return i.apply(this,e)}:function(...e){return s.apply(this,e),i.apply(this,e)},{unhook:function(){e[t]=s}}},$32b7d6fbb0a54bbf$var$Rin.hookPrepend=function(e,t,i,n=!0){const s=e[t];return e[t]=n?function(...e){if(!1!==i.apply(this,e))return s.apply(this,e)}:function(...e){return i.apply(this,e),s.apply(this,e)},{unhook:function(){e[t]=s}}},parcelRequire.register("js9rW",(function(e,t){$parcel$export(e.exports,"default",(function(){return i}));var i={email:/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)+$/i,url:/^[\w-]+:\/\/[\w-]+(\.\w+)+.*$/,urlNoProt:/^[\w-]+(\.\w+)+.*$/,name:/^[-A-Za-z0-9_.]+$/,uname:/^['\pL\pN ]+$/,text:/^[^&<>{}]*$/,utext:/^([\r\n\pL\pN\pS &!@#$%*\[\]()_+=;',.\/?:"~-]+)$/}})),parcelRequire.register("b2O91",(function(e,t){!function(i){var n="object"==typeof t&&t,s=e&&e.exports==n&&e,r="object"==typeof $parcel$global&&$parcel$global;r.global!==r&&r.window!==r||(i=r);var a=function(e){this.message=e};(a.prototype=new Error).name="InvalidCharacterError";var o=function(e){throw new a(e)},l="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",c=/[\t\n\f\r ]/g,d={encode:function(e){e=String(e),/[^\0-\xFF]/.test(e)&&o("The string to be encoded contains characters outside of the Latin1 range.");for(var t,i,n,s,r=e.length%3,a="",c=-1,d=e.length-r;++c<d;)t=e.charCodeAt(c)<<16,i=e.charCodeAt(++c)<<8,n=e.charCodeAt(++c),a+=l.charAt((s=t+i+n)>>18&63)+l.charAt(s>>12&63)+l.charAt(s>>6&63)+l.charAt(63&s);return 2==r?(t=e.charCodeAt(c)<<8,i=e.charCodeAt(++c),a+=l.charAt((s=t+i)>>10)+l.charAt(s>>4&63)+l.charAt(s<<2&63)+"="):1==r&&(s=e.charCodeAt(c),a+=l.charAt(s>>2)+l.charAt(s<<4&63)+"=="),a},decode:function(e){var t=(e=String(e).replace(c,"")).length;t%4==0&&(t=(e=e.replace(/==?$/,"")).length),(t%4==1||/[^+a-zA-Z0-9/]/.test(e))&&o("Invalid character: the string to be decoded is not correctly encoded.");for(var i,n,s=0,r="",a=-1;++a<t;)n=l.indexOf(e.charAt(a)),i=s%4?64*i+n:n,s++%4&&(r+=String.fromCharCode(255&i>>(-2*s&6)));return r},version:"1.0.0"};if("function"==typeof define&&"object"==typeof define.amd&&define.amd)define((function(){return d}));else if(n&&!n.nodeType)if(s)s.exports=d;else for(var h in d)d.hasOwnProperty(h)&&(n[h]=d[h]);else i.base64=d}(this)})),parcelRequire.register("dPQcY",(function(e,t){var i=function(){if("undefined"!=typeof self)return self;if("undefined"!=typeof window)return window;if(void 0!==i)return i;throw new Error("unable to locate global object")}();e.exports=t=i.fetch,i.fetch&&(t.default=i.fetch.bind(i)),t.Headers=i.Headers,t.Request=i.Request,t.Response=i.Response}));let $4a6e2d88db56f358$var$Class=function(){};var $4a6e2d88db56f358$export$2e2bcd8739ae039=$4a6e2d88db56f358$var$Class;$4a6e2d88db56f358$var$Class._class=$4a6e2d88db56f358$var$Class,$4a6e2d88db56f358$var$Class._super={},$4a6e2d88db56f358$var$Class.prototype.className="Class",$4a6e2d88db56f358$var$Class.prototype.__ctor=function(){},$4a6e2d88db56f358$var$Class.prototype.__dtor=function(){},$4a6e2d88db56f358$var$Class.prototype.isInstanceOf=function(e){return(e="string"===$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)?e:e.prototype?e.prototype.className:e.constructor.prototype.className)in this._super||this.className===e},$4a6e2d88db56f358$var$Class.prototype._initSuperRefs=function(){let e=this.constructor._super,t={};const i=this;for(let n in e){let s={},r=e[n].prototype;for(let e in r)"function"===$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(r[e])&&(s[e]=function(e){return function(t,n,s,r,a,o,l,c,d,h,f){return e.call(i,t,n,s,r,a,o,l,c,d,h,f)}}(r[e]));t[n]=s}this._super=t},$4a6e2d88db56f358$var$Class.inherit=function(e){let t=this._class,i=t._super,n=t._class;if("function"===$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)){for(let i in e._class)/^[A-Z]/.test(i)||(t[i]=e._class[i]);$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.override(t.prototype,e._class.prototype),$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.override(i,e._class._super),e._class.prototype.className&&(i[e._class.prototype.className]=e._class)}else $32b7d6fbb0a54bbf$export$2e2bcd8739ae039.override(t.prototype,e);return t._super=i,t._class=n,t},$4a6e2d88db56f358$var$Class.prototype._extend=function(e,t){if(0===t.length)return e;const i=function(...e){this._initSuperRefs(),this.__ctor.apply(this,e)};i._class=i,i._super={},$4a6e2d88db56f358$var$Class.inherit.call(i,e),delete i.prototype.className;for(let e=0;e<t.length;e++)i.inherit(t[e]);return delete i._super.Class,"classInit"in i.prototype&&i.prototype.classInit(),i.isInstance=function(e){return $32b7d6fbb0a54bbf$export$2e2bcd8739ae039.isInstanceOf(e,i)},i},$4a6e2d88db56f358$var$Class.extend=function(...e){return this._class.prototype._extend(this,e)},$4a6e2d88db56f358$var$Class.create=function(e){return new(this.extend(e))};var $0ec522ff4f8bedba$export$2e2bcd8739ae039=$4a6e2d88db56f358$export$2e2bcd8739ae039.extend({className:"Event",source:null,name:null,args:null,_async:!1,list:null,next:null,ret:null,original:null,i:-1,__ctor:function(e,t,i,n,s,r){this.source=e,this.name=i,this.args=n,this.cbHandler=s,this.cbContext=r,this.list=t,this.reset()},reset:function(){return this.next=null,this.ret=[],this._async=!1,this.i=-1,this},setSource:function(e){return this.source=e,this},wait:function(){return this._async=!0,this},resume:function(){for(this._async=!1;!(this._async||++this.i>=this.list.length);)if(!this.list[this.i].silent)if("string"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(this.list[this.i].handler)){if(this.list[this.i].context){if(!this.list[this.i].context[this.list[this.i].handler])continue;if(!1===this.list[this.i].context[this.list[this.i].handler](this,this.args,this.list[this.i].data))break}else if(!1===$parcel$global[this.list[this.i].handler].call(null,this,this.args,this.list[this.i].data))break}else if(!1===this.list[this.i].handler.call(this.list[this.i].context,this,this.args,this.list[this.i].data))break;return this._async||(this.i>=this.list.length&&this.next&&this.next.resume(),this.cbHandler&&this.cbHandler.call(this.cbContext)),this},from:function(e){return this.original=e,this},enqueue:function(e){if(!e)return this;var t;for(t=this;null!=t.next;t=t.next);return t.next=e,e.from(this),this}}),$0a6c600e0d2373ba$export$2e2bcd8739ae039=$4a6e2d88db56f358$export$2e2bcd8739ae039.extend({className:"EventDispatcher",listeners:null,namespace:null,__ctor:function(){this.listeners={}},setNamespace:function(e){return this.namespace=e,this},addEventListener:function(e,t,i,n){var s=(e=e.split(":"))[e.length-1],r=e.length>1?e[0]:null;return this.listeners[s]||(this.listeners[s]=[]),this.listeners[s].push({ns:r,handler:t,context:i,data:n,silent:0}),this},removeEventListener:function(e,t,i){var n=(e=e.split(":"))[e.length-1],s=e.length>1?e[0]:null;if("*"==n)for(var r in this.listeners)for(var a=this.listeners[r],o=0;o<a.length;o++){var l=!0;t&&(l=l&&a[o].handler===t),i&&(l=l&&a[o].context===i),s&&(l=l&&a[o].ns==s),l&&a.splice(o--,1)}else{if(!this.listeners[n])return this;for(a=this.listeners[n],o=0;o<a.length;o++){l=!0;t&&(l=l&&a[o].handler===t),i&&(l=l&&a[o].context===i),s&&(l=l&&a[o].ns==s),l&&a.splice(o--,1)}}return this},prepareEvent:function(e,t,i,n){var s=[],r=(e=e.split(":"))[e.length-1],a=e.length>1?e[0]:null;this.listeners[r]&&(s=s.concat(this.listeners[r])),this.listeners["*"]&&(s=s.concat(this.listeners["*"]));for(var o=0;o<s.length;o++)s[o].silent&&s.splice(o--,1);if(a)for(o=0;o<s.length;o++)s[o].ns!=a&&s.splice(o--,1);return new $0ec522ff4f8bedba$export$2e2bcd8739ae039(this,s,r,t,i,n)},silence:function(e,t){var i=(e=e.split(":"))[e.length-1],n=e.length>1?e[0]:null;if(t=!1===t?-1:1,"*"==i)for(var s in this.listeners)for(var r=this.listeners[s],a=0;a<r.length;a++)n&&r[a].ns!=n||(r[a].silent+=t);else{if(!this.listeners[i])return this;for(r=this.listeners[i],a=0;a<r.length;a++)n&&r[a].ns!=n||(r[a].silent+=t)}return this},dispatchEvent:function(e,t,i,n){return this.prepareEvent(this.namespace?this.namespace+":"+e:e,t,i,n).resume()}}),$lfbt7=parcelRequire("lfbt7");let $601363b594d4bfd7$var$_Model=$0a6c600e0d2373ba$export$2e2bcd8739ae039.extend({className:"Model",defaults:null,constraints:null,data:null,changedList:null,_silent:0,_level:0,__ctor:function(e,t){if(this._super.EventDispatcher.__ctor(),this.data={},null!=t)this.reset(t,!1);else{let e=null;if(!this.defaults&&this.constraints){e={};for(let t in this.constraints){let i=this.constraints[t];null!==i.def&&void 0!==i.def?"function"==typeof i.def?e[t]=i.def():e[t]=i.def:e[t]=null}}this.reset(e)}this.init(),null!=e&&this.set(e,!0),this.constraints&&this.update(),this.ready()},reset:function(e,t){if(!this.defaults){if(!e||"object"!==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)&&"function"!==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e))return this;this.defaults=e}return"function"===$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(this.defaults)?this.data=this.defaults():this.data=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.clone(this.defaults),!1===t||!1===e?this:this.update(null,!0)},init:function(){},ready:function(){},silent:function(e){return this._silent+=e?1:-1,this},_validate:function(e,t){if(!this.constraints||!this.constraints[e])return t;var i=this.constraints[e],n=t;for(var s in i)if($601363b594d4bfd7$var$_Model.Constraints[s])try{n=$601363b594d4bfd7$var$_Model.Constraints[s](this,i[s],e,n)}catch(t){if("null"==t.message)break;throw new Error(`Constraint [${s}:${i[s]}] failed on property '${e}'.`)}return n},_set:function(e,t){if(!this.constraints||!this.constraints[e])return this.data[e]=t,t;var i=this.constraints[e],n=(this.data[e],t);for(var s in i)if($601363b594d4bfd7$var$_Model.Constraints[s])try{n=$601363b594d4bfd7$var$_Model.Constraints[s](this,i[s],e,n)}catch(i){if("null"==i.message)break;this._silent||this.dispatchEvent("constraintError",{constraint:s,message:i.message,name:e,value:t});break}return this.data[e]=n},_propertyEvent:function(e,t,i,n){var s={name:e,old:t,value:i,level:this._level},r=this.dispatchEvent("propertyChanging",s);n?this.data[e]=s.value:s.value=this._set(e,s.value),null!=r&&r.ret.length&&!1===r.ret[0]||(this.dispatchEvent("propertyChanged."+e,s),this.dispatchEvent("propertyChanged",s),this.changedList.push(e))},set:function(){var e=arguments.length,t=!1,i=!1;if((e>2||2==e&&"object"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(arguments[0]))&&"boolean"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(arguments[e-1])&&!1===(t=arguments[--e])&&(i=!0),0==this._level&&(this.changedList=[]),this._level++,2==e)(this.data[arguments[0]]!=arguments[1]||t)&&(this._silent||i?this._set(arguments[0],arguments[1]):this._propertyEvent(arguments[0],this.data[arguments[0]],this._validate(arguments[0],arguments[1])));else for(var n in arguments[0])(this.data[n]!=arguments[0][n]||t)&&(this._silent||i?this._set(n,arguments[0][n]):this._propertyEvent(n,this.data[n],this._validate(n,arguments[0][n])));return--this._level||!this.changedList.length||i||this._silent||this.dispatchEvent("modelChanged",{fields:this.changedList}),this},has:function(e){return e in this.data},get:function(e,t){return 0==arguments.length||!1===e?this.data:1==arguments.length&&!0===e?this.flatten():2==arguments.length&&void 0===this.data[e]?t:this.data[e]},getInt:function(e,t){return 2==arguments.length&&void 0===this.data[e]?t:parseInt(this.data[e])},getFloat:function(e,t){return 2==arguments.length&&void 0===this.data[e]?t:parseFloat(this.data[e])},getBool:function(e,t){return"true"===(e=2==arguments.length&&void 0===this.data[e]?t:this.data[e])||!0===e||"false"!==e&&!1!==e&&!!parseInt(e)},getReference:function(e){var t=this;return{get:function(){return t.get(e)},set:function(i){t.set(e,i)}}},constraint:function(e,t,i){if(3==arguments.length||2==arguments.length||1==arguments.length&&"object"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)){switch(this.constraints===this.constructor.prototype.constraints&&(this.constraints=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.clone(this.constraints)),arguments.length){case 1:$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.override(this.constraints,e);break;case 2:$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.override(this.constraints[e],t);break;case 3:this.constraints[e][t]=i}return this}return e?this.constraints[e]:this},flatten:function(e,t){if(e)return null==(s=this.flatten(!1,!0))?null:(s.class=this.classPath,s);if(!this.constraints&&!this.defaults)return this.data;if(!this.isCompliant())return{};var i=this.constraints,n=this.defaults?"function"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(this.defaults)?this.defaults():this.defaults:this.constraints,s={};for(var r in this.data)if(r in n){if(i&&i[r]){var a=i[r];if(a.model){s[r]=this.data[r]?this.data[r].flatten(t):null;continue}if(a.arrayof){s[r]=[];for(var o=0;o<this.data[r].length;o++)s[r][o]=this.data[r][o]?this.data[r][o].flatten(t):null;continue}if(a.cls){s[r]=this.data[r]?this.data[r].flatten():null;continue}}s[r]=this.data[r]}return s},remove:function(e,t){if("array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)){for(var i=0;i<e.length;i++)delete this.data[e[i]];!1===t||this._silent||this.dispatchEvent("propertyRemoved",{fields:e})}else delete this.data[e],!1===t||this._silent||this.dispatchEvent("propertyRemoved",{fields:[e]})},update:function(e,t){if(this._silent)return this;if(0==this._level&&(this.changedList=[]),this._level++,e&&"string"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e))this._propertyEvent(e,this.data[e],this.data[e],t);else if(e&&"array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e))for(var i of e)this._propertyEvent(i,this.data[i],this.data[i],t);else for(var i in this.data)this._propertyEvent(i,this.data[i],this.data[i],t);return--this._level||this._silent||0==this.changedList.length&&!0!==e||this.dispatchEvent("modelChanged",{fields:this.changedList}),this},validate:function(e){if(!this.constraints)return this;if(e&&"string"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e))this._set(e,this.data[e]);else for(var t in this.data)e&&-1==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.indexOf(e,t)||this._set(t,this.data[t]);return this},isCompliant:function(){if(!this.constraints)return!0;try{for(var e in this.data)this._validate(e,this.data[e]);return!0}catch(e){}return!1},observe:function(e,t,i){this.addEventListener("propertyChanged."+e,t,i)},unobserve:function(e,t,i){this.removeEventListener("propertyChanged."+e,t,i)},watch:function(e,t){1==(e=e.split(":")).length&&(e[1]=e[0],e[0]="watch"),this.addEventListener(e[0]+":propertyChanged."+e[1],(function(e,i){t(i.value,i,e)}))},unwatch:function(e){1==(e=e.split(":")).length&&(e[1]=e[0],e[0]="watch"),this.removeEventListener(e[0]+":propertyChanged."+e[1])},toString:function(){return $32b7d6fbb0a54bbf$export$2e2bcd8739ae039.serialize(this.get(!0))}});$601363b594d4bfd7$var$_Model.Constraints=$lfbt7.default;var $601363b594d4bfd7$export$2e2bcd8739ae039=$601363b594d4bfd7$var$_Model,$49f067e8726ea7a3$export$2e2bcd8739ae039=$601363b594d4bfd7$export$2e2bcd8739ae039.extend({className:"ModelList",itemt:$601363b594d4bfd7$export$2e2bcd8739ae039,contents:null,itemId:null,nextId:null,defaults:{contents:null},constraints:{contents:{type:"array",arrayof:"@itemt"}},__ctor:function(...e){this.itemId=[],this.nextId=0,this._super.Model.__ctor(...e)},ready:function(){this._eventGroup="ModelList_"+Date.now()+":modelChanged",this.contents=this.data.contents},_bind:function(e,t){return t&&t.addEventListener&&t.addEventListener(this._eventGroup,this._onItemEvent,this,e),t},_unbind:function(e){return e&&e.removeEventListener&&e.removeEventListener(this._eventGroup),e},_onItemEvent:function(e,t,i){this.prepareEvent("itemChanged",{id:i,item:e.source}).from(e).enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume()},length:function(){return this.data.contents.length},clear:function(){for(var e=0;e<this.data.contents;e++)this._unbind(this.data.contents[e]);return this.itemId=[],this.nextId=0,this.contents=this.data.contents=[],this.prepareEvent("itemsCleared").enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume(),this},setData:function(e){if(this.clear(),!e)return this;for(var t=0;t<e.length;t++){var i=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.ensureTypeOf(this.itemt,e[t]);this.itemId.push(this.nextId++),this.data.contents.push(i),this._bind(this.nextId-1,i)}return this.prepareEvent("itemsChanged").enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume(),this},getData:function(){return this.data.contents},getAt:function(e){return e<0||e>=this.data.contents.length?null:this.data.contents[e]},removeAt:function(e){if(e<0||e>=this.data.contents.length)return null;let t=this.data.contents.splice(e,1)[0],i=this.itemId.splice(e,1)[0];return this._unbind(t),this.prepareEvent("itemRemoved",{id:i,item:t}).enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume(),t},setAt:function(e,t){return!(e<0||e>=this.data.contents.length)&&(t=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.ensureTypeOf(this.itemt,t),this._unbind(this.data.contents[e]),this.data.contents[e]=t,this._bind(this.itemId[e],t),this.prepareEvent("itemChanged",{id:this.itemId[e],item:t}).enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume(),!0)},updateAt:function(e){return!(e<0||e>=this.data.contents.length)&&(this.prepareEvent("itemChanged",{id:this.itemId[e],item:this.data.contents[e]}).enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume(),!0)},push:function(e){return e&&"object"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)?null:(e=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.ensureTypeOf(this.itemt,e),this.itemId.push(this.nextId++),this.data.contents.push(e),this._bind(this.nextId-1,e),this.prepareEvent("itemAdded",{id:this.itemId[this.itemId.length-1],item:e,position:"tail"}).enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume(),e)},pop:function(){return this._unbind(this.data.contents.pop())},unshift:function(e){return e&&"object"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)?null:(e=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.ensureTypeOf(this.itemt,e),this.itemId.unshift(this.nextId++),this.data.contents.unshift(e),this._bind(this.nextId-1,e),this.prepareEvent("itemAdded",{id:this.itemId[0],item:e,position:"head"}).enqueue(this.prepareEvent("modelChanged",{fields:["contents"]})).resume(),e)},shift:function(){return this._unbind(this.data.contents.shift())},find:function(e,t){for(var i=this.data.contents,n=0;n<i.length;n++)if($32b7d6fbb0a54bbf$export$2e2bcd8739ae039.partialCompare(i[n].data,e))return t?i[n]:n;return t?null:-1}});let $491b6ac1b8bde8fd$var$Schema={Type:function(e){let t={flatten:function(e,t){return e},unflatten:function(e,t){return e}};return e?$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.override(t,e):t},String:function(){return $491b6ac1b8bde8fd$var$Schema.Type({flatten:function(e,t){return null!=e?e.toString():null},unflatten:function(e,t){return null!=e?e.toString():null}})},Integer:function(){return $491b6ac1b8bde8fd$var$Schema.Type({flatten:function(e,t){return~~e},unflatten:function(e,t){return~~e}})},Number:function(e){return $491b6ac1b8bde8fd$var$Schema.Type({_precision:e,_round:!1,precision:function(e){return this._precision=~~e,this},flatten:function(e,t){return e=parseFloat(e),this._precision>0&&(e=~~(e*Math.pow(10,this._precision))/Math.pow(10,this._precision)),e},unflatten:function(e,t){return parseFloat(e)}})},Bool:function(e){return $491b6ac1b8bde8fd$var$Schema.Type({_compact:e,compact:function(e){return this._compact=e,this},flatten:function(e,t){return e=~~e,this._compact?e>0?1:0:e>0},unflatten:function(e,t){return!!~~e}})},SharedString:function(){return $491b6ac1b8bde8fd$var$Schema.Type({flatten:function(e,t){return null==e?0:(e=e.toString(),"strings"in t||(t.index={},t.strings=[]),e in t.index||(t.strings.push(e),t.index[e]=t.strings.length),t.index[e])},unflatten:function(e,t){return null==e||0==e?null:t.strings[~~e-1]}})},Array:function(e){return $491b6ac1b8bde8fd$var$Schema.Type({itemType:e,_debug:!1,_filter:null,debug:function(e){return this._debug=e,this},of:function(e){return this.itemType=e,this},filter:function(e){return this._filter=e,this},flatten:function(e,t){if(null==e)return null;let i=[];for(let n=0;n<e.length;n++)this._filter&&!this._filter(e[n],n)||i.push(this.itemType.flatten(e[n],t));return i},unflatten:async function(e,t){if(null==e)return null;let i=[];for(let n=0;n<e.length;n++)i.push(await this.itemType.unflatten(e[n],t));return i}})},Object:function(){return $491b6ac1b8bde8fd$var$Schema.Type({properties:[],property:function(e,t,i=null){return this.properties.push({name:e,type:t,defvalue:i}),this},flatten:function(e,t){if(null==e)return null;let i;if(!0===t.symbolic){i={};for(let n=0;n<this.properties.length;n++)this.properties[n].name in e?i[this.properties[n].name]=this.properties[n].type.flatten(e[this.properties[n].name],t):i[this.properties[n].name]=this.properties[n].type.flatten(this.properties[n].defvalue,t)}else{i=[];for(let n=0;n<this.properties.length;n++)this.properties[n].name in e?i.push(this.properties[n].type.flatten(e[this.properties[n].name],t)):i.push(this.properties[n].type.flatten(this.properties[n].defvalue,t))}return i},unflatten:async function(e,t){if(null==e)return null;let i={};if(!0===t.symbolic)for(let n=0;n<this.properties.length;n++)i[this.properties[n].name]=await this.properties[n].type.unflatten(this.properties[n].name in e?e[this.properties[n].name]:this.properties[n].defvalue,t);else for(let n=0;n<this.properties.length;n++)i[this.properties[n].name]=await this.properties[n].type.unflatten(n in e?e[n]:this.properties[n].defvalue,t);return i}})},Class:function(e){return $491b6ac1b8bde8fd$var$Schema.Type({_constructor:e,constructor:function(e){return this._constructor=e,this},flatten:function(e,t){return null==e?null:e.flatten(t)},unflatten:async function(e,t){return null==e?null:await(new this._constructor).unflatten(e,t)}})},Property:function(e,t){return $491b6ac1b8bde8fd$var$Schema.Type({property:e,type:t,name:function(e){return this.property=e,this},is:function(e){return this.type=e,this},flatten:function(e,t){if(null==e)return null;let i;return!0===t.symbolic?(i={},i[this.property]=this.type.flatten(e[this.property],t)):i=this.type.flatten(e[this.property],t),i},unflatten:async function(e,t){if(null==e)return null;let i={};return!0===t.symbolic?i[this.property]=await this.type.unflatten(e[this.property],t):i[this.property]=await this.type.unflatten(e,t),i}})},Map:function(){return $491b6ac1b8bde8fd$var$Schema.Type({flatten:function(e,t){if(null==e)return null;if(!0===t.symbolic)return e;let i=[];for(let t in e)i.push(t),i.push(e[t]);return i},unflatten:function(e,t){if(null==e)return null;if(!0===t.symbolic)return e;let i={};for(let t=0;t<e.length;t+=2)i[e[t]]=e[t+1];return i}})},Selector:function(){return $491b6ac1b8bde8fd$var$Schema.Type({conditions:[],value:null,when:function(e,t){return this.conditions.push([t=>t===e,t]),this},with:function(e){return this.value=e,this},flatten:function(e,t){if(null==e)return null;for(let i of this.conditions)if(!0===i[0](this.value))return i[1].flatten(e,t);return null},unflatten:async function(e,t){if(null==e)return null;for(let i of this.conditions)if(!0===i[0](this.value))return await i[1].unflatten(e,t);return null}})}};var $491b6ac1b8bde8fd$export$2e2bcd8739ae039=$491b6ac1b8bde8fd$var$Schema,$e81c6e03d7b73f89$export$2e2bcd8739ae039=$4a6e2d88db56f358$export$2e2bcd8739ae039.extend({className:"Flattenable",typeSchema:null,flatten:function(e){return this.typeSchema.flatten(this,e)},unflatten:async function(e,t){return Object.assign(this,await this.typeSchema.unflatten(e,t)),await this.onUnflattened(),this},onUnflattened:async function(){}}),$157d3e85e770833c$export$2e2bcd8739ae039=$e81c6e03d7b73f89$export$2e2bcd8739ae039.extend({className:"Collection",itemTypeSchema:null,items:null,__ctor:function(e){e||(e=this.itemTypeSchema),e&&(this.typeSchema=$491b6ac1b8bde8fd$export$2e2bcd8739ae039.Property("items").is($491b6ac1b8bde8fd$export$2e2bcd8739ae039.Array().of(e))),this.reset()},onUnflattened:function(){let e=this.items;this.reset();for(let t of e)this.add(t)},itemsReferenceChanged:function(){},reset:function(){return this.items=[],this.itemsReferenceChanged(),this},clear:function(){var e=this.items;this.reset();for(var t=0;t<e.length;t++)this.onItemRemoved(e[t],0);return this},sort:function(e,t){return"function"!=typeof e?this.items.sort((function(i,n){return(i[e]<=n[e]?-1:1)*(!0===t?-1:1)})):this.items.sort(e),this},findItem:function(e,t){if(!this.items)return null;for(var i=0;i<this.items.length;i++)if((!t||!$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.partialCompare(this.items[i],t))&&$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.partialCompare(this.items[i],e))return this.items[i];return null},getItems:function(){return this.items},length:function(){return this.items.length},isEmpty:function(){return!this.items.length},indexOf:function(e){return this.items.indexOf(e)},getAt:function(e,t=!1){return e<0&&1==t&&(e+=this.items.length),e>=0&&e<this.items.length?this.items[e]:null},first:function(){return this.getAt(0)},last:function(){return this.getAt(-1,!0)},addAt:function(e,t){if(!t||!this.onBeforeItemAdded(t))return this;if(e<0&&(e=0),e>this.items.length&&(e=this.items.length),0==e)this.items.unshift(t);else if(e==this.items.length)this.items.push(t);else{var i=this.items.splice(0,e);i.push(t),this.items=i.concat(this.items),this.itemsReferenceChanged()}return this.onItemAdded(t),this},unshift:function(e){return this.addAt(0,e)},push:function(e){return this.addAt(this.items.length,e)},add:function(e){return this.push(e)},removeAt:function(e,t=!1){if(e<0&&1==t&&(e+=this.items.length),e<0||e>=this.items.length)return null;var i=this.items[e];return this.items.splice(e,1),this.onItemRemoved(i,e),i},pop:function(e){return this.removeAt(-1,!0)},shift:function(e){return this.removeAt(0)},remove:function(e){return this.removeAt(this.indexOf(e))},forEach:function(e){if(this.isEmpty())return this;for(var t=0;t<this.items.length&&!1!==e(this.items[t],t,this);t++);return this},forEachCall:function(e,...t){if(this.isEmpty())return this;for(var i=0;i<this.items.length&&!1!==this.items[i][e](...t);i++);return this},forEachRev:function(e){if(this.isEmpty())return this;for(var t=this.items.length-1;t>=0&&!1!==e(this.items[t],t,this);t--);return this},forEachRevCall:function(e,...t){if(this.isEmpty())return this;for(var i=this.items.length-1;i>=0&&!1!==this.items[i][e](...t);i--);return this},onBeforeItemAdded:function(e){return!0},onItemAdded:function(e){},onItemRemoved:function(e){}});let $c7112a3823f0f63d$var$Template={strict:!1,parseTemplate:function(e,t,i,n=!1,s=1){let r="string",a=null,o=0,l=0,c="",d=[],h=d,f=!1;function u(e,n){if("template"==e?n=$c7112a3823f0f63d$var$Template.parseTemplate(n,t,i,!0,0):"parse"==e?(n=$c7112a3823f0f63d$var$Template.parseTemplate(n,t,i,!1,0),e="base-string","array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n)&&(e=n[0].type,n=n[0].data)):"parse-trim-merge"==e?n=$c7112a3823f0f63d$var$Template.parseTemplate(n.trim().split("\n").map((e=>e.trim())).join("\n"),t,i,!1,0):"parse-merge"==e?n=$c7112a3823f0f63d$var$Template.parseTemplate(n,t,i,!1,0):"parse-merge-alt"==e&&(n=$c7112a3823f0f63d$var$Template.parseTemplate(n,"{","}",!1,0)),"parse-merge"==e||"parse-merge-alt"==e||"parse-trim-merge"==e)for(let e=0;e<n.length;e++)d.push(n[e]);else d.push({type:e,data:n});f&&(h.push(d=[]),f=!1)}!0===n&&(e=e.trim(),r="identifier",o=10,h.push(d=[])),e+="\0";for(let n=0;n<e.length;n++)if("\\"!=e[n]){switch(o){case 0:"\0"==e[n]?a="string":e[n]==t&&"<"==e[n+1]?(o=1,l=1,a="string",r="parse-merge"):e[n]==t&&"@"==e[n+1]?(o=1,l=1,a="string",r="parse-trim-merge",n++):e[n]==t&&":"==e[n+1]?(o=12,l=1,a="string",r="string",n++):e[n]==t?(o=1,l=1,a="string",r="template"):c+=e[n];break;case 1:if("\0"==e[n])throw new Error("Parse error: Unexpected end of template");if(e[n]==i){if(l--,l<0)throw new Error("Parse error: Unmatched "+i);if(0==l){o=0,a=r;break}}else e[n]==t&&l++;c+=e[n];break;case 10:if("\0"==e[n]){a=r;break}if("."==e[n]){u(r,c),u("access","."),r="identifier",c="";break}if(null!=e[n].match(/[\t\n\r\f\v ]/)){for(a=r,r="identifier",f=!0;null!=e[n].match(/[\t\n\r\f\v ]/);)n++;n--;break}if(e[n]==t&&"<"==e[n+1]){c&&(a=r),o=11,l=1,r="parse-merge";break}if(e[n]==t&&"@"==e[n+1]){c&&(a=r),o=11,l=1,r="parse-trim-merge",n++;break}if('"'==e[n]){c&&(a=r),o=14,l=1,r="parse-merge";break}if("'"==e[n]){c&&(a=r),o=15,l=1,r="parse-merge";break}if("`"==e[n]){c&&(a=r),o=16,l=1,r="parse-merge-alt";break}if(e[n]==t&&":"==e[n+1]){c&&(a=r),o=13,l=1,r="string",n++;break}if(e[n]==t){c&&u(r,c),o=11,l=1,c="",r="parse",c+=e[n];break}"identifier"!=r&&(u(r,c),c="",r="identifier"),c+=e[n];break;case 11:if("\0"==e[n])throw new Error("Parse error: Unexpected end of template");if(e[n]==i){if(l--,l<0)throw new Error("Parse error: Unmatched "+i);if(0==l&&(o=10,"parse-merge"==r||"parse-merge-alt"==r||"parse-trim-merge"==r))break}else e[n]==t&&l++;c+=e[n];break;case 12:if("\0"==e[n])throw new Error("Parse error: Unexpected end of template");if(e[n]==i){if(l--,l<0)throw new Error("Parse error: Unmatched "+i);if(0==l){0!=c.length&&"<"!=c[0]&&"["!=c[0]&&" "!=c[0]&&(c=t+c+i),o=0,a=r;break}}else e[n]==t&&l++;c+=e[n];break;case 13:if("\0"==e[n])throw new Error("Parse error: Unexpected end of template");if(e[n]==i){if(l--,l<0)throw new Error("Parse error: Unmatched "+i);if(0==l){"<"!=c[0]&&"["!=c[0]&&" "!=c[0]&&(c=t+c+i),o=10;break}}else e[n]==t&&l++;c+=e[n];break;case 14:if("\0"==e[n])throw new Error("Parse error: Unexpected end of template");if('"'==e[n]){if(l--,l<0)throw new Error('Parse error: Unmatched "');if(0==l&&(o=10,"parse-merge"==r||"parse-merge-alt"==r||"parse-trim-merge"==r))break}c+=e[n];break;case 15:if("\0"==e[n])throw new Error("Parse error: Unexpected end of template");if("'"==e[n]){if(l--,l<0)throw new Error("Parse error: Unmatched '");if(0==l&&(o=10,"parse-merge"==r||"parse-merge-alt"==r||"parse-trim-merge"==r))break}c+=e[n];break;case 16:if("\0"==e[n])throw new Error("Parse error: Unexpected end of template");if("`"==e[n]){if(l--,l<0)throw new Error("Parse error: Unmatched `");if(0==l&&(o=10,"parse-merge"==r||"parse-merge-alt"==r||"parse-trim-merge"==r))break}c+=e[n]}a&&(u(a,c),a=c="")}else c+="\\",c+=e[++n];if(!n){let e=0;for(;e<h.length&&"string"==h[e].type&&""==h[e].data;)h.splice(e,1);for(e=h.length-1;e>0&&"string"==h[e].type&&""==h[e].data;)h.splice(e--,1);0==h.length&&h.push({type:"string",data:""})}return s&&function e(t){if("object"==typeof t){if(t instanceof Array)for(let i=0;i<t.length;i++)e(t[i]);else t.data=e(t.data);return t}for(let e=0;e<t.length;e++)if("\\"==t[e]){let i=t[e+1];switch(i){case"n":i="\n";break;case"r":i="\r";break;case"f":i="\f";break;case"v":i="\v";break;case"t":i="\t";break;case"s":i="s";break;case'"':i='"';break;case"'":i="'"}t=t.substr(0,e)+i+t.substr(e+2)}return t}(h),h},parse:function(e){return this.parseTemplate(e.trim(),"[","]",!1)},clean:function(e){for(let t=0;t<e.length;t++)"template"!=e[t].type&&(e.splice(t,1),t--);return e},expand:function(e,t,i="text",n="base-string"){let s=[];if("var"==n){let i=!0,n=!1,r=t,a=null,o=!0,l="";for(let s=0;s<e.length&&null!=t;s++)switch(e[s].type){case"identifier":case"string":l+=e[s].data,a=null;break;case"template":a=this.expand(e[s].data,r,"arg","template"),l+="object"!=typeof a?a:"";break;case"base-string":l+=this.expand(e[s].data,r,"arg","base-string"),a=null;break;case"access":if(a&&"object"==typeof a)t=a;else{for(""==l&&(l="this");;)if("!"==l[0])l=l.substr(1),i=!1;else{if("$"!=l[0])break;l=l.substr(1),n=!0}if("this"!=l&&null!=t){let e=t;null===(t=l in t?t[l]:null)&&o&&l in $c7112a3823f0f63d$var$Template.functions&&(t=$c7112a3823f0f63d$var$Template.functions[l](null,null,e)),o=!1}}l=""}for(;""!=l;)if("!"==l[0])l=l.substr(1),i=!1;else{if("$"!=l[0])break;l=l.substr(1),n=!0}if("this"!=l){let i=!1;if(null!=t?l in t?t=t[l]:(i=!0,t=null):i=!0,i&&1==e.length&&1==$c7112a3823f0f63d$var$Template.strict)throw new Error("Expression function `"+l+"` not found.")}"string"==typeof t&&(i&&(t=t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")),n&&(t='"'+t+'"')),s.push(t)}if("varref"==i){let i=t,n=null,s=!0,r="";for(let a=0;a<e.length&&null!=t;a++)switch(e[a].type){case"identifier":case"string":r+=e[a].data,n=null;break;case"template":n=this.expand(e[a].data,i,"arg","template"),r+="object"!=typeof n?n:"";break;case"base-string":r+=this.expand(e[a].data,i,"arg","base-string"),n=null;break;case"access":if(n&&"object"==typeof n)t=n;else{for(""==r&&(r="this");;)if("!"==r[0])r=r.substr(1);else{if("$"!=r[0])break;r=r.substr(1)}if("this"!=r&&null!=t){let e=t;null===(t=r in t?t[r]:null)&&s&&r in $c7112a3823f0f63d$var$Template.functions&&(t=$c7112a3823f0f63d$var$Template.functions[r](null,null,e)),s=!1}}r=""}for(;""!=r;)if("!"==r[0])r=r.substr(1);else{if("$"!=r[0])break;r=r.substr(1)}return"this"!=r?[t,r]:null}if("fn"==n){var r=[];if(r.push($c7112a3823f0f63d$var$Template.expand(e[0],t,"text","base-string")),"_"+r[0]in $c7112a3823f0f63d$var$Template.functions&&(r[0]="_"+r[0]),!(r[0]in $c7112a3823f0f63d$var$Template.functions)){if(1==$c7112a3823f0f63d$var$Template.strict)throw new Error("Expression function `"+r[0]+"` not found.");return`(Unknown: ${r[0]})`}if("_"==r[0][0])return $c7112a3823f0f63d$var$Template.functions[r[0]](e,t);for(let i=1;i<e.length;i++)r.push($c7112a3823f0f63d$var$Template.expand(e[i],t,"arg","base-string"));s.push($c7112a3823f0f63d$var$Template.functions[r[0]](r,e,t))}if("template"==n){if(1==e.length){if(1==e[0].length&&"string"==e[0][0].type)return e[0][0].data;if(1==e[0].length&&"identifier"==e[0][0].type){let n=e[0][0].data;if(n in $c7112a3823f0f63d$var$Template.functions||"_"+n in $c7112a3823f0f63d$var$Template.functions)return $c7112a3823f0f63d$var$Template.expand(e,t,i,"fn")}return $c7112a3823f0f63d$var$Template.expand(e[0],t,i,"var")}return $c7112a3823f0f63d$var$Template.expand(e,t,i,"fn")}if("base-string"==n){let n=-1;for(let r of e){let a=null;switch(n++,r.type){case"template":a=$c7112a3823f0f63d$var$Template.expand(r.data,t,i,"template");break;case"string":case"identifier":a=r.data;break;case"base-string":a=$c7112a3823f0f63d$var$Template.expand(r.data,t,i,"base-string")}"void"!=i&&("last"==i&&n!=e.length-1||s.push(a))}}if("obj"==i)return s;if("last"==i)return"Rose\\Arry"==typeOf(s)&&(s=s[0]),s;if("void"==i)return null;if("arg"==i)return"array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(s)?1!=s.length?s.join(""):s[0]:s;if("text"==i&&"array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(s)){let e=t=>null!=t&&"object"==typeof t?"map"in t?t.map(e).join(""):"join"in t?t.join(""):t.toString():t;s=s.map(e).join("")}return s},compile:function(e){return e=$c7112a3823f0f63d$var$Template.parse(e),function(t=null,i="text"){return $c7112a3823f0f63d$var$Template.expand(e,t||{},i)}},eval:function(e,t=null,i="text"){return e=$c7112a3823f0f63d$var$Template.parse(e),$c7112a3823f0f63d$var$Template.expand(e,t||{},i)},value:function(e,t=null){return"array"!=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e)?e:$c7112a3823f0f63d$var$Template.expand(e,t||{},"arg")},register:function(e,t){$c7112a3823f0f63d$var$Template.functions[e]=t},call:function(e,t,i=null){return e in $c7112a3823f0f63d$var$Template.functions?$c7112a3823f0f63d$var$Template.functions[e](t,null,i):null},getNamedValues:function(e,t,i=1,n=!0){let s={},r=0;for(;i<e.length;i+=2){let a=$c7112a3823f0f63d$var$Template.expand(e[i],t,"arg");r||(r=a.startsWith(":")?1:a.endsWith(":")?2:3),1==r?a=a.substr(1):2==r&&(a=a.substr(0,a.length-1)),s[a]=n?$c7112a3823f0f63d$var$Template.expand(e[i+1],t,"arg"):e[i+1]}return s}};$c7112a3823f0f63d$var$Template.functions={global:function(e){return globalThis},null:function(e){return null},true:function(e){return!0},false:function(e){return!1},len:function(e){return e[1].toString().length},int:function(e){return~~e[1]},str:function(e){return e[1].toString()},float:function(e){return parseFloat(e[1])},chr:function(e){return String.fromCharCode(e[1])},ord:function(e){return e[1].toString().charCodeAt(0)},not:function(e){return!e[1]},neg:function(e){return-e[1]},abs:function(e){return Math.abs(e[1])},and:function(e){for(let t=1;t<e.length;t++)if(!e[t])return!1;return!0},or:function(e){for(let t=1;t<e.length;t++)if(~~e[t])return!0;return!1},eq:function(e){return e[1]==e[2]},ne:function(e){return e[1]!=e[2]},lt:function(e){return e[1]<e[2]},le:function(e){return e[1]<=e[2]},gt:function(e){return e[1]>e[2]},ge:function(e){return e[1]>=e[2]},isnotnull:function(e){return!!e[1]},isnull:function(e){return!e[1]},iszero:function(e){return 0==parseInt(e[1])},"eq?":function(e){return e[1]==e[2]},"ne?":function(e){return e[1]!=e[2]},"lt?":function(e){return e[1]<e[2]},"le?":function(e){return e[1]<=e[2]},"gt?":function(e){return e[1]>e[2]},"ge?":function(e){return e[1]>=e[2]},"notnull?":function(e){return!!e[1]},"null?":function(e){return!e[1]},"zero?":function(e){return 0==parseInt(e[1])},typeof:function(e){return $32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e[1])},"*":function(e){let t=e[1];for(let i=2;i<e.length;i++)t*=e[i];return t},"/":function(e){let t=e[1];for(let i=2;i<e.length;i++)t/=e[i];return t},"+":function(e){let t=e[1];for(let i=2;i<e.length;i++)t-=-e[i];return t},"-":function(e){let t=e[1];for(let i=2;i<e.length;i++)t-=e[i];return t},mul:function(e){let t=e[1];for(let i=2;i<e.length;i++)t*=e[i];return t},div:function(e){let t=e[1];for(let i=2;i<e.length;i++)t/=e[i];return t},sum:function(e){let t=e[1];for(let i=2;i<e.length;i++)t-=-e[i];return t},sub:function(e){let t=e[1];for(let i=2;i<e.length;i++)t-=e[i];return t},mod:function(e){let t=e[1];for(let i=2;i<e.length;i++)t%=e[i];return t},pow:function(e){let t=e[1];for(let i=2;i<e.length;i++)t=Math.pow(t,e[i]);return t},dump:function(e){return JSON.stringify(e[1])},_set:function(e,t){for(let i=1;i+1<e.length;i+=2){let n=$c7112a3823f0f63d$var$Template.value(e[i+1],t);if(e[i].length>1){let s=$c7112a3823f0f63d$var$Template.expand(e[i],t,"varref");null!=s&&(s[0][s[1]]=n)}else t[$c7112a3823f0f63d$var$Template.value(e[i],t)]=n}return""},_unset:function(e,t){for(let i=1;i<e.length;i++)if(e[i].length>1){let n=$c7112a3823f0f63d$var$Template.expand(e[i],t,"varref");null!=n&&delete n[0][n[1]]}else delete t[$c7112a3823f0f63d$var$Template.value(e[i],t)];return null},trim:function(e){return e[1]?"object"==typeof e[1]?e[1].map((e=>e.trim())):e[1].trim():""},upper:function(e){return e[1]?"object"==typeof e[1]?e[1].map((e=>e.toUpperCase())):e[1].toUpperCase():""},lower:function(e){return e[1]?"object"==typeof e[1]?e[1].map((e=>e.toLowerCase())):e[1].toLowerCase():""},substr:function(e){let t=e[e.length-1].toString(),i=0,n=null;return 4==e.length?(i=~~e[1],n=~~e[2]):(i=~~e[1],n=null),i<0&&(i+=t.length),n<0&&(n+=t.length),null===n&&(n=t.length-i),t.substr(i,n)},replace:function(e){return e[3].split(e[1]).join(e[2])},nl2br:function(e){return e[1]?"object"==typeof e[1]?e[1].map((e=>e.replace(/\n/g,"<br/>"))):e[1].replace(/\n/g,"<br/>"):""},"%":function(e){e.shift();var t=e.shift();let i="";for(let n=0;n<e.length;n++)if("array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e[n])){i+=`<${t}>`;for(let t=0;t<e[n].length;t++)i+=e[n][t];i+=`</${t}>`}else i+=`<${t}>${e[n]}</${t}>`;return i},"%%":function(e){e.shift();var t=e.shift();let i="",n="";for(let t=0;t<e.length;t+=2)t+1<e.length?i+=` ${e[t]}="${e[t+1]}"`:n=e[t];return n?`<${t}${i}>${n}</${t}>`:`<${t}${i}/>`},join:function(e){return e[2]&&"array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(e[2])?e[2].join(e[1]):""},split:function(e){return e[2]&&"string"==typeof e[2]?e[2].split(e[1]):[]},keys:function(e){return e[1]&&"object"==typeof e[1]?Object.keys(e[1]):[]},values:function(e){return e[1]&&"object"==typeof e[1]?Object.values(e[1]):[]},_each:function(e,t){let i=$c7112a3823f0f63d$var$Template.expand(e[1],t,"arg"),n=$c7112a3823f0f63d$var$Template.expand(e[2],t,"arg"),s="",r=0;if(!n)return s;for(let a in n)t[i]=n[a],t[i+"##"]=r++,t[i+"#"]=a,s+=$c7112a3823f0f63d$var$Template.expand(e[3],t,"text");return delete t[i],delete t[i+"##"],delete t[i+"#"],s},_foreach:function(e,t){let i=$c7112a3823f0f63d$var$Template.expand(e[1],t,"arg"),n=$c7112a3823f0f63d$var$Template.expand(e[2],t,"arg"),s=0;if(!n)return null;for(let r in n)t[i]=n[r],t[i+"##"]=s++,t[i+"#"]=r,$c7112a3823f0f63d$var$Template.expand(e[3],t,"text");return delete t[i],delete t[i+"##"],delete t[i+"#"],null},"_?":function(e,t){return $c7112a3823f0f63d$var$Template.expand(e[1],t,"arg")?$c7112a3823f0f63d$var$Template.expand(e[2],t,"arg"):e.length>3?$c7112a3823f0f63d$var$Template.expand(e[3],t,"arg"):""},"_??":function(e,t){let i=$c7112a3823f0f63d$var$Template.expand(e[1],t,"arg");return i||$c7112a3823f0f63d$var$Template.expand(e[2],t,"arg")},_if:function(e,t){for(let i=0;i<e.length;i+=3){if("else"==$c7112a3823f0f63d$var$Template.expand(e[i],t,"arg"))return $c7112a3823f0f63d$var$Template.expand(e[i+1],t,"text");if($c7112a3823f0f63d$var$Template.expand(e[i+1],t,"arg"))return $c7112a3823f0f63d$var$Template.expand(e[i+2],t,"text")}return""},_switch:function(e,t){let i=$c7112a3823f0f63d$var$Template.expand(e[1],t,"arg");for(let n=2;n<e.length;n+=2){let s=$c7112a3823f0f63d$var$Template.expand(e[n],t,"arg");if(s==i||"default"==s)return $c7112a3823f0f63d$var$Template.expand(e[n+1],t,"text")}return""},_break:function(e,t){throw new Error("EXC_BREAK")},_continue:function(e,t){throw new Error("EXC_CONTINUE")},_repeat:function(e,t){if(e.length<3||1!=(1&e.length))return"(`repeat`: Wrong number of parameters)";let i=$c7112a3823f0f63d$var$Template.value(e[1],t),n=null,s=0,r=null,a=null;for(let i=2;i<e.length-1;i+=2){switch($c7112a3823f0f63d$var$Template.value(e[i],t).toLowerCase()){case"from":s=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t));break;case"to":r=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t));break;case"count":n=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t));break;case"step":a=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t))}}let o=e[e.length-1],l=[];if(null!==r)if(null===a&&(a=s>r?-1:1),a<0)for(let e=s;e>=r;e+=a)try{t[i]=e,l.push($c7112a3823f0f63d$var$Template.value(o,t))}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}else for(let e=s;e<=r;e+=a)try{t[i]=e,l.push($c7112a3823f0f63d$var$Template.value(o,t))}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}else if(null!==n){null===a&&(a=1);for(let e=s;n>0;n--,e+=a)try{t[i]=e,l.push($c7112a3823f0f63d$var$Template.value(o,t))}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}}else{null===a&&(a=1);for(let e=s;;e+=a)try{t[i]=e,l.push($c7112a3823f0f63d$var$Template.value(o,t))}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}}return delete t[i],l},_for:function(e,t){if(e.length<3||1!=(1&e.length))return"(`for`: Wrong number of parameters)";let i=$c7112a3823f0f63d$var$Template.value(e[1],t),n=null,s=0;to=null;let r=null;for(let i=2;i<e.length-1;i+=2)switch(value=$c7112a3823f0f63d$var$Template.value(e[i],t),value.toLowerCase()){case"from":s=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t));break;case"to":to=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t));break;case"count":n=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t));break;case"step":r=parseFloat($c7112a3823f0f63d$var$Template.value(e[i+1],t))}let a=e[e.length-1];if(null!==to)if(null===r&&(r=s>to?-1:1),r<0)for(let e=s;e>=to;e+=r)try{t[i]=e,$c7112a3823f0f63d$var$Template.value(a,t)}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}else for(let e=s;e<=to;e+=r)try{t[i]=e,$c7112a3823f0f63d$var$Template.value(a,t)}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}else if(null!==n){null===r&&(r=1);for(let e=s;n>0;n--,e+=r)try{t[i]=e,$c7112a3823f0f63d$var$Template.value(a,t)}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}}else{null===r&&(r=1);for(let e=s;;e+=r)try{t[i]=e,$c7112a3823f0f63d$var$Template.value(a,t)}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}}return delete t[i],null},_loop:function(e,t){if(e.length<2)return"(`loop`: Wrong number of parameters)";let i=e[1];for(;;)try{$c7112a3823f0f63d$var$Template.value(i,t)}catch(e){let t=e.message;if("EXC_BREAK"==t)break;if("EXC_CONTINUE"==t)continue;throw e}return null},_echo:function(e,t){let i="";for(let n=1;n<e.length;n++)i+=$c7112a3823f0f63d$var$Template.expand(e[n],t,"arg");return console.log(i),""},"_#":function(e,t){let i=[];for(let n=1;n<e.length;n++)i.push($c7112a3823f0f63d$var$Template.expand(e[n],t,"arg"));return i},"_##":function(e,t){let i=[];for(let t=1;t<e.length;t++)i.push(e[t]);return i},"_&":function(e,t){return $c7112a3823f0f63d$var$Template.getNamedValues(e,t,1,!0)},"_&&":function(e,t){return $c7112a3823f0f63d$var$Template.getNamedValues(e,t,1,!1)},contains:function(e,t,i){let n=e[1];if("object"!=typeof n)return i.err="Argument is not a Map",!1;let s="";for(let t=2;t<e.length;t++)e[t]in n||(s+=", "+e[t]);return""==s||(i.err=s.substr(1),!1)},has:function(e,t,i){let n=e[2];return"object"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n)&&e[1]in n},_map:function(e,t){let i=$c7112a3823f0f63d$var$Template.expand(e[1],t,"arg"),n=$c7112a3823f0f63d$var$Template.expand(e[2],t,"arg");if(!n)return n;let s="array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n),r=s?[]:{},a=0;for(let o in n)t[i]=n[o],t[i+"##"]=a++,t[i+"#"]=o,s?r.push($c7112a3823f0f63d$var$Template.expand(e[3],t,"arg")):r[o]=$c7112a3823f0f63d$var$Template.expand(e[3],t,"arg");return delete t[i],delete t[i+"##"],delete t[i+"#"],r},_filter:function(e,t){let i=$c7112a3823f0f63d$var$Template.expand(e[1],t,"arg"),n=$c7112a3823f0f63d$var$Template.expand(e[2],t,"arg");if(!n)return n;let s="array"==$32b7d6fbb0a54bbf$export$2e2bcd8739ae039.typeOf(n),r=s?[]:{},a=0;for(let o in n)t[i]=n[o],t[i+"##"]=a++,t[i+"#"]=o,~~$c7112a3823f0f63d$var$Template.expand(e[3],t,"arg")&&(s?r.push(n[o]):r[o]=n[o]);return delete t[i],delete t[i+"##"],delete t[i+"#"],r},expand:function(e,t,i){return $c7112a3823f0f63d$var$Template.expand($c7112a3823f0f63d$var$Template.parseTemplate(e[1],"{","}"),3==e.length?e[2]:i)},_call:function(e,t){let i=$c7112a3823f0f63d$var$Template.expand(e[1],t,"varref");if(!i||"function"!=typeof i[0][i[1]])throw new Error("Expression is not a function: "+$c7112a3823f0f63d$var$Template.expand(e[1],t,"obj").map((e=>null==e?".":e)).join(""));let n=[];for(let i=2;i<e.length;i++)n.push($c7112a3823f0f63d$var$Template.value(e[i],t));return i[0][i[1]](...n)}};var $c7112a3823f0f63d$export$2e2bcd8739ae039=$c7112a3823f0f63d$var$Template;const $c51df899a73d8e2a$export$6fd6461d908cc175=$32b7d6fbb0a54bbf$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$4c85e640eb41c31b=$4a6e2d88db56f358$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$d61e24a684f9e51=$0ec522ff4f8bedba$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$ec8b666c5fe2c75a=$0a6c600e0d2373ba$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$a1edc412be3e1841=$601363b594d4bfd7$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$59eced47f477f85a=$49f067e8726ea7a3$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$19342e026b58ebb7=$491b6ac1b8bde8fd$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$3a9581c9ade29768=$e81c6e03d7b73f89$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$fb8073518f34e6ec=$157d3e85e770833c$export$2e2bcd8739ae039,$c51df899a73d8e2a$export$14416b8d99d47caa=$c7112a3823f0f63d$export$2e2bcd8739ae039,$119f0b596e158ca6$var$_Router={Route:$c51df899a73d8e2a$export$ec8b666c5fe2c75a.extend({routeRegex:null,value:null,params:null,args:null,s_args:null,active:!1,changed:!1,__ctor:function(e){this._super.EventDispatcher.__ctor(),this._compileRoute(this.value=e)},_compileRoute:function(e){for(this.params=[],e=e.replace(/\/\*\//g,"/.+/");;){var t=/:([!@A-Za-z0-9_-]+)/.exec(e);if(!t)break;e=e.replace(t[0],"([^/]+)"),this.params.push(t[1])}this.routeRegex="^"+e.replace(/##/g,"")},addHandler:function(e,t){this.addEventListener((!0===t?"un":"")+"routed",e,null)},removeHandler:function(e,t){this.removeEventListener((!0===t?"un":"")+"routed",e,null)},dispatch:function(e){var t=e.match(this.routeRegex);if(!t)return this.s_args=null,this.active&&this.dispatchEvent("unrouted",{route:this}),void(this.active=!1);for(var i={route:this},n="",s=0;s<this.params.length;s++)i[this.params[s]]=t[s+1],n+="_"+t[s+1];this.changed=n!=this.s_args,this.s_args=n,this.dispatchEvent("routed",this.args=i),this.active=!0}}),routes:{},sortedRoutes:[],ignoreHashChangeEvent:0,location:"",args:[],init:function(){this.alreadyAttached||(this.alreadyAttached=!0,"onhashchange"in globalThis&&(globalThis.onhashchange=this.onLocationChanged.bind(this)))},refresh:function(){this.onLocationChanged()},setRoute:function(e,t){var i=this.realLocation(e);i!=this.location&&(t&&this.ignoreHashChangeEvent++,globalThis.location.hash=i)},addRoute:function(e,t,i){return this.routes[e]||(this.routes[e]=new this.Route(e),this.sortedRoutes.push(e),this.sortedRoutes.sort(((e,t)=>this.routes[e].routeRegex.length-this.routes[t].routeRegex.length))),void 0!==i?(this.routes[e].addHandler(t,!1),this.routes[e].addHandler(i,!0)):this.routes[e].addHandler(t,!1),this.routes[e]},addRoutes:function(e){for(var t in e)this.routes[t]||(this.routes[t]=new this.Route(t),this.sortedRoutes.push(t)),this.routes[t].addHandler(e[t],!1);this.sortedRoutes.sort(((e,t)=>this.routes[e].routeRegex.length-this.routes[t].routeRegex.length))},removeRoute:function(e,t,i){this.routes[e]&&(void 0!==i?(this.routes[e].removeHandler(t,!1),this.routes[e].removeHandler(i,!0)):this.routes[e].removeHandler(t))},removeRoutes:function(e){for(var t in e)this.routes[t]&&this.routes[t].removeHandler(e[t])},realLocation:function(e,t){t||(t=this.location),t||(t=" ");for(var i,n=0,s=0,r=0,a="";-1!=n&&s<e.length&&r<t.length;)switch(n){case 0:if("*"==e.substr(s++,1)){n=1;break}if(e.substr(s-1,1)!=t.substr(r++,1)){a+=e.substr(s-1),n=-1;break}a+=t.substr(r-1,1);break;case 1:if("*"==e.substr(s,1)){n=3,s++;break}n=2;break;case 2:if(-1==(i=t.indexOf(e.substr(s,1),r))){a+=t.substr(r)+e.substr(s),n=-1;break}a+=t.substr(r,i-r),n=0,r=i;break;case 3:if(-1==(i=t.lastIndexOf(e.substr(s,1)))){a+=e.substr(s),n=-1;break}a+=t.substr(r,i-r),n=0,r=i}return-1!=n&&(a+=e.substr(s)),a.trim()},onLocationChanged:function(){var e=location.hash.substr(1),t=this.realLocation(e);if(e==t)if(this.location=e,this.args=this.location.split("/"),this.ignoreHashChangeEvent>0)this.ignoreHashChangeEvent--;else for(var i=0;i<this.sortedRoutes.length;i++)this.routes[this.sortedRoutes[i]].dispatch(this.location);else globalThis.location.replace("#"+t)},navigate:function(e,t=!1){e=this.realLocation(e),globalThis.location.hash!="#"+e?t?globalThis.location.replace("#"+e):globalThis.location.hash=e:this.refresh()}};$119f0b596e158ca6$var$_Router.init();var $119f0b596e158ca6$export$2e2bcd8739ae039=$119f0b596e158ca6$var$_Router;const $6c26768ccb30d8e4$var$elementPrototypes={},$6c26768ccb30d8e4$var$elementClasses={},$6c26768ccb30d8e4$var$Element={eid:null,isRoot:!0,root:null,isReady:0,readyReenter:0,readyLocked:0,modelt:$c51df899a73d8e2a$export$a1edc412be3e1841,model:null,events:{"click [data-action]":function(e){let t=e.source.dataset.action.split(" ");t[0]in this?this[t[0]]({...e.params,...e.source.dataset,...t,length:t.length},e):e.continuePropagation=!0},"keyup(13) input[data-enter]":function(e){let t=e.source.dataset.enter.split(" ");t[0]in this?this[t[0]]({...e.params,...e.source.dataset,...t,length:t.length},e):e.continuePropagation=!0}},__ctor:function(){if(this._list_watch=[],this._list_visible=[],this._list_property=[],"root"in this.dataset&&"false"==this.dataset.root&&(this.isRoot=!1),this.style.display="block",this.eid=Math.random().toString().substr(2),null!=this.model){let e=this.model;this.model=null,this.setModel(e,!1)}Object.keys(this._super).reverse().forEach((e=>{"init"in this._super[e]&&this._super[e].init()})),$6c26768ccb30d8e4$var$Element.debug&&console.log(">> "+this.tagName+" INIT ON "+this.parentElement.tagName),this.init(),this.events&&this.bindEvents(this.events),setTimeout((()=>{"r-dom-probe"!==this.tagName.toLowerCase()?this.appendChild(document.createElement("r-dom-probe")):this.markReady()}),0)},init:function(){},ready:function(){},rready:function(){},markReady:function(e=null){if(this.readyLocked++,this.isReady)this.collectWatchers();else{if(this.isReady=1,"model"in this.dataset){let e=this.getFieldByPath(this.dataset.model);e&&this.setModel(e)}Object.keys(this._super).reverse().forEach((e=>{"ready"in this._super[e]&&this._super[e].ready()})),$6c26768ccb30d8e4$var$Element.debug&&console.log(">> "+this.tagName+" READY"),this.ready(),this.collectWatchers()}let t=this.findCustomParent(this);$6c26768ccb30d8e4$var$Element.debug&&console.log(this.tagName+" ROOT IS "+(t?t.tagName:"NULL")),t&&0===t.isReady&&0!=this.isReady&&t.checkReady();let i=!1;if(t&&2===t.isReady&&2!==this.isReady&&(this.getRoot(),this.root&&this.dataset.ref&&($6c26768ccb30d8e4$var$Element.debug&&console.log(this.tagName+" REF AS `"+this.dataset.ref+"` ON "+this.root.tagName),this.root[this.dataset.ref]=this,this.root.onRefAdded(this.dataset.ref,this)),i=!0),t||2===this.isReady||(i=!0),i){if(this.isReady=2,null!==e)for(let t of e)t.checkReady();$6c26768ccb30d8e4$var$Element.debug&&console.log(">> "+this.tagName+" RREADY"),Object.keys(this._super).reverse().forEach((e=>{"rready"in this._super[e]&&this._super[e].rready()})),this.rready()}this.readyLocked--,this.readyReenter&&!this.readyLocked&&(this.readyReenter=!1,this.checkReady()),"r-dom-probe"===this.tagName.toLowerCase()&&this.remove()},checkReady:function(){if(0==this.childNodes.length)return;if(this.readyLocked)return void(this.readyReenter=!0);let e=!0,t=[],i=document.evaluate(".//*[contains(name(),'-')]",this,null,XPathResult.ANY_TYPE,null);for($6c26768ccb30d8e4$var$Element.debug&&console.log("# CHECKING "+this.tagName);;){let n=i.iterateNext();if(!n)break;n!==this&&(this.findCustomParent(n)===this&&($6c26768ccb30d8e4$var$Element.debug&&console.log("   "+n.tagName+" = "+n.isReady),n.isReady||(e=!1),t.push(n)))}e&&this.markReady(t)},getFieldByPath:function(e){if(!e)return null;let t=e.split("."),i=$parcel$global;for(t.length&&"this"==t[0]&&(i=this,t.shift()),t.length&&"root"==t[0]&&(i=this.getRoot(),t.shift());null!=i&&0!=t.length;)i=i[t.shift()];return i},getRoot:function(){return this.root?this.root:this.root=this.findRoot()},setModel:function(e,t=!0){return e?(e=$c51df899a73d8e2a$export$6fd6461d908cc175.ensureTypeOf(this.modelt,e),this.model!==e&&(null!=this.model&&(this.model.removeEventListener(this.eid+":modelChanged",this.onModelPreChanged,this),this.model.removeEventListener(this.eid+":propertyChanging",this.onModelPropertyChanging,this),this.model.removeEventListener(this.eid+":propertyChanged",this.onModelPropertyPreChanged,this),this.model.removeEventListener(this.eid+":propertyRemoved",this.onModelPropertyRemoved,this)),this.model=e,this.model.addEventListener(this.eid+":modelChanged",this.onModelPreChanged,this),this.model.addEventListener(this.eid+":propertyChanging",this.onModelPropertyChanging,this),this.model.addEventListener(this.eid+":propertyChanged",this.onModelPropertyPreChanged,this),this.model.addEventListener(this.eid+":propertyRemoved",this.onModelPropertyRemoved,this)),!1!==t&&this.model.setNamespace(this.eid).update(!0).setNamespace(null),this):this},getModel:function(){return this.model},addClass:function(e){return e?(e.split(" ").forEach((e=>{(e=e.trim())&&("-"==e[0]||"+"==e[0]?this.classList["-"==e[0]?"remove":"add"](e.substr(1)):this.classList.add(e))})),this):this},removeClass:function(e){return e?(e.split(" ").forEach((e=>{(e=e.trim())&&("-"==e[0]||"+"==e[0]?this.classList["-"==e[0]?"remove":"add"](e.substr(1)):this.classList.remove(e))})),this):this},setStyle:function(e){return e?(e.split(";").forEach((e=>{let t=(e=e.trim()).indexOf(":");if(-1==t)return;let i=e.substr(0,t).trim();for(let e=i.indexOf("-");-1!=e;e=i.indexOf("-"))i=i.substr(0,e)+i.substr(e+1,1).toUpperCase()+i.substr(e+2);this.style[i]=e.substr(t+1).trim()})),this):this},getWidth:function(e=null){return(e||this).getBoundingClientRect().width},getHeight:function(e=null){return(e||this).getBoundingClientRect().height},bindEvents:function(e){for(var t in e){let a=e[t];"string"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(a)&&(a=this[a]),a=a.bind(this);var i=t.indexOf(" "),n=-1==i?t:t.substr(0,i),s=-1==i?"":t.substr(i+1);let o=null;var r=n.indexOf("(");if(-1!=r&&(o=n.substr(r+1,n.length-r-2).split(","),n=n.substr(0,r)),"@"==s[0]){if("@this"!=s){this[s.substr(1)].addEventListener(n,a);continue}s=this}else"&"==s[0]&&(s="&this"!=s?"[data-ref='"+s.substr(1)+"']":this);if("#"!=n.substr(0,1)){if(null!=o)switch(n){case"keyup":case"keydown":this.listen(n,s,(function(e){if(-1!=$c51df899a73d8e2a$export$6fd6461d908cc175.indexOf(o,e.keyCode.toString()))return a(e,o);e.continuePropagation=!0}));continue}this.listen(n,s,a)}else this.listen("propertyChanged."+n.substr(1),this,a)}return this},_eventHandler:function(e,t,i){if(!1!==e.continuePropagation){if(e.continuePropagation=!0,e.source=e.target,t&&t instanceof HTMLElement)e.source===t&&(e.continuePropagation=!1,!0===i.call(this,e,e.detail)&&(e.continuePropagation=!0));else if(t&&"*"!=t){let n=this.querySelectorAll(t);for(;e.source!==this;){if(-1!==$c51df899a73d8e2a$export$6fd6461d908cc175.indexOf(n,e.source,!0)){e.continuePropagation=!1,!0===i.call(this,e,e.detail)&&(e.continuePropagation=!0);break}e.source=e.source.parentElement}}else e.continuePropagation=!1,!0===i.call(this,e,e.detail)&&(e.continuePropagation=!0);!1===e.continuePropagation&&(e.preventDefault(),e.stopPropagation())}},listen:function(e,t,i){let n=!1,s=!1;"function"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(t)&&(i=t,t=null),"!"==e[e.length-1]&&(e=e.substr(0,e.length-1),n=!0),"!"==e[0]&&(e=e.substr(1),s=!0);let r=null,a=null,o=this;return this.addEventListener(e,r=e=>{!1!==e.continuePropagation&&(e.firstCapture||(e.firstCapture=this,e.firstCaptureCount=0,e.queue=[]),e.firstCapture===this&&e.firstCaptureCount++,1==n&&e.queue.push([this,t,i]),1==s&&this._eventHandler(e,t,i))},!0),this.addEventListener(e,a=e=>{if(!1!==e.continuePropagation&&(1!=n&&1!=s&&this._eventHandler(e,t,i),e.firstCapture===this&&!1!==e.continuePropagation&&0==--e.firstCaptureCount)){for(;e.queue.length;){let t=e.queue.pop();t[0]._eventHandler(e,t[1],t[2])}e.continuePropagation=!1}},!1),{removed:!1,remove:function(){this.removed||(this.removed=!0,o.removeEventListener(e,r,!0),o.removeEventListener(e,a,!1))}}},createEventObject:function(e,t,i){let n;return n="click"==e?new MouseEvent(e,{bubbles:i,detail:t}):new CustomEvent(e,{bubbles:i,detail:t}),n},dispatch:function(e,t=null,i=!0){this.dispatchEvent(this.createEventObject(e,t,i))},dispatchOn:function(e,t,i=null,n=!0){e.dispatchEvent(this.createEventObject(t,i,n))},setInnerHTML:function(e){this.readyLocked++,this.innerHTML=e,this.readyLocked--},collectWatchers:function(){let e,t=this,i=!1;if(!this.isRoot)return;let n=this._list_watch.length,s=this._list_visible.length,r=this._list_property.length;e=this.querySelectorAll("[data-watch]");for(let t=0;t<e.length;t++){for(let i of e[t].querySelectorAll(".pseudo"))i.remove();e[t]._template=$c51df899a73d8e2a$export$14416b8d99d47caa.compile(e[t].innerHTML),e[t]._watch=new RegExp("^("+e[t].dataset.watch+")$"),e[t].innerHTML="",e[t].removeAttribute("data-watch"),this._list_watch.push(e[t])}if("selfWatch"in this.dataset){for(let e of this.querySelectorAll(".pseudo"))e.remove();this._template=$c51df899a73d8e2a$export$14416b8d99d47caa.compile(this.innerHTML),this._watch=new RegExp("^("+this.dataset.selfWatch+")$"),this.innerHTML="",this.removeAttribute("data-self-watch"),this._list_watch.push(this)}e=this.querySelectorAll("[data-visible]");for(let t=0;t<e.length;t++)e[t]._visible=$c51df899a73d8e2a$export$14416b8d99d47caa.compile(e[t].dataset.visible),e[t].removeAttribute("data-visible"),this._list_visible.push(e[t]);"selfVisible"in this.dataset&&(this._visible=$c51df899a73d8e2a$export$14416b8d99d47caa.compile(this.dataset.selfVisible),this.removeAttribute("data-self-visible"),this._list_visible.push(this)),e=this.querySelectorAll("[data-property]");for(let i=0;i<e.length;i++)e[i].onchange=e[i].onblur=function(){switch(this.type){case"radio":this.checked&&t.getModel().set(this.name,this.value);break;case"checkbox":t.getModel().set(this.name,this.checked?"1":"0");break;case"field":t.getModel().set(this.name,this.getValue());break;default:t.getModel().set(this.name,this.value)}},"SELECT"==e[i].tagName&&(e[i].onmouseup=function(){t.getModel().set(this.name,this.value)}),e[i].name=e[i].dataset.property,e[i].removeAttribute("data-property"),this._list_property.push(e[i]);"selfProperty"in this.dataset&&(this.onchange=this.onblur=function(){switch(this.type){case"radio":this.checked&&t.getModel().set(this.name,this.value);break;case"checkbox":t.getModel().set(this.name,this.checked?"1":"0");break;case"field":t.getModel().set(this.name,this.getValue());break;default:t.getModel().set(this.name,this.value)}},"SELECT"==this.tagName&&(this.onmouseup=function(){t.getModel().set(this.name,this.value)}),this.name=this.dataset.selfProperty,this.removeAttribute("data-self-property"),this._list_property.push(this)),this._list_watch=this._list_watch.filter((e=>null!=e.parentElement)),n!=this._list_watch.length&&(i=!0),this._list_visible=this._list_visible.filter((e=>null!=e.parentElement)),s!=this._list_visible.length&&(i=!0),this._list_property=this._list_property.filter((e=>null!=e.parentElement)),r!=this._list_property.length&&(i=!0),null!=this.model&&i&&this.model.setNamespace(this.eid).update(!0).setNamespace(null)},onCreated:function(){},onConnected:function(){},onDisconnected:function(){},onRefAdded:function(e,t){},onRefRemoved:function(e,t){},onModelPreChanged:function(e,t){let i=this.getModel().get();for(let e=0;e<this._list_watch.length;e++)for(let n of t.fields)if(this._list_watch[e]._watch.test(n)){this._list_watch[e].innerHTML=this._list_watch[e]._template(i);break}for(let e=0;e<this._list_visible.length;e++)this._list_visible[e]._visible(i,"arg")?this._list_visible[e].style.removeProperty("display"):this._list_visible[e].style.setProperty("display","none","important");this.onModelChanged(e,t)},onModelChanged:function(e,t){},onModelPropertyChanging:function(e,t){},onModelPropertyPreChanged:function(e,t){for(let e=0;e<this._list_property.length;e++)if(this._list_property[e].name==t.name){let i=!0;switch(this._list_property[e].type){case"radio":if(this._list_property[e].value!=t.value){this._list_property[e].parentElement.classList.remove("active");continue}this._list_property[e].checked=!0,this._list_property[e].parentElement.classList.add("active");break;case"checkbox":~~t.value?(this._list_property[e].checked=!0,this._list_property[e].parentElement.classList.add("active")):(this._list_property[e].checked=!1,this._list_property[e].parentElement.classList.remove("active"));break;case"field":this._list_property[e].val=this._list_property[e].dataset.value=t.value,this._list_property[e].setValue(t.value),i=!1;break;default:this._list_property[e].value=t.value,this._list_property[e].val=this._list_property[e].dataset.value=t.value,this._list_property[e].value!=t.value&&(i=!1)}i&&this._list_property[e].onchange&&this._list_property[e].onchange()}this.dispatch("propertyChanged."+t.name,t,!1),this.dispatch("propertyChanged",t,!1),this.onModelPropertyChanged(e,t)},onModelPropertyChanged:function(e,t){},onModelPropertyRemoved:function(e,t){},preparePrototype:function(e){if(!0!==e.__prototypePrepared){e.__prototypePrepared=!0,"events"in e||(e.events={});for(let t in e)t.startsWith("event ")&&(e.events[t.substr(6)]=e[t],delete e[t])}},register:function(e,...t){const i=class extends HTMLElement{findRoot(e){let t=e||this.parentElement;for(;null!=t;){if("isRoot"in t&&!0===t.isRoot)return t;t=t.parentElement}return null}findCustomParent(e){let t=e?e.parentElement:this.parentElement;for(;null!=t;){if(-1!==t.tagName.indexOf("-"))return t;t=t.parentElement}return null}connectReference(e=null,t=255){this.root||1!=(1&t)||(null==e&&(e=this.findRoot()),null!=e&&(this.dataset.ref&&(e[this.dataset.ref]=this),this.root=e))}connectedCallback(){this.connectReference(null,1),this.invokeConstructor&&(this.invokeConstructor=!1,this.__ctor()),this.connectReference(null,2),this.onConnected(),this.dataset.xref&&(globalThis[this.dataset.xref]=this)}disconnectedCallback(){this.root&&(this.dataset.ref&&(this.root.onRefRemoved(this.dataset.ref,this),delete this.root[this.dataset.ref]),this.root=null),this.onDisconnected(),this.dataset.xref&&delete globalThis[this.dataset.xref]}constructor(){super(),this.invokeConstructor=!0,$6c26768ccb30d8e4$var$Element.debug&&console.log("CREATED "+this.tagName),this._super={};for(let e of Object.entries(this.constructor.prototype._super)){this._super[e[0]]={};for(let t of Object.entries(e[1]))this._super[e[0]][t[0]]=t[1].bind(this)}this.onCreated()}};$c51df899a73d8e2a$export$6fd6461d908cc175.override(i.prototype,$6c26768ccb30d8e4$var$Element);const n={},s={},r=$c51df899a73d8e2a$export$6fd6461d908cc175.clone($6c26768ccb30d8e4$var$Element.events);let a,o=!0,l=!0,c=!0;for(let e=0;e<t.length;e++)if(t[e]){if("string"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(t[e])){const i=t[e];if(t[e]=$6c26768ccb30d8e4$var$elementPrototypes[i],!t[e])continue;s[i]={};for(let n in t[e])"function"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(t[e][n])&&(s[i][n]=t[e][n]);o=!1,l=!1,c=!1,a=!1}else $6c26768ccb30d8e4$var$Element.preparePrototype(t[e]),a=!0;"_super"in t[e]&&$c51df899a73d8e2a$export$6fd6461d908cc175.override(s,t[e]._super),"events"in t[e]&&$c51df899a73d8e2a$export$6fd6461d908cc175.override(r,t[e].events),$c51df899a73d8e2a$export$6fd6461d908cc175.override(i.prototype,t[e]),$c51df899a73d8e2a$export$6fd6461d908cc175.override(n,t[e]),a&&(!o&&"init"in t[e]&&(o=!0),!l&&"ready"in t[e]&&(l=!0),!c&&"rready"in t[e]&&(c=!0))}let d=function(){};return o||(i.prototype.init=d,n.init=d),l||(i.prototype.ready=d,n.ready=d),c||(i.prototype.rready=d,n.rready=d),i.prototype._super=s,i.prototype.events=r,n._super=s,n.events=r,customElements.define(e,i),$6c26768ccb30d8e4$var$elementPrototypes[e]=n,$6c26768ccb30d8e4$var$elementClasses[e]=i,i},expand:function(e,...t){if(!(e in $6c26768ccb30d8e4$var$elementPrototypes))return;const i=$6c26768ccb30d8e4$var$elementPrototypes[e],n=$6c26768ccb30d8e4$var$elementClasses[e],s=i._super,r=i.events;for(let e of t)$6c26768ccb30d8e4$var$Element.preparePrototype(e),"_super"in e&&$c51df899a73d8e2a$export$6fd6461d908cc175.override(s,e._super),"events"in e&&$c51df899a73d8e2a$export$6fd6461d908cc175.override(r,e.events),$c51df899a73d8e2a$export$6fd6461d908cc175.override(n.prototype,e),$c51df899a73d8e2a$export$6fd6461d908cc175.override(i,e);n.prototype._super=s,n.prototype.events=r,i._super=s,i.events=r},hookAppend:function(e,t,i){if(!(e in $6c26768ccb30d8e4$var$elementPrototypes))return;let n=$c51df899a73d8e2a$export$6fd6461d908cc175.hookAppend($6c26768ccb30d8e4$var$elementPrototypes[e],t,i),s=$c51df899a73d8e2a$export$6fd6461d908cc175.hookAppend($6c26768ccb30d8e4$var$elementClasses[e].prototype,t,i);return{unhook:function(){n.unhook(),s.unhook()}}},hookPrepend:function(e,t,i){if(!(e in $6c26768ccb30d8e4$var$elementPrototypes))return;let n=$c51df899a73d8e2a$export$6fd6461d908cc175.hookPrepend($6c26768ccb30d8e4$var$elementPrototypes[e],t,i),s=$c51df899a73d8e2a$export$6fd6461d908cc175.hookPrepend($6c26768ccb30d8e4$var$elementClasses[e].prototype,t,i);return{unhook:function(){n.unhook(),s.unhook()}}},":toggleClass":function(e,t){let i=t.source;"2"in e&&(i=document.querySelector(e[2])),i&&(i.classList.contains(e[1])?i.classList.remove(e[1]):i.classList.add(e[1]))},":setClass":function(e,t){let i=t.source;"2"in e&&(i=document.querySelector(e[2])),i&&i.classList.add(e[1])},":volatileClass":function(e,t){let i=t.source;if("2"in e&&(i=document.querySelector(e[2])),!i)return;i.classList.add(e[1]);let n=()=>{window.removeEventListener("click",n,!0),i.classList.remove(e[1])};window.addEventListener("click",n,!0)},":toggleClassUnique":function(e,t){let i=t.source;i&&(i.classList.contains(e[1])?i.classList.remove(e[1]):(i.querySelectorParent(e[2]).querySelectorAll(e[3]).forEach((t=>t.classList.remove(e[1]))),i.classList.add(e[1])))},":setClassUnique":function(e,t){let i=t.source;i&&(i.querySelectorParent(e[2]).querySelectorAll(e[3]).forEach((t=>t.classList.remove(e[1]))),i.classList.add(e[1]))},debug:!1};$6c26768ccb30d8e4$var$Element.register("r-elem",{}),$6c26768ccb30d8e4$var$Element.register("r-dom-probe",{}),HTMLElement.prototype.querySelectorParent=function(e){let t=this;for(;null!=t&&!t.matches(e);)t=t.parentElement;return t};var $6c26768ccb30d8e4$export$2e2bcd8739ae039=$6c26768ccb30d8e4$var$Element,$b2O91=parcelRequire("b2O91"),$dPQcY=parcelRequire("dPQcY");"fetch"in $parcel$global||($parcel$global.fetch=$parcel$interopDefault($dPQcY));const $442f716f1350c2d8$var$Api={REQUEST_PACKAGE_SUPPORTED:1,REQ64_SUPPORTED:2,JSON_RESPONSE_SUPPORTED:4,XML_RESPONSE_SUPPORTED:8,INCLUDE_CREDENTIALS:16,apiUrl:"/api",flags:0,useReq64:!1,retries:0,headers:{},_requestLevel:0,_requestPackage:0,_packageData:[],setEndPoint:function(e,t=null){return null===t&&(t=$442f716f1350c2d8$var$Api.REQUEST_PACKAGE_SUPPORTED|$442f716f1350c2d8$var$Api.REQ64_SUPPORTED|$442f716f1350c2d8$var$Api.JSON_RESPONSE_SUPPORTED|$442f716f1350c2d8$var$Api.XML_RESPONSE_SUPPORTED|$442f716f1350c2d8$var$Api.INCLUDE_CREDENTIALS),this.apiUrl=e,this.flags=t,this},responseFilter:function(e,t){return!0},packageBegin:function(){this.flags&$442f716f1350c2d8$var$Api.REQUEST_PACKAGE_SUPPORTED&&this._requestPackage++},packageEnd:function(e){this.flags&$442f716f1350c2d8$var$Api.REQUEST_PACKAGE_SUPPORTED&&this._requestPackage&&(--this._requestPackage||this.packageSend(e))},packRequests:function(e,t=null){this.flags&$442f716f1350c2d8$var$Api.REQUEST_PACKAGE_SUPPORTED&&(this.packageBegin(),e(),this.packageEnd(t))},packageSend:function(e){if(!(this.flags&$442f716f1350c2d8$var$Api.REQUEST_PACKAGE_SUPPORTED))return;if(!this._packageData.length)return;let t=this._packageData;this._packageData=[];for(var i="",n=0;n<t.length;n++)i+="r"+n+","+$parcel$interopDefault($b2O91).encode(this.encodeParams(t[n][2]))+";";this._showProgress(),this.apiCall({rpkg:i},((i,n)=>{this._hideProgress();for(let e=0;e<t.length;e++)try{var s=i["r"+e];if(!s){null!=t[e][1]&&t[e][1](t[e][2]);continue}null!=t[e][0]&&this.responseFilter(s,t[e][2])&&t[e][0](s,t[e][2])}catch(e){}e&&e()}),(e=>{this._hideProgress();for(let e=0;e<t.length;e++)null!=t[e][1]&&t[e][1](t[e][2])}))},_showProgress:function(){"document"in $parcel$global&&(this._requestLevel++,this._requestLevel>0&&$parcel$global.document.documentElement.classList.add("busy"))},_hideProgress:function(){if("document"in $parcel$global){if(this._requestLevel--,this._requestLevel)return;setTimeout((()=>{0===this._requestLevel&&$parcel$global.document.documentElement.classList.remove("busy")}),250)}},header:function(e,t){return null===t?delete this.headers[e]:this.headers[e]=t,this},encodeParams:function(e){let t=[];if(e instanceof FormData)for(let i of e.entries())t.push(encodeURIComponent(i[0])+"="+encodeURIComponent(i[1]));else for(let i in e)t.push(encodeURIComponent(i)+"="+encodeURIComponent(e[i]));return t.join("&")},apiCall:function(e,t,i,n,s){let r=this.apiUrl+"?_="+Date.now();if("GET"!=n&&"POST"!=n&&(n="auto"),void 0===s&&(s=this.retries),this._requestPackage&&this.flags&$442f716f1350c2d8$var$Api.REQUEST_PACKAGE_SUPPORTED)return e instanceof FormData||(e={...e}),void this._packageData.push([t,i,e]);this._showProgress();let a=e,o={mode:"cors",headers:{Accept:"text/html,application/xhtml+xml,application/xml,application/json;q=0.9",...this.headers},method:n,body:null,multipart:!1};if(this.flags&$442f716f1350c2d8$var$Api.INCLUDE_CREDENTIALS&&(o.credentials="include"),"string"==typeof a||a instanceof Blob)"string"==typeof a?"<"===a[0]?a.endsWith("</soap:Envelope>")?o.headers["Content-Type"]="application/soap+xml":o.headers["Content-Type"]="application/xml":"{"===a[0]?o.headers["Content-Type"]="application/json":o.headers["Content-Type"]="application/octet-stream":o.headers["Content-Type"]=a.type,o.body=a;else{if(!(a instanceof FormData)){a=new FormData;for(let t in e)e[t]instanceof File||e[t]instanceof Blob?a.append(t,e[t],e[t].name):a.append(t,e[t])}for(let e of a.entries())if(e[1]instanceof File||e[1]instanceof Blob){o.method="POST",o.multipart=!0;break}if(this.useReq64&&this.flags&$442f716f1350c2d8$var$Api.REQ64_SUPPORTED&&!o.multipart){let e=new FormData;e.append("req64",$parcel$interopDefault($b2O91).encode(this.encodeParams(a))),a=e}if("auto"==o.method){let e=0;o.method="GET";for(let t of a.entries())if(e+=t[0].length+t[1].length+2,e>960){o.method="POST";break}}"GET"==o.method?r+="&"+this.encodeParams(a):o.multipart?o.body=a:(o.headers["Content-Type"]="application/x-www-form-urlencoded",o.body=this.encodeParams(a))}$parcel$global.fetch(r,o).then((e=>this.decodeResult(e))).then((i=>{if(this._hideProgress(),t&&this.responseFilter(i,e))try{t(i,e)}catch(e){}})).catch((r=>{this._hideProgress(),0==s?i&&i(e):this.apiCall(a,t,i,n,s-1)}))},decodeResult:function(e){let t=e.headers.get("content-type").split(";")[0].toLowerCase();return this.flags&$442f716f1350c2d8$var$Api.JSON_RESPONSE_SUPPORTED&&-1!==t.indexOf("json")?e.json():this.flags&$442f716f1350c2d8$var$Api.XML_RESPONSE_SUPPORTED&&-1!==t.indexOf("xml")?new Promise(((t,i)=>{e.text().then((e=>{e=(new DOMParser).parseFromString(e,"text/xml"),t(e)})).catch(i)})):e.blob()},getBlob:function(e,t){return new Blob([e],{type:t})},base64:{encode:function(e){return $parcel$interopDefault($b2O91).encode(e)},decode:function(e){return $parcel$interopDefault($b2O91).decode(e)}},post:function(e,t,i){return this.apiCall(e,t,i,"POST")},get:function(e,t,i){return this.apiCall(e,t,i,"GET")},fetch:function(e){return new Promise(((t,i)=>{this.apiCall(e,t,i)}))},makeUrl:function(e){return this.apiUrl+(-1==this.apiUrl.indexOf("?")?"?":"&")+this.encodeParams(e)}};var $442f716f1350c2d8$export$2e2bcd8739ae039=$442f716f1350c2d8$var$Api,$6c0ec2bddb1ae62d$export$2e2bcd8739ae039=$c51df899a73d8e2a$export$ec8b666c5fe2c75a.extend({className:"DataSource",debounceDelay:250,request:null,includeCount:!1,includeEnum:!1,includeList:!0,eid:null,count:0,list:null,enum:null,__ctor:function(e,t){this._super.EventDispatcher.__ctor(),this.basePath=e,t&&Object.assign(this,t),this.request=new $c51df899a73d8e2a$export$a1edc412be3e1841(this.request),this.eid=Math.random().toString().substr(2),this.count=0,this.list=new $c51df899a73d8e2a$export$59eced47f477f85a,this.list.dataSource=this,this.enum=new $c51df899a73d8e2a$export$59eced47f477f85a,this.enum.dataSource=this,this.request.addEventListener(this.eid+":propertyChanged",this.forwardRequestEvent,this),this.list.addEventListener(this.eid+":itemsCleared",this.forwardListEvent,this),this.list.addEventListener(this.eid+":itemsChanged",this.forwardListEvent,this),this.list.addEventListener(this.eid+":itemRemoved",this.forwardListEvent,this),this.list.addEventListener(this.eid+":itemChanged",this.forwardListEvent,this),this.list.addEventListener(this.eid+":itemAdded",this.forwardListEvent,this),this.enum.addEventListener(this.eid+":itemsCleared",this.forwardEnumEvent,this),this.enum.addEventListener(this.eid+":itemsChanged",this.forwardEnumEvent,this),this.enum.addEventListener(this.eid+":itemRemoved",this.forwardEnumEvent,this),this.enum.addEventListener(this.eid+":itemChanged",this.forwardEnumEvent,this),this.enum.addEventListener(this.eid+":itemAdded",this.forwardEnumEvent,this)},forwardRequestEvent:function(e,t){this.prepareEvent("request"+e.name[0].toUpperCase()+e.name.substr(1),t).setSource(e.source).resume()},forwardListEvent:function(e,t){this.prepareEvent("list"+e.name[0].toUpperCase()+e.name.substr(1),t).setSource(e.source).resume()},forwardEnumEvent:function(e,t){this.prepareEvent("enum"+e.name[0].toUpperCase()+e.name.substr(1),t).setSource(e.source).resume()},refresh:function(e="full",t=null){"function"==typeof e&&(t=e,e="full"),this._timeout&&(clearTimeout(this._timeout),this._timeout=null);const i=()=>{this._timeout=null,$442f716f1350c2d8$export$2e2bcd8739ae039.packageBegin(),!this.includeCount||"full"!=e&&"filter"!=e||this.fetchCount(),this.includeEnum&&"full"==e&&this.fetchEnum(),this.includeList&&this.fetchList(),$442f716f1350c2d8$export$2e2bcd8739ae039.packageEnd(t)};!0===e?(e="full",i()):this._timeout=setTimeout(i,this.debounceDelay)},fetch:function(e,t=!1){return new Promise(((i,n)=>{let s=1==t?null:this.list.find(e,!0);s?i(s.get()):this.fetchOne(e,(e=>{e&&200==e.response&&e.data.length>0?i(e.data[0]):n(e)}))}))},delete:function(e){return new Promise(((t,i)=>{this.fetchDelete(e,(e=>{200==e.response?t(e):i(e.error)}))}))},fetchList:function(){let e={...this.request.get()};e.f=this.basePath+".list",this.dispatchEvent("listLoading"),$442f716f1350c2d8$export$2e2bcd8739ae039.fetch(e).then((e=>{this.list.setData(200==e.response?e.data:null),this.dispatchEvent("listLoaded"),this.dispatchEvent("listChanged")}))},fetchEnum:function(){let e={...this.request.get()};e.f=this.basePath+".enum",this.dispatchEvent("enumLoading"),$442f716f1350c2d8$export$2e2bcd8739ae039.fetch(e).then((e=>{this.enum.setData(200==e.response?e.data:null),this.dispatchEvent("enumLoaded"),this.dispatchEvent("enumChanged")}))},fetchCount:function(){let e={...this.request.get()};e.f=this.basePath+".count",this.dispatchEvent("countLoading"),$442f716f1350c2d8$export$2e2bcd8739ae039.fetch(e).then((e=>{this.count=200==e.response?e.count:0,this.dispatchEvent("countLoaded"),this.dispatchEvent("countChanged")}))},fetchOne:function(e,t){let i={...this.request.get(),...e};i.f=this.basePath+".get",$442f716f1350c2d8$export$2e2bcd8739ae039.fetch(i).then((e=>{t(e)}))},fetchDelete:function(e,t){let i={...this.request.get(),...e};i.f=this.basePath+".delete",$442f716f1350c2d8$export$2e2bcd8739ae039.fetch(i).then((e=>{t(e)}))},fetchData:function(e){let t={...this.request.get(),...e};return"."==t.f[0]&&(t.f=this.basePath+t.f),$442f716f1350c2d8$export$2e2bcd8739ae039.fetch(t)},makeUrl:function(e){let t={...this.request.get(),...e};return"."==t.f[0]&&(t.f=this.basePath+t.f),$442f716f1350c2d8$export$2e2bcd8739ae039.makeUrl(t)}}),$7939b771b0ff4e2a$export$2e2bcd8739ae039=$c51df899a73d8e2a$export$59eced47f477f85a.extend({className:"DataList",debounceDelay:250,request:null,eid:null,__ctor:function(e,t=null){this._super.ModelList.__ctor(),null!==t&&Object.assign(this,t),this.request||(this.request={}),this.request.f=e,this.request=new $c51df899a73d8e2a$export$a1edc412be3e1841(this.request),this.eid=Math.random().toString().substr(2),this.dataList=this,this.request.addEventListener(this.eid+":propertyChanged",this.forwardRequestEvent,this)},forwardRequestEvent:function(e,t){this.prepareEvent("request"+e.name[0].toUpperCase()+e.name.substr(1),t).setSource(e.source).resume()},refresh:function(e=null,t=null){if(this._timeout&&(clearTimeout(this._timeout),this._timeout=null),!0===e)return this.dispatchEvent("listLoading"),void $442f716f1350c2d8$export$2e2bcd8739ae039.fetch(this.request.get()).then((e=>{this.setData(200==e.response?e.data:null),this.dispatchEvent("listLoaded"),this.dispatchEvent("listChanged"),null!==t&&t()}));this._timeout=setTimeout((()=>{this.refresh(!0,e)}),this.debounceDelay)}});const $ce8debe4e7655d48$var$Easing={interpolate:function(e,t,i,n,s){let r={},a={},o=0;for(let t in e)r[t]=0,a[t]=e[t],o++;let l=Date.now()/1e3,c=0,d=function(){let h=Date.now()/1e3;c=h-l,l=h;for(let s in r){if(r[s]==i[s])continue;r[s]+=c,r[s]>=i[s]&&(r[s]=i[s],o--);let l=n[s](r[s]/i[s]);a[s]=(1-l)*e[s]+l*t[s]}s(a,0==o),0!=o&&requestAnimationFrame(d)};d()},Linear:{IN:function(e){return e},OUT:function(e){return e},IN_OUT:function(e){return e}},Back:{k:1.70158,IN:function(e,t){return void 0===t&&(t=$ce8debe4e7655d48$var$Easing.Back.k),e*e*((t+1)*e-t)},OUT:function(e,t){return 1-$ce8debe4e7655d48$var$Easing.Back.IN(1-e,t)},IN_OUT:function(e,t){return e<.5?$ce8debe4e7655d48$var$Easing.Back.IN(2*e,t)/2:$ce8debe4e7655d48$var$Easing.Back.OUT(2*(e-.5),t)/2+.5}},Bounce:{getConst:function(e){return e<1/2.75?7.5625*e*e:e<2/2.75?7.5625*(e-=1.5/2.75)*e+.75:e<2.5/2.75?7.5625*(e-=2.25/2.75)*e+.9375:7.5625*(e-=2.625/2.75)*e+.984375},IN:function(e){return 1-$ce8debe4e7655d48$var$Easing.Bounce.getConst(1-e)},OUT:function(e){return $ce8debe4e7655d48$var$Easing.Bounce.getConst(e)},IN_OUT:function(e){return e<.5?(1-$ce8debe4e7655d48$var$Easing.Bounce.getConst(1-2*e))/2:$ce8debe4e7655d48$var$Easing.Bounce.getConst(2*(e-.5))/2+.5}},Circ:{IN:function(e){return 1-Math.sqrt(1-e*e)},OUT:function(e){return 1-$ce8debe4e7655d48$var$Easing.Circ.IN(1-e)},IN_OUT:function(e){return e<.5?$ce8debe4e7655d48$var$Easing.Circ.IN(2*e)/2:$ce8debe4e7655d48$var$Easing.Circ.OUT(2*(e-.5))/2+.5}},Cubic:{IN:function(e){return e*e*e},OUT:function(e){return 1-$ce8debe4e7655d48$var$Easing.Cubic.IN(1-e)},IN_OUT:function(e){return e<.5?$ce8debe4e7655d48$var$Easing.Cubic.IN(2*e)/2:$ce8debe4e7655d48$var$Easing.Cubic.OUT(2*(e-.5))/2+.5}},Expo:{IN:function(e){return Math.pow(2,12*(e-1))},OUT:function(e){return 1-Math.pow(2,-12*e)},IN_OUT:function(e){return(e*=2)<1?Math.pow(2,12*(e-1))/2:(2-Math.pow(2,-12*(e-1)))/2}},Power:{p:12,IN:function(e){return Math.pow(e,$ce8debe4e7655d48$var$Easing.Power.p)},OUT:function(e){return 1-$ce8debe4e7655d48$var$Easing.Power.IN(1-e)},IN_OUT:function(e){return e<.5?$ce8debe4e7655d48$var$Easing.Power.IN(2*e)/2:$ce8debe4e7655d48$var$Easing.Power.OUT(2*(e-.5))/2+.5}},Quad:{IN:function(e){return e*e},OUT:function(e){return 1-$ce8debe4e7655d48$var$Easing.Quad.IN(1-e)},IN_OUT:function(e){return e<.5?$ce8debe4e7655d48$var$Easing.Quad.IN(2*e)/2:$ce8debe4e7655d48$var$Easing.Quad.OUT(2*(e-.5))/2+.5}},Quartic:{IN:function(e){return e*e*e*e},OUT:function(e){return 1-$ce8debe4e7655d48$var$Easing.Quartic.IN(1-e)},IN_OUT:function(e){return e<.5?$ce8debe4e7655d48$var$Easing.Quartic.IN(2*e)/2:$ce8debe4e7655d48$var$Easing.Quartic.OUT(2*(e-.5))/2+.5}},Quintic:{IN:function(e){return e*e*e*e*e},OUT:function(e){return 1-$ce8debe4e7655d48$var$Easing.Quintic.IN(1-e)},IN_OUT:function(e){return e<.5?$ce8debe4e7655d48$var$Easing.Quintic.IN(2*e)/2:$ce8debe4e7655d48$var$Easing.Quintic.OUT(2*(e-.5))/2+.5}},Sine:{IN:function(e){return 1-Math.sin(1.5708*(1-e))},OUT:function(e){return Math.sin(1.5708*e)},IN_OUT:function(e){return(Math.cos(3.1416*e)-1)/-2}},Step:{IN:function(e){return 1!=e?0:1},OUT:function(e){return 1!=e?0:1},IN_OUT:function(e){return 1!=e?0:1}}};var $ce8debe4e7655d48$export$2e2bcd8739ae039=$ce8debe4e7655d48$var$Easing;const $856e97017603d248$var$Anim=$c51df899a73d8e2a$export$4c85e640eb41c31b.extend({list:null,initialData:null,data:null,stack:null,block:null,timeScale:1,time:0,blockTime:0,index:0,paused:!1,finished:!1,onFinishedCallback:null,onUpdatedCallback:null,__ctor:function(){this.list=[],this.initialData={},this.data={},this.stack=[],this.block=this.list,this.reset()},__dtor:function(){},clone:function(){let e=new $856e97017603d248$var$Anim;return e.list=this.list,e.initialData=this.initialData,e.reset()},onFinished:function(e){return this.onFinishedCallback=e,this},onUpdated:function(e){return this.onUpdatedCallback=e,this},reset:function(){this.stack.length=0,this.blockTime=0,this.time=0,this.index=0,this.block=this.list,this.paused=!0,this.finished=!1,this.handle=null;for(let e in this.initialData)this.data[e]=this.initialData[e];return this},initial:function(e){return this.initialData=e,this.reset()},speed:function(e){return this.timeScale=e>0?e:1,this},setOutput:function(e){return this.data=e,this},pause:function(){this.paused||(clearInterval(this.handle),this.paused=!0)},resume:function(){if(!this.paused)return;let e=Date.now()/1e3;this.handle=setInterval((()=>{let t=Date.now()/1e3,i=t-e;e=t,this.update(i),this.onUpdatedCallback&&this.onUpdatedCallback(this.data,this)}),16),this.onUpdatedCallback&&this.onUpdatedCallback(this.data,this),this.paused=!1},update:function(e){if(this.paused)return!1;if(this.index>=this.block.length)return!0;let t,i,n,s=0;for(this.time+=e*this.timeScale;this.index<this.block.length;){let r,a=this.block[this.index];switch(a.op){case"parallel":if(0==a.started)for(a.blocks.length=0,a.started=!0,s=0;s<a.block.length;s++)a.blocks.push([a.block[s]]),a.indices[s]=0,a.blockTimes[s]=this.blockTime;t=this.block,i=this.index,n=this.blockTime;let o=0,l=n;for(s=0;s<a.blocks.length;s++)this.block=a.blocks[s],this.index=a.indices[s],this.blockTime=a.blockTimes[s],!0===this.update(0)&&o++,this.blockTime>l&&(l=this.blockTime),a.blockTimes[s]=this.blockTime,a.blocks[s]=this.block,a.indices[s]=this.index;if(this.block=t,this.index=i,this.blockTime=n,a.fn&&a.fn.call(this),o!=a.blocks.length)return!1;a.started=!1,this.blockTime=l,this.index++;break;case"serial":if(0==a.started&&(a._block=a.block,a._index=0,a._blockTime=this.blockTime,a.started=!0),t=this.block,i=this.index,n=this.blockTime,this.block=a._block,this.index=a._index,this.blockTime=a._blockTime,s=this.update(0),a._block=this.block,a._index=this.index,a._blockTime=this.blockTime,this.block=t,this.index=i,this.blockTime=n,a.fn&&a.fn.call(this),!0!==s)return!1;a.started=!1,this.blockTime=a._blockTime,this.index++;break;case"repeat":return 0==a.started&&(a._block=a.block,a._index=0,a._blockTime=this.blockTime,a._count=a.count,a.started=!0),t=this.block,i=this.index,n=this.blockTime,this.block=a._block,this.index=a._index,this.blockTime=a._blockTime,s=this.update(0),a._block=this.block,a._index=this.index,a._blockTime=this.blockTime,this.block=t,this.index=i,this.blockTime=n,a.fn&&a.fn.call(this),!0===s&&(a._count<=1?(a.started=!1,this.blockTime=a._blockTime,this.index++,!1):(a._index=0,a._count--,!1));case"set":this.data[a.field]=a.value,this.index++;break;case"restart":this.index=0;break;case"wait":if(r="string"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(a.duration)?this.data[a.duration]:a.duration,this.time<this.blockTime+r)return!1;this.blockTime+=r,this.index++;break;case"range":if(0==a.started&&(null===a.startValue?a._startValue=this.data[a.field]:a._startValue=a.startValue,a._endValue=a.endValue,a.started=!0),r="string"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(a.duration)?this.data[a.duration]:a.duration,e=this.time<this.blockTime+r?(this.time-this.blockTime)/r:1,a.easing&&1!=e?this.data[a.field]=a.easing(e)*(a._endValue-a._startValue)+a._startValue:this.data[a.field]=e*(a._endValue-a._startValue)+a._startValue,1!=e)return!1;a.started=!1,this.blockTime+=r,this.index++;break;case"rand":if(0==a.started&&(a.started=!0,a.last=null),r="string"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(a.duration)?this.data[a.duration]:a.duration,e=this.time<this.blockTime+r?(this.time-this.blockTime)/r:1,a.easing&&1!=e?a.cur=~~(a.easing(e)*a.count):a.cur=~~(e*a.count),a.cur!=a.last){for(;s=~~(Math.random()*(a.endValue-a.startValue+1))+a.startValue,s==this.data[a.field];);this.data[a.field]=s,a.last=a.cur}if(1!=e)return!1;a.started=!1,this.blockTime+=r,this.index++;break;case"randt":if(r="string"==$c51df899a73d8e2a$export$6fd6461d908cc175.typeOf(a.duration)?this.data[a.duration]:a.duration,e=this.time<this.blockTime+r?(this.time-this.blockTime)/r:1,s=a.easing&&1!=e?a.easing(e)*(a.count-1):e*(a.count-1),this.data[a.field]=a.table[~~((s+a.count)%a.count)],1!=e)return!1;this.blockTime+=r,this.index++;break;case"play":a.snd.play(),this.index++;break;case"exec":a.fn.call(this,this),this.index++}}return this.block==this.list&&(this.finished||null==this.onFinishedCallback||this.onFinishedCallback(),this.pause(),this.finished=!0),!0},parallel:function(){let e=[];return this.block.push({op:"parallel",started:!1,block:e,blocks:[],indices:[],blockTimes:[]}),this.stack.push(this.block),this.block=e,this},serial:function(){let e=[];return this.block.push({op:"serial",started:!1,block:e}),this.stack.push(this.block),this.block=e,this},repeat:function(e){let t=[];return this.block.push({op:"repeat",started:!1,block:t,count:e}),this.stack.push(this.block),this.block=t,this},callback:function(e){let t=this.stack[this.stack.length-1];return t[t.length-1].fn=e,this},end:function(){return this.block=this.stack.pop(),this},set:function(e,t){return this.block.push({op:"set",field:e,value:t}),this},restart:function(e){return this.block.push({op:"restart"}),this},wait:function(e){return this.block.push({op:"wait",duration:e}),this},range:function(e,t,i,n,s){return this.block.push({op:"range",started:!1,field:e,duration:t,startValue:i,endValue:n,easing:s||null}),this},rand:function(e,t,i,n,s,r){return this.block.push({op:"rand",started:!1,field:e,duration:t,count:i,startValue:n,endValue:s,easing:r||null}),this},randt:function(e,t,i,n,s,r){let a=[];for(let e=0;e<i;e++)a.push(e%(s-n+1)+n);for(let e=i>>2;e>0;e--){let e=~~(Math.random()*i),t=~~(Math.random()*i),n=a[t];a[t]=a[e],a[e]=n}return this.block.push({op:"randt",field:e,duration:t,count:i,startValue:n,endValue:s,table:a,easing:r||null}),this},play:function(e){return this.block.push({op:"play",snd:e}),this},exec:function(e){return this.block.push({op:"exec",fn:e}),this}});var $856e97017603d248$export$2e2bcd8739ae039=$856e97017603d248$var$Anim,$a87557df4d82a328$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-tabs",{container:null,"event click [data-name]":function(e){e.continuePropagation=!0,this.dataset.baseRoute?location="#"+$119f0b596e158ca6$export$2e2bcd8739ae039.realLocation(this.dataset.baseRoute.replace("@",e.source.dataset.name)):this.selectTab(e.source.dataset.name)},init:function(){this._routeHandler=(e,t)=>{""!=$119f0b596e158ca6$export$2e2bcd8739ae039.location&&this.querySelectorAll("[href]").forEach((e=>{e.href&&($119f0b596e158ca6$export$2e2bcd8739ae039.location.startsWith(e.href.substr(e.href.indexOf("#")+1))?e.classList.add("active"):e.classList.remove("active"))})),t.route.changed&&this.showTab(t.tabName)}},ready:function(){"container"in this.dataset?":previousElement"==this.dataset.container?this.container=this.previousElementSibling:":nextElement"==this.dataset.container?this.container=this.nextElementSibling:":none"==this.dataset.container?this.container=null:this.container=document.querySelector(this.dataset.container):this.container=this.nextElementSibling,this._hideTabsExcept(this.dataset.initial)},onConnected:function(){this.dataset.baseRoute&&$119f0b596e158ca6$export$2e2bcd8739ae039.addRoute(this.dataset.baseRoute.replace("@",":tabName"),this._routeHandler)},onDisconnected:function(){this.dataset.baseRoute&&$119f0b596e158ca6$export$2e2bcd8739ae039.removeRoute(this.dataset.baseRoute.replace("@",":tabName"),this._routeHandler)},_hideTabsExcept:function(e){e||(e=""),null!=this.container&&this.container.querySelectorAll(":scope > [data-name]").forEach((t=>{t.dataset.name==e?(t.classList.remove("x-hidden"),this.dispatch("tabShown",{name:t.dataset.name,el:t})):(t.classList.add("x-hidden"),this.dispatch("tabHidden",{name:t.dataset.name,el:t}))})),this.querySelectorAll("[data-name]").forEach((t=>{t.dataset.name==e?t.classList.add("active"):t.classList.remove("active")})),this.dispatch("tabChanged",{name:e})},showTab:function(e){return this._hideTabsExcept(e)},selectTab:function(e){if(this.dataset.baseRoute){const t="#"+$119f0b596e158ca6$export$2e2bcd8739ae039.realLocation(this.dataset.baseRoute.replace("@",e));if(location.hash!=t)return void(location=t)}this.showTab(e)}}),$af32cc3508cbfc71$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-form",{events:{"change [data-field]":"_fieldChanged","click input[type=reset]":"reset","click .reset":"reset","click input[type=submit]":"submit","click button[type=submit]":"submit","click .submit":"submit","submit form":"submit"},model:{},ready:function(){let e=document.createElement("form");e.append(...this.childNodes),this.append(e);let t={},i=this.model.get();this.querySelectorAll("[data-field]").forEach((e=>{e.name=e.dataset.field,i[e.name]=e.type;let n=e.dataset.default;if(null==n)switch(e.type){case"radio":if(!e.checked)return;n=e.value;break;case"checkbox":n=e.checked?"1":"0";break;case"field":n=e.getValue();break;default:n=""}t[e.dataset.field]=n}));for(let e in i)i[e]=e in t?t[e]:"";t=i,this.model.defaults=t,this.model.reset(),this.clearMarkers()},filterString:function(e,t){return e&&"messages"in $parcel$global?(e.startsWith("@messages.")&&e.substr(10)in $parcel$global.messages&&(e=$c51df899a73d8e2a$export$14416b8d99d47caa.eval($parcel$global.messages[e.substr(10)],t)),e):e},_change:function(e){if("createEvent"in document){let t=document.createEvent("HTMLEvents");t.initEvent("change",!1,!0),e.dispatchEvent(t)}else e.fireEvent("onchange")},_setField:function(e,t,i){if(e)for(e of this.querySelectorAll('[data-field="'+e+'"]'))switch(e.type||e.tagName.toLowerCase()){case"select":e.val=e.dataset.value=e.multiple&&t?t.split(","):t,e.value=e.val=e.dataset.value,!0!==i&&this._change(e);break;case"checkbox":e.checked=!!parseInt(t);break;case"radio":e.checked=t==e.value;break;case"field":e.val=e.dataset.value=t,e.setValue(t);break;case"file":t instanceof File||t instanceof Blob||t instanceof FileList?(e.val=t,e.dataset.value=t):(e.val=e.dataset.value="",e.value="");break;default:e.val=e.dataset.value=t,e.value=t,!0!==i&&this._change(e)}},_getField:function(e,t=null,i=!1){if(!e)return null;if("string"!=typeof e){let n=null==e.value?e.val:e.value;switch(null===n&&(n=t),e.type||e.tagName.toLowerCase()){case"select":t=e.multiple&&n?n.join(","):n;break;case"checkbox":t=e.checked?"1":"0";break;case"radio":e.checked&&(t=e.value);break;case"field":t=e.getValue();break;case"file":t=i?e.files&&e.files.length?e.multiple?e.files:e.files[0]:null:e.val;break;default:t=n}return null===t?"":t}for(e of(t=null,this.querySelectorAll('[data-field="'+e+'"]')))t=this._getField(e,t);return null===t?"":t},getField:function(e){return this._getField(e)},clearMarkers:function(){this.classList.remove("busy"),this.querySelectorAll(".message").forEach((e=>e.classList.add("x-hidden"))),this.querySelectorAll("span.field-error").forEach((e=>e.remove())),this.querySelectorAll(".field-error").forEach((e=>{e.classList.remove("field-error"),e.classList.remove("is-invalid")})),this.querySelectorAll(".field-passed").forEach((e=>e.classList.remove("field-passed")))},_fieldChanged:function(e){let t=e.source;"file"==t.type?this.model.set(t.dataset.field,this._getField(t,null,!0),!0):this.model.set(t.dataset.field,this._getField(t)),e.continuePropagation=!0},onModelPropertyChanged:function(e,t){this._setField(t.name,t.value)},_onSuccess:function(e){let t;this.classList.remove("busy"),this.dispatch("formSuccess",e),e.message&&null!=(t=this.querySelector(".message.success"))&&(t.innerHTML=this.filterString(e.message,e).replace(/\n/g,"<br/>"),t.classList.remove("x-hidden"),t.onanimationend=()=>t.classList.add("x-hidden"))},_onFailure:function(e){let t;if(this.classList.remove("busy"),this.dispatch("formError",e),e.fields){for(let t in e.fields){let i=this.querySelector('[data-field-container="'+t+'"]');if(!i&&(i=this.querySelector('[data-field="'+t+'"]'),!i))continue;let n=document.createElement("span");n.classList.add("field-error"),n.innerHTML=this.filterString(e.fields[t],e).replace(/\n/g,"<br/>"),i.classList.add("field-error"),i.classList.add("is-invalid"),"bottom"==this.dataset.errorsAt?i.parentElement.append(n):"top"==this.dataset.errorsAt?i.parentElement.prepend(n):i.parentElement.insertBefore(n,i.nextElementSibling),setTimeout(function(e){return function(){e.classList.add("active")}}(n),25)}e.error&&null!=(t=this.querySelector(".message.error"))&&(t.innerHTML=this.filterString(e.error,e).replace(/\n/g,"<br/>"),t.classList.remove("x-hidden"),t.onanimationend=()=>t.classList.add("x-hidden"))}else null!=(t=this.querySelector(".message.error"))&&(t.innerHTML=this.filterString(e.error,e).replace(/\n/g,"<br/>")||"Error: "+e.response,t.classList.remove("x-hidden"),t.onanimationend=()=>t.classList.add("x-hidden"))},reset:function(e){if(this.model.reset(e),this.clearMarkers(),!1===e)for(var t in this.model.data)this._setField(t,this.model.data[t],!0);return!1},submit:function(){if(this.classList.contains("busy"))return;let e={};"false"==this.dataset.strict&&Object.assign(e,this.model.get());let t={};this.querySelectorAll("[data-field]").forEach((e=>t[e.dataset.field]=!0)),Object.keys(t).forEach((t=>e[t]=this._getField(t))),this.model.set(e);let i=this.dataset.formAction||this.formAction;i&&(this.clearMarkers(),this.classList.add("busy"),"function"!=typeof i?(e.f=i,$442f716f1350c2d8$export$2e2bcd8739ae039.apiCall(e,(e=>this[200==e.response?"_onSuccess":"_onFailure"](e)),(e=>this._onFailure({error:"Unable to execute request."})))):i(e,(e=>this[200==e.response?"_onSuccess":"_onFailure"](e))))}}),$13b1dfca67ae5763$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-panel",{route:null,init:function(){this.style.display="",this._onActivate=(e,t)=>{t.route.changed&&this.show(!0)},this._onDeactivate=(e,t)=>{this.hide()},this.hide()},onConnected:function(){this.dataset.route?(this.route=$119f0b596e158ca6$export$2e2bcd8739ae039.addRoute(this.dataset.route,this._onActivate,this._onDeactivate),this.classList.remove("active")):this.classList.add("active")},onDisconnected:function(){this.dataset.route&&$119f0b596e158ca6$export$2e2bcd8739ae039.removeRoute(this.dataset.route,this._onActivate,this._onDeactivate)},hide:function(){this.classList.remove("active"),this.dispatch("panelHidden",this.route?this.route.args:{})},show:function(e=!1){if(this.dataset.route&&!e){let e="#"+this.dataset.route;if(window.location.hash.substr(0,e.length)!=e)return void(window.location=e)}this.classList.add("active"),this.dispatch("panelShown",this.route?this.route.args:{})}}),$b79f0a97576f022b$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-list",{list:null,container:null,template:null,isEmpty:!1,isDynamicTemplate:!1,ready:function(){this.container=this.querySelector(this.dataset.container||".x-data"),this.container||(this.container=document.createElement("div"),this.container.className="x-data",this.appendChild(this.container));let e=this.template_elem=this.querySelector("template");e?("dynamic"!=e.dataset.mode?this.template=$c51df899a73d8e2a$export$14416b8d99d47caa.compile(e.innerHTML):(this.template=()=>e.innerHTML,this.isDynamicTemplate=!0),e.remove()):this.template=()=>"",this.container.textContent=" ",this.setEmpty(null),this.setLoading(null)},rready:function(){let e=this.getFieldByPath(this.dataset.list);e?this.setList(e):console.error("List not found: "+this.dataset.list)},setEmpty:function(e){this.isEmpty!==e&&(!0===e?(this.querySelectorAll(".x-empty").forEach((e=>e.classList.remove("x-hidden"))),this.querySelectorAll(".x-not-empty").forEach((e=>e.classList.add("x-hidden"))),this.querySelectorAll(".x-empty-null").forEach((e=>e.classList.add("x-hidden")))):!1===e?(this.querySelectorAll(".x-empty").forEach((e=>e.classList.add("x-hidden"))),this.querySelectorAll(".x-not-empty").forEach((e=>e.classList.remove("x-hidden"))),this.querySelectorAll(".x-empty-null").forEach((e=>e.classList.add("x-hidden")))):(this.querySelectorAll(".x-empty").forEach((e=>e.classList.add("x-hidden"))),this.querySelectorAll(".x-not-empty").forEach((e=>e.classList.add("x-hidden"))),this.querySelectorAll(".x-empty-null").forEach((e=>e.classList.remove("x-hidden")))),this.isEmpty=e)},setLoading:function(e){!0===e?this.querySelectorAll(".x-loading").forEach((e=>e.classList.remove("x-hidden"))):this.querySelectorAll(".x-loading").forEach((e=>e.classList.add("x-hidden")))},setList:function(e){e&&$c51df899a73d8e2a$export$6fd6461d908cc175.isInstanceOf(e,$c51df899a73d8e2a$export$59eced47f477f85a)&&this.list!==e&&(null!=this.list&&(this.list.dataSource&&this.list.dataSource.removeEventListener(this.eid+":*"),this.list.dataList&&this.list.dataList.removeEventListener(this.eid+":*"),this.list.removeEventListener(this.eid+":*")),this.list=e,this.list.dataSource&&(this.list.dataSource.addEventListener(this.eid+":listLoading",this.onLoading,this),this.list.dataSource.addEventListener(this.eid+":listLoaded",this.onLoaded,this)),this.list.dataList&&(this.list.dataList.addEventListener(this.eid+":listLoading",this.onLoading,this),this.list.dataList.addEventListener(this.eid+":listLoaded",this.onLoaded,this)),this.list.addEventListener(this.eid+":itemsCleared",this.onItemsCleared,this),this.list.addEventListener(this.eid+":itemsChanged",this.onItemsChanged,this),this.list.addEventListener(this.eid+":itemRemoved",this.onItemRemoved,this),this.list.addEventListener(this.eid+":itemChanged",this.onItemChanged,this),this.list.addEventListener(this.eid+":itemAdded",this.onItemAdded,this))},buildItem:function(e,t,i=!1){let n=this.template(t.get());if(i)return n;let s=document.createElement("div");s.dataset.iid=e,s.innerHTML=n,s.querySelectorAll('[data-model=":list-item"]').forEach((e=>{e.model=t,e.dataset.model="this.model"}));for(let e of this.template_elem.attributes)e.nodeName.startsWith("data-_")||"data-mode"==e.nodeName||s.setAttribute(e.nodeName,e.nodeValue);return s},onLoading:function(){this.setLoading(!0)},onLoaded:function(){this.setLoading(!1)},onItemsCleared:function(){this.container._timeout=setTimeout((()=>{this.setEmpty(!0),this.container._timeout=null,this.container.textContent=""}),300)},onItemsChanged:function(){if(0==this.list.length())return;this.container._timeout&&clearTimeout(this.container._timeout),this.container._timeout=null,this.container.textContent="";let e=0;for(let t of this.list.getData())"false"!=this.dataset.wrap?this.container.append(this.buildItem(this.list.itemId[e++],t)):this.container.innerHTML+=this.buildItem(this.list.itemId[e++],t,!0);this.setEmpty(0==e)},onItemRemoved:function(e,t){if("false"==this.dataset.wrap)return void this.onItemsChanged();let i=this.container.querySelector('[data-iid="'+t.id+'"]');i&&(i.remove(),this.setEmpty(0==this.list.length()))},onItemChanged:function(e,t){if(this.isDynamicTemplate)return;if("false"==this.dataset.wrap)return void this.onItemsChanged();let i=this.container.querySelector('[data-iid="'+t.id+'"]');i&&(i.innerHTML=this.template(t.item))},onItemAdded:function(e,t){"head"==t.position?"false"!=this.dataset.wrap?this.container.prepend(this.buildItem(t.id,t.item)):this.container.innerHTML=this.buildItem(t.id,t.item,!0)+this.container.innerHTML:"false"!=this.dataset.wrap?this.container.append(this.buildItem(t.id,t.item)):this.container.innerHTML+=this.buildItem(t.id,t.item,!0),this.setEmpty(!1)},refresh:function(){this.onItemsChanged()}}),$cc5b6ce169c059d1$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-item",{init:function(){},rready:function(){let e=this.getFieldByPath(this.dataset.model);e||(e={}),this.setModel(e)}}),$c96ae66895468b04$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-paginator",{source:null,template:null,init:function(){this.setModel({offsetStart:0,offsetEnd:0,count:0,offset:0,currentPageSize:this.dataset.pageSize||25,pageSize:this.dataset.pageSize||25}),this.listen("propertyChanged.pageSize",((e,t)=>{this.model.get("currentPageSize")!=t.value&&(this.model.set("currentPageSize",t.value),this.updateOffset("range"))}))},rready:function(){let e=this.getFieldByPath(this.dataset.source);e?this.setSource(e):console.error("data-source not found: "+this.dataset.source)},setSource:function(e){e&&$c51df899a73d8e2a$export$6fd6461d908cc175.isInstanceOf(e,$6c0ec2bddb1ae62d$export$2e2bcd8739ae039)&&this.source!==e&&(null!=this.source&&(this.source.removeEventListener(this.eid+":*"),this.source.includeCount=!1),this.source=e,this.source.includeCount=!0,this.updateOffset(),this.source.addEventListener(this.eid+":requestPropertyChanged",this.onRequestPropertyChanged,this),this.source.addEventListener(this.eid+":countChanged",this.onCountChanged,this),this.source.addEventListener(this.eid+":listItemRemoved",this.onItemRemoved,this),this.source.addEventListener(this.eid+":listItemAdded",this.onItemAdded,this),this.source.setNamespace(this.eid),this.source.request.update(!0),this.source.setNamespace(null))},updateOffset:function(e=null){this.model.set("offsetStart",0!=this.model.get("count")?this.model.get("offset")+1:0),this.model.set("offsetEnd",Math.min(this.model.get("count"),this.model.get("offsetStart")+this.model.getInt("pageSize")-1)),this.model.update("count");let t=this.source.request.get("count"),i=this.source.request.get("offset");this.source.request.set("count",this.model.getInt("pageSize")),this.source.request.set("offset",this.model.get("offset")),!e||t==this.source.request.get("count")&&i==this.source.request.get("offset")||this.source.refresh(e)},onRequestPropertyChanged:function(e,t){"count"!=t.name&&"offset"!=t.name&&this.model.set(t.name,t.value)},onModelPropertyChanged:function(e,t){-1==["offsetStart","offsetEnd","count","offset","currentPageSize","pageSize"].indexOf(t.name)&&this.source.request.get(t.name)!=t.value&&(this.source.request.set(t.name,t.value),this.source.refresh("filter"))},onCountChanged:function(e,t){this.model.set("count",e.source.count,!1),this.updateOffset()},onItemRemoved:function(e,t){this.model.set("count",this.model.getInt("count")-1,!1),this.updateOffset()},onItemAdded:function(e,t){this.model.set("count",this.model.getInt("count")+1,!1),this.updateOffset()},prevPage:function(){if(this.model.get("offset")<=0)return;let e=this.model.get("offset")-this.model.getInt("pageSize");e<0&&(e=0),this.model.set("offset",e),this.updateOffset("range")},nextPage:function(){let e=this.model.get("offset")+this.model.getInt("pageSize");e>=this.model.get("count")||(this.model.set("offset",e),this.updateOffset("range"))},firstPage:function(){this.model.set("offset",0),this.updateOffset("range")},lastPage:function(){let e=this.model.get("count")-this.model.getInt("pageSize");e<0&&(e=0),this.model.set("offset",e),this.updateOffset("range")},refresh:function(){this.source.refresh("full")},clear:function(e){for(let t=0;t<e.length;t++)this.model.set(e[t],"")}}),$405ea16f22716faa$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-table",{source:null,template:null,container:null,isEmpty:null,init:function(){this.setModel({})},ready:function(){if(this.container=this.querySelector(this.dataset.container||"tbody.x-data"),!this.container)throw new Error("r-table requires a container");"dynamic"!=this.container.dataset.mode?this.template=$c51df899a73d8e2a$export$14416b8d99d47caa.compile(this.container.innerHTML):this.template=()=>this.container.innerHTML,this.temporalBody=document.createElement("tbody"),this.container.textContent=" ",this.setEmpty(!0)},rready:function(){let e=this.getFieldByPath(this.dataset.source);e?this.setSource(e):console.error("data-source not found: "+this.dataset.source)},setEmpty:function(e){this.isEmpty!==e&&(e?(this.querySelectorAll(".x-empty").forEach((e=>e.classList.remove("x-hidden"))),this.querySelectorAll(".x-not-empty").forEach((e=>e.classList.add("x-hidden")))):(this.querySelectorAll(".x-empty").forEach((e=>e.classList.add("x-hidden"))),this.querySelectorAll(".x-not-empty").forEach((e=>e.classList.remove("x-hidden")))),this.isEmpty=e)},setSource:function(e){e&&$c51df899a73d8e2a$export$6fd6461d908cc175.isInstanceOf(e,$6c0ec2bddb1ae62d$export$2e2bcd8739ae039)&&this.source!==e&&(null!=this.source&&this.source.removeEventListener(this.eid+":*"),this.source=e,this.source.addEventListener(this.eid+":requestPropertyChanged",this.onRequestPropertyChanged,this),this.source.addEventListener(this.eid+":listItemsCleared",this.onItemsCleared,this),this.source.addEventListener(this.eid+":listItemsChanged",this.onItemsChanged,this),this.source.addEventListener(this.eid+":listItemRemoved",this.onItemRemoved,this),this.source.addEventListener(this.eid+":listItemChanged",this.onItemChanged,this),this.source.addEventListener(this.eid+":listItemAdded",this.onItemAdded,this),this.source.setNamespace(this.eid),this.source.request.update(!0),this.source.setNamespace(null))},onRequestPropertyChanged:function(e,t){if(this.model.set(t.name,t.value),"sort"==t.name)this.querySelectorAll("thead [data-sort]").forEach((e=>e.dataset.order=""));else if("order"==t.name){let i=this.querySelector('thead [data-sort="'+e.source.get("sort")+'"]');i&&(i.dataset.order=t.value)}},onModelPropertyChanged:function(e,t){if(this.source.request.get(t.name)==t.value)return;this.source.request.set(t.name,t.value);-1==["count","offset"].indexOf(t.name)&&this.source.refresh("filter")},onModelPropertyRemoved:function(e,t){"string"==typeof t.fields?this.source.request.remove(i):t.fields.forEach((e=>this.source.request.remove(e))),this.source.refresh("filter")},buildItem:function(e,t){let i=this.temporalBody;return i.innerHTML=this.template(t.get()),i.querySelectorAll('[data-model=":list-item"]').forEach((e=>{e.model=t,e.dataset.model="this.model"})),i=i.firstElementChild,i.dataset.iid=e,i},onItemsCleared:function(e,t){this.container._timeout=setTimeout((()=>{this.setEmpty(!0),this.container._timeout=null,this.container.textContent=""}),300)},onItemsChanged:function(e,t){if(0==this.source.list.length())return;this.container._timeout&&clearTimeout(this.container._timeout),this.container._timeout=null,this.container.textContent="";let i=0;for(let e of this.source.list.getData())this.container.append(this.buildItem(this.source.list.itemId[i++],e));this.setEmpty(0==i)},onItemRemoved:function(e,t){let i=this.container.querySelector('[data-iid="'+t.id+'"]');i&&(i.remove(),this.setEmpty(0==this.source.list.length()))},onItemChanged:function(e,t){let i=this.container.querySelector('[data-iid="'+t.id+'"]');if(!i)return;let n=this.buildItem(t.id,t.item);this.container.replaceChild(n,i)},onItemAdded:function(e,t){"head"==t.position?this.container.prepend(this.buildItem(t.id,t.item)):this.container.append(this.buildItem(t.id,t.item)),this.setEmpty(!1)},"event click thead [data-sort]":function(e,t){this.source.request.get("sort")==e.source.dataset.sort?(this.source.request.set("order","asc"==this.source.request.get("order")?"desc":"asc"),this.source.refresh("order")):(this.source.request.set("sort",e.source.dataset.sort),this.source.request.set("order","asc",!0),this.source.refresh("order"))},refresh:function(){this.source.refresh("full")},clear:function(e){for(let t=0;t<e.length;t++)this.model.set(e[t],"")}}),$cac3c1d5cfc14785$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-select",{list:null,container:null,value:"",init:function(){this.container=document.createElement("select"),this.parentElement.insertBefore(this.container,this);let e=[];for(let t of this.attributes)t.nodeName.startsWith("data-_")||"data-list"==t.nodeName||"data-blank"==t.nodeName||(this.container.setAttribute(t.nodeName,t.nodeValue),e.push(t.nodeName));e.forEach((e=>this.removeAttribute(e))),this.textContent=" ",this.style.display="none"},rready:function(){let e=this.getFieldByPath(this.dataset.list);e?(this.setList(e),this.parentElement.lastElementChild!==this&&this.parentElement.append(this)):console.error("List not found: "+this.dataset.list)},setList:function(e){e&&$c51df899a73d8e2a$export$6fd6461d908cc175.isInstanceOf(e,$c51df899a73d8e2a$export$59eced47f477f85a)&&this.list!==e&&(null!=this.list&&this.list.removeEventListener(this.eid+":*"),this.list=e,this.list.dataSource&&(this.list.dataSource.includeEnum=!0),this.list.addEventListener(this.eid+":itemsCleared",this.onItemsCleared,this),this.list.addEventListener(this.eid+":itemsChanged",this.onItemsChanged,this),this.list.addEventListener(this.eid+":itemRemoved",this.onItemsChanged,this),this.list.addEventListener(this.eid+":itemChanged",this.onItemsChanged,this),this.list.addEventListener(this.eid+":itemAdded",this.onItemsChanged,this),this.onItemsChanged())},onItemsCleared:function(e,t){this.container.textContent=""},onItemsChanged:function(e,t){if(0==this.list.length())return;let i,n,s=this.list.getData(),r="";if(s[0].has("value")?i="value":s[0].has("id")&&(i="id"),s[0].has("label")?n="label":s[0].has("name")&&(n="name"),"blank"in this.dataset&&(r+='<option value="">'+this.dataset.blank+"</option>"),s[0].has("group")){let e={};s.forEach((t=>e[t.get("group")]=null));for(let t in e)e[t]={name:t,list:[]};s.forEach((t=>e[t.get("group")].list.push(t))),e=Object.values(e),e.forEach((e=>{r+='<optgroup label="'+e.name+'">',e.list.forEach((e=>r+='<option value="'+e.get(i)+'">'+e.get(n)+"</option>")),r+="</optgroup>"}))}else s.forEach((e=>r+='<option value="'+e.get(i)+'">'+e.get(n)+"</option>"));this.container.innerHTML=r,this.container.value=this.container.dataset.value},refresh:function(){this.onItemsChanged()}});const $67e7e8d506459fb8$var$Utils={showDownload:function(e,t){var i=document.createElement("a");i.href=t,i.style.display="none",i.download=e,i.target="_blank",document.body.appendChild(i),i.click(),document.body.removeChild(i)},showFilePicker:function(e,t,i){var n=document.createElement("input");n.type="file",n.accept=t,n.style.display="none",n.multiple=e,document.body.appendChild(n),n.onchange=function(){i(n.files)},document.body.onfocus=function(){document.body.onfocus=null,document.body.removeChild(n)},n.click()},loadAsDataUrl:function(e,t){var i=new FileReader;i.onload=function(e){t(e.target.result,null)},i.onerror=function(e){t(null,e)},i.readAsDataURL(e)},loadAsText:function(e,t){var i=new FileReader;i.onload=function(e){t(e.target.result)},i.readAsText(e)},loadAsArrayBuffer:function(e,t){var i=new FileReader;i.onload=function(e){t(e.target.result)},i.readAsArrayBuffer(e)},loadAllAsDataUrl:function(e,t){var i=[];if(e&&e.length){var n=function(s){s!=e.length?$67e7e8d506459fb8$var$Utils.loadAsDataUrl(e[s],(function(t,r){r||i.push({name:e[s].name,size:e[s].size,url:t}),n(s+1)})):t(i)};n(0)}else t(i)},loadImageFromUrl:function(e,t){let i=new Image;i.onload=()=>t(i),i.onerror=()=>t(null),i.src=e}};var $67e7e8d506459fb8$export$2e2bcd8739ae039=$67e7e8d506459fb8$var$Utils,$0ab293403fcf827b$export$2e2bcd8739ae039=$6c26768ccb30d8e4$export$2e2bcd8739ae039.register("r-image-cropper",{aspectRatio:1,imageScale0:0,imageScale:1,imageOffsX:0,imageOffsY:0,pointerA:null,pointerB:null,bounds:null,init:function(){this.canvas=document.createElement("canvas"),this.appendChild(this.canvas),this.g=this.canvas.getContext("2d"),this.pointerA={id:null,active:!1,sx:0,sy:0,cx:0,cy:0,ix:0,iy:0},this.pointerB={id:null,active:!1,sx:0,sy:0,cx:0,cy:0,ix:0,iy:0},this.log=document.createElement("div"),this.appendChild(this.log)},setImageUrl:function(e){$67e7e8d506459fb8$export$2e2bcd8739ae039.loadImageFromUrl(e,(e=>{this.setImage(e)}))},setImageFile:function(e){$67e7e8d506459fb8$export$2e2bcd8739ae039.loadAsDataUrl(e,(e=>{$67e7e8d506459fb8$export$2e2bcd8739ae039.loadImageFromUrl(e,(e=>{this.setImage(e)}))}))},setImage:function(e){this.image=e,this.reset(),this.imageScale=Math.max(this.canvas.width/this.image.width,this.canvas.height/this.image.height),this.imageOffsX=.5*(this.canvas.width-this.imageScale*this.image.width),this.imageOffsY=.5*(this.canvas.height-this.imageScale*this.image.height),this.render()},getBlobAndUrl:function(e,t="image/png",i=.9){this.canvas.toBlob((t=>{e(t,URL.createObjectURL(t))}),t,i)},reset:function(){this.bounds=this.getBoundingClientRect(),this.canvas.width=this.bounds.width,this.canvas.height=this.bounds.width/this.aspectRatio},render:function(){this.canvas.width=this.canvas.width,this.g.fillStyle="#000",this.g.beginPath(),this.g.rect(0,0,this.canvas.width,this.canvas.height),this.g.fill(),this.g.translate(this.imageOffsX,this.imageOffsY),this.g.scale(this.imageScale,this.imageScale),this.g.drawImage(this.image,0,0)},translateImage:function(e,t){this.imageOffsX+=e,this.imageOffsY+=t,this.render(!0)},"event mousemove canvas":function(e){this.pointerA.active&&(this.pointerA.cx=e.clientX,this.pointerA.cy=e.clientY,this.translateImage(this.pointerA.cx-this.pointerA.sx,this.pointerA.cy-this.pointerA.sy),this.pointerA.sx=this.pointerA.cx,this.pointerA.sy=this.pointerA.cy),this.pointerA.ix=(e.clientX-this.bounds.left-this.imageOffsX)/this.imageScale,this.pointerA.iy=(e.clientY-this.bounds.top-this.imageOffsY)/this.imageScale},"event mousedown canvas":function(e){this.pointerA.active=!0,this.pointerA.sx=e.clientX,this.pointerA.sy=e.clientY},"event mouseup canvas":function(e){this.pointerA.active=!1},"event wheel canvas":function(e){e.deltaY>0?this.imageScale-=.045:this.imageScale+=.045,this.imageScale<.1&&(this.imageScale=.1),this.imageOffsX+=-this.pointerA.ix*this.imageScale+(e.clientX-this.bounds.left)-this.imageOffsX,this.imageOffsY+=-this.pointerA.iy*this.imageScale+(e.clientY-this.bounds.top)-this.imageOffsY,this.render()},"event touchmove canvas":function(e){for(let t of e.changedTouches)this.pointerA.id==t.identifier?(this.pointerA.cx=t.clientX,this.pointerA.cy=t.clientY):this.pointerB.id==t.identifier&&(this.pointerB.cx=t.clientX,this.pointerB.cy=t.clientY);if(this.pointerA.active&&this.pointerB.active){let e=Math.sqrt(Math.pow(this.pointerA.sx-this.pointerB.sx,2)+Math.pow(this.pointerA.sy-this.pointerB.sy,2)),t=Math.sqrt(Math.pow(this.pointerA.cx-this.pointerB.cx,2)+Math.pow(this.pointerA.cy-this.pointerB.cy,2))-e;this.imageScale+=t/10*.025,this.imageScale<.1&&(this.imageScale=.1),this.imageOffsX+=-this.pointerA.ix*this.imageScale+(this.pointerA.cx-this.bounds.left)-this.imageOffsX,this.imageOffsY+=-this.pointerA.iy*this.imageScale+(this.pointerA.cy-this.bounds.top)-this.imageOffsY,this.pointerA.sx=this.pointerA.cx,this.pointerA.sy=this.pointerA.cy,this.pointerB.sx=this.pointerB.cx,this.pointerB.sy=this.pointerB.cy,this.render()}else{let e=this.pointerA.active?this.pointerA:this.pointerB.active?this.pointerB:null;if(!e)return;this.translateImage(e.cx-e.sx,e.cy-e.sy),e.sx=e.cx,e.sy=e.cy}},"event touchstart canvas":function(e){this.imageScale0=this.imageScale;for(let t of e.changedTouches)null===this.pointerA.id?(this.pointerA.id=t.identifier,this.pointerA.active=!0,this.pointerA.sx=t.clientX,this.pointerA.sy=t.clientY,this.pointerA.ix=(t.clientX-this.bounds.left-this.imageOffsX)/this.imageScale,this.pointerA.iy=(t.clientY-this.bounds.top-this.imageOffsY)/this.imageScale):null===this.pointerB.id&&(this.pointerB.id=t.identifier,this.pointerB.active=!0,this.pointerB.sx=t.clientX,this.pointerB.sy=t.clientY,this.pointerB.ix=(t.clientX-this.bounds.left-this.imageOffsX)/this.imageScale,this.pointerB.iy=(t.clientY-this.bounds.top-this.imageOffsY)/this.imageScale)},"event touchend canvas":function(e){for(let t of e.changedTouches)this.pointerA.id==t.identifier?(this.pointerA.id=null,this.pointerA.active=!1):this.pointerB.id==t.identifier&&(this.pointerB.id=null,this.pointerB.active=!1)},"event touchcancel canvas":function(e){for(let t of e.changedTouches)this.pointerA.id==t.identifier?(this.pointerA.id=null,this.pointerA.active=!1):this.pointerB.id==t.identifier&&(this.pointerB.id=null,this.pointerB.active=!1)}}),$49b0b8cdf9ff8eae$export$2e2bcd8739ae039={Tabs:$a87557df4d82a328$export$2e2bcd8739ae039,Form:$af32cc3508cbfc71$export$2e2bcd8739ae039,Panel:$13b1dfca67ae5763$export$2e2bcd8739ae039,List:$b79f0a97576f022b$export$2e2bcd8739ae039,Item:$cc5b6ce169c059d1$export$2e2bcd8739ae039,Paginator:$c96ae66895468b04$export$2e2bcd8739ae039,Table:$405ea16f22716faa$export$2e2bcd8739ae039,Select:$cac3c1d5cfc14785$export$2e2bcd8739ae039,ImageCropper:$0ab293403fcf827b$export$2e2bcd8739ae039};const $4aff2c8dfed9b14b$export$55185c17a0fcbe46=$119f0b596e158ca6$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$db77ccec0bb4ccac=$6c26768ccb30d8e4$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$9864de54bd63ed8a=$6c26768ccb30d8e4$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$bf71da7aebe9ddc1=$442f716f1350c2d8$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$accd73d198d77d2f=$6c0ec2bddb1ae62d$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$d3568da47c78d35c=$7939b771b0ff4e2a$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$cea96571ebbff9dd=$ce8debe4e7655d48$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$deefd61317ad2797=$856e97017603d248$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$3abb4be70fa2c84e=$49b0b8cdf9ff8eae$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$d2ca453b913dcdea=$67e7e8d506459fb8$export$2e2bcd8739ae039,$4aff2c8dfed9b14b$export$6fd6461d908cc175=$c51df899a73d8e2a$export$6fd6461d908cc175,$4aff2c8dfed9b14b$export$4c85e640eb41c31b=$c51df899a73d8e2a$export$4c85e640eb41c31b,$4aff2c8dfed9b14b$export$d61e24a684f9e51=$c51df899a73d8e2a$export$d61e24a684f9e51,$4aff2c8dfed9b14b$export$ec8b666c5fe2c75a=$c51df899a73d8e2a$export$ec8b666c5fe2c75a,$4aff2c8dfed9b14b$export$a1edc412be3e1841=$c51df899a73d8e2a$export$a1edc412be3e1841,$4aff2c8dfed9b14b$export$59eced47f477f85a=$c51df899a73d8e2a$export$59eced47f477f85a,$4aff2c8dfed9b14b$export$19342e026b58ebb7=$c51df899a73d8e2a$export$19342e026b58ebb7,$4aff2c8dfed9b14b$export$3a9581c9ade29768=$c51df899a73d8e2a$export$3a9581c9ade29768,$4aff2c8dfed9b14b$export$fb8073518f34e6ec=$c51df899a73d8e2a$export$fb8073518f34e6ec,$4aff2c8dfed9b14b$export$14416b8d99d47caa=$c51df899a73d8e2a$export$14416b8d99d47caa;export{$4aff2c8dfed9b14b$export$55185c17a0fcbe46 as Router,$4aff2c8dfed9b14b$export$db77ccec0bb4ccac as Element,$4aff2c8dfed9b14b$export$9864de54bd63ed8a as CElement,$4aff2c8dfed9b14b$export$bf71da7aebe9ddc1 as Api,$4aff2c8dfed9b14b$export$accd73d198d77d2f as DataSource,$4aff2c8dfed9b14b$export$d3568da47c78d35c as DataList,$4aff2c8dfed9b14b$export$cea96571ebbff9dd as Easing,$4aff2c8dfed9b14b$export$deefd61317ad2797 as Anim,$4aff2c8dfed9b14b$export$3abb4be70fa2c84e as Elements,$4aff2c8dfed9b14b$export$d2ca453b913dcdea as Utils,$4aff2c8dfed9b14b$export$6fd6461d908cc175 as Rin,$4aff2c8dfed9b14b$export$4c85e640eb41c31b as Class,$4aff2c8dfed9b14b$export$d61e24a684f9e51 as Event,$4aff2c8dfed9b14b$export$ec8b666c5fe2c75a as EventDispatcher,$4aff2c8dfed9b14b$export$a1edc412be3e1841 as Model,$4aff2c8dfed9b14b$export$59eced47f477f85a as ModelList,$4aff2c8dfed9b14b$export$19342e026b58ebb7 as Schema,$4aff2c8dfed9b14b$export$3a9581c9ade29768 as Flattenable,$4aff2c8dfed9b14b$export$fb8073518f34e6ec as Collection,$4aff2c8dfed9b14b$export$14416b8d99d47caa as Template};
+import {Rinn as $j3ZoB$Rinn, Class as $j3ZoB$Class, Event as $j3ZoB$Event, EventDispatcher as $j3ZoB$EventDispatcher, Model as $j3ZoB$Model, ModelList as $j3ZoB$ModelList, Schema as $j3ZoB$Schema, Flattenable as $j3ZoB$Flattenable, Collection as $j3ZoB$Collection, Template as $j3ZoB$Template} from "rinn";
+import $j3ZoB$base64 from "base-64";
+import $j3ZoB$nodefetch from "node-fetch";
+
+var $parcel$global =
+typeof globalThis !== 'undefined'
+  ? globalThis
+  : typeof self !== 'undefined'
+  ? self
+  : typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+  ? global
+  : {};
+
+/*
+**	The Router is a special module that detects local URL changes (when a hash-change occurs) and
+**	forwards events to the appropriate handlers.
+*/ const $cdbdea0eedb44c97$var$_Router = {
+    Route: $j3ZoB$EventDispatcher.extend({
+        /*
+		**	Regular expression for the route. This is generated from a simpler expression provided
+		**	in the constructor.
+		*/ routeRegex: null,
+        /*
+		**	Original route string value.
+		*/ value: null,
+        /*
+		**	Map with the indices and the names of each paremeter obtained from the route expression.
+		*/ params: null,
+        /*
+		**	Arguments obtained from the current route (uses `params` to determine name of arguments).
+		*/ args: null,
+        /*
+		**	Arguments string obtained from the last route dispatch. Used to check if the arguments changed.
+		*/ s_args: null,
+        /*
+		**	Indicates if the route is active because of a past positive dispatch.
+		*/ active: false,
+        /*
+		**	Indicates if the params have changed since last event. Transition from inactive to active route will always set this value to true.
+		*/ changed: false,
+        /*
+		**	Constructor of the route, the specified argument is a route expression.
+		**
+		**	>> void __ctor (string route);
+		*/ __ctor: function(route) {
+            this._super.EventDispatcher.__ctor();
+            this._compileRoute(this.value = route);
+        },
+        /*
+		**	Transforms the specified route expression into a regular expression and a set of parameter
+		**	names and stores them in the 'param' array.
+		**
+		**	>> void _compileRoute (string route);
+		*/ _compileRoute: function(route) {
+            this.params = [];
+            route = route.replace(/\/\*\//g, '/.+/');
+            while(true){
+                var m = /:([!@A-Za-z0-9_-]+)/.exec(route);
+                if (!m) break;
+                route = route.replace(m[0], '([^/]+)');
+                this.params.push(m[1]);
+            }
+            this.routeRegex = '^' + route.replace(/##/g, '');
+        },
+        /*
+		**	Adds a handler to the route dispatcher. The handler can be removed later using removeHandler and
+		**	specifying the same parameters. If unrouted boolean is specified the event to listen to will be
+		**	the unrouted event (when the route changes and the route is not activated).
+		**
+		**	void addHandler (handler: function, unrouted: bool);
+		*/ addHandler: function(handler, unrouted) {
+            this.addEventListener((unrouted === true ? 'un' : '') + 'routed', handler, null);
+        },
+        /*
+		**	Removes a handler from the route dispatcher.
+		**
+		**	void removeHandler (handler: function, unrouted: bool);
+		*/ removeHandler: function(handler, unrouted) {
+            this.removeEventListener((unrouted === true ? 'un' : '') + 'routed', handler, null);
+        },
+        /*
+		**	Verifies if the specified route matches the internal route and if so dispatches a (depends on doUnroute parameter) "routed" or "unrouted" event with the
+		**	parameters obtained from the location to all attached handlers.
+		**
+		**	void dispatch (route:string, doUnroute:bool);
+		*/ dispatch: function(route) {
+            var matches = route.match(this.routeRegex);
+            if (!matches) {
+                this.s_args = null;
+                if (this.active) this.dispatchEvent('unrouted', {
+                    route: this
+                });
+                this.active = false;
+                return;
+            }
+            var args = {
+                route: this
+            };
+            var str = '';
+            for(var i = 0; i < this.params.length; i++){
+                args[this.params[i]] = matches[i + 1];
+                str += '_' + matches[i + 1];
+            }
+            this.changed = str != this.s_args;
+            this.s_args = str;
+            this.dispatchEvent('routed', this.args = args);
+            this.active = true;
+        }
+    }),
+    /*
+	**	Map with route objects. The key of the map is the route and the value a handler.
+	*/ routes: {
+    },
+    /*
+	**	Sorted list of routes. Smaller routes are processed first than larger ones. This array stores
+	**	only the keys to the Router.routes map.
+	*/ sortedRoutes: [],
+    /*
+	**	Indicates the number of times the onLocationChanged handler should ignore the hash change event.
+	*/ ignoreHashChangeEvent: 0,
+    /*
+	**	Current relative location (everything after the location hash symbol).
+	*/ location: '',
+    /*
+	**	Current relative location as an array of elements (obtained by splitting the location by slash).
+	*/ args: [],
+    /*
+	**	Initializes the router module. Ensure to call `refresh` once to force a hashchange when the page loads.
+	*/ init: function() {
+        if (this.alreadyAttached) return;
+        this.alreadyAttached = true;
+        if ('onhashchange' in globalThis) globalThis.onhashchange = this.onLocationChanged.bind(this);
+    },
+    /*
+	**	Refreshes the current route by forcing a hashchange event.
+	*/ refresh: function() {
+        this.onLocationChanged();
+    },
+    /*
+	**	Changes the current location and optionally prevents a trigger of the hashchange event.
+	*/ setRoute: function(route, silent) {
+        var location = this.realLocation(route);
+        if (location == this.location) return;
+        if (silent) this.ignoreHashChangeEvent++;
+        globalThis.location.hash = location;
+    },
+    /*
+	**	Adds the specified route to the routing map. When the specified route is detected, the `onRoute` handler will be called, and then
+	**	when the route exits `onUnroute` will be called.
+	*/ addRoute: function(route, onRoute, onUnroute) {
+        if (!this.routes[route]) {
+            this.routes[route] = new this.Route(route);
+            this.sortedRoutes.push(route);
+            this.sortedRoutes.sort((a, b)=>{
+                return this.routes[a].routeRegex.length - this.routes[b].routeRegex.length;
+            });
+        }
+        if (onUnroute !== undefined) {
+            this.routes[route].addHandler(onRoute, false);
+            this.routes[route].addHandler(onUnroute, true);
+        } else this.routes[route].addHandler(onRoute, false);
+        return this.routes[route];
+    },
+    /*
+	**	Adds the specified routes to the routing map. The routes map should contain the route expression
+	**	in the key of the map and a handler function in the value.
+	*/ addRoutes: function(routes) {
+        for(var i in routes){
+            if (!this.routes[i]) {
+                this.routes[i] = new this.Route(i);
+                this.sortedRoutes.push(i);
+            }
+            this.routes[i].addHandler(routes[i], false);
+        }
+        this.sortedRoutes.sort((a, b)=>{
+            return this.routes[a].routeRegex.length - this.routes[b].routeRegex.length;
+        });
+    },
+    /*
+	**	Removes the specified route from the routing map.
+	*/ removeRoute: function(route, onRoute, onUnroute) {
+        if (!this.routes[route]) return;
+        if (onUnroute !== undefined) {
+            this.routes[route].removeHandler(onRoute, false);
+            this.routes[route].removeHandler(onUnroute, true);
+        } else this.routes[route].removeHandler(onRoute);
+    },
+    /*
+	**	Removes the specified routes from the routing map. The routes map should contain the route
+	**	expression in the key of the map and a handler function in the value.
+	*/ removeRoutes: function(routes) {
+        for(var i in routes){
+            if (!this.routes[i]) continue;
+            this.routes[i].removeHandler(routes[i]);
+        }
+    },
+    /*
+	**	Given a formatted location and a previous one it will return the correct real location.
+	*/ realLocation: function(cLocation, pLocation) {
+        if (!pLocation) pLocation = this.location;
+        if (!pLocation) pLocation = ' ';
+        var state = 0, i = 0, j = 0, k;
+        var rLocation = '';
+        while(state != -1 && i < cLocation.length && j < pLocation.length)switch(state){
+            case 0:
+                if (cLocation.substr(i++, 1) == '*') {
+                    state = 1;
+                    break;
+                }
+                if (cLocation.substr(i - 1, 1) != pLocation.substr(j++, 1)) {
+                    rLocation += cLocation.substr(i - 1);
+                    state = -1;
+                    break;
+                }
+                rLocation += pLocation.substr(j - 1, 1);
+                break;
+            case 1:
+                if (cLocation.substr(i, 1) == '*') {
+                    state = 3;
+                    i++;
+                    break;
+                }
+                state = 2;
+                break;
+            case 2:
+                k = pLocation.indexOf(cLocation.substr(i, 1), j);
+                if (k == -1) {
+                    rLocation += pLocation.substr(j) + cLocation.substr(i);
+                    state = -1;
+                    break;
+                }
+                rLocation += pLocation.substr(j, k - j);
+                state = 0;
+                j = k;
+                break;
+            case 3:
+                k = pLocation.lastIndexOf(cLocation.substr(i, 1));
+                if (k == -1) {
+                    rLocation += cLocation.substr(i);
+                    state = -1;
+                    break;
+                }
+                rLocation += pLocation.substr(j, k - j);
+                state = 0;
+                j = k;
+                break;
+        }
+        if (state != -1) rLocation += cLocation.substr(i);
+        return rLocation.trim();
+    },
+    /*
+	**	Event handler called when the location hash changes.
+	*/ onLocationChanged: function() {
+        var cLocation = location.hash.substr(1);
+        var rLocation = this.realLocation(cLocation);
+        if (cLocation != rLocation) {
+            globalThis.location.replace('#' + rLocation);
+            return;
+        }
+        this.location = cLocation;
+        this.args = this.location.split('/');
+        if (this.ignoreHashChangeEvent > 0) {
+            this.ignoreHashChangeEvent--;
+            return;
+        }
+        for(var i = 0; i < this.sortedRoutes.length; i++)this.routes[this.sortedRoutes[i]].dispatch(this.location);
+    },
+    /*
+	**	Navigates to the given hash-based URL.
+	*/ navigate: function(location, replace = false) {
+        location = this.realLocation(location);
+        if (globalThis.location.hash == '#' + location) {
+            this.refresh();
+            return;
+        }
+        if (replace) globalThis.location.replace('#' + location);
+        else globalThis.location.hash = location;
+    }
+};
+$cdbdea0eedb44c97$var$_Router.init();
+var $cdbdea0eedb44c97$export$2e2bcd8739ae039 = $cdbdea0eedb44c97$var$_Router;
+
+
+
+/**
+ * 	Map containing the original prototypes for all registered elements.
+ */ const $f2f01f7f560a1091$var$elementPrototypes = {
+};
+/**
+ * 	Map containing the final classes for all registered elements.
+ */ const $f2f01f7f560a1091$var$elementClasses = {
+};
+/**
+ * 	Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
+ * 	self or child-elements, and several utility methods.
+ */ const $f2f01f7f560a1091$var$Element = {
+    /**
+	 * 	Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
+	 */ eid: null,
+    /**
+	 * 	Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
+	 */ isRoot: true,
+    /**
+	 * 	Root element to which this element is attached (when applicable).
+	 */ root: null,
+    /**
+	 * 	Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
+	 */ isReady: 0,
+    readyReenter: 0,
+    readyLocked: 0,
+    /**
+	 * 	Model type (class) for the element's model.
+	 */ modelt: $j3ZoB$Model,
+    /**
+	 * 	Data model related to the element.
+	 */ model: null,
+    /**
+	 * 	Events map.
+	 */ events: {
+        'click [data-action]': function(evt) {
+            let opts = evt.source.dataset.action.split(' ');
+            if (opts[0] in this) this[opts[0]]({
+                ...evt.params,
+                ...evt.source.dataset,
+                ...opts,
+                length: opts.length
+            }, evt);
+            else evt.continuePropagation = true;
+        },
+        'keyup(13) input[data-enter]': function(evt) {
+            let opts = evt.source.dataset.enter.split(' ');
+            if (opts[0] in this) this[opts[0]]({
+                ...evt.params,
+                ...evt.source.dataset,
+                ...opts,
+                length: opts.length
+            }, evt);
+            else evt.continuePropagation = true;
+        }
+    },
+    /**
+	 * 	Element constructor.
+	 */ __ctor: function() {
+        this._list_watch = [];
+        this._list_visible = [];
+        this._list_property = [];
+        if ('root' in this.dataset) {
+            if (this.dataset.root == 'false') this.isRoot = false;
+        }
+        this.style.display = 'block';
+        this.eid = Math.random().toString().substr(2);
+        if (this.model != null) {
+            let tmp = this.model;
+            this.model = null;
+            this.setModel(tmp, false);
+        }
+        Object.keys(this._super).reverse().forEach((i)=>{
+            if ('init' in this._super[i]) this._super[i].init();
+        });
+        if ($f2f01f7f560a1091$var$Element.debug) console.log('>> ' + this.tagName + ' INIT ON ' + this.parentElement.tagName);
+        this.init();
+        if (this.events) this.bindEvents(this.events);
+        setTimeout(()=>{
+            if (this.tagName.toLowerCase() !== 'r-dom-probe') this.appendChild(document.createElement('r-dom-probe'));
+            else this.markReady();
+        }, 0);
+    },
+    /**
+	 * 	Initializes the element. Called after construction of the instance.
+	 */ init: function() {
+    },
+    /**
+	 * 	Executed when the children of the element are ready.
+	 */ ready: function() {
+    },
+    /**
+	 * 	Executed after ready and after the root is also ready.
+	 */ rready: function() {
+    },
+    /**
+	 * 	Marks the element as ready.
+	 */ markReady: function(list = null) {
+        this.readyLocked++;
+        if (!this.isReady) {
+            this.isReady = 1;
+            // Set model is `model` property was set in the element.
+            if ('model' in this.dataset) {
+                let ref = this.getFieldByPath(this.dataset.model);
+                if (ref) this.setModel(ref);
+            }
+            // Run ready methods in class hierarchy.
+            Object.keys(this._super).reverse().forEach((i)=>{
+                if ('ready' in this._super[i]) this._super[i].ready();
+            });
+            if ($f2f01f7f560a1091$var$Element.debug) console.log('>> ' + this.tagName + ' READY');
+            this.ready();
+            this.collectWatchers();
+        } else this.collectWatchers();
+        let root = this.findCustomParent(this);
+        if ($f2f01f7f560a1091$var$Element.debug) console.log(this.tagName + ' ROOT IS ' + (root ? root.tagName : 'NULL'));
+        if (root && root.isReady === 0 && this.isReady != 0) root.checkReady();
+        let rootReady = false;
+        if (root && root.isReady === 2 && this.isReady !== 2) {
+            this.getRoot();
+            if (this.root && this.dataset.ref) {
+                if ($f2f01f7f560a1091$var$Element.debug) console.log(this.tagName + ' REF AS `' + this.dataset.ref + '` ON ' + this.root.tagName);
+                this.root[this.dataset.ref] = this;
+                this.root.onRefAdded(this.dataset.ref, this);
+            }
+            rootReady = true;
+        }
+        if (!root && this.isReady !== 2) rootReady = true;
+        if (rootReady) {
+            this.isReady = 2;
+            if (list !== null) for (let elem of list)elem.checkReady();
+            if ($f2f01f7f560a1091$var$Element.debug) console.log('>> ' + this.tagName + ' RREADY');
+            Object.keys(this._super).reverse().forEach((i)=>{
+                if ('rready' in this._super[i]) this._super[i].rready();
+            });
+            this.rready();
+        }
+        this.readyLocked--;
+        if (this.readyReenter && !this.readyLocked) {
+            this.readyReenter = false;
+            this.checkReady();
+        }
+        if (this.tagName.toLowerCase() === 'r-dom-probe') this.remove();
+    },
+    /**
+	 *	Checks if all children are ready and fires the appropriate function (`ready` and/or `rready`).
+	 */ checkReady: function() {
+        if (this.childNodes.length == 0) return;
+        if (this.readyLocked) {
+            this.readyReenter = true;
+            return;
+        }
+        let isReady = true;
+        let list = [];
+        let result = document.evaluate(".//*[contains(name(),'-')]", this, null, XPathResult.ANY_TYPE, null);
+        if ($f2f01f7f560a1091$var$Element.debug) console.log('# CHECKING ' + this.tagName);
+        while(true){
+            let elem = result.iterateNext();
+            if (!elem) break;
+            if (elem === this) continue;
+            let root = this.findCustomParent(elem);
+            if (root !== this) continue;
+            if ($f2f01f7f560a1091$var$Element.debug) console.log('   ' + elem.tagName + ' = ' + elem.isReady);
+            if (!elem.isReady) isReady = false;
+            list.push(elem);
+        }
+        if (!isReady) return;
+        this.markReady(list);
+    },
+    /**
+	 * 	Returns the value of a field given its path. Starts from `global`, unless the first item in the path is `this`, in which case it will start from the element.
+	 */ getFieldByPath: function(path) {
+        if (!path) return null;
+        let tmp = path.split('.');
+        let ref = $parcel$global;
+        if (tmp.length && tmp[0] == 'this') {
+            ref = this;
+            tmp.shift();
+        }
+        if (tmp.length && tmp[0] == 'root') {
+            ref = this.getRoot();
+            tmp.shift();
+        }
+        while(ref != null && tmp.length != 0)ref = ref[tmp.shift()];
+        return ref;
+    },
+    /**
+	 * 	Returns the root of the element (that is, the `root` property). If not set it will attempt to find the root first.
+	 */ getRoot: function() {
+        return this.root ? this.root : this.root = this.findRoot();
+    },
+    /**
+	 * 	Sets the model of the element and executes the `modelChanged` event handler (unless `update` is set to false).
+	 */ setModel: function(model, update = true) {
+        if (!model) return this;
+        model = $j3ZoB$Rinn.ensureTypeOf(this.modelt, model);
+        if (this.model !== model) {
+            if (this.model != null) {
+                this.model.removeEventListener(this.eid + ':modelChanged', this.onModelPreChanged, this);
+                this.model.removeEventListener(this.eid + ':propertyChanging', this.onModelPropertyChanging, this);
+                this.model.removeEventListener(this.eid + ':propertyChanged', this.onModelPropertyPreChanged, this);
+                this.model.removeEventListener(this.eid + ':propertyRemoved', this.onModelPropertyRemoved, this);
+            }
+            this.model = model;
+            this.model.addEventListener(this.eid + ':modelChanged', this.onModelPreChanged, this);
+            this.model.addEventListener(this.eid + ':propertyChanging', this.onModelPropertyChanging, this);
+            this.model.addEventListener(this.eid + ':propertyChanged', this.onModelPropertyPreChanged, this);
+            this.model.addEventListener(this.eid + ':propertyRemoved', this.onModelPropertyRemoved, this);
+        }
+        if (update !== false) this.model.setNamespace(this.eid).update(true).setNamespace(null);
+        return this;
+    },
+    /**
+	 * 	Returns the model of the element. Added for symmetry only, exactly the same as accesing public property `model` of this class.
+	 */ getModel: function() {
+        return this.model;
+    },
+    /**
+	 * 	Adds one or more CSS classes (separated by space) to the element.
+	 */ addClass: function(classString) {
+        if (!classString) return this;
+        classString.split(' ').forEach((i)=>{
+            i = i.trim();
+            if (!i) return;
+            if (i[0] == '-' || i[0] == '+') this.classList[i[0] == '-' ? 'remove' : 'add'](i.substr(1));
+            else this.classList.add(i);
+        });
+        return this;
+    },
+    /**
+	 * 	Removes one or more CSS classes (separated by space) from the element.
+	 */ removeClass: function(classString) {
+        if (!classString) return this;
+        classString.split(' ').forEach((i)=>{
+            i = i.trim();
+            if (!i) return;
+            if (i[0] == '-' || i[0] == '+') this.classList[i[0] == '-' ? 'remove' : 'add'](i.substr(1));
+            else this.classList.remove(i);
+        });
+        return this;
+    },
+    /**
+	 * 	Sets one or more style properties to the element (separated by semi-colon).
+	 */ setStyle: function(styleString) {
+        if (!styleString) return this;
+        styleString.split(';').forEach((i)=>{
+            let j = (i = i.trim()).indexOf(':');
+            if (j == -1) return;
+            let name = i.substr(0, j).trim();
+            for(let k = name.indexOf('-'); k != -1; k = name.indexOf('-'))name = name.substr(0, k) + name.substr(k + 1, 1).toUpperCase() + name.substr(k + 2);
+            this.style[name] = i.substr(j + 1).trim();
+        });
+        return this;
+    },
+    /**
+	 * 	Returns the width of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+	 */ getWidth: function(elem = null) {
+        return (elem || this).getBoundingClientRect().width;
+    },
+    /**
+	 * 	Returns the height of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+	 */ getHeight: function(elem = null) {
+        return (elem || this).getBoundingClientRect().height;
+    },
+    /**
+	**	Binds all events in the specified map to the element, the events map can have one of the following forms:
+	**
+	**		"click .button": "doSomething",		(Delegated Event)
+	**		"click .button": function() { },	(Delegated Event)
+	**		"myevt &this": "...",				(Self Event)
+	**		"myevt": "...",						(Element Event)
+	**		"myevt @objName": "...",			(EventDispatcher Event)
+	**		"#propname": "...",					(Property Changed Event)
+	**		"keyup(10) .input": "..."			(Delegated Event with Parameters)
+	**
+	**	>> Element bindEvents (object events);
+	*/ bindEvents: function(events) {
+        for(var evtstr in events){
+            let hdl = events[evtstr];
+            if ($j3ZoB$Rinn.typeOf(hdl) == 'string') hdl = this[hdl];
+            hdl = hdl.bind(this);
+            var i = evtstr.indexOf(' ');
+            var name = i == -1 ? evtstr : evtstr.substr(0, i);
+            var selector = i == -1 ? '' : evtstr.substr(i + 1);
+            let args = null;
+            var j = name.indexOf('(');
+            if (j != -1) {
+                args = name.substr(j + 1, name.length - j - 2).split(',');
+                name = name.substr(0, j);
+            }
+            if (selector[0] == '@') {
+                if (selector != '@this') {
+                    this[selector.substr(1)].addEventListener(name, hdl);
+                    continue;
+                }
+                selector = this;
+            } else if (selector[0] == '&') {
+                if (selector != '&this') selector = "[data-ref='" + selector.substr(1) + "']";
+                else selector = this;
+            }
+            if (name.substr(0, 1) == '#') {
+                this.listen('propertyChanged.' + name.substr(1), this, hdl);
+                continue;
+            }
+            if (args != null) switch(name){
+                case 'keyup':
+                case 'keydown':
+                    this.listen(name, selector, function(evt) {
+                        if ($j3ZoB$Rinn.indexOf(args, evt.keyCode.toString()) != -1) return hdl(evt, args);
+                        evt.continuePropagation = true;
+                    });
+                    continue;
+            }
+            this.listen(name, selector, hdl);
+        }
+        return this;
+    },
+    /**
+	**	Executes the underlying event handler given an event and a selector. Called internally by listen().
+	**
+	**	>> void _eventHandler (event evt, string selector, function handler);
+	*/ _eventHandler: function(evt, selector, handler) {
+        if (evt.continuePropagation === false) return;
+        evt.continuePropagation = true;
+        evt.source = evt.target;
+        if (selector && selector instanceof HTMLElement) {
+            if (evt.source === selector) {
+                evt.continuePropagation = false;
+                if (handler.call(this, evt, evt.detail) === true) evt.continuePropagation = true;
+            }
+        } else if (selector && selector != '*') {
+            let elems = this.querySelectorAll(selector);
+            while(evt.source !== this){
+                let i = $j3ZoB$Rinn.indexOf(elems, evt.source, true);
+                if (i !== -1) {
+                    evt.continuePropagation = false;
+                    if (handler.call(this, evt, evt.detail) === true) evt.continuePropagation = true;
+                    break;
+                } else evt.source = evt.source.parentElement;
+            }
+        } else {
+            evt.continuePropagation = false;
+            if (handler.call(this, evt, evt.detail) === true) evt.continuePropagation = true;
+        }
+        if (evt.continuePropagation === false) {
+            evt.preventDefault();
+            evt.stopPropagation();
+        }
+    },
+    /**
+	**	Listens for an event on elements matching the specified selector, returns an object with a single method `remove` used
+	**	to remove the listener when it is no longer needed.
+	**
+	**	>> object listen (string eventName, string selector, function handler);
+	**	>> object listen (string eventName, function handler);
+	*/ listen: function(eventName, selector, handler) {
+        let eventCatcher = false;
+        let eventImmediate = false;
+        if ($j3ZoB$Rinn.typeOf(selector) == 'function') {
+            handler = selector;
+            selector = null;
+        }
+        if (eventName[eventName.length - 1] == '!') {
+            eventName = eventName.substr(0, eventName.length - 1);
+            eventCatcher = true;
+        }
+        if (eventName[0] == '!') {
+            eventName = eventName.substr(1);
+            eventImmediate = true;
+        }
+        let callback0 = null;
+        let callback1 = null;
+        let self = this;
+        this.addEventListener(eventName, callback0 = (evt)=>{
+            if (evt.continuePropagation === false) return;
+            if (!evt.firstCapture) {
+                evt.firstCapture = this;
+                evt.firstCaptureCount = 0;
+                evt.queue = [];
+            }
+            if (evt.firstCapture === this) evt.firstCaptureCount++;
+            if (eventCatcher == true) evt.queue.push([
+                this,
+                selector,
+                handler
+            ]);
+            if (eventImmediate == true) this._eventHandler(evt, selector, handler);
+        }, true);
+        this.addEventListener(eventName, callback1 = (evt)=>{
+            if (evt.continuePropagation === false) return;
+            if (eventCatcher != true && eventImmediate != true) this._eventHandler(evt, selector, handler);
+            if (evt.firstCapture === this && evt.continuePropagation !== false) {
+                if (--evt.firstCaptureCount == 0) {
+                    while(evt.queue.length){
+                        let q = evt.queue.pop();
+                        q[0]._eventHandler(evt, q[1], q[2]);
+                    }
+                    evt.continuePropagation = false;
+                }
+            }
+        }, false);
+        return {
+            removed: false,
+            remove: function() {
+                if (this.removed) return;
+                this.removed = true;
+                self.removeEventListener(eventName, callback0, true);
+                self.removeEventListener(eventName, callback1, false);
+            }
+        };
+    },
+    /**
+	**	Creates an event object for later dispatch.
+	*/ createEventObject: function(eventName, args, bubbles) {
+        let evt;
+        if (eventName == 'click') evt = new MouseEvent(eventName, {
+            bubbles: bubbles,
+            detail: args
+        });
+        else evt = new CustomEvent(eventName, {
+            bubbles: bubbles,
+            detail: args
+        });
+        return evt;
+    },
+    /**
+	**	Dispatches a new event with the specified name and the given arguments.
+	*/ dispatch: function(eventName, args = null, bubbles = true) {
+        this.dispatchEvent(this.createEventObject(eventName, args, bubbles));
+    },
+    /**
+	**	Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
+	*/ dispatchOn: function(elem, eventName, args = null, bubbles = true) {
+        elem.dispatchEvent(this.createEventObject(eventName, args, bubbles));
+    },
+    /**
+	**	Sets the innerHTML property of the element and runs some post set-content tasks.
+	**
+	**	>> void setInnerHTML (value);
+	*/ setInnerHTML: function(value) {
+        this.readyLocked++;
+        this.innerHTML = value;
+        this.readyLocked--;
+    },
+    /**
+	**	Collects all watchers (data-watch, data-visible, data-property), that depend on the model, should be invoked when the structure
+	**	of the element changed (added/removed children). This is automatically called when the setInnerHTML method is called.
+	**
+	**	Note that for 3rd party libs that add children to this element (which could probably have a watcher) will possibly result in
+	**	duplication of the added elements when compiling the innerHTML template. To prevent this add the 'pseudo' CSS class to any
+	**	element that should not be added to the HTML template.
+	**
+	**	>> void collectWatchers ();
+	*/ collectWatchers: function() {
+        let self = this;
+        let modified = false;
+        let list;
+        if (!this.isRoot) return;
+        let _list_watch_length = this._list_watch.length;
+        let _list_visible_length = this._list_visible.length;
+        let _list_property_length = this._list_property.length;
+        /* *** */ list = this.querySelectorAll('[data-watch]');
+        for(let i3 = 0; i3 < list.length; i3++){
+            for (let j of list[i3].querySelectorAll('.pseudo'))j.remove();
+            list[i3]._template = $j3ZoB$Template.compile(list[i3].innerHTML);
+            list[i3]._watch = new RegExp('^(' + list[i3].dataset.watch + ')$');
+            list[i3].innerHTML = '';
+            list[i3].removeAttribute('data-watch');
+            this._list_watch.push(list[i3]);
+        }
+        if ('selfWatch' in this.dataset) {
+            for (let j of this.querySelectorAll('.pseudo'))j.remove();
+            this._template = $j3ZoB$Template.compile(this.innerHTML);
+            this._watch = new RegExp('^(' + this.dataset.selfWatch + ')$');
+            this.innerHTML = '';
+            this.removeAttribute('data-self-watch');
+            this._list_watch.push(this);
+        }
+        /* *** */ list = this.querySelectorAll('[data-visible]');
+        for(let i1 = 0; i1 < list.length; i1++){
+            list[i1]._visible = $j3ZoB$Template.compile(list[i1].dataset.visible);
+            list[i1].removeAttribute('data-visible');
+            this._list_visible.push(list[i1]);
+        }
+        if ('selfVisible' in this.dataset) {
+            this._visible = $j3ZoB$Template.compile(this.dataset.selfVisible);
+            this.removeAttribute('data-self-visible');
+            this._list_visible.push(this);
+        }
+        /* *** */ list = this.querySelectorAll('[data-property]');
+        for(let i2 = 0; i2 < list.length; i2++){
+            list[i2].onchange = list[i2].onblur = function() {
+                switch(this.type){
+                    case 'radio':
+                        if (this.checked) self.getModel().set(this.name, this.value);
+                        break;
+                    case 'checkbox':
+                        self.getModel().set(this.name, this.checked ? '1' : '0');
+                        break;
+                    case 'field':
+                        self.getModel().set(this.name, this.getValue());
+                        break;
+                    default:
+                        self.getModel().set(this.name, this.value);
+                        break;
+                }
+            };
+            if (list[i2].tagName == 'SELECT') list[i2].onmouseup = function() {
+                self.getModel().set(this.name, this.value);
+            };
+            list[i2].name = list[i2].dataset.property;
+            list[i2].removeAttribute('data-property');
+            this._list_property.push(list[i2]);
+        }
+        if ('selfProperty' in this.dataset) {
+            this.onchange = this.onblur = function() {
+                switch(this.type){
+                    case 'radio':
+                        if (this.checked) self.getModel().set(this.name, this.value);
+                        break;
+                    case 'checkbox':
+                        self.getModel().set(this.name, this.checked ? '1' : '0');
+                        break;
+                    case 'field':
+                        self.getModel().set(this.name, this.getValue());
+                        break;
+                    default:
+                        self.getModel().set(this.name, this.value);
+                        break;
+                }
+            };
+            if (this.tagName == 'SELECT') this.onmouseup = function() {
+                self.getModel().set(this.name, this.value);
+            };
+            this.name = this.dataset.selfProperty;
+            this.removeAttribute('data-self-property');
+            this._list_property.push(this);
+        }
+        /* *** */ this._list_watch = this._list_watch.filter((i)=>i.parentElement != null
+        );
+        if (_list_watch_length != this._list_watch.length) modified = true;
+        this._list_visible = this._list_visible.filter((i)=>i.parentElement != null
+        );
+        if (_list_visible_length != this._list_visible.length) modified = true;
+        this._list_property = this._list_property.filter((i)=>i.parentElement != null
+        );
+        if (_list_property_length != this._list_property.length) modified = true;
+        if (this.model != null && modified) this.model.setNamespace(this.eid).update(true).setNamespace(null);
+    },
+    /**
+	**	Executed when the element is created and yet not attached to the DOM tree.
+	*/ onCreated: function() {
+    },
+    /**
+	**	Executed when the element is attached to the DOM tree.
+	*/ onConnected: function() {
+    },
+    /**
+	**	Executed when the element is no longer a part of the DOM tree.
+	*/ onDisconnected: function() {
+    },
+    /**
+	**	Executed on the root element when a child element has `data-ref` attribute and it was added to it.
+	*/ onRefAdded: function(name, element) {
+    },
+    /**
+	**	Executed on the root element when a child element has `data-ref` attribute and it was removed from it.
+	*/ onRefRemoved: function(name, element) {
+    },
+    /**
+	**	Event handler invoked when the model has changed, executed before onModelChanged() to update internal dependencies,
+	**	should not be overriden or elements watching the model will not be updated.
+	**
+	**	>> void onModelPreChanged (evt, args);
+	*/ onModelPreChanged: function(evt, args) {
+        let data = this.getModel().get();
+        for(let i = 0; i < this._list_watch.length; i++)for (let j of args.fields){
+            if (!this._list_watch[i]._watch.test(j)) continue;
+            this._list_watch[i].innerHTML = this._list_watch[i]._template(data);
+            break;
+        }
+        for(let i4 = 0; i4 < this._list_visible.length; i4++)if (!!this._list_visible[i4]._visible(data, 'arg')) this._list_visible[i4].style.removeProperty('display');
+        else this._list_visible[i4].style.setProperty('display', 'none', 'important');
+        this.onModelChanged(evt, args);
+    },
+    /**
+	**	Event handler invoked when the model has changed.
+	*/ onModelChanged: function(evt, args) {
+    },
+    /**
+	**	Event handler invoked when a property of the model is changing. Fields `name` and `value` can be found in the `args` object.
+	*/ onModelPropertyChanging: function(evt, args) {
+    },
+    /**
+	**	Event handler invoked when a property of the model has changed, executed before onModelPropertyChanged() to update internal
+	**	dependencies. Automatically triggers internal events named `propertyChanged.<propertyName>` and `propertyChanged`.
+	**	Should not be overriden or elements depending on the property will not be updated.
+	*/ onModelPropertyPreChanged: function(evt, args) {
+        for(let i = 0; i < this._list_property.length; i++)if (this._list_property[i].name == args.name) {
+            let trigger = true;
+            switch(this._list_property[i].type){
+                case 'radio':
+                    if (this._list_property[i].value != args.value) {
+                        this._list_property[i].parentElement.classList.remove('active');
+                        continue;
+                    }
+                    this._list_property[i].checked = true;
+                    this._list_property[i].parentElement.classList.add('active');
+                    break;
+                case 'checkbox':
+                    if (~~args.value) {
+                        this._list_property[i].checked = true;
+                        this._list_property[i].parentElement.classList.add('active');
+                    } else {
+                        this._list_property[i].checked = false;
+                        this._list_property[i].parentElement.classList.remove('active');
+                    }
+                    break;
+                case 'field':
+                    this._list_property[i].val = this._list_property[i].dataset.value = args.value;
+                    this._list_property[i].setValue(args.value);
+                    trigger = false;
+                    break;
+                default:
+                    this._list_property[i].value = args.value;
+                    this._list_property[i].val = this._list_property[i].dataset.value = args.value;
+                    if (this._list_property[i].value != args.value) trigger = false;
+                    break;
+            }
+            if (trigger && this._list_property[i].onchange) this._list_property[i].onchange();
+        }
+        this.dispatch('propertyChanged.' + args.name, args, false);
+        this.dispatch('propertyChanged', args, false);
+        this.onModelPropertyChanged(evt, args);
+    },
+    /**
+	**	Event handler invoked when a property of the model has changed.
+	*/ onModelPropertyChanged: function(evt, args) {
+    },
+    /**
+	**	Event handler invoked when a property of the model is removed. Field `name` can be found in the `args` object.
+	*/ onModelPropertyRemoved: function(evt, args) {
+    },
+    /*
+	**	Runs the following preparation procedures on the specified prototype:
+	**		- All functions named 'event <event-name> [event-selector]' will be moved to the 'events' map.
+	**
+	**	>> void preparePrototype (object proto);
+	*/ preparePrototype: function(proto) {
+        if (proto.__prototypePrepared === true) return;
+        proto.__prototypePrepared = true;
+        if (!('events' in proto)) proto.events = {
+        };
+        for(let i in proto)if (i.startsWith('event ')) {
+            proto.events[i.substr(6)] = proto[i];
+            delete proto[i];
+        }
+    },
+    /*
+	**	Registers a new custom element with the specified name. Extra functionality can be added with one or more prototypes, by default
+	**	all elements also get the `Element` prototype. Note that the final prototypes of all registered elements are stored, and if you want
+	**	to inherit another element's prototype just provide its name (string) in the protos argument list.
+	**
+	**	>> class register (string name, ...(object|string) protos);
+	*/ register: function(name, ...protos) {
+        const newElement = class _class extends HTMLElement {
+            findRoot(srcElement) {
+                let elem = srcElement ? srcElement : this.parentElement;
+                while(elem != null){
+                    if ('isRoot' in elem && elem.isRoot === true) return elem;
+                    elem = elem.parentElement;
+                }
+                return null;
+            }
+            findCustomParent(srcElement) {
+                let elem = srcElement ? srcElement.parentElement : this.parentElement;
+                while(elem != null){
+                    if (elem.tagName.indexOf('-') !== -1) return elem;
+                    elem = elem.parentElement;
+                }
+                return null;
+            }
+            connectReference(root = null, flags = 255) {
+                if (!this.root && (flags & 1) == 1) {
+                    if (root == null) root = this.findRoot();
+                    if (root != null) {
+                        if (this.dataset.ref) root[this.dataset.ref] = this;
+                        this.root = root;
+                    }
+                }
+            }
+            connectedCallback() {
+                this.connectReference(null, 1);
+                if (this.invokeConstructor) {
+                    this.invokeConstructor = false;
+                    this.__ctor();
+                }
+                this.connectReference(null, 2);
+                this.onConnected();
+                if (this.dataset.xref) globalThis[this.dataset.xref] = this;
+            }
+            disconnectedCallback() {
+                if (this.root) {
+                    if (this.dataset.ref) {
+                        this.root.onRefRemoved(this.dataset.ref, this);
+                        delete this.root[this.dataset.ref];
+                    }
+                    this.root = null;
+                }
+                this.onDisconnected();
+                if (this.dataset.xref) delete globalThis[this.dataset.xref];
+            }
+            constructor(){
+                super();
+                this.invokeConstructor = true;
+                if ($f2f01f7f560a1091$var$Element.debug) console.log('CREATED ' + this.tagName);
+                this._super = {
+                };
+                for (let i of Object.entries(this.constructor.prototype._super)){
+                    this._super[i[0]] = {
+                    };
+                    for (let j of Object.entries(i[1]))this._super[i[0]][j[0]] = j[1].bind(this);
+                }
+                this.onCreated();
+            }
+        };
+        $j3ZoB$Rinn.override(newElement.prototype, $f2f01f7f560a1091$var$Element);
+        const proto = {
+        };
+        const _super = {
+        };
+        const events = $j3ZoB$Rinn.clone($f2f01f7f560a1091$var$Element.events);
+        let __init = true;
+        let __ready = true;
+        let __rready = true;
+        let __check;
+        for(let i5 = 0; i5 < protos.length; i5++){
+            if (!protos[i5]) continue;
+            if ($j3ZoB$Rinn.typeOf(protos[i5]) == 'string') {
+                const name = protos[i5];
+                protos[i5] = $f2f01f7f560a1091$var$elementPrototypes[name];
+                if (!protos[i5]) continue;
+                _super[name] = {
+                };
+                for(let f in protos[i5]){
+                    if ($j3ZoB$Rinn.typeOf(protos[i5][f]) != 'function') continue;
+                    _super[name][f] = protos[i5][f];
+                }
+                __init = false;
+                __ready = false;
+                __rready = false;
+                __check = false;
+            } else {
+                $f2f01f7f560a1091$var$Element.preparePrototype(protos[i5]);
+                __check = true;
+            }
+            if ('_super' in protos[i5]) $j3ZoB$Rinn.override(_super, protos[i5]._super);
+            if ('events' in protos[i5]) $j3ZoB$Rinn.override(events, protos[i5].events);
+            $j3ZoB$Rinn.override(newElement.prototype, protos[i5]);
+            $j3ZoB$Rinn.override(proto, protos[i5]);
+            if (__check) {
+                if (!__init && 'init' in protos[i5]) __init = true;
+                if (!__ready && 'ready' in protos[i5]) __ready = true;
+                if (!__rready && 'rready' in protos[i5]) __rready = true;
+            }
+        }
+        let dummy = function() {
+        };
+        if (!__init) {
+            newElement.prototype.init = dummy;
+            proto.init = dummy;
+        }
+        if (!__ready) {
+            newElement.prototype.ready = dummy;
+            proto.ready = dummy;
+        }
+        if (!__rready) {
+            newElement.prototype.rready = dummy;
+            proto.rready = dummy;
+        }
+        newElement.prototype._super = _super;
+        newElement.prototype.events = events;
+        proto._super = _super;
+        proto.events = events;
+        customElements.define(name, newElement);
+        $f2f01f7f560a1091$var$elementPrototypes[name] = proto;
+        $f2f01f7f560a1091$var$elementClasses[name] = newElement;
+        return newElement;
+    },
+    /*
+	**	Expands an already created custom element with the specified prototype(s).
+	**
+	**	>> void expand (string elementName, ...object protos);
+	*/ expand: function(name, ...protos) {
+        if (!(name in $f2f01f7f560a1091$var$elementPrototypes)) return;
+        const self = $f2f01f7f560a1091$var$elementPrototypes[name];
+        const elem = $f2f01f7f560a1091$var$elementClasses[name];
+        const _super = self._super;
+        const events = self.events;
+        for (let proto of protos){
+            $f2f01f7f560a1091$var$Element.preparePrototype(proto);
+            if ('_super' in proto) $j3ZoB$Rinn.override(_super, proto._super);
+            if ('events' in proto) $j3ZoB$Rinn.override(events, proto.events);
+            $j3ZoB$Rinn.override(elem.prototype, proto);
+            $j3ZoB$Rinn.override(self, proto);
+        }
+        elem.prototype._super = _super;
+        elem.prototype.events = events;
+        self._super = _super;
+        self.events = events;
+    },
+    /*
+	**	Appends a hook to a function of a custom element.
+	*/ hookAppend: function(name, functionName, newFunction) {
+        if (!(name in $f2f01f7f560a1091$var$elementPrototypes)) return;
+        let hook1 = $j3ZoB$Rinn.hookAppend($f2f01f7f560a1091$var$elementPrototypes[name], functionName, newFunction);
+        let hook2 = $j3ZoB$Rinn.hookAppend($f2f01f7f560a1091$var$elementClasses[name].prototype, functionName, newFunction);
+        return {
+            unhook: function() {
+                hook1.unhook();
+                hook2.unhook();
+            }
+        };
+    },
+    /*
+	**	Prepends a hook to a function of a custom element.
+	*/ hookPrepend: function(name, functionName, newFunction) {
+        if (!(name in $f2f01f7f560a1091$var$elementPrototypes)) return;
+        let hook1 = $j3ZoB$Rinn.hookPrepend($f2f01f7f560a1091$var$elementPrototypes[name], functionName, newFunction);
+        let hook2 = $j3ZoB$Rinn.hookPrepend($f2f01f7f560a1091$var$elementClasses[name].prototype, functionName, newFunction);
+        return {
+            unhook: function() {
+                hook1.unhook();
+                hook2.unhook();
+            }
+        };
+    },
+    /**
+	**	Built-in action handlers.
+	*/ /**
+	**	:toggleClass <className> [<selector>]
+	**
+	**	Toggles a CSS class on the element.
+	*/ ':toggleClass': function(args, evt) {
+        let elem = evt.source;
+        if ('2' in args) elem = document.querySelector(args[2]);
+        if (!elem) return;
+        if (elem.classList.contains(args[1])) elem.classList.remove(args[1]);
+        else elem.classList.add(args[1]);
+    },
+    /**
+	**	:setClass <className> [<selector>]
+	**
+	**	Sets a CSS class on the element.
+	*/ ':setClass': function(args, evt) {
+        let elem = evt.source;
+        if ('2' in args) elem = document.querySelector(args[2]);
+        if (!elem) return;
+        elem.classList.add(args[1]);
+    },
+    /**
+	**	:volatileClass <className> [<selector>]
+	**
+	**	Adds the CSS class to the element and any click outside will cause it to be removed.
+	*/ ':volatileClass': function(args, evt) {
+        let elem = evt.source;
+        if ('2' in args) elem = document.querySelector(args[2]);
+        if (!elem) return;
+        elem.classList.add(args[1]);
+        let fn = ()=>{
+            window.removeEventListener('click', fn, true);
+            elem.classList.remove(args[1]);
+        };
+        window.addEventListener('click', fn, true);
+    },
+    /**
+	**	:toggleClassUnique <className> <parentSelector> <childSelector>
+	**
+	**	Toggles a CSS class on the element and only one element in the selected parent can have the class.
+	*/ ':toggleClassUnique': function(args, evt) {
+        let elem1 = evt.source;
+        if (!elem1) return;
+        if (elem1.classList.contains(args[1])) elem1.classList.remove(args[1]);
+        else {
+            elem1.querySelectorParent(args[2]).querySelectorAll(args[3]).forEach((elem)=>elem.classList.remove(args[1])
+            );
+            elem1.classList.add(args[1]);
+        }
+    },
+    /**
+	**	:setClassUnique <className> <parentSelector> <childSelector>
+	**
+	**	Sets a CSS class on the element and only that element in the selected parent can have the class.
+	*/ ':setClassUnique': function(args, evt) {
+        let elem2 = evt.source;
+        if (!elem2) return;
+        elem2.querySelectorParent(args[2]).querySelectorAll(args[3]).forEach((elem)=>elem.classList.remove(args[1])
+        );
+        elem2.classList.add(args[1]);
+    }
+};
+$f2f01f7f560a1091$var$Element.debug = false;
+$f2f01f7f560a1091$var$Element.register('r-elem', {
+});
+$f2f01f7f560a1091$var$Element.register('r-dom-probe', {
+});
+/* ****************************************** */ /**
+**	Finds the parent element given a selector.
+*/ HTMLElement.prototype.querySelectorParent = function(selector) {
+    let elem = this;
+    while(elem != null){
+        if (elem.matches(selector)) break;
+        elem = elem.parentElement;
+    }
+    return elem;
+};
+var $f2f01f7f560a1091$export$2e2bcd8739ae039 = $f2f01f7f560a1091$var$Element;
+
+
+
+
+if (!('fetch' in $parcel$global)) $parcel$global.fetch = $j3ZoB$nodefetch;
+/**
+**	API interface utility functions.
+*/ const $03dfb5b808851c4b$var$Api = {
+    /**
+	**	Flags constants.
+	*/ REQUEST_PACKAGE_SUPPORTED: 1,
+    REQ64_SUPPORTED: 2,
+    JSON_RESPONSE_SUPPORTED: 4,
+    XML_RESPONSE_SUPPORTED: 8,
+    INCLUDE_CREDENTIALS: 16,
+    /**
+	**	Target URL for all the API requests. Set by calling `setEndPoint`.
+	*/ apiUrl: "/api",
+    /**
+	**	Capabilities flag.
+	*/ flags: 0,
+    /**
+	**	Indicates if all request data will be packed into a req64 parameter instead of individual fields.
+	*/ useReq64: false,
+    /**
+	**	Number of retries to execute each API call before giving up and invoking error handlers.
+	*/ retries: 0,
+    /**
+	**	Headers for the request.
+	*/ headers: {
+    },
+    /**
+	**	Level of the current request. Used to detect nested requests.
+	*/ _requestLevel: 0,
+    /**
+	**	Indicates if all API calls should be bundled in a request package. Activated by calling the packageBegin() function and finished with packageEnd().
+	*/ _requestPackage: 0,
+    /**
+	**	When in package-mode, this contains the package data to be sent upon a call to packageEnd().
+	*/ _packageData: [],
+    /**
+	**	Sets the API end-point URL address.
+	*/ setEndPoint: function(apiUrl, flags = null) {
+        if (flags === null) flags = $03dfb5b808851c4b$var$Api.REQUEST_PACKAGE_SUPPORTED | $03dfb5b808851c4b$var$Api.REQ64_SUPPORTED | $03dfb5b808851c4b$var$Api.JSON_RESPONSE_SUPPORTED | $03dfb5b808851c4b$var$Api.XML_RESPONSE_SUPPORTED | $03dfb5b808851c4b$var$Api.INCLUDE_CREDENTIALS;
+        this.apiUrl = apiUrl;
+        this.flags = flags;
+        return this;
+    },
+    /**
+	**	Overridable filter that processes the response from the server and returns true if it was successful. The `res` parameter indicates the response data, and `req` the request data.
+	*/ responseFilter: function(res, req) {
+        return true;
+    },
+    /**
+	**	Starts "package-mode" (using the `rpkg` field). Any API calls after this will be bundled together.
+	*/ packageBegin: function() {
+        if (!(this.flags & $03dfb5b808851c4b$var$Api.REQUEST_PACKAGE_SUPPORTED)) return;
+        this._requestPackage++;
+    },
+    /**
+	**	Finishes "package-mode" and a single API request with the currently constructed package will be sent.
+	*/ packageEnd: function(callback) {
+        if (!(this.flags & $03dfb5b808851c4b$var$Api.REQUEST_PACKAGE_SUPPORTED)) return;
+        if (!this._requestPackage) return;
+        if (--this._requestPackage) return;
+        this.packageSend(callback);
+    },
+    /**
+	**	Starts package-mode, executes the callback and finishes package-mode. Therefore any requests made by the callback will be packed together.
+	*/ packRequests: function(callback, responseCallback = null) {
+        if (!(this.flags & $03dfb5b808851c4b$var$Api.REQUEST_PACKAGE_SUPPORTED)) return;
+        this.packageBegin();
+        callback();
+        this.packageEnd(responseCallback);
+    },
+    /**
+	**	Sends a single API request with the currently constructed package and maintains package-mode.
+	*/ packageSend: function(callback) {
+        if (!(this.flags & $03dfb5b808851c4b$var$Api.REQUEST_PACKAGE_SUPPORTED)) return;
+        if (!this._packageData.length) return;
+        let _packageData = this._packageData;
+        this._packageData = [];
+        var rpkg = "";
+        for(var i1 = 0; i1 < _packageData.length; i1++)rpkg += "r" + i1 + "," + $j3ZoB$base64.encode(this.encodeParams(_packageData[i1][2])) + ";";
+        this._showProgress();
+        this.apiCall({
+            rpkg: rpkg
+        }, (res, req)=>{
+            this._hideProgress();
+            for(let i = 0; i < _packageData.length; i++)try {
+                var response = res["r" + i];
+                if (!response) {
+                    if (_packageData[i][1] != null) _packageData[i][1](_packageData[i][2]);
+                    continue;
+                }
+                if (_packageData[i][0] != null) {
+                    if (this.responseFilter(response, _packageData[i][2])) _packageData[i][0](response, _packageData[i][2]);
+                }
+            } catch (e) {
+            }
+            if (callback) callback();
+        }, (req)=>{
+            this._hideProgress();
+            for(let i = 0; i < _packageData.length; i++)if (_packageData[i][1] != null) _packageData[i][1](_packageData[i][2]);
+        });
+    },
+    /**
+	**	Adds CSS class 'busy' to the HTML root element, works only if running inside a browser.
+	*/ _showProgress: function() {
+        if ('document' in $parcel$global) {
+            this._requestLevel++;
+            if (this._requestLevel > 0) $parcel$global.document.documentElement.classList.add('busy');
+        }
+    },
+    /**
+	**	Removes the 'busy' CSS class from the HTML element.
+	*/ _hideProgress: function() {
+        if ('document' in $parcel$global) {
+            this._requestLevel--;
+            if (this._requestLevel) return;
+            setTimeout(()=>{
+                if (this._requestLevel === 0) $parcel$global.document.documentElement.classList.remove('busy');
+            }, 250);
+        }
+    },
+    /**
+	 * 	Sets an HTTP header.
+	 */ header: function(name, value) {
+        if (value === null) delete this.headers[name];
+        else this.headers[name] = value;
+        return this;
+    },
+    /**
+	**	Returns a parameter string for a GET request given an object with fields.
+	*/ encodeParams: function(obj) {
+        let s = [];
+        if (obj instanceof FormData) for (let i of obj.entries())s.push(encodeURIComponent(i[0]) + '=' + encodeURIComponent(i[1]));
+        else for(let i2 in obj)s.push(encodeURIComponent(i2) + '=' + encodeURIComponent(obj[i2]));
+        return s.join('&');
+    },
+    /**
+	**	Executes an API call to the URL stored in the `apiUrl` property. By default `httpMethod` is "auto", which will determine the best depending on the data to
+	**	be sent. Any connection error will be reported to the `failure` callback, and similarly any success to the `success` callback. The `params` object can be
+	**	a FormData object or just a regular object.
+	*/ apiCall: function(params, success, failure, httpMethod, retries) {
+        let url = this.apiUrl + '?_=' + Date.now();
+        if (httpMethod) {
+            httpMethod = httpMethod.toUpperCase();
+            if (httpMethod != 'GET' && httpMethod != 'POST') httpMethod = 'auto';
+        } else httpMethod = 'auto';
+        if (retries === undefined) retries = this.retries;
+        if (this._requestPackage && this.flags & $03dfb5b808851c4b$var$Api.REQUEST_PACKAGE_SUPPORTED) {
+            if (!(params instanceof FormData)) params = {
+                ...params
+            };
+            this._packageData.push([
+                success,
+                failure,
+                params
+            ]);
+            return;
+        }
+        this._showProgress();
+        let data = params;
+        let options = {
+            mode: 'cors',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9',
+                ...this.headers
+            },
+            method: httpMethod,
+            body: null,
+            multipart: false
+        };
+        if (this.flags & $03dfb5b808851c4b$var$Api.INCLUDE_CREDENTIALS) options.credentials = 'include';
+        if (typeof data !== 'string' && !(data instanceof Blob)) {
+            if (!(data instanceof FormData)) {
+                data = new FormData();
+                for(let i in params)if (params[i] instanceof File || params[i] instanceof Blob) data.append(i, params[i], params[i].name);
+                else data.append(i, params[i]);
+            }
+            for (let i of data.entries())if (i[1] instanceof File || i[1] instanceof Blob) {
+                options.method = 'POST';
+                options.multipart = true;
+                break;
+            }
+            if (this.useReq64 && this.flags & $03dfb5b808851c4b$var$Api.REQ64_SUPPORTED && !options.multipart) {
+                let tmp = new FormData();
+                tmp.append('req64', $j3ZoB$base64.encode(this.encodeParams(data)));
+                data = tmp;
+            }
+            if (options.method == 'auto') {
+                let l = 0;
+                options.method = 'GET';
+                for (let i of data.entries()){
+                    l += i[0].length + i[1].length + 2;
+                    if (l > 960) {
+                        options.method = 'POST';
+                        break;
+                    }
+                }
+            }
+            if (options.method == 'GET') url += '&' + this.encodeParams(data);
+            else if (!options.multipart) {
+                options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                options.body = this.encodeParams(data);
+            } else options.body = data;
+        } else {
+            if (typeof data === 'string') {
+                if (data[0] === '<') {
+                    if (data.endsWith('</soap:Envelope>')) options.headers['Content-Type'] = 'application/soap+xml';
+                    else options.headers['Content-Type'] = 'application/xml';
+                } else if (data[0] === '{') options.headers['Content-Type'] = 'application/json';
+                else options.headers['Content-Type'] = 'application/octet-stream';
+            } else options.headers['Content-Type'] = data.type;
+            options.body = data;
+        }
+        $parcel$global.fetch(url, options).then((result)=>this.decodeResult(result)
+        ).then((result)=>{
+            this._hideProgress();
+            if (!success) return;
+            if (this.responseFilter(result, params)) try {
+                success(result, params);
+            } catch (e) {
+            }
+        }).catch((err)=>{
+            this._hideProgress();
+            if (retries == 0) {
+                if (failure) failure(params);
+            } else this.apiCall(data, success, failure, httpMethod, retries - 1);
+        });
+    },
+    /**
+	**	Decodes a result obtained using fetch into a usable object.
+	*/ decodeResult: function(result) {
+        let type = result.headers.get('content-type').split(';')[0].toLowerCase();
+        if (this.flags & $03dfb5b808851c4b$var$Api.JSON_RESPONSE_SUPPORTED && type.indexOf('json') !== -1) return result.json();
+        if (this.flags & $03dfb5b808851c4b$var$Api.XML_RESPONSE_SUPPORTED && type.indexOf('xml') !== -1) return new Promise((resolve, reject)=>{
+            result.text().then((data)=>{
+                data = (new DOMParser).parseFromString(data, 'text/xml');
+                resolve(data);
+            }).catch(reject);
+        });
+        return result.blob();
+    },
+    /**
+	**	Makes a blob with the specified data and type.
+	*/ getBlob: function(data, type) {
+        return new Blob([
+            data
+        ], {
+            type: type
+        });
+    },
+    /**
+	**	Provided access to the base64 module to encode/decode data.
+	*/ base64: {
+        encode: function(value) {
+            return $j3ZoB$base64.encode(value);
+        },
+        decode: function(value) {
+            return $j3ZoB$base64.decode(value);
+        }
+    },
+    /**
+	**	Executes a POST API call.
+	*/ post: function(params, success, failure) {
+        return this.apiCall(params, success, failure, 'POST');
+    },
+    /**
+	**	Executes a GET API call.
+	*/ get: function(params, success, failure) {
+        return this.apiCall(params, success, failure, 'GET');
+    },
+    /**
+	**	Executes an automatic API call, returns a promise.
+	*/ fetch: function(params) {
+        return new Promise((resolve, reject)=>{
+            this.apiCall(params, resolve, reject);
+        });
+    },
+    /**
+	**	Executes an automatic API call, returns a promise.
+	*/ makeUrl: function(data) {
+        return this.apiUrl + (this.apiUrl.indexOf('?') == -1 ? '?' : '&') + this.encodeParams(data);
+    }
+};
+var $03dfb5b808851c4b$export$2e2bcd8739ae039 = $03dfb5b808851c4b$var$Api;
+
+
+
+
+var /*
+**	Provides several methods to quickly interface with a remote data-source as defined by Wind.
+*/ $c92d48c08b86e527$export$2e2bcd8739ae039 = $j3ZoB$EventDispatcher.extend({
+    className: 'DataSource',
+    debounceDelay: 250,
+    request: null,
+    includeCount: false,
+    includeEnum: false,
+    includeList: true,
+    eid: null,
+    count: 0,
+    list: null,
+    enum: null,
+    /*
+	**	Constructs the data source with the specified optional `config` parameters, any of the properties of this object can be specified
+	**	in the config. Uses the given basePath as prefix for the `f` parameter for subsequent API operations, a basePath of `candies` will
+	**	result in calls to `candies.list`, `candies.count`, etc.
+	*/ __ctor: function(basePath, config) {
+        this._super.EventDispatcher.__ctor();
+        this.basePath = basePath;
+        if (config) Object.assign(this, config);
+        this.request = new $j3ZoB$Model(this.request);
+        this.eid = Math.random().toString().substr(2);
+        this.count = 0;
+        this.list = new $j3ZoB$ModelList();
+        this.list.dataSource = this;
+        this.enum = new $j3ZoB$ModelList();
+        this.enum.dataSource = this;
+        this.request.addEventListener(this.eid + ':propertyChanged', this.forwardRequestEvent, this);
+        this.list.addEventListener(this.eid + ':itemsCleared', this.forwardListEvent, this);
+        this.list.addEventListener(this.eid + ':itemsChanged', this.forwardListEvent, this);
+        this.list.addEventListener(this.eid + ':itemRemoved', this.forwardListEvent, this);
+        this.list.addEventListener(this.eid + ':itemChanged', this.forwardListEvent, this);
+        this.list.addEventListener(this.eid + ':itemAdded', this.forwardListEvent, this);
+        this.enum.addEventListener(this.eid + ':itemsCleared', this.forwardEnumEvent, this);
+        this.enum.addEventListener(this.eid + ':itemsChanged', this.forwardEnumEvent, this);
+        this.enum.addEventListener(this.eid + ':itemRemoved', this.forwardEnumEvent, this);
+        this.enum.addEventListener(this.eid + ':itemChanged', this.forwardEnumEvent, this);
+        this.enum.addEventListener(this.eid + ':itemAdded', this.forwardEnumEvent, this);
+    },
+    forwardRequestEvent: function(evt, args) {
+        this.prepareEvent('request' + evt.name[0].toUpperCase() + evt.name.substr(1), args).setSource(evt.source).resume();
+    },
+    forwardListEvent: function(evt, args) {
+        this.prepareEvent('list' + evt.name[0].toUpperCase() + evt.name.substr(1), args).setSource(evt.source).resume();
+    },
+    forwardEnumEvent: function(evt, args) {
+        this.prepareEvent('enum' + evt.name[0].toUpperCase() + evt.name.substr(1), args).setSource(evt.source).resume();
+    },
+    /*
+	**	Executes one or more API functions (depending on `includeCount`, `includeEnum` and `includeList` properties) to retrieve the
+	**	required data (uses debounce to prevent too-quick refreshes).
+	**
+	**	Refresh mode can be: order, filter, range or full. Setting `mode` to `true` will cause a full refresh without debouncing.
+	*/ refresh: function(mode = 'full', callback = null) {
+        if (typeof mode == 'function') {
+            callback = mode;
+            mode = 'full';
+        }
+        if (this._timeout) {
+            clearTimeout(this._timeout);
+            this._timeout = null;
+        }
+        const fn = ()=>{
+            this._timeout = null;
+            $03dfb5b808851c4b$export$2e2bcd8739ae039.packageBegin();
+            if (this.includeCount && (mode == 'full' || mode == 'filter')) this.fetchCount();
+            if (this.includeEnum && mode == 'full') this.fetchEnum();
+            if (this.includeList) this.fetchList();
+            $03dfb5b808851c4b$export$2e2bcd8739ae039.packageEnd(callback);
+        };
+        if (mode === true) {
+            mode = 'full';
+            fn();
+        } else this._timeout = setTimeout(fn, this.debounceDelay);
+    },
+    /*
+	**	Searches for the item in `list` that matches the specified `fields` and sends it to the callback. If no item is found (or if `forced` is true),
+	**	a call to API function `.get` will be executed with the fields as request parameters. Returns a promise.
+	*/ fetch: function(fields, forced = false) {
+        return new Promise((resolve, reject)=>{
+            let item = forced == true ? null : this.list.find(fields, true);
+            if (!item) this.fetchOne(fields, (r)=>{
+                if (r && r.response == 200) {
+                    if (r.data.length > 0) resolve(r.data[0]);
+                    else reject(r);
+                } else reject(r);
+            });
+            else resolve(item.get());
+        });
+    },
+    /*
+	**	Removes an item from the remote data source by executing the `.delete` API function, passes the given `fields` as request
+	**	parameters. Returns a promise.
+	*/ delete: function(params) {
+        return new Promise((resolve, reject)=>{
+            this.fetchDelete(params, (r)=>{
+                if (r.response == 200) resolve(r);
+                else reject(r.error);
+            });
+        });
+    },
+    fetchList: function() {
+        let data = {
+            ...this.request.get()
+        };
+        data.f = this.basePath + '.list';
+        this.dispatchEvent('listLoading');
+        $03dfb5b808851c4b$export$2e2bcd8739ae039.fetch(data).then((r)=>{
+            this.list.setData(r.response == 200 ? r.data : null);
+            this.dispatchEvent('listLoaded');
+            this.dispatchEvent('listChanged');
+        });
+    },
+    fetchEnum: function() {
+        let data = {
+            ...this.request.get()
+        };
+        data.f = this.basePath + '.enum';
+        this.dispatchEvent('enumLoading');
+        $03dfb5b808851c4b$export$2e2bcd8739ae039.fetch(data).then((r)=>{
+            this.enum.setData(r.response == 200 ? r.data : null);
+            this.dispatchEvent('enumLoaded');
+            this.dispatchEvent('enumChanged');
+        });
+    },
+    fetchCount: function() {
+        let data = {
+            ...this.request.get()
+        };
+        data.f = this.basePath + '.count';
+        this.dispatchEvent('countLoading');
+        $03dfb5b808851c4b$export$2e2bcd8739ae039.fetch(data).then((r)=>{
+            this.count = r.response == 200 ? r.count : 0;
+            this.dispatchEvent('countLoaded');
+            this.dispatchEvent('countChanged');
+        });
+    },
+    fetchOne: function(params, callback) {
+        let data = {
+            ...this.request.get(),
+            ...params
+        };
+        data.f = this.basePath + '.get';
+        $03dfb5b808851c4b$export$2e2bcd8739ae039.fetch(data).then((r)=>{
+            callback(r);
+        });
+    },
+    fetchDelete: function(params, callback) {
+        let data = {
+            ...this.request.get(),
+            ...params
+        };
+        data.f = this.basePath + '.delete';
+        $03dfb5b808851c4b$export$2e2bcd8739ae039.fetch(data).then((r)=>{
+            callback(r);
+        });
+    },
+    fetchData: function(params) {
+        let data = {
+            ...this.request.get(),
+            ...params
+        };
+        if (data.f[0] == '.') data.f = this.basePath + data.f;
+        return $03dfb5b808851c4b$export$2e2bcd8739ae039.fetch(data);
+    },
+    makeUrl: function(params) {
+        let data = {
+            ...this.request.get(),
+            ...params
+        };
+        if (data.f[0] == '.') data.f = this.basePath + data.f;
+        return $03dfb5b808851c4b$export$2e2bcd8739ae039.makeUrl(data);
+    }
+});
+
+
+
+
+var /*
+**	Provides an interface to connect with a listing API function.
+*/ $3f534db4f9a2dc0d$export$2e2bcd8739ae039 = $j3ZoB$ModelList.extend({
+    className: 'DataList',
+    debounceDelay: 250,
+    request: null,
+    eid: null,
+    /*
+	**	Constructs the data list with the specified optional `config` parameters, any of the properties of this object can be specified
+	**	in the config. The given `f` parameter is passed directly as a request parameter to the API.
+	*/ __ctor: function(f, config = null) {
+        this._super.ModelList.__ctor();
+        if (config !== null) Object.assign(this, config);
+        if (!this.request) this.request = {
+        };
+        this.request.f = f;
+        this.request = new $j3ZoB$Model(this.request);
+        this.eid = Math.random().toString().substr(2);
+        this.dataList = this;
+        this.request.addEventListener(this.eid + ':propertyChanged', this.forwardRequestEvent, this);
+    },
+    forwardRequestEvent: function(evt, args) {
+        this.prepareEvent('request' + evt.name[0].toUpperCase() + evt.name.substr(1), args).setSource(evt.source).resume();
+    },
+    /*
+	**	Executes a request to retrieve the data for the list (uses debounce to prevent too-quick refreshes).
+	*/ refresh: function(callback = null, _callback = null) {
+        if (this._timeout) {
+            clearTimeout(this._timeout);
+            this._timeout = null;
+        }
+        if (callback === true) {
+            this.dispatchEvent('listLoading');
+            $03dfb5b808851c4b$export$2e2bcd8739ae039.fetch(this.request.get()).then((r)=>{
+                this.setData(r.response == 200 ? r.data : null);
+                this.dispatchEvent('listLoaded');
+                this.dispatchEvent('listChanged');
+                if (_callback !== null) _callback();
+            });
+            return;
+        }
+        const fn = ()=>{
+            this.refresh(true, callback);
+        };
+        this._timeout = setTimeout(fn, this.debounceDelay);
+    }
+});
+
+
+/*
+**	riza/easing
+**
+**	Copyright (c) 2016-2021, RedStar Technologies, All rights reserved.
+**	https://www.rsthn.com/
+**
+**	THIS LIBRARY IS PROVIDED BY REDSTAR TECHNOLOGIES "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+**	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+**	PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL REDSTAR TECHNOLOGIES BE LIABLE FOR ANY
+**	DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+**	NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+**	OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+**	STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+**	USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/ /**
+**	Collection of useful easing functions (imported from Cherry source code).
+*/ const $b01cf61b5fd2eff8$var$Easing = {
+    /**
+	**	Interpolates numeric values between two objects (`src` and `dst`) using the specified `duration` (in seconds) and `easing` function. Note that all four parameters
+	**	`src`, `dst`, `duration` and `easing` must be objects having the same number of values.
+	*/ interpolate: function(src, dst, duration, easing, callback /* function(data, isFinished) */ ) {
+        let time = {
+        };
+        let data = {
+        };
+        let count = 0;
+        for(let x in src){
+            time[x] = 0;
+            data[x] = src[x];
+            count++;
+        }
+        let lastTime = Date.now() / 1000;
+        let dt = 0;
+        let interpolator = function() {
+            let curTime = Date.now() / 1000;
+            dt = curTime - lastTime;
+            lastTime = curTime;
+            for(let x in time){
+                if (time[x] == duration[x]) continue;
+                time[x] += dt;
+                if (time[x] >= duration[x]) {
+                    time[x] = duration[x];
+                    count--;
+                }
+                let t = easing[x](time[x] / duration[x]);
+                data[x] = (1 - t) * src[x] + t * dst[x];
+            }
+            callback(data, count == 0);
+            if (count != 0) requestAnimationFrame(interpolator);
+        };
+        interpolator();
+    },
+    /* ******************************************** */ Linear: {
+        IN: function(t) {
+            return t;
+        },
+        OUT: function(t) {
+            return t;
+        },
+        IN_OUT: function(t) {
+            return t;
+        }
+    },
+    /* ******************************************** */ Back: {
+        k: 1.70158,
+        IN: function(t, k) {
+            if (k === undefined) k = $b01cf61b5fd2eff8$var$Easing.Back.k;
+            return t * t * ((k + 1) * t - k);
+        },
+        OUT: function(t, k) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Back.IN(1 - t, k);
+        },
+        IN_OUT: function(t, k) {
+            if (t < 0.5) return $b01cf61b5fd2eff8$var$Easing.Back.IN(t * 2, k) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Back.OUT((t - 0.5) * 2, k) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Bounce: {
+        getConst: function(t) {
+            if (t < 1 / 2.75) return 7.5625 * t * t;
+            else if (t < 2 / 2.75) return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
+            else if (t < 2.5 / 2.75) return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
+            return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
+        },
+        IN: function(t) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Bounce.getConst(1 - t);
+        },
+        OUT: function(t) {
+            return $b01cf61b5fd2eff8$var$Easing.Bounce.getConst(t);
+        },
+        IN_OUT: function(t) {
+            if (t < 0.5) return (1 - $b01cf61b5fd2eff8$var$Easing.Bounce.getConst(1 - 2 * t)) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Bounce.getConst((t - 0.5) * 2) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Circ: {
+        IN: function(t) {
+            return 1 - Math.sqrt(1 - t * t);
+        },
+        OUT: function(t) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Circ.IN(1 - t);
+        },
+        IN_OUT: function(t) {
+            if (t < 0.5) return $b01cf61b5fd2eff8$var$Easing.Circ.IN(t * 2) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Circ.OUT((t - 0.5) * 2) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Cubic: {
+        IN: function(t) {
+            return t * t * t;
+        },
+        OUT: function(t) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Cubic.IN(1 - t);
+        },
+        IN_OUT: function(t) {
+            if (t < 0.5) return $b01cf61b5fd2eff8$var$Easing.Cubic.IN(t * 2) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Cubic.OUT((t - 0.5) * 2) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Expo: {
+        IN: function(t) {
+            return Math.pow(2, 12 * (t - 1));
+        },
+        OUT: function(t) {
+            return -Math.pow(2, -12 * t) + 1;
+        },
+        IN_OUT: function(t) {
+            if ((t *= 2) < 1) return Math.pow(2, 12 * (t - 1)) / 2;
+            else return (-Math.pow(2, -12 * (t - 1)) + 2) / 2;
+        }
+    },
+    /* ******************************************** */ Power: {
+        p: 12,
+        IN: function(t) {
+            return Math.pow(t, $b01cf61b5fd2eff8$var$Easing.Power.p);
+        },
+        OUT: function(t) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Power.IN(1 - t);
+        },
+        IN_OUT: function(t) {
+            if (t < 0.5) return $b01cf61b5fd2eff8$var$Easing.Power.IN(t * 2) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Power.OUT((t - 0.5) * 2) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Quad: {
+        IN: function(t) {
+            return t * t;
+        },
+        OUT: function(t) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Quad.IN(1 - t);
+        },
+        IN_OUT: function(t) {
+            if (t < 0.5) return $b01cf61b5fd2eff8$var$Easing.Quad.IN(t * 2) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Quad.OUT((t - 0.5) * 2) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Quartic: {
+        IN: function(t) {
+            return t * t * t * t;
+        },
+        OUT: function(t) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Quartic.IN(1 - t);
+        },
+        IN_OUT: function(t) {
+            if (t < 0.5) return $b01cf61b5fd2eff8$var$Easing.Quartic.IN(t * 2) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Quartic.OUT((t - 0.5) * 2) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Quintic: {
+        IN: function(t) {
+            return t * t * t * t * t;
+        },
+        OUT: function(t) {
+            return 1 - $b01cf61b5fd2eff8$var$Easing.Quintic.IN(1 - t);
+        },
+        IN_OUT: function(t) {
+            if (t < 0.5) return $b01cf61b5fd2eff8$var$Easing.Quintic.IN(t * 2) / 2;
+            else return $b01cf61b5fd2eff8$var$Easing.Quintic.OUT((t - 0.5) * 2) / 2 + 0.5;
+        }
+    },
+    /* ******************************************** */ Sine: {
+        IN: function(t) {
+            return 1 - Math.sin(1.5708 * (1 - t));
+        },
+        OUT: function(t) {
+            return Math.sin(1.5708 * t);
+        },
+        IN_OUT: function(t) {
+            return (Math.cos(3.1416 * t) - 1) / -2;
+        }
+    },
+    /* ******************************************** */ Step: {
+        IN: function(t) {
+            return t != 1 ? 0 : 1;
+        },
+        OUT: function(t) {
+            return t != 1 ? 0 : 1;
+        },
+        IN_OUT: function(t) {
+            return t != 1 ? 0 : 1;
+        }
+    }
+};
+var $b01cf61b5fd2eff8$export$2e2bcd8739ae039 = $b01cf61b5fd2eff8$var$Easing;
+
+
+
+/**
+**	Class to animate properties using rules (imported from Cherry source code).
+*/ const $3807f10d3d8a70da$var$Anim = $j3ZoB$Class.extend({
+    list: null,
+    initialData: null,
+    data: null,
+    stack: null,
+    block: null,
+    timeScale: 1,
+    time: 0,
+    blockTime: 0,
+    index: 0,
+    paused: false,
+    finished: false,
+    onFinishedCallback: null,
+    onUpdatedCallback: null,
+    __ctor: function() {
+        this.list = [];
+        this.initialData = {
+        };
+        this.data = {
+        };
+        this.stack = [];
+        this.block = this.list;
+        this.reset();
+    },
+    __dtor: function() {
+    },
+    clone: function() {
+        let a = new $3807f10d3d8a70da$var$Anim();
+        a.list = this.list;
+        a.initialData = this.initialData;
+        return a.reset();
+    },
+    onFinished: function(callback) {
+        this.onFinishedCallback = callback;
+        return this;
+    },
+    onUpdated: function(callback) {
+        this.onUpdatedCallback = callback;
+        return this;
+    },
+    // Resets the animation to its initial state.
+    reset: function() {
+        this.stack.length = 0;
+        this.blockTime = 0;
+        this.time = 0;
+        this.index = 0;
+        this.block = this.list;
+        this.paused = true;
+        this.finished = false;
+        this.handle = null;
+        for(let i in this.initialData)this.data[i] = this.initialData[i];
+        return this;
+    },
+    // Sets the initial data.
+    initial: function(data) {
+        this.initialData = data;
+        return this.reset();
+    },
+    // Sets the time scale (animation speed).
+    speed: function(value) {
+        this.timeScale = value > 0 ? value : 1;
+        return this;
+    },
+    // Sets the output data object.
+    setOutput: function(data) {
+        this.data = data;
+        return this;
+    },
+    // Pauses the animation.
+    pause: function() {
+        if (this.paused) return;
+        clearInterval(this.handle);
+        this.paused = true;
+    },
+    // Resumes the animation.
+    resume: function() {
+        if (!this.paused) return;
+        let lastTime = Date.now() / 1000;
+        this.handle = setInterval(()=>{
+            let curTime = Date.now() / 1000;
+            let dt = curTime - lastTime;
+            lastTime = curTime;
+            this.update(dt);
+            if (this.onUpdatedCallback) this.onUpdatedCallback(this.data, this);
+        }, 16);
+        if (this.onUpdatedCallback) this.onUpdatedCallback(this.data, this);
+        this.paused = false;
+    },
+    // Updates the animation by the specified delta time (seconds).
+    update: function(dt) {
+        if (this.paused) return false;
+        if (this.index >= this.block.length) return true;
+        let i = 0;
+        let _block;
+        let _index;
+        let _blockTime;
+        this.time += dt * this.timeScale;
+        while(this.index < this.block.length){
+            let cmd = this.block[this.index];
+            let duration;
+            switch(cmd.op){
+                case "parallel":
+                    if (cmd.started == false) {
+                        cmd.blocks.length = 0;
+                        cmd.started = true;
+                        for(i = 0; i < cmd.block.length; i++){
+                            cmd.blocks.push([
+                                cmd.block[i]
+                            ]);
+                            cmd.indices[i] = 0;
+                            cmd.blockTimes[i] = this.blockTime;
+                        }
+                    }
+                    _block = this.block;
+                    _index = this.index;
+                    _blockTime = this.blockTime;
+                    let n = 0;
+                    let blockTime = _blockTime;
+                    for(i = 0; i < cmd.blocks.length; i++){
+                        this.block = cmd.blocks[i];
+                        this.index = cmd.indices[i];
+                        this.blockTime = cmd.blockTimes[i];
+                        if (this.update(0) === true) n++;
+                        if (this.blockTime > blockTime) blockTime = this.blockTime;
+                        cmd.blockTimes[i] = this.blockTime;
+                        cmd.blocks[i] = this.block;
+                        cmd.indices[i] = this.index;
+                    }
+                    this.block = _block;
+                    this.index = _index;
+                    this.blockTime = _blockTime;
+                    if (cmd.fn) cmd.fn.call(this);
+                    if (n != cmd.blocks.length) return false;
+                    cmd.started = false;
+                    this.blockTime = blockTime;
+                    this.index++;
+                    break;
+                case "serial":
+                    if (cmd.started == false) {
+                        cmd._block = cmd.block;
+                        cmd._index = 0;
+                        cmd._blockTime = this.blockTime;
+                        cmd.started = true;
+                    }
+                    _block = this.block;
+                    _index = this.index;
+                    _blockTime = this.blockTime;
+                    this.block = cmd._block;
+                    this.index = cmd._index;
+                    this.blockTime = cmd._blockTime;
+                    i = this.update(0);
+                    cmd._block = this.block;
+                    cmd._index = this.index;
+                    cmd._blockTime = this.blockTime;
+                    this.block = _block;
+                    this.index = _index;
+                    this.blockTime = _blockTime;
+                    if (cmd.fn) cmd.fn.call(this);
+                    if (i !== true) return false;
+                    cmd.started = false;
+                    this.blockTime = cmd._blockTime;
+                    this.index++;
+                    break;
+                case "repeat":
+                    if (cmd.started == false) {
+                        cmd._block = cmd.block;
+                        cmd._index = 0;
+                        cmd._blockTime = this.blockTime;
+                        cmd._count = cmd.count;
+                        cmd.started = true;
+                    }
+                    _block = this.block;
+                    _index = this.index;
+                    _blockTime = this.blockTime;
+                    this.block = cmd._block;
+                    this.index = cmd._index;
+                    this.blockTime = cmd._blockTime;
+                    i = this.update(0);
+                    cmd._block = this.block;
+                    cmd._index = this.index;
+                    cmd._blockTime = this.blockTime;
+                    this.block = _block;
+                    this.index = _index;
+                    this.blockTime = _blockTime;
+                    if (cmd.fn) cmd.fn.call(this);
+                    if (i !== true) return false;
+                    if (cmd._count <= 1) {
+                        cmd.started = false;
+                        this.blockTime = cmd._blockTime;
+                        this.index++;
+                        return false;
+                    } else {
+                        cmd._index = 0;
+                        cmd._count--;
+                        return false;
+                    }
+                    break;
+                case "set":
+                    this.data[cmd.field] = cmd.value;
+                    this.index++;
+                    break;
+                case "restart":
+                    this.index = 0;
+                    break;
+                case "wait":
+                    duration = $j3ZoB$Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+                    if (this.time < this.blockTime + duration) return false;
+                    this.blockTime += duration;
+                    this.index++;
+                    break;
+                case "range":
+                    if (cmd.started == false) {
+                        if (cmd.startValue === null) cmd._startValue = this.data[cmd.field];
+                        else cmd._startValue = cmd.startValue;
+                        cmd._endValue = cmd.endValue;
+                        cmd.started = true;
+                    }
+                    duration = $j3ZoB$Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+                    if (this.time < this.blockTime + duration) dt = (this.time - this.blockTime) / duration;
+                    else dt = 1;
+                    if (cmd.easing && dt != 1) this.data[cmd.field] = cmd.easing(dt) * (cmd._endValue - cmd._startValue) + cmd._startValue;
+                    else this.data[cmd.field] = dt * (cmd._endValue - cmd._startValue) + cmd._startValue;
+                    if (dt != 1) return false;
+                    cmd.started = false;
+                    this.blockTime += duration;
+                    this.index++;
+                    break;
+                case "rand":
+                    if (cmd.started == false) {
+                        cmd.started = true;
+                        cmd.last = null;
+                    }
+                    duration = $j3ZoB$Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+                    if (this.time < this.blockTime + duration) dt = (this.time - this.blockTime) / duration;
+                    else dt = 1;
+                    if (cmd.easing && dt != 1) cmd.cur = ~~(cmd.easing(dt) * cmd.count);
+                    else cmd.cur = ~~(dt * cmd.count);
+                    if (cmd.cur != cmd.last) {
+                        while(true){
+                            i = ~~(Math.random() * (cmd.endValue - cmd.startValue + 1)) + cmd.startValue;
+                            if (i != this.data[cmd.field]) break;
+                        }
+                        this.data[cmd.field] = i;
+                        cmd.last = cmd.cur;
+                    }
+                    if (dt != 1) return false;
+                    cmd.started = false;
+                    this.blockTime += duration;
+                    this.index++;
+                    break;
+                case "randt":
+                    duration = $j3ZoB$Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+                    if (this.time < this.blockTime + duration) dt = (this.time - this.blockTime) / duration;
+                    else dt = 1;
+                    if (cmd.easing && dt != 1) i = cmd.easing(dt) * (cmd.count - 1);
+                    else i = dt * (cmd.count - 1);
+                    this.data[cmd.field] = cmd.table[~~((i + cmd.count) % cmd.count)];
+                    if (dt != 1) return false;
+                    this.blockTime += duration;
+                    this.index++;
+                    break;
+                case "play":
+                    cmd.snd.play();
+                    this.index++;
+                    break;
+                case "exec":
+                    cmd.fn.call(this, this);
+                    this.index++;
+                    break;
+            }
+        }
+        if (this.block == this.list) {
+            if (!this.finished && this.onFinishedCallback != null) this.onFinishedCallback();
+            this.pause();
+            this.finished = true;
+        }
+        return true;
+    },
+    // Runs the subsequent commands in parallel. Should end the parallel block by calling end().
+    parallel: function() {
+        let block = [];
+        this.block.push({
+            op: "parallel",
+            started: false,
+            block: block,
+            blocks: [],
+            indices: [],
+            blockTimes: []
+        });
+        this.stack.push(this.block);
+        this.block = block;
+        return this;
+    },
+    // Runs the subsequent commands in series. Should end the serial block by calling end().
+    serial: function() {
+        let block = [];
+        this.block.push({
+            op: "serial",
+            started: false,
+            block: block
+        });
+        this.stack.push(this.block);
+        this.block = block;
+        return this;
+    },
+    // Repeats a block the specified number of times.
+    repeat: function(count) {
+        let block = [];
+        this.block.push({
+            op: "repeat",
+            started: false,
+            block: block,
+            count: count
+        });
+        this.stack.push(this.block);
+        this.block = block;
+        return this;
+    },
+    // Sets the callback of the current block.
+    callback: function(fn) {
+        let block = this.stack[this.stack.length - 1];
+        block[block.length - 1].fn = fn;
+        return this;
+    },
+    // Ends a parallel(), serial() or repeat() block.
+    end: function() {
+        this.block = this.stack.pop();
+        return this;
+    },
+    // Sets the value of a variable.
+    set: function(field, value) {
+        this.block.push({
+            op: "set",
+            field: field,
+            value: value
+        });
+        return this;
+    },
+    // Restarts the current block.
+    restart: function(duration) {
+        this.block.push({
+            op: "restart"
+        });
+        return this;
+    },
+    // Waits for the specified duration.
+    wait: function(duration) {
+        this.block.push({
+            op: "wait",
+            duration: duration
+        });
+        return this;
+    },
+    // Sets the range of a variable.
+    range: function(field, duration, startValue, endValue, easing) {
+        this.block.push({
+            op: "range",
+            started: false,
+            field: field,
+            duration: duration,
+            startValue: startValue,
+            endValue: endValue,
+            easing: easing ? easing : null
+        });
+        return this;
+    },
+    // Generates a certain amount of random numbers in the given range (inclusive).
+    rand: function(field, duration, count, startValue, endValue, easing) {
+        this.block.push({
+            op: "rand",
+            started: false,
+            field: field,
+            duration: duration,
+            count: count,
+            startValue: startValue,
+            endValue: endValue,
+            easing: easing ? easing : null
+        });
+        return this;
+    },
+    // Generates a certain amount of random numbers in the given range (inclusive). This uses a static random table to determine the next values.
+    randt: function(field, duration, count, startValue, endValue, easing) {
+        let table = [];
+        for(let i = 0; i < count; i++)table.push(i % (endValue - startValue + 1) + startValue);
+        for(let i1 = count >> 2; i1 > 0; i1--){
+            let a = ~~(Math.random() * count);
+            let b = ~~(Math.random() * count);
+            let c = table[b];
+            table[b] = table[a];
+            table[a] = c;
+        }
+        this.block.push({
+            op: "randt",
+            field: field,
+            duration: duration,
+            count: count,
+            startValue: startValue,
+            endValue: endValue,
+            table: table,
+            easing: easing ? easing : null
+        });
+        return this;
+    },
+    // Plays a sound.
+    play: function(snd) {
+        this.block.push({
+            op: "play",
+            snd: snd
+        });
+        return this;
+    },
+    // Executes a function.
+    exec: function(fn) {
+        this.block.push({
+            op: "exec",
+            fn: fn
+        });
+        return this;
+    }
+});
+var $3807f10d3d8a70da$export$2e2bcd8739ae039 = $3807f10d3d8a70da$var$Anim;
+
+
+
+
+var $a23af1cab366283c$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-tabs', {
+    /*
+	**	Container element for tab content.
+	*/ container: null,
+    /**
+	**	Element events.
+	*/ 'event click [data-name]': function(evt) {
+        evt.continuePropagation = true;
+        if (this.dataset.baseRoute) {
+            location = "#" + $cdbdea0eedb44c97$export$2e2bcd8739ae039.realLocation(this.dataset.baseRoute.replace('@', evt.source.dataset.name));
+            return;
+        }
+        this.selectTab(evt.source.dataset.name);
+    },
+    /**
+	**	Initializes the Tabs element.
+	*/ init: function() {
+        this._routeHandler = (evt, args)=>{
+            if ($cdbdea0eedb44c97$export$2e2bcd8739ae039.location != '') this.querySelectorAll("[href]").forEach((link)=>{
+                if (!link.href) return;
+                if ($cdbdea0eedb44c97$export$2e2bcd8739ae039.location.startsWith(link.href.substr(link.href.indexOf('#') + 1))) link.classList.add('active');
+                else link.classList.remove('active');
+            });
+            if (!args.route.changed) return;
+            this.showTab(args.tabName);
+        };
+    },
+    /**
+	**	Executed when the children of the element are ready.
+	*/ ready: function() {
+        if ("container" in this.dataset) {
+            if (this.dataset.container == ':previousElement') this.container = this.previousElementSibling;
+            else if (this.dataset.container == ':nextElement') this.container = this.nextElementSibling;
+            else if (this.dataset.container == ':none') this.container = null;
+            else this.container = document.querySelector(this.dataset.container);
+        } else this.container = this.nextElementSibling;
+        this._hideTabsExcept(this.dataset.initial);
+    },
+    /**
+	**	Adds a handler to Router if the data-base-route attribute was set.
+	*/ onConnected: function() {
+        if (this.dataset.baseRoute) $cdbdea0eedb44c97$export$2e2bcd8739ae039.addRoute(this.dataset.baseRoute.replace('@', ':tabName'), this._routeHandler);
+    },
+    /**
+	**	Removes a handler previously added to Router if the data-base-route attribute was set.
+	*/ onDisconnected: function() {
+        if (this.dataset.baseRoute) $cdbdea0eedb44c97$export$2e2bcd8739ae039.removeRoute(this.dataset.baseRoute.replace('@', ':tabName'), this._routeHandler);
+    },
+    /**
+	**	Hides all tabs except the one with the specified exceptName, if none specified then all tabs will be hidden (adds `.x-hidden` CSS class),
+	**	additionally the respective link item in the tab definition will have class `.active`.
+	*/ _hideTabsExcept: function(exceptName) {
+        if (!exceptName) exceptName = '';
+        if (this.container != null) this.container.querySelectorAll(':scope > [data-name]').forEach((i)=>{
+            if (i.dataset.name == exceptName) {
+                i.classList.remove('x-hidden');
+                this.dispatch('tabShown', {
+                    name: i.dataset.name,
+                    el: i
+                });
+            } else {
+                i.classList.add('x-hidden');
+                this.dispatch('tabHidden', {
+                    name: i.dataset.name,
+                    el: i
+                });
+            }
+        });
+        this.querySelectorAll("[data-name]").forEach((link)=>{
+            if (link.dataset.name == exceptName) link.classList.add('active');
+            else link.classList.remove('active');
+        });
+        this.dispatch('tabChanged', {
+            name: exceptName
+        });
+    },
+    /**
+	**	Shows the tab with the specified name, ignores `data-base-route` and current route as well.
+	*/ showTab: function(name) {
+        return this._hideTabsExcept(name);
+    },
+    /**
+	**	Shows a tab given its name. The route will be changed automatically if `data-base-route` is enabled.
+	*/ selectTab: function(name) {
+        if (this.dataset.baseRoute) {
+            const hash = "#" + $cdbdea0eedb44c97$export$2e2bcd8739ae039.realLocation(this.dataset.baseRoute.replace('@', name));
+            if (location.hash != hash) {
+                location = hash;
+                return;
+            }
+        }
+        this.showTab(name);
+    }
+});
+
+
+
+
+
+var $653d148303270476$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-form', {
+    /**
+	**	Element events.
+	*/ events: {
+        'change [data-field]': '_fieldChanged',
+        'click input[type=reset]': 'reset',
+        'click .reset': 'reset',
+        'click input[type=submit]': 'submit',
+        'click button[type=submit]': 'submit',
+        'click .submit': 'submit',
+        'submit form': 'submit'
+    },
+    /*
+	**	Initial form model.
+	*/ model: {
+    },
+    /**
+	**	Executed when the children of the element are ready.
+	*/ ready: function() {
+        let formElement = document.createElement('form');
+        formElement.append(...this.childNodes);
+        this.append(formElement);
+        let def = {
+        };
+        let names = this.model.get();
+        this.querySelectorAll('[data-field]').forEach((i)=>{
+            i.name = i.dataset.field;
+            names[i.name] = i.type;
+            let val = i.dataset.default;
+            if (val == undefined) switch(i.type){
+                case 'radio':
+                    if (!i.checked) return;
+                    val = i.value;
+                    break;
+                case 'checkbox':
+                    val = i.checked ? '1' : '0';
+                    break;
+                case 'field':
+                    val = i.getValue();
+                    break;
+                case 'file':
+                    val = '';
+                    break;
+                default:
+                    val = '';
+                    break;
+            }
+            def[i.dataset.field] = val;
+        });
+        for(let name in names)if (name in def) names[name] = def[name];
+        else names[name] = '';
+        def = names;
+        this.model.defaults = def;
+        this.model.reset();
+        this.clearMarkers();
+    },
+    /*
+	**	Transforms an string returned by the server to a local representation.
+	*/ filterString: function(str, r) {
+        if (!str || !('messages' in $parcel$global)) return str;
+        if (str.startsWith('@messages.')) {
+            if (str.substr(10) in $parcel$global.messages) str = $j3ZoB$Template.eval($parcel$global.messages[str.substr(10)], r);
+        }
+        return str;
+    },
+    _change: function(elem) {
+        if ('createEvent' in document) {
+            let evt = document.createEvent('HTMLEvents');
+            evt.initEvent('change', false, true);
+            elem.dispatchEvent(evt);
+        } else elem.fireEvent('onchange');
+    },
+    _setField: function(f, value, silent) {
+        if (!f) return;
+        for (f of this.querySelectorAll('[data-field="' + f + '"]'))switch(f.type || f.tagName.toLowerCase()){
+            case 'select':
+                f.val = f.dataset.value = f.multiple ? value ? value.split(',') : value : value;
+                f.value = f.val = f.dataset.value;
+                if (silent !== true) this._change(f);
+                break;
+            case 'checkbox':
+                f.checked = parseInt(value) ? true : false;
+                break;
+            case 'radio':
+                f.checked = value == f.value;
+                break;
+            case 'field':
+                f.val = f.dataset.value = value;
+                f.setValue(value);
+                break;
+            case 'file':
+                if (value instanceof File || value instanceof Blob) {
+                    f.val = value;
+                    f.dataset.value = value;
+                } else if (value instanceof FileList) {
+                    f.val = value;
+                    f.dataset.value = value;
+                } else {
+                    f.val = f.dataset.value = '';
+                    f.value = '';
+                }
+                break;
+            default:
+                f.val = f.dataset.value = value;
+                f.value = value;
+                if (silent !== true) this._change(f);
+                break;
+        }
+    },
+    _getField: function(f, _value = null, fromFileFields = false) {
+        if (!f) return null;
+        if (typeof f != 'string') {
+            let value = f.value == null ? f.val : f.value;
+            if (value === null) value = _value;
+            switch(f.type || f.tagName.toLowerCase()){
+                case 'select':
+                    _value = f.multiple ? value ? value.join(',') : value : value;
+                    break;
+                case 'checkbox':
+                    _value = f.checked ? '1' : '0';
+                    break;
+                case 'radio':
+                    if (f.checked) _value = f.value;
+                    break;
+                case 'field':
+                    _value = f.getValue();
+                    break;
+                case 'file':
+                    _value = fromFileFields ? f.files && f.files.length ? f.multiple ? f.files : f.files[0] : null : f.val;
+                    break;
+                default:
+                    _value = value;
+                    break;
+            }
+            return _value === null ? '' : _value;
+        }
+        _value = null;
+        for (f of this.querySelectorAll('[data-field="' + f + '"]'))_value = this._getField(f, _value);
+        return _value === null ? '' : _value;
+    },
+    getField: function(name) {
+        return this._getField(name);
+    },
+    clearMarkers: function() {
+        this.classList.remove('busy');
+        this.querySelectorAll('.message').forEach((i)=>i.classList.add('x-hidden')
+        );
+        this.querySelectorAll('span.field-error').forEach((i)=>i.remove()
+        );
+        this.querySelectorAll('.field-error').forEach((i)=>{
+            i.classList.remove('field-error');
+            i.classList.remove('is-invalid');
+        });
+        this.querySelectorAll('.field-passed').forEach((i)=>i.classList.remove('field-passed')
+        );
+    },
+    _fieldChanged: function(evt) {
+        let f = evt.source;
+        if (f.type == 'file') this.model.set(f.dataset.field, this._getField(f, null, true), true);
+        else this.model.set(f.dataset.field, this._getField(f));
+        evt.continuePropagation = true;
+    },
+    onModelPropertyChanged: function(evt, args) {
+        this._setField(args.name, args.value);
+    },
+    _onSuccess: function(r) {
+        this.classList.remove('busy');
+        let tmp;
+        this.dispatch('formSuccess', r);
+        if (r.message && (tmp = this.querySelector('.message.success')) != null) {
+            tmp.innerHTML = this.filterString(r.message, r).replace(/\n/g, '<br/>');
+            tmp.classList.remove('x-hidden');
+            tmp.onanimationend = ()=>tmp.classList.add('x-hidden')
+            ;
+        }
+    },
+    _onFailure: function(r) {
+        this.classList.remove('busy');
+        let tmp;
+        this.dispatch('formError', r);
+        if (r.fields) {
+            for(let i in r.fields){
+                let f = this.querySelector('[data-field-container="' + i + '"]');
+                if (!f) {
+                    f = this.querySelector('[data-field="' + i + '"]');
+                    if (!f) continue;
+                }
+                let tmp1 = document.createElement('span');
+                tmp1.classList.add('field-error');
+                tmp1.innerHTML = this.filterString(r.fields[i], r).replace(/\n/g, '<br/>');
+                f.classList.add('field-error');
+                f.classList.add('is-invalid');
+                if (this.dataset.errorsAt == 'bottom') f.parentElement.append(tmp1);
+                else if (this.dataset.errorsAt == 'top') f.parentElement.prepend(tmp1);
+                else f.parentElement.insertBefore(tmp1, f.nextElementSibling);
+                setTimeout(function(tmp) {
+                    return function() {
+                        tmp.classList.add('active');
+                    };
+                }(tmp1), 25);
+            }
+            if (r.error && (tmp = this.querySelector('.message.error')) != null) {
+                tmp.innerHTML = this.filterString(r.error, r).replace(/\n/g, '<br/>');
+                tmp.classList.remove('x-hidden');
+                tmp.onanimationend = ()=>tmp.classList.add('x-hidden')
+                ;
+            }
+        } else if ((tmp = this.querySelector('.message.error')) != null) {
+            tmp.innerHTML = this.filterString(r.error, r).replace(/\n/g, '<br/>') || 'Error: ' + r.response;
+            tmp.classList.remove('x-hidden');
+            tmp.onanimationend = ()=>tmp.classList.add('x-hidden')
+            ;
+        }
+    },
+    reset: function(nsilent) {
+        this.model.reset(nsilent);
+        this.clearMarkers();
+        if (nsilent === false) for(var i in this.model.data)this._setField(i, this.model.data[i], true);
+        return false;
+    },
+    submit: function() {
+        if (this.classList.contains('busy')) return;
+        let data = {
+        };
+        if (this.dataset.strict == 'false') Object.assign(data, this.model.get());
+        let list = {
+        };
+        this.querySelectorAll('[data-field]').forEach((e)=>list[e.dataset.field] = true
+        );
+        Object.keys(list).forEach((f)=>data[f] = this._getField(f)
+        );
+        this.model.set(data);
+        let f1 = this.dataset.formAction || this.formAction;
+        if (!f1) return;
+        this.clearMarkers();
+        this.classList.add('busy');
+        if (typeof f1 != 'function') {
+            data.f = f1;
+            var _method;
+            $03dfb5b808851c4b$export$2e2bcd8739ae039.apiCall(data, (r)=>this[r.response == 200 ? '_onSuccess' : '_onFailure'](r)
+            , (r)=>this._onFailure({
+                    error: 'Unable to execute request.'
+                })
+            , (_method = this.dataset.method) !== null && _method !== void 0 ? _method : 'POST');
+        } else f1(data, (r)=>this[r.response == 200 ? '_onSuccess' : '_onFailure'](r)
+        );
+    }
+});
+
+
+
+
+var $eccb61e2eee7209a$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-panel', {
+    /**
+	**	Route object used by this element.
+	*/ route: null,
+    /**
+	**	Initializes the element.
+	*/ init: function() {
+        this.style.display = '';
+        // Executed then the panel route is activated.
+        this._onActivate = (evt, args)=>{
+            if (!args.route.changed) return;
+            this.show(true);
+        };
+        // Executed then the panel route is deactivated.
+        this._onDeactivate = (evt, args)=>{
+            this.hide();
+        };
+        this.hide();
+    },
+    /**
+	**	Adds a handler to Router if the data-route attribute was set.
+	*/ onConnected: function() {
+        if (this.dataset.route) {
+            this.route = $cdbdea0eedb44c97$export$2e2bcd8739ae039.addRoute(this.dataset.route, this._onActivate, this._onDeactivate);
+            this.classList.remove('active');
+        } else this.classList.add('active');
+    },
+    /**
+	**	Removes a handler previously added to Router if the data-route attribute was set.
+	*/ onDisconnected: function() {
+        if (this.dataset.route) $cdbdea0eedb44c97$export$2e2bcd8739ae039.removeRoute(this.dataset.route, this._onActivate, this._onDeactivate);
+    },
+    /**
+	**	Hides the panel by removing the `active` class from the element. Fires `panelHidden` event.
+	*/ hide: function() {
+        this.classList.remove('active');
+        this.dispatch('panelHidden', this.route ? this.route.args : {
+        });
+    },
+    /**
+	**	Shows the panel visible by adding `active` class to the element. If `silent` is true and `data-route` enabled, the current route
+	**	will not be updated. Fires `panelShown` event.
+	*/ show: function(silent = false) {
+        if (this.dataset.route && !silent) {
+            let hash = "#" + this.dataset.route;
+            if (window.location.hash.substr(0, hash.length) != hash) {
+                window.location = hash;
+                return;
+            }
+        }
+        this.classList.add('active');
+        this.dispatch('panelShown', this.route ? this.route.args : {
+        });
+    }
+});
+
+
+
+
+var /*
+**	Connects to a ModelList and renders its contents using a template. When using "dynamic" template, the contents can be other custom elements, and
+**	the model of each item can be accessed by using data-model=":list-item", which will cause the item model to be added to the element.
+**
+**	Additionally root attribute data-wrap can be set to 'true' to wrap the template contents inside a div with a data-iid representing the ID of the
+**	item, this will cause any changes to items to affect only the specific item in question.
+*/ $714a04be6cb9a277$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-list', {
+    list: null,
+    container: null,
+    template: null,
+    isEmpty: false,
+    isDynamicTemplate: false,
+    /**
+	**	Executed when the children of the element are ready.
+	*/ ready: function() {
+        this.container = this.querySelector(this.dataset.container || '.x-data');
+        if (!this.container) {
+            this.container = document.createElement('div');
+            this.container.className = 'x-data';
+            this.appendChild(this.container);
+        }
+        let tmp = this.template_elem = this.querySelector('template');
+        if (tmp) {
+            if (tmp.dataset.mode != 'dynamic') this.template = $j3ZoB$Template.compile(tmp.innerHTML);
+            else {
+                this.template = ()=>tmp.innerHTML
+                ;
+                this.isDynamicTemplate = true;
+            }
+            tmp.remove();
+        } else this.template = ()=>''
+        ;
+        this.container.textContent = ' ';
+        this.setEmpty(null);
+        this.setLoading(null);
+    },
+    /**
+	**	Executed when the children of the element are ready.
+	*/ rready: function() {
+        let list = this.getFieldByPath(this.dataset.list);
+        if (!list) {
+            console.error('List not found: ' + this.dataset.list);
+            return;
+        }
+        this.setList(list);
+    },
+    /*
+	**	Indicates if the list is empty. Elements having x-empty, x-not-empty and x-empty-null will be updated.
+	*/ setEmpty: function(value) {
+        if (this.isEmpty === value) return;
+        if (value === true) {
+            this.querySelectorAll('.x-empty').forEach((i)=>i.classList.remove('x-hidden')
+            );
+            this.querySelectorAll('.x-not-empty').forEach((i)=>i.classList.add('x-hidden')
+            );
+            this.querySelectorAll('.x-empty-null').forEach((i)=>i.classList.add('x-hidden')
+            );
+        } else if (value === false) {
+            this.querySelectorAll('.x-empty').forEach((i)=>i.classList.add('x-hidden')
+            );
+            this.querySelectorAll('.x-not-empty').forEach((i)=>i.classList.remove('x-hidden')
+            );
+            this.querySelectorAll('.x-empty-null').forEach((i)=>i.classList.add('x-hidden')
+            );
+        } else {
+            this.querySelectorAll('.x-empty').forEach((i)=>i.classList.add('x-hidden')
+            );
+            this.querySelectorAll('.x-not-empty').forEach((i)=>i.classList.add('x-hidden')
+            );
+            this.querySelectorAll('.x-empty-null').forEach((i)=>i.classList.remove('x-hidden')
+            );
+        }
+        this.isEmpty = value;
+    },
+    /*
+	**	Indicates if the list is loading. Elements having x-loading will be updated.
+	*/ setLoading: function(value) {
+        if (value === true) this.querySelectorAll('.x-loading').forEach((i)=>i.classList.remove('x-hidden')
+        );
+        else this.querySelectorAll('.x-loading').forEach((i)=>i.classList.add('x-hidden')
+        );
+    },
+    /**
+	**	Sets the list model-list of the element.
+	*/ setList: function(list) {
+        if (!list || !$j3ZoB$Rinn.isInstanceOf(list, $j3ZoB$ModelList) || this.list === list) return;
+        if (this.list != null) {
+            if (this.list.dataSource) this.list.dataSource.removeEventListener(this.eid + ':*');
+            if (this.list.dataList) this.list.dataList.removeEventListener(this.eid + ':*');
+            this.list.removeEventListener(this.eid + ':*');
+        }
+        this.list = list;
+        if (this.list.dataSource) {
+            this.list.dataSource.addEventListener(this.eid + ':listLoading', this.onLoading, this);
+            this.list.dataSource.addEventListener(this.eid + ':listLoaded', this.onLoaded, this);
+        }
+        if (this.list.dataList) {
+            this.list.dataList.addEventListener(this.eid + ':listLoading', this.onLoading, this);
+            this.list.dataList.addEventListener(this.eid + ':listLoaded', this.onLoaded, this);
+        }
+        this.list.addEventListener(this.eid + ':itemsCleared', this.onItemsCleared, this);
+        this.list.addEventListener(this.eid + ':itemsChanged', this.onItemsChanged, this);
+        this.list.addEventListener(this.eid + ':itemRemoved', this.onItemRemoved, this);
+        this.list.addEventListener(this.eid + ':itemChanged', this.onItemChanged, this);
+        this.list.addEventListener(this.eid + ':itemAdded', this.onItemAdded, this);
+    },
+    /*
+	**	Builds an item (inside a div) to be added to the container.
+	*/ buildItem: function(iid, data, asHtml = false) {
+        let html = this.template(data.get());
+        if (asHtml) return html;
+        let elem = document.createElement('div');
+        elem.dataset.iid = iid;
+        elem.innerHTML = html;
+        elem.querySelectorAll('[data-model=":list-item"]').forEach((i)=>{
+            i.model = data;
+            i.dataset.model = "this.model";
+        });
+        for (let attr of this.template_elem.attributes){
+            if (attr.nodeName.startsWith('data-_') || attr.nodeName == 'data-mode') continue;
+            elem.setAttribute(attr.nodeName, attr.nodeValue);
+        }
+        return elem;
+    },
+    /*
+	**	Executed when the list is loading.
+	*/ onLoading: function() {
+        this.setLoading(true);
+    },
+    /*
+	**	Executed when the list finished loading.
+	*/ onLoaded: function() {
+        this.setLoading(false);
+    },
+    /*
+	**	Executed when the list is cleared.
+	*/ onItemsCleared: function() {
+        this.container._timeout = setTimeout(()=>{
+            this.setEmpty(true);
+            this.container._timeout = null;
+            this.container.textContent = '';
+        }, 300);
+    },
+    /*
+	**	Executed when the items of the list changed.
+	*/ onItemsChanged: function() {
+        if (this.list.length() == 0) return;
+        if (this.container._timeout) clearTimeout(this.container._timeout);
+        this.container._timeout = null;
+        this.container.textContent = '';
+        let i = 0;
+        for (let data of this.list.getData())if (this.dataset.wrap != 'false') this.container.append(this.buildItem(this.list.itemId[i++], data));
+        else this.container.innerHTML += this.buildItem(this.list.itemId[i++], data, true);
+        this.setEmpty(i == 0);
+    },
+    /*
+	**	Executed when an item is removed from the list.
+	*/ onItemRemoved: function(evt, args) {
+        if (this.dataset.wrap == 'false') {
+            this.onItemsChanged();
+            return;
+        }
+        let elem = this.container.querySelector('[data-iid="' + args.id + '"]');
+        if (!elem) return;
+        elem.remove();
+        this.setEmpty(this.list.length() == 0);
+    },
+    /*
+	**	Executed when an item changes.
+	*/ onItemChanged: function(evt, args) {
+        if (this.isDynamicTemplate) return;
+        if (this.dataset.wrap == 'false') {
+            this.onItemsChanged();
+            return;
+        }
+        let elem = this.container.querySelector('[data-iid="' + args.id + '"]');
+        if (!elem) return;
+        elem.innerHTML = this.template(args.item);
+    },
+    /*
+	**	Executed when an item is added to the list.
+	*/ onItemAdded: function(evt, args) {
+        if (args.position == 'head') {
+            if (this.dataset.wrap != 'false') this.container.prepend(this.buildItem(args.id, args.item));
+            else this.container.innerHTML = this.buildItem(args.id, args.item, true) + this.container.innerHTML;
+        } else if (this.dataset.wrap != 'false') this.container.append(this.buildItem(args.id, args.item));
+        else this.container.innerHTML += this.buildItem(args.id, args.item, true);
+        this.setEmpty(false);
+    },
+    /**
+	 * 	Forces re-rendering of the element.
+	 */ refresh: function() {
+        this.onItemsChanged();
+    }
+});
+
+
+
+var $a88b97fa7f2abc94$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-item', {
+    /**
+	**	Initializes the element.
+	*/ init: function() {
+    },
+    /**
+	**	Executed when the children and root are ready.
+	*/ rready: function() {
+        let model = this.getFieldByPath(this.dataset.model);
+        if (!model) model = {
+        };
+        this.setModel(model);
+    }
+});
+
+
+
+
+
+var /*
+**	Connects to a data source to provide pagination features.
+*/ $e4e0c6c826f2c695$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-paginator', {
+    source: null,
+    template: null,
+    /**
+	**	Initializes the element.
+	*/ init: function() {
+        this.setModel({
+            offsetStart: 0,
+            offsetEnd: 0,
+            count: 0,
+            offset: 0,
+            currentPageSize: this.dataset.pageSize || 25,
+            pageSize: this.dataset.pageSize || 25
+        });
+        this.listen('propertyChanged.pageSize', (evt, args)=>{
+            if (this.model.get('currentPageSize') == args.value) return;
+            this.model.set('currentPageSize', args.value);
+            this.updateOffset('range');
+        });
+    },
+    /**
+	**	Executed when the children of the element are ready.
+	*/ rready: function() {
+        let source = this.getFieldByPath(this.dataset.source);
+        if (!source) {
+            console.error('data-source not found: ' + this.dataset.source);
+            return;
+        }
+        this.setSource(source);
+    },
+    /**
+	**	Sets the source model-list of the paginator.
+	*/ setSource: function(source) {
+        if (!source || !$j3ZoB$Rinn.isInstanceOf(source, $c92d48c08b86e527$export$2e2bcd8739ae039) || this.source === source) return;
+        if (this.source != null) {
+            this.source.removeEventListener(this.eid + ':*');
+            this.source.includeCount = false;
+        }
+        this.source = source;
+        this.source.includeCount = true;
+        this.updateOffset();
+        this.source.addEventListener(this.eid + ':requestPropertyChanged', this.onRequestPropertyChanged, this);
+        this.source.addEventListener(this.eid + ':countChanged', this.onCountChanged, this);
+        this.source.addEventListener(this.eid + ':listItemRemoved', this.onItemRemoved, this);
+        this.source.addEventListener(this.eid + ':listItemAdded', this.onItemAdded, this);
+        this.source.setNamespace(this.eid);
+        this.source.request.update(true);
+        this.source.setNamespace(null);
+    },
+    /*
+	**	Updates several offset related fields in the paginator model. Optionally refreshes the data source with the specified mode.
+	*/ updateOffset: function(mode = null) {
+        this.model.set('offsetStart', this.model.get('count') != 0 ? this.model.get('offset') + 1 : 0);
+        this.model.set('offsetEnd', Math.min(this.model.get('count'), this.model.get('offsetStart') + this.model.getInt('pageSize') - 1));
+        this.model.update('count');
+        let _count = this.source.request.get('count');
+        let _offset = this.source.request.get('offset');
+        this.source.request.set('count', this.model.getInt('pageSize'));
+        this.source.request.set('offset', this.model.get('offset'));
+        if (mode && (_count != this.source.request.get('count') || _offset != this.source.request.get('offset'))) this.source.refresh(mode);
+    },
+    /*
+	**	Event handler invoked when a property of the source request changes. The property is copied to the local model.
+	*/ onRequestPropertyChanged: function(evt, args) {
+        if (args.name == 'count' || args.name == 'offset') return;
+        this.model.set(args.name, args.value);
+    },
+    /*
+	**	Event handler invoked when a property of the model has changed. The property is copied to the data source request model.
+	*/ onModelPropertyChanged: function(evt, args) {
+        let ignored = [
+            'offsetStart',
+            'offsetEnd',
+            'count',
+            'offset',
+            'currentPageSize',
+            'pageSize'
+        ];
+        if (ignored.indexOf(args.name) != -1) return;
+        if (this.source.request.get(args.name) == args.value) return;
+        this.source.request.set(args.name, args.value);
+        this.source.refresh('filter');
+    },
+    /*
+	**	Executed when the remote count changes.
+	*/ onCountChanged: function(evt, args) {
+        this.model.set('count', evt.source.count, false);
+        this.updateOffset();
+    },
+    /*
+	**	Executed when an item is removed from the list.
+	*/ onItemRemoved: function(evt, args) {
+        this.model.set('count', this.model.getInt('count') - 1, false);
+        this.updateOffset();
+    },
+    /*
+	**	Executed when an item is added to the list.
+	*/ onItemAdded: function(evt, args) {
+        this.model.set('count', this.model.getInt('count') + 1, false);
+        this.updateOffset();
+    },
+    /*
+	**	Moves to the previous page.
+	*/ prevPage: function() {
+        if (this.model.get('offset') <= 0) return;
+        let offs = this.model.get('offset') - this.model.getInt('pageSize');
+        if (offs < 0) offs = 0;
+        this.model.set('offset', offs);
+        this.updateOffset('range');
+    },
+    /*
+	**	Moves to the next page.
+	*/ nextPage: function() {
+        let offs = this.model.get('offset') + this.model.getInt('pageSize');
+        if (offs >= this.model.get('count')) return;
+        this.model.set('offset', offs);
+        this.updateOffset('range');
+    },
+    /*
+	**	Moves to the first page.
+	*/ firstPage: function() {
+        this.model.set('offset', 0);
+        this.updateOffset('range');
+    },
+    /*
+	**	Moves to the last page.
+	*/ lastPage: function() {
+        let offs = this.model.get('count') - this.model.getInt('pageSize');
+        if (offs < 0) offs = 0;
+        this.model.set('offset', offs);
+        this.updateOffset('range');
+    },
+    /*
+	**	Refreshes the data source.
+	*/ refresh: function() {
+        this.source.refresh('full');
+    },
+    /*
+	**	Clears (set to empty) the specified fields from the data source's request parameters.
+	*/ clear: function(args) {
+        for(let i = 0; i < args.length; i++)this.model.set(args[i], '');
+    }
+});
+
+
+
+
+
+var /*
+**	Connects to a DataSource and renders its contents as a table.
+*/ $54901aecda702d75$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-table', {
+    source: null,
+    template: null,
+    container: null,
+    isEmpty: null,
+    /**
+	**	Initializes the element.
+	*/ init: function() {
+        this.setModel({
+        });
+    },
+    /**
+	**	Executed when the children of the element are ready.
+	*/ ready: function() {
+        this.container = this.querySelector(this.dataset.container || 'tbody.x-data');
+        if (!this.container) throw new Error('r-table requires a container');
+        if (this.container.dataset.mode != 'dynamic') this.template = $j3ZoB$Template.compile(this.container.innerHTML);
+        else this.template = ()=>this.container.innerHTML
+        ;
+        this.temporalBody = document.createElement('tbody');
+        this.container.textContent = ' ';
+        this.setEmpty(true);
+    },
+    /**
+	**	Executed when the children and root elements are ready.
+	*/ rready: function() {
+        let source = this.getFieldByPath(this.dataset.source);
+        if (!source) {
+            console.error('data-source not found: ' + this.dataset.source);
+            return;
+        }
+        this.setSource(source);
+    },
+    /*
+	**	Indicates if the table is empty. Elements having .x-not-empty will be hidden.
+	*/ setEmpty: function(value) {
+        if (this.isEmpty === value) return;
+        if (value) {
+            this.querySelectorAll('.x-empty').forEach((i)=>i.classList.remove('x-hidden')
+            );
+            this.querySelectorAll('.x-not-empty').forEach((i)=>i.classList.add('x-hidden')
+            );
+        } else {
+            this.querySelectorAll('.x-empty').forEach((i)=>i.classList.add('x-hidden')
+            );
+            this.querySelectorAll('.x-not-empty').forEach((i)=>i.classList.remove('x-hidden')
+            );
+        }
+        this.isEmpty = value;
+    },
+    /**
+	**	Sets the data source of the element.
+	*/ setSource: function(source) {
+        if (!source || !$j3ZoB$Rinn.isInstanceOf(source, $c92d48c08b86e527$export$2e2bcd8739ae039) || this.source === source) return;
+        if (this.source != null) this.source.removeEventListener(this.eid + ':*');
+        this.source = source;
+        this.source.addEventListener(this.eid + ':requestPropertyChanged', this.onRequestPropertyChanged, this);
+        this.source.addEventListener(this.eid + ':listItemsCleared', this.onItemsCleared, this);
+        this.source.addEventListener(this.eid + ':listItemsChanged', this.onItemsChanged, this);
+        this.source.addEventListener(this.eid + ':listItemRemoved', this.onItemRemoved, this);
+        this.source.addEventListener(this.eid + ':listItemChanged', this.onItemChanged, this);
+        this.source.addEventListener(this.eid + ':listItemAdded', this.onItemAdded, this);
+        this.source.setNamespace(this.eid);
+        this.source.request.update(true);
+        this.source.setNamespace(null);
+    },
+    /*
+	**	Event handler invoked when a property of the source request changes. The property is copied to the local model.
+	*/ onRequestPropertyChanged: function(evt, args) {
+        this.model.set(args.name, args.value);
+        if (args.name == 'sort') this.querySelectorAll('thead [data-sort]').forEach((i)=>i.dataset.order = ''
+        );
+        else if (args.name == 'order') {
+            let elem = this.querySelector('thead [data-sort="' + evt.source.get('sort') + '"]');
+            if (elem) elem.dataset.order = args.value;
+        }
+    },
+    /*
+	**	Event handler invoked when a property of the model has changed. The property is copied to the data source request model.
+	*/ onModelPropertyChanged: function(evt, args) {
+        if (this.source.request.get(args.name) == args.value) return;
+        this.source.request.set(args.name, args.value);
+        let ignored = [
+            'count',
+            'offset'
+        ];
+        if (ignored.indexOf(args.name) != -1) return;
+        this.source.refresh('filter');
+    },
+    /*
+	**	Event handler invoked when a property of the model is removed.
+	*/ onModelPropertyRemoved: function(evt, args) {
+        if (typeof args.fields == 'string') this.source.request.remove(i);
+        else args.fields.forEach((i)=>this.source.request.remove(i)
+        );
+        this.source.refresh('filter');
+    },
+    /*
+	**	Builds an item to be added to the container.
+	*/ buildItem: function(iid, data) {
+        let elem = this.temporalBody;
+        elem.innerHTML = this.template(data.get());
+        elem.querySelectorAll('[data-model=":list-item"]').forEach((i)=>{
+            i.model = data;
+            i.dataset.model = "this.model";
+        });
+        elem = elem.firstElementChild;
+        elem.dataset.iid = iid;
+        return elem;
+    },
+    /*
+	**	Executed when the list is cleared.
+	*/ onItemsCleared: function(evt, args) {
+        this.container._timeout = setTimeout(()=>{
+            this.setEmpty(true);
+            this.container._timeout = null;
+            this.container.textContent = '';
+        }, 300);
+    },
+    /*
+	**	Executed when the items of the list changed.
+	*/ onItemsChanged: function(evt, args) {
+        if (this.source.list.length() == 0) return;
+        if (this.container._timeout) clearTimeout(this.container._timeout);
+        this.container._timeout = null;
+        this.container.textContent = '';
+        let i = 0;
+        for (let data of this.source.list.getData())this.container.append(this.buildItem(this.source.list.itemId[i++], data));
+        this.setEmpty(i == 0);
+    },
+    /*
+	**	Executed when an item is removed from the list.
+	*/ onItemRemoved: function(evt, args) {
+        let elem = this.container.querySelector('[data-iid="' + args.id + '"]');
+        if (!elem) return;
+        elem.remove();
+        this.setEmpty(this.source.list.length() == 0);
+    },
+    /*
+	**	Executed when an item changes.
+	*/ onItemChanged: function(evt, args) {
+        let elem = this.container.querySelector('[data-iid="' + args.id + '"]');
+        if (!elem) return;
+        let _elem = this.buildItem(args.id, args.item);
+        this.container.replaceChild(_elem, elem);
+    },
+    /*
+	**	Executed when an item is added to the list.
+	*/ onItemAdded: function(evt, args) {
+        if (args.position == 'head') this.container.prepend(this.buildItem(args.id, args.item));
+        else this.container.append(this.buildItem(args.id, args.item));
+        this.setEmpty(false);
+    },
+    /*
+	**	Handles clicks to data-sort elements.
+	*/ "event click thead [data-sort]": function(evt, args) {
+        if (this.source.request.get('sort') == evt.source.dataset.sort) {
+            this.source.request.set('order', this.source.request.get('order') == 'asc' ? 'desc' : 'asc');
+            this.source.refresh('order');
+        } else {
+            this.source.request.set('sort', evt.source.dataset.sort);
+            this.source.request.set('order', 'asc', true);
+            this.source.refresh('order');
+        }
+    },
+    /*
+	**	Refreshes the data source.
+	*/ refresh: function() {
+        this.source.refresh('full');
+    },
+    /*
+	**	Clears (set to empty) the specified fields from the data source's request parameters.
+	*/ clear: function(args) {
+        for(let i = 0; i < args.length; i++)this.model.set(args[i], '');
+    }
+});
+
+
+
+
+var /*
+**	Connects to a ModelList and renders its contents as a <select> element.
+*/ $6f796319a51b6aea$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-select', {
+    list: null,
+    container: null,
+    value: '',
+    /**
+	**	Initializes the element.
+	*/ init: function() {
+        this.container = document.createElement('select');
+        this.parentElement.insertBefore(this.container, this);
+        let list = [];
+        for (let attr of this.attributes){
+            if (attr.nodeName.startsWith('data-_') || attr.nodeName == 'data-list' || attr.nodeName == 'data-blank') continue;
+            this.container.setAttribute(attr.nodeName, attr.nodeValue);
+            list.push(attr.nodeName);
+        }
+        list.forEach((i)=>this.removeAttribute(i)
+        );
+        this.textContent = ' ';
+        this.style.display = 'none';
+    },
+    /**
+	**	Executed when the children and parent of the element are ready.
+	*/ rready: function() {
+        let list = this.getFieldByPath(this.dataset.list);
+        if (!list) {
+            console.error('List not found: ' + this.dataset.list);
+            return;
+        }
+        this.setList(list);
+        if (this.parentElement.lastElementChild !== this) this.parentElement.append(this);
+    },
+    /**
+	**	Sets the list model-list of the element.
+	*/ setList: function(list) {
+        if (!list || !$j3ZoB$Rinn.isInstanceOf(list, $j3ZoB$ModelList) || this.list === list) return;
+        if (this.list != null) this.list.removeEventListener(this.eid + ':*');
+        this.list = list;
+        if (this.list.dataSource) this.list.dataSource.includeEnum = true;
+        this.list.addEventListener(this.eid + ':itemsCleared', this.onItemsCleared, this);
+        this.list.addEventListener(this.eid + ':itemsChanged', this.onItemsChanged, this);
+        this.list.addEventListener(this.eid + ':itemRemoved', this.onItemsChanged, this);
+        this.list.addEventListener(this.eid + ':itemChanged', this.onItemsChanged, this);
+        this.list.addEventListener(this.eid + ':itemAdded', this.onItemsChanged, this);
+        this.onItemsChanged();
+    },
+    /*
+	**	Executed when the list is cleared.
+	*/ onItemsCleared: function(evt, args) {
+        this.container.textContent = '';
+    },
+    /*
+	**	Executed when the items of the list changed.
+	*/ onItemsChanged: function(evt, args) {
+        if (this.list.length() == 0) return;
+        let list = this.list.getData();
+        let value, label, s = '';
+        if (list[0].has('value')) value = 'value';
+        else if (list[0].has('id')) value = 'id';
+        if (list[0].has('label')) label = 'label';
+        else if (list[0].has('name')) label = 'name';
+        if ('blank' in this.dataset) s += '<option value="">' + this.dataset.blank + '</option>';
+        if (list[0].has('group')) {
+            let groups = {
+            };
+            list.forEach((i)=>groups[i.get('group')] = null
+            );
+            for(let i1 in groups)groups[i1] = {
+                name: i1,
+                list: []
+            };
+            list.forEach((i)=>groups[i.get('group')].list.push(i)
+            );
+            groups = Object.values(groups);
+            groups.forEach((g)=>{
+                s += '<optgroup label="' + g.name + '">';
+                g.list.forEach((i)=>s += '<option value="' + i.get(value) + '">' + i.get(label) + '</option>'
+                );
+                s += '</optgroup>';
+            });
+        } else list.forEach((i)=>s += '<option value="' + i.get(value) + '">' + i.get(label) + '</option>'
+        );
+        this.container.innerHTML = s;
+        this.container.value = this.container.dataset.value;
+    },
+    /**
+	 * 	Forces re-rendering of the element.
+	 */ refresh: function() {
+        this.onItemsChanged();
+    }
+});
+
+
+
+/*
+**	riza/utils
+**
+**	Copyright (c) 2013-2021, RedStar Technologies, All rights reserved.
+**	https://www.rsthn.com/
+**
+**	THIS LIBRARY IS PROVIDED BY REDSTAR TECHNOLOGIES "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+**	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+**	PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL REDSTAR TECHNOLOGIES BE LIABLE FOR ANY
+**	DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+**	NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+**	OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+**	STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+**	USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/ const $f15dd1abb49aad26$var$Utils = {
+    /**
+	**	Forces the browser to show a download dialog.
+	*/ showDownload: function(filename, dataUrl) {
+        var link = document.createElement("a");
+        link.href = dataUrl;
+        link.style.display = 'none';
+        link.download = filename;
+        link.target = "_blank";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    },
+    /**
+	**	Forces the browser to show a file selection dialog.
+	*/ showFilePicker: function(allowMultiple, accept, callback) {
+        var input = document.createElement("input");
+        input.type = "file";
+        input.accept = accept;
+        input.style.display = 'none';
+        input.multiple = allowMultiple;
+        document.body.appendChild(input);
+        input.onchange = function() {
+            callback(input.files);
+        };
+        document.body.onfocus = function() {
+            document.body.onfocus = null;
+            document.body.removeChild(input);
+        };
+        input.click();
+    },
+    /**
+	**	Loads a URL using FileReader and returns as a dataURL.
+	*/ loadAsDataUrl: function(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            callback(e.target.result, null);
+        };
+        reader.onerror = function(e) {
+            callback(null, e);
+        };
+        reader.readAsDataURL(file);
+    },
+    /**
+	**	Loads a URL using FileReader and returns as text.
+	*/ loadAsText: function(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            callback(e.target.result);
+        };
+        reader.readAsText(file);
+    },
+    /**
+	**	Loads a URL using FileReader and returns as an array buffer.
+	*/ loadAsArrayBuffer: function(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            callback(e.target.result);
+        };
+        reader.readAsArrayBuffer(file);
+    },
+    /**
+	**	Loads an array of URLs using FileReader and returns them as data url.
+	*/ loadAllAsDataUrl: function(fileList, callback) {
+        var result = [];
+        if (!fileList || !fileList.length) {
+            callback(result);
+            return;
+        }
+        var loadNext = function(i) {
+            if (i == fileList.length) {
+                callback(result);
+                return;
+            }
+            $f15dd1abb49aad26$var$Utils.loadAsDataUrl(fileList[i], function(url, err) {
+                if (!err) result.push({
+                    name: fileList[i].name,
+                    size: fileList[i].size,
+                    url: url
+                });
+                loadNext(i + 1);
+            });
+        };
+        loadNext(0);
+    },
+    /*
+	**	Loads a URL as an image.
+	*/ loadImageFromUrl: function(url, callback) {
+        let image = new Image();
+        image.onload = ()=>callback(image)
+        ;
+        image.onerror = ()=>callback(null)
+        ;
+        image.src = url;
+    }
+};
+var $f15dd1abb49aad26$export$2e2bcd8739ae039 = $f15dd1abb49aad26$var$Utils;
+
+
+var $60ded19ad3520ba6$export$2e2bcd8739ae039 = $f2f01f7f560a1091$export$2e2bcd8739ae039.register('r-image-cropper', {
+    /*
+	**	Default aspect ratio.
+	*/ aspectRatio: 1,
+    /*
+	**	Current image scale.
+	*/ imageScale0: 0,
+    imageScale: 1,
+    /*
+	**	Image translation offsets.
+	*/ imageOffsX: 0,
+    imageOffsY: 0,
+    /*
+	**	Pointer contexts.
+	*/ pointerA: null,
+    pointerB: null,
+    /*
+	**	Client bounding box.
+	*/ bounds: null,
+    /*
+	**	Initializes the element.
+	*/ init: function() {
+        this.canvas = document.createElement('canvas');
+        this.appendChild(this.canvas);
+        this.g = this.canvas.getContext('2d');
+        this.pointerA = {
+            id: null,
+            active: false,
+            sx: 0,
+            sy: 0,
+            cx: 0,
+            cy: 0,
+            ix: 0,
+            iy: 0
+        };
+        this.pointerB = {
+            id: null,
+            active: false,
+            sx: 0,
+            sy: 0,
+            cx: 0,
+            cy: 0,
+            ix: 0,
+            iy: 0
+        };
+        this.log = document.createElement('div');
+        this.appendChild(this.log);
+    },
+    /*
+	**	Sets the image for the cropper from an image URL.
+	*/ setImageUrl: function(url) {
+        $f15dd1abb49aad26$export$2e2bcd8739ae039.loadImageFromUrl(url, (image)=>{
+            this.setImage(image);
+        });
+    },
+    /*
+	**	Sets the image for the cropper from an HTML File object.
+	*/ setImageFile: function(file) {
+        $f15dd1abb49aad26$export$2e2bcd8739ae039.loadAsDataUrl(file, (url)=>{
+            $f15dd1abb49aad26$export$2e2bcd8739ae039.loadImageFromUrl(url, (image)=>{
+                this.setImage(image);
+            });
+        });
+    },
+    /*
+	**	Sets the cropper image from an HTML Image element.
+	*/ setImage: function(image) {
+        this.image = image;
+        this.reset();
+        this.imageScale = Math.max(this.canvas.width / this.image.width, this.canvas.height / this.image.height);
+        this.imageOffsX = (this.canvas.width - this.imageScale * this.image.width) * 0.5;
+        this.imageOffsY = (this.canvas.height - this.imageScale * this.image.height) * 0.5;
+        this.render();
+    },
+    /*
+	**	Returns the blob and URL representing the current canvas state.
+	*/ getBlobAndUrl: function(callback, type = 'image/png', quality = 0.9) {
+        this.canvas.toBlob((blob)=>{
+            callback(blob, URL.createObjectURL(blob));
+        }, type, quality);
+    },
+    /*
+	**	Auto-resizes the canvas to ensure the aspect ratio is maintained.
+	*/ reset: function() {
+        this.bounds = this.getBoundingClientRect();
+        this.canvas.width = this.bounds.width;
+        this.canvas.height = this.bounds.width / this.aspectRatio;
+    },
+    /*
+	**	Auto-resizes the canvas to ensure the aspect ratio is maintained and renders the image.
+	*/ render: function() {
+        this.canvas.width = this.canvas.width;
+        this.g.fillStyle = '#000';
+        this.g.beginPath();
+        this.g.rect(0, 0, this.canvas.width, this.canvas.height);
+        this.g.fill();
+        this.g.translate(this.imageOffsX, this.imageOffsY);
+        this.g.scale(this.imageScale, this.imageScale);
+        this.g.drawImage(this.image, 0, 0);
+    },
+    /*
+	**	Translates the image by the given offsets.
+	*/ translateImage: function(offsX, offsY) {
+        this.imageOffsX += offsX;
+        this.imageOffsY += offsY;
+        this.render(true);
+    },
+    /*
+	**	Handle mouse events on the canvas.
+	*/ "event mousemove canvas": function(evt) {
+        if (this.pointerA.active) {
+            this.pointerA.cx = evt.clientX;
+            this.pointerA.cy = evt.clientY;
+            this.translateImage(this.pointerA.cx - this.pointerA.sx, this.pointerA.cy - this.pointerA.sy);
+            this.pointerA.sx = this.pointerA.cx;
+            this.pointerA.sy = this.pointerA.cy;
+        }
+        this.pointerA.ix = (evt.clientX - this.bounds.left - this.imageOffsX) / this.imageScale;
+        this.pointerA.iy = (evt.clientY - this.bounds.top - this.imageOffsY) / this.imageScale;
+    },
+    "event mousedown canvas": function(evt) {
+        this.pointerA.active = true;
+        this.pointerA.sx = evt.clientX;
+        this.pointerA.sy = evt.clientY;
+    },
+    "event mouseup canvas": function(evt) {
+        this.pointerA.active = false;
+    },
+    "event wheel canvas": function(evt) {
+        if (evt.deltaY > 0) this.imageScale -= 0.045;
+        else this.imageScale += 0.045;
+        if (this.imageScale < 0.1) this.imageScale = 0.1;
+        this.imageOffsX += -this.pointerA.ix * this.imageScale + (evt.clientX - this.bounds.left) - this.imageOffsX;
+        this.imageOffsY += -this.pointerA.iy * this.imageScale + (evt.clientY - this.bounds.top) - this.imageOffsY;
+        this.render();
+    },
+    /*
+	**	Handle touch events on the canvas.
+	*/ "event touchmove canvas": function(evt) {
+        for (let i of evt.changedTouches){
+            if (this.pointerA.id == i.identifier) {
+                this.pointerA.cx = i.clientX;
+                this.pointerA.cy = i.clientY;
+            } else if (this.pointerB.id == i.identifier) {
+                this.pointerB.cx = i.clientX;
+                this.pointerB.cy = i.clientY;
+            }
+        }
+        if (this.pointerA.active && this.pointerB.active) {
+            let d0 = Math.sqrt(Math.pow(this.pointerA.sx - this.pointerB.sx, 2) + Math.pow(this.pointerA.sy - this.pointerB.sy, 2));
+            let d1 = Math.sqrt(Math.pow(this.pointerA.cx - this.pointerB.cx, 2) + Math.pow(this.pointerA.cy - this.pointerB.cy, 2));
+            let d = d1 - d0;
+            this.imageScale += d / 10 * 0.025;
+            if (this.imageScale < 0.1) this.imageScale = 0.1;
+            this.imageOffsX += -this.pointerA.ix * this.imageScale + (this.pointerA.cx - this.bounds.left) - this.imageOffsX;
+            this.imageOffsY += -this.pointerA.iy * this.imageScale + (this.pointerA.cy - this.bounds.top) - this.imageOffsY;
+            this.pointerA.sx = this.pointerA.cx;
+            this.pointerA.sy = this.pointerA.cy;
+            this.pointerB.sx = this.pointerB.cx;
+            this.pointerB.sy = this.pointerB.cy;
+            this.render();
+        } else {
+            let p = this.pointerA.active ? this.pointerA : this.pointerB.active ? this.pointerB : null;
+            if (!p) return;
+            this.translateImage(p.cx - p.sx, p.cy - p.sy);
+            p.sx = p.cx;
+            p.sy = p.cy;
+        }
+    },
+    "event touchstart canvas": function(evt) {
+        this.imageScale0 = this.imageScale;
+        for (let i of evt.changedTouches){
+            if (this.pointerA.id === null) {
+                this.pointerA.id = i.identifier;
+                this.pointerA.active = true;
+                this.pointerA.sx = i.clientX;
+                this.pointerA.sy = i.clientY;
+                this.pointerA.ix = (i.clientX - this.bounds.left - this.imageOffsX) / this.imageScale;
+                this.pointerA.iy = (i.clientY - this.bounds.top - this.imageOffsY) / this.imageScale;
+            } else if (this.pointerB.id === null) {
+                this.pointerB.id = i.identifier;
+                this.pointerB.active = true;
+                this.pointerB.sx = i.clientX;
+                this.pointerB.sy = i.clientY;
+                this.pointerB.ix = (i.clientX - this.bounds.left - this.imageOffsX) / this.imageScale;
+                this.pointerB.iy = (i.clientY - this.bounds.top - this.imageOffsY) / this.imageScale;
+            }
+        }
+    },
+    "event touchend canvas": function(evt) {
+        for (let i of evt.changedTouches){
+            if (this.pointerA.id == i.identifier) {
+                this.pointerA.id = null;
+                this.pointerA.active = false;
+            } else if (this.pointerB.id == i.identifier) {
+                this.pointerB.id = null;
+                this.pointerB.active = false;
+            }
+        }
+    },
+    "event touchcancel canvas": function(evt) {
+        for (let i of evt.changedTouches){
+            if (this.pointerA.id == i.identifier) {
+                this.pointerA.id = null;
+                this.pointerA.active = false;
+            } else if (this.pointerB.id == i.identifier) {
+                this.pointerB.id = null;
+                this.pointerB.active = false;
+            }
+        }
+    }
+});
+
+
+var $ddafb9752a9ba425$export$2e2bcd8739ae039 = {
+    Tabs: $a23af1cab366283c$export$2e2bcd8739ae039,
+    Form: $653d148303270476$export$2e2bcd8739ae039,
+    Panel: $eccb61e2eee7209a$export$2e2bcd8739ae039,
+    List: $714a04be6cb9a277$export$2e2bcd8739ae039,
+    Item: $a88b97fa7f2abc94$export$2e2bcd8739ae039,
+    Paginator: $e4e0c6c826f2c695$export$2e2bcd8739ae039,
+    Table: $54901aecda702d75$export$2e2bcd8739ae039,
+    Select: $6f796319a51b6aea$export$2e2bcd8739ae039,
+    ImageCropper: $60ded19ad3520ba6$export$2e2bcd8739ae039
+};
+
+
+
+
+const $8832174729c85c16$export$55185c17a0fcbe46 = $cdbdea0eedb44c97$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$db77ccec0bb4ccac = $f2f01f7f560a1091$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$9864de54bd63ed8a = $f2f01f7f560a1091$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$bf71da7aebe9ddc1 = $03dfb5b808851c4b$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$accd73d198d77d2f = $c92d48c08b86e527$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$d3568da47c78d35c = $3f534db4f9a2dc0d$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$cea96571ebbff9dd = $b01cf61b5fd2eff8$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$deefd61317ad2797 = $3807f10d3d8a70da$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$3abb4be70fa2c84e = $ddafb9752a9ba425$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$d2ca453b913dcdea = $f15dd1abb49aad26$export$2e2bcd8739ae039;
+const $8832174729c85c16$export$eefcfe56efaaa57d = $j3ZoB$Rinn;
+const $8832174729c85c16$export$4c85e640eb41c31b = $j3ZoB$Class;
+const $8832174729c85c16$export$d61e24a684f9e51 = $j3ZoB$Event;
+const $8832174729c85c16$export$ec8b666c5fe2c75a = $j3ZoB$EventDispatcher;
+const $8832174729c85c16$export$a1edc412be3e1841 = $j3ZoB$Model;
+const $8832174729c85c16$export$59eced47f477f85a = $j3ZoB$ModelList;
+const $8832174729c85c16$export$19342e026b58ebb7 = $j3ZoB$Schema;
+const $8832174729c85c16$export$3a9581c9ade29768 = $j3ZoB$Flattenable;
+const $8832174729c85c16$export$fb8073518f34e6ec = $j3ZoB$Collection;
+const $8832174729c85c16$export$14416b8d99d47caa = $j3ZoB$Template;
+
+
+export {$8832174729c85c16$export$55185c17a0fcbe46 as Router, $8832174729c85c16$export$db77ccec0bb4ccac as Element, $8832174729c85c16$export$9864de54bd63ed8a as CElement, $8832174729c85c16$export$bf71da7aebe9ddc1 as Api, $8832174729c85c16$export$accd73d198d77d2f as DataSource, $8832174729c85c16$export$d3568da47c78d35c as DataList, $8832174729c85c16$export$cea96571ebbff9dd as Easing, $8832174729c85c16$export$deefd61317ad2797 as Anim, $8832174729c85c16$export$3abb4be70fa2c84e as Elements, $8832174729c85c16$export$d2ca453b913dcdea as Utils, $8832174729c85c16$export$eefcfe56efaaa57d as Rinn, $8832174729c85c16$export$4c85e640eb41c31b as Class, $8832174729c85c16$export$d61e24a684f9e51 as Event, $8832174729c85c16$export$ec8b666c5fe2c75a as EventDispatcher, $8832174729c85c16$export$a1edc412be3e1841 as Model, $8832174729c85c16$export$59eced47f477f85a as ModelList, $8832174729c85c16$export$19342e026b58ebb7 as Schema, $8832174729c85c16$export$3a9581c9ade29768 as Flattenable, $8832174729c85c16$export$fb8073518f34e6ec as Collection, $8832174729c85c16$export$14416b8d99d47caa as Template};
+//# sourceMappingURL=riza.js.map

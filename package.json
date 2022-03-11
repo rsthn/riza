@@ -1,40 +1,22 @@
 {
     "name": "riza",
-    "version": "1.0.59",
-    "description": "Riza Framework",
+    "version": "1.0.60",
+    "description": "Riza Library",
     "type": "module",
+    "source": "src/main.js",
     "main": "src/main.js",
+    "module": "dist/riza.js",
     "bin": {
         "riza": "bin/cli.js"
     },
     "scripts": {
         "test": "echo Ok",
         "requirements": "yarn global add --ignore-optional parcel http-server",
-        "deploy": "npm run build && node ./local/deploy.js",
-        "commit": "npm run build && node ./local/commit.js",
-        "build:cjs": "parcel build --no-cache --target target_cjs src/_export.js --no-source-maps",
-        "build:esm": "parcel build --no-cache --target target_esm src/main.js --no-source-maps",
-        "build": "npm run build:cjs && npm run build:esm"
+        "deploy": "yarn build && node ./local/deploy.js",
+        "commit": "yarn build && node ./local/commit.js",
+        "build": "parcel build --no-cache --target module"
     },
-    "target_esm": "dist/riza.js",
-    "target_cjs": "dist/riza.cjs.js",
-    "targets": {
-        "target_esm": {
-            "isLibrary": true,
-            "context": "browser",
-            "outputFormat": "esmodule",
-            "optimize": true,
-            "engines": {
-                "browsers": "since 2021-01"
-            }
-        },
-        "target_cjs": {
-            "isLibrary": false,
-            "engines": {
-                "browsers": "since 2021-01"
-            }
-        }
-    },
+    "browserslist": "since 2020-01",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/rsthn/riza.git"
@@ -47,15 +29,14 @@
     "homepage": "https://github.com/rsthn/riza#readme",
     "files": [
         "dist/",
-        "src/",
         "bin/",
         "LICENSE",
         "README.md"
     ],
     "dependencies": {
-        "@rsthn/rin": "^2.0.36",
         "base-64": "^1.0.0",
         "fs-extra": "^10.0.1",
-        "node-fetch": "^2.6.7"
+        "node-fetch": "^2.6.7",
+        "rinn": "^2.0.37"
     }
 }

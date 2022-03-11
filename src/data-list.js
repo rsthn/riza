@@ -14,7 +14,7 @@
 **	USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import { Model, ModelList } from '@rsthn/rin';
+import { Model, ModelList } from 'rinn';
 import Api from './api.js';
 
 /*

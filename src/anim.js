@@ -14,7 +14,7 @@
 **	USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import { Rin, Class } from '@rsthn/rin';
+import { Rinn, Class } from 'rinn';
 
 /**
 **	Class to animate properties using rules (imported from Cherry source code).
@@ -331,7 +331,7 @@ const Anim = Class.extend
 					break;
 
 				case "wait":
-					duration = Rin.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+					duration = Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
 
 					if (this.time < this.blockTime + duration)
 						return false;
@@ -353,7 +353,7 @@ const Anim = Class.extend
 						cmd.started = true;
 					}
 
-					duration = Rin.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+					duration = Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
 
 					if (this.time < this.blockTime + duration)
 						dt = (this.time - this.blockTime) / duration;
@@ -380,7 +380,7 @@ const Anim = Class.extend
 						cmd.last = null;
 					}
 
-					duration = Rin.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+					duration = Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
 
 					if (this.time < this.blockTime + duration)
 						dt = (this.time - this.blockTime) / duration;
@@ -412,7 +412,7 @@ const Anim = Class.extend
 					break;
 
 				case "randt":
-					duration = Rin.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
+					duration = Rinn.typeOf(cmd.duration) == "string" ? this.data[cmd.duration] : cmd.duration;
 
 					if (this.time < this.blockTime + duration)
 						dt = (this.time - this.blockTime) / duration;

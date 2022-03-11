@@ -14,7 +14,7 @@
 **	USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import { Rin, Model, Template } from '@rsthn/rin';
+import { Rinn, Model, Template } from 'rinn';
 
 /**
  * 	Map containing the original prototypes for all registered elements.
@@ -348,7 +348,7 @@ const Element =
 	{
 		if (!model) return this;
 
-		model = Rin.ensureTypeOf(this.modelt, model);
+		model = Rinn.ensureTypeOf(this.modelt, model);
 
 		if (this.model !== model)
 		{
@@ -481,7 +481,7 @@ const Element =
 		{
 			let hdl = events[evtstr];
 
-			if (Rin.typeOf(hdl) == 'string')
+			if (Rinn.typeOf(hdl) == 'string')
 				hdl = this[hdl];
 
 			hdl = hdl.bind(this);
@@ -531,7 +531,7 @@ const Element =
 					case 'keyup': case 'keydown':
 						this.listen (name, selector, function (evt)
 						{
-							if (Rin.indexOf(args, evt.keyCode.toString()) != -1)
+							if (Rinn.indexOf(args, evt.keyCode.toString()) != -1)
 								return hdl (evt, args);
 
 							evt.continuePropagation = true;
@@ -576,7 +576,7 @@ const Element =
 
 			while (evt.source !== this)
 			{
-				let i = Rin.indexOf (elems, evt.source, true);
+				let i = Rinn.indexOf (elems, evt.source, true);
 				if (i !== -1)
 				{
 					evt.continuePropagation = false;
@@ -619,7 +619,7 @@ const Element =
 		let eventCatcher = false;
 		let eventImmediate = false;
 
-		if (Rin.typeOf(selector) == 'function')
+		if (Rinn.typeOf(selector) == 'function')
 		{
 			handler = selector;
 			selector = null;
@@ -1207,11 +1207,11 @@ const Element =
 			}
 		};
 
-		Rin.override (newElement.prototype, Element);
+		Rinn.override (newElement.prototype, Element);
 
 		const proto = { };
 		const _super = { };
-		const events = Rin.clone(Element.events);
+		const events = Rinn.clone(Element.events);
 
 		let __init = true;
 		let __ready = true;
@@ -1222,7 +1222,7 @@ const Element =
 		{
 			if (!protos[i]) continue;
 
-			if (Rin.typeOf(protos[i]) == 'string')
+			if (Rinn.typeOf(protos[i]) == 'string')
 			{
 				const name = protos[i];
 
@@ -1233,7 +1233,7 @@ const Element =
 
 				for (let f in protos[i])
 				{
-					if (Rin.typeOf(protos[i][f]) != 'function')
+					if (Rinn.typeOf(protos[i][f]) != 'function')
 						continue;
 
 					_super[name][f] = protos[i][f];
@@ -1251,13 +1251,13 @@ const Element =
 			}
 
 			if ('_super' in protos[i])
-				Rin.override (_super, protos[i]._super);
+				Rinn.override (_super, protos[i]._super);
 
 			if ('events' in protos[i])
-				Rin.override (events, protos[i].events);
+				Rinn.override (events, protos[i].events);
 
-			Rin.override (newElement.prototype, protos[i]);
-			Rin.override (proto, protos[i]);
+			Rinn.override (newElement.prototype, protos[i]);
+			Rinn.override (proto, protos[i]);
 
 			if (__check)
 			{
@@ -1322,13 +1322,13 @@ const Element =
 			Element.preparePrototype(proto);
 
 			if ('_super' in proto)
-				Rin.override (_super, proto._super);
+				Rinn.override (_super, proto._super);
 
 			if ('events' in proto)
-				Rin.override (events, proto.events);
+				Rinn.override (events, proto.events);
 
-			Rin.override (elem.prototype, proto);
-			Rin.override (self, proto);
+			Rinn.override (elem.prototype, proto);
+			Rinn.override (self, proto);
 		}
 
 		elem.prototype._super = _super;
@@ -1346,8 +1346,8 @@ const Element =
 		if (!(name in elementPrototypes))
 			return;
 
-		let hook1 = Rin.hookAppend(elementPrototypes[name], functionName, newFunction);
-		let hook2 = Rin.hookAppend(elementClasses[name].prototype, functionName, newFunction);
+		let hook1 = Rinn.hookAppend(elementPrototypes[name], functionName, newFunction);
+		let hook2 = Rinn.hookAppend(elementClasses[name].prototype, functionName, newFunction);
 
 		return { 
 			unhook: function() {
@@ -1365,8 +1365,8 @@ const Element =
 		if (!(name in elementPrototypes))
 			return;
 
-		let hook1 = Rin.hookPrepend(elementPrototypes[name], functionName, newFunction);
-		let hook2 = Rin.hookPrepend(elementClasses[name].prototype, functionName, newFunction);
+		let hook1 = Rinn.hookPrepend(elementPrototypes[name], functionName, newFunction);
+		let hook2 = Rinn.hookPrepend(elementClasses[name].prototype, functionName, newFunction);
 
 		return { 
 			unhook: function() {

@@ -15,7 +15,7 @@
 */
 
 /*
-<r-form data-form-action="api-function-name" [data-strict="true|false"] [data-errors-at=""]>
+<r-form data-form-action="api-function-name" [data-strict="true|false"] [data-errors-at=""] [data-method="post"]>
 	<input type="text" data-field="username"/>
 </r-form>
 
@@ -29,7 +29,7 @@ r-form span.field-error {
 }
 */
 
-import { Template } from '@rsthn/rin';
+import { Template } from 'rinn';
 import Element from '../element.js';
 import Api from '../api.js';
 
@@ -394,7 +394,7 @@ export default Element.register ('r-form',
 		if (typeof(f) != 'function')
 		{
 			data.f = f;
-			Api.apiCall(data, (r) => this[r.response == 200 ? '_onSuccess' : '_onFailure'](r), (r) => this._onFailure({ error: 'Unable to execute request.' }));
+			Api.apiCall(data, (r) => this[r.response == 200 ? '_onSuccess' : '_onFailure'](r), (r) => this._onFailure({ error: 'Unable to execute request.' }), this.dataset.method ?? 'POST');
 		}
 		else
 			f(data, (r) => this[r.response == 200 ? '_onSuccess' : '_onFailure'](r));

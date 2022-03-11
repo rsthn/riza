@@ -28,7 +28,7 @@
 	</r-paginator>
 */
 
-import { Rin } from '@rsthn/rin';
+import { Rinn } from 'rinn';
 import Element from '../element.js';
 import DataSource from '../data-source.js';
 
@@ -84,7 +84,7 @@ export default Element.register ('r-paginator',
 	*/
 	setSource: function (source)
 	{
-		if (!source || !Rin.isInstanceOf(source, DataSource) || this.source === source)
+		if (!source || !Rinn.isInstanceOf(source, DataSource) || this.source === source)
 			return;
 
 		if (this.source != null)

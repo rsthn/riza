@@ -4,7 +4,7 @@
    "version": "1.0.0",
    "private": true,
    "scripts": {
-      "test": "echo Place your tests here && exit 1",
+      "test": "echo Ok && exit 1",
       "requirements": "yarn global add parcel cross-env shx",
       "clean:prod": "shx rm -rf prod",
       "prebuild:prod": "shx mkdir -p prod && shx cp -r src/static prod",
@@ -24,5 +24,8 @@
       "@popperjs/core": "^2.9",
       "bootstrap": "^5.0",
       "riza": "^1.0"
+   },
+   "devDependencies": {
+      "buffer": "^6.0.3"
    }
 }

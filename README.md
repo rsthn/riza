@@ -1,15 +1,15 @@
-# Riza JS Framework
+# Riza Library
 
-Riza is a library that provides functionality to build custom elements, support connecting directly to [Wind](https://github.com/rsthn/rose-core/blob/master/Wind.md)-compliant web services and several pre-made elements to develop web applications fast.
+Riza is a library that provides functionality to build custom elements, supports connecting directly to [Wind](https://github.com/rsthn/rose-core/blob/master/Wind.md) compliant APIs and several pre-made elements to develop web applications fast.
 
 ## Installation
 
-You can use npm/yarn to install the library, or download the standalone file from the `dist` folder (either CJS or ESM) and include it in your index.html file.
+You can use npm/yarn to install the library, or use the standalone file (ESM) from the `dist` folder and include it in your index.html file.
 
-<small>**NOTE:** When using the web distribution, all definitions exported by [Rin](https://github.com/rsthn/rin/) will be available as exports right from the `riza` object.</small>
+<small>**NOTE:** All definitions exported by [Rinn](https://github.com/rsthn/rinn/) will be available as direct exports right from the `riza` object.</small>
 
 ```sh
-npm install riza
+yarn add riza
 ```
 
 ## Documentation

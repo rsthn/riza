@@ -2,14 +2,6 @@
 # yarn lockfile v1
 
 
-"@rsthn/rin@^2.0.36":
-  version "2.0.36"
-  resolved "https://registry.yarnpkg.com/@rsthn/rin/-/rin-2.0.36.tgz#c80eefc20e658fe518aa074972fbb5309350174a"
-  integrity sha512-ihrf5KoEmrYYI1IuYa1kup835lJTMK6yZhRDFnRK7I0p1jLJfA/mEsBHPiV+9K7K4d3hJtgnLlp2GW/MSN2MNw==
-  dependencies:
-    base-64 "^1.0.0"
-    node-fetch "^2.6.1"
-
 base-64@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/base-64/-/base-64-1.0.0.tgz#09d0f2084e32a3fd08c2475b973788eee6ae8f4a"
@@ -38,12 +30,17 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-node-fetch@^2.6.1, node-fetch@^2.6.7:
+node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
+
+rinn@^2.0.37:
+  version "2.0.38"
+  resolved "https://registry.yarnpkg.com/rinn/-/rinn-2.0.38.tgz#605ebb3aab21148f058ce6b477da92f094b8cf46"
+  integrity sha512-Nv7DKBdFULF0TiQIpeEkuf82sNXTd9mBjm07VWZeu/IkwT44p65X8OWSXRE38cUWlmLlaqQBfRa94NmFdR9DKg==
 
 tr46@~0.0.3:
   version "0.0.3"
