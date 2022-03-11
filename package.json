@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Riza Library",
     "type": "module",
     "source": "src/main.js",
@@ -17,6 +17,11 @@
         "build": "parcel build --no-cache --target module"
     },
     "browserslist": "since 2020-01",
+    "targets": {
+        "module": {
+            "optimize": true
+        }
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/rsthn/riza.git"
