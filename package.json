@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Riza Library",
     "type": "module",
     "source": "src/main.js",
@@ -29,6 +29,7 @@
     "homepage": "https://github.com/rsthn/riza#readme",
     "files": [
         "dist/",
+        "src/",
         "bin/cli.js",
         "bin/template/src/",
         "bin/template/.env.development",
@@ -41,6 +42,6 @@
         "base-64": "^1.0.0",
         "fs-extra": "^10.0.1",
         "node-fetch": "^2.6.7",
-        "rinn": "^2.0.37"
+        "rinn": "^2.0.38"
     }
 }

@@ -38,9 +38,9 @@ node-fetch@^2.6.7:
     whatwg-url "^5.0.0"
 
 rinn@^2.0.37:
-  version "2.0.38"
-  resolved "https://registry.yarnpkg.com/rinn/-/rinn-2.0.38.tgz#605ebb3aab21148f058ce6b477da92f094b8cf46"
-  integrity sha512-Nv7DKBdFULF0TiQIpeEkuf82sNXTd9mBjm07VWZeu/IkwT44p65X8OWSXRE38cUWlmLlaqQBfRa94NmFdR9DKg==
+  version "2.0.39"
+  resolved "https://registry.yarnpkg.com/rinn/-/rinn-2.0.39.tgz#796d7d6cd6502b5aa028c5289946ee3e1fc4f878"
+  integrity sha512-VpisFAtYBuHcV7cIK62bypi2xRS5RP5qVzD42A6XhWlSA0Mjl+v9dVNSdvw84xhI9S+bo/XNeuXNi3jmyzBgaA==
 
 tr46@~0.0.3:
   version "0.0.3"
