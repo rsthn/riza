@@ -15,6 +15,7 @@
 */
 
 import { Rinn, Model, Template } from 'rinn';
+import Router from './router.js';
 
 /**
  * 	Map containing the original prototypes for all registered elements.
@@ -92,6 +93,11 @@ const Element =
 	},
 
 	/**
+	 * Routes map.
+	 */
+	routes: null,
+
+	/**
 	 * 	Element constructor.
 	 */
 	__ctor: function()
@@ -108,7 +114,7 @@ const Element =
 
 		this.style.display = 'block';
 
-		this.eid = Math.random().toString().substr(2);
+		this.eid = Math.random().toString().substring(2);
 
 		if (this.model != null)
 		{
@@ -395,7 +401,7 @@ const Element =
 			if (!i) return;
 
 			if (i[0] == '-' || i[0] == '+')
-				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substr(1));
+				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substring(1));
 			else
 				this.classList.add(i);
 		});
@@ -416,7 +422,7 @@ const Element =
 			if (!i) return;
 
 			if (i[0] == '-' || i[0] == '+')
-				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substr(1));
+				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substring(1));
 			else
 				this.classList.remove(i);
 		});
@@ -435,12 +441,12 @@ const Element =
 			let j = (i = i.trim()).indexOf(':');
 			if (j == -1) return;
 
-			let name = i.substr(0, j).trim();
+			let name = i.substring(0, j).trim();
 			for (let k = name.indexOf('-'); k != -1; k = name.indexOf('-')) {
-				name = name.substr(0, k) + name.substr(k+1, 1).toUpperCase() + name.substr(k+2);
+				name = name.substring(0, k) + name.substring(k+1, 1).toUpperCase() + name.substring(k+2);
 			}
 
-			this.style[name] = i.substr(j+1).trim();
+			this.style[name] = i.substring(j+1).trim();
 		});
 
 		return this;
@@ -477,7 +483,7 @@ const Element =
 	*/
 	bindEvents: function (events)
 	{
-		for (var evtstr in events)
+		for (let evtstr in events)
 		{
 			let hdl = events[evtstr];
 
@@ -488,23 +494,23 @@ const Element =
 
 			var i = evtstr.indexOf(' ');
 
-			var name = i == -1 ? evtstr : evtstr.substr(0, i);
-			var selector = i == -1 ? '' : evtstr.substr(i + 1);
+			var name = i == -1 ? evtstr : evtstr.substring(0, i);
+			var selector = i == -1 ? '' : evtstr.substring(i + 1);
 
 			let args = null;
 
 			var j = name.indexOf('(');
 			if (j != -1)
 			{
-				args = name.substr(j+1, name.length-j-2).split(',');
-				name = name.substr(0, j);
+				args = name.substring(j+1, name.length-j-2).split(',');
+				name = name.substring(0, j);
 			}
 
 			if (selector[0] == '@')
 			{
 				if (selector != '@this')
 				{
-					this[selector.substr(1)].addEventListener(name, hdl);
+					this[selector.substring(1)].addEventListener(name, hdl);
 					continue;
 				}
 
@@ -513,14 +519,14 @@ const Element =
 			else if (selector[0] == '&')
 			{
 				if (selector != '&this')
-					selector = "[data-ref='"+selector.substr(1)+"']";
+					selector = "[data-ref='"+selector.substring(1)+"']";
 				else
 					selector = this;
 			}
 
-			if (name.substr(0, 1) == '#')
+			if (name.substring(0, 1) == '#')
 			{
-				this.listen('propertyChanged.'+name.substr(1), this, hdl);
+				this.listen('propertyChanged.'+name.substring(1), this, hdl);
 				continue;
 			}
 
@@ -545,6 +551,56 @@ const Element =
 		}
 
 		return this;
+	},
+
+	/**
+	**	Binds all routes in the specified map to the Router object.
+	**
+	**		"route-path": "doSomething"						On-Route
+	**		"route-path": function (evt, args) { }			On-Route
+	**		"!route-path": "doSomething"					On-UnRoute
+	**		"!route-path": function (evt, args) { }			On-UnRoute
+	**
+	**	>> Element bindRoutes ();
+	*/
+	bindRoutes: function ()
+	{
+		if (!this.routes)
+			return;
+
+		for (let routeStr in this.routes)
+		{
+			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substring(1)) : Router.getRoute(routeStr);
+			let handler = this.routes[routeStr];
+
+			if (Rinn.typeOf(handler) == 'string')
+				handler = this[handler];
+
+			if (routeStr[0] === '!')
+				route.addHandler(handler, true, this);
+			else
+				route.addHandler(handler, false, this);
+		}
+	},
+
+	/**
+	 * Unbinds all routes added by bindRoutes.
+	 */
+	unbindRoutes: function (routes)
+	{
+		for (let routeStr in routes)
+		{
+			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substring(1)) : Router.getRoute(routeStr);
+			let handler = routes[routeStr];
+
+			if (Rinn.typeOf(handler) == 'string')
+				handler = this[handler];
+
+			if (routeStr[0] === '!')
+				route.removeHandler(handler, true, this);
+			else
+				route.removeHandler(handler, false, this);
+		}
 	},
 
 	/**
@@ -627,13 +683,13 @@ const Element =
 
 		if (eventName[eventName.length-1] == '!')
 		{
-			eventName = eventName.substr(0, eventName.length-1);
+			eventName = eventName.substring(0, eventName.length-1);
 			eventCatcher = true;
 		}
 
 		if (eventName[0] == '!')
 		{
-			eventName = eventName.substr(1);
+			eventName = eventName.substring(1);
 			eventImmediate = true;
 		}
 
@@ -910,6 +966,23 @@ const Element =
 	},
 
 	/**
+	 * Executed when the element is attached to the DOM tree.
+	 */
+	elementConnected: function()
+	{
+		this.bindRoutes();
+		this.onConnected();
+	},
+
+	/**
+	 * Executed when the element is no longer a part of the DOM tree.
+	 */
+	elementDisconnected: function()
+	{
+		this.unbindRoutes();
+	},
+
+	/**
 	**	Executed when the element is attached to the DOM tree.
 	*/
 	onConnected: function()
@@ -1068,6 +1141,7 @@ const Element =
 	/*
 	**	Runs the following preparation procedures on the specified prototype:
 	**		- All functions named 'event <event-name> [event-selector]' will be moved to the 'events' map.
+	**		- All functions named 'route <route-path>' will be moved to the 'routes' map.
 	**
 	**	>> void preparePrototype (object proto);
 	*/
@@ -1078,14 +1152,22 @@ const Element =
 
 		proto.__prototypePrepared = true;
 
-		if (!('events' in proto))
+		if (!proto.hasOwnProperty('events') || !proto.events)
 			proto.events = { };
+
+		if (!proto.hasOwnProperty('routes') || !proto.routes)
+			proto.routes = { };
 
 		for (let i in proto)
 		{
 			if (i.startsWith('event '))
 			{
-				proto.events[i.substr(6)] = proto[i];
+				proto.events[i.substring(6)] = proto[i];
+				delete proto[i];
+			}
+			else if (i.startsWith('route '))
+			{
+				proto.routes[i.substring(6)] = proto[i];
 				delete proto[i];
 			}
 		}
@@ -1180,7 +1262,7 @@ const Element =
 				}
 
 				this.connectReference(null, 2);
-				this.onConnected();
+				this.elementConnected();
 
 				if (this.dataset.xref)
 					globalThis[this.dataset.xref] = this;
@@ -1200,7 +1282,7 @@ const Element =
 					this.root = null;
 				}
 
-				this.onDisconnected();
+				this.elementDisconnected();
 
 				if (this.dataset.xref)
 					delete globalThis[this.dataset.xref];

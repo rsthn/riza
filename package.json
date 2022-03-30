@@ -1,25 +1,34 @@
 {
     "name": "riza",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "description": "Riza Library",
     "type": "module",
-    "source": "src/main.js",
-    "main": "src/main.js",
-    "module": "dist/riza.js",
+    "main": "./dist/riza.m.js",
+    "module": "./dist/riza.m.js",
+    "browser": "./dist/riza.js",
     "bin": {
         "riza": "bin/cli.js"
     },
     "scripts": {
         "test": "echo Ok",
-        "requirements": "yarn global add --ignore-optional parcel http-server",
-        "deploy": "yarn build && node ./local/deploy.js",
+        "requirements": "yarn global add --ignore-optional parcel",
+        "deploy": "yarn build:all && node ./local/deploy.js",
         "commit": "yarn build && node ./local/commit.js",
-        "build": "parcel build --no-cache --target module"
+        "build:all": "yarn build:module && yarn build:browser",
+        "build:browser": "parcel build --no-cache --target browser",
+        "build:module": "parcel build --no-cache --target module",
+        "build": "yarn build:browser"
     },
     "browserslist": "since 2020-01",
     "targets": {
         "module": {
+            "source": "./src/main.js",
             "optimize": true
+        },
+        "browser": {
+            "source": "./src/main.js",
+            "optimize": true,
+            "includeNodeModules": true
         }
     },
     "repository": {

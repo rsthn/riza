@@ -101,21 +101,21 @@ const _Router =
 		**	specifying the same parameters. If unrouted boolean is specified the event to listen to will be
 		**	the unrouted event (when the route changes and the route is not activated).
 		**
-		**	void addHandler (handler: function, unrouted: bool);
+		**	void addHandler (handler: function, unrouted: bool, context:object=null);
 		*/
-		addHandler: function (handler, unrouted)
+		addHandler: function (handler, unrouted=false, context=null)
 		{
-			this.addEventListener ((unrouted === true ? 'un' : '') + 'routed', handler, null);
+			this.addEventListener ((unrouted === true ? 'un' : '') + 'routed', handler, context);
 		},
 
 		/*
 		**	Removes a handler from the route dispatcher.
 		**
-		**	void removeHandler (handler: function, unrouted: bool);
+		**	void removeHandler (handler: function, unrouted: bool, context: object=null);
 		*/
-		removeHandler: function (handler, unrouted)
+		removeHandler: function (handler, unrouted=false, context=null)
 		{
-			this.removeEventListener ((unrouted === true ? 'un' : '') + 'routed', handler, null);
+			this.removeEventListener ((unrouted === true ? 'un' : '') + 'routed', handler, context);
 		},
 
 		/*
@@ -219,7 +219,7 @@ const _Router =
 	**	Adds the specified route to the routing map. When the specified route is detected, the `onRoute` handler will be called, and then
 	**	when the route exits `onUnroute` will be called.
 	*/
-	addRoute: function (route, onRoute, onUnroute)
+	addRoute: function (route, onRoute, onUnroute=null)
 	{
 		if (!this.routes[route])
 		{
@@ -231,13 +231,31 @@ const _Router =
 			});
 		}
 
-		if (onUnroute !== undefined)
+		if (onUnroute !== null)
 		{
 			this.routes[route].addHandler (onRoute, false);
 			this.routes[route].addHandler (onUnroute, true);
 		}
 		else
 			this.routes[route].addHandler (onRoute, false);
+
+		return this.routes[route];
+	},
+
+	/*
+	**	Returns the Route object for the specified route.
+	*/
+	getRoute: function (route)
+	{
+		if (!this.routes[route])
+		{
+			this.routes[route] = new this.Route (route);
+			this.sortedRoutes.push (route);
+
+			this.sortedRoutes.sort ((a, b) => {
+				return this.routes[a].routeRegex.length - this.routes[b].routeRegex.length;
+			});
+		}
 
 		return this.routes[route];
 	},
