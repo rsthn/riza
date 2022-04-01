@@ -34,6 +34,7 @@ const Api =
 	JSON_RESPONSE_SUPPORTED: 	0x04,
 	XML_RESPONSE_SUPPORTED: 	0x08,
 	INCLUDE_CREDENTIALS:		0x10,
+	UNIQUE_STAMP:				0x20,
 
 	/**
 	**	Target URL for all the API requests. Set by calling `setEndPoint`.
@@ -81,7 +82,7 @@ const Api =
 	setEndPoint: function (apiUrl, flags=null)
 	{
 		if (flags === null)
-			flags = Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED | Api.INCLUDE_CREDENTIALS;
+			flags = Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED | Api.INCLUDE_CREDENTIALS | Api.UNIQUE_STAMP;
 
 		this.apiUrl = apiUrl;
 		this.flags = flags;
@@ -269,25 +270,41 @@ const Api =
 	},
 
 	/**
+	 * Returns a URL given a relative or absolute URL.
+	 */
+	getUrl: function (url)
+	{
+		if (url.indexOf('//') !== -1)
+			return url;
+
+		return this.apiUrl + url;
+	},
+
+	/**
+	 * Appends a parameter to the URL.
+	 */
+	appendParam: function (url, param)
+	{
+		return url + (url.indexOf('?') == -1 ? '?' : '&') + param;
+	},
+
+	/**
 	**	Executes an API call to the URL stored in the `apiUrl` property. By default `httpMethod` is "auto", which will determine the best depending on the data to
 	**	be sent. Any connection error will be reported to the `failure` callback, and similarly any success to the `success` callback. The `params` object can be
 	**	a FormData object or just a regular object.
 	*/
-	apiCall: function (params, success, failure, httpMethod, retries)
+	apiCall: function (params, success, failure, httpMethod=null, retries=null, relativeUrl='')
 	{
-		let url = this.apiUrl + '?_=' + Date.now();
+		let url = this.getUrl(relativeUrl);
 
-		if (httpMethod)
-		{
-			httpMethod = httpMethod.toUpperCase();
+		if (this.flags & Api.UNIQUE_STAMP)
+			url = this.appendParam(url, '_='+Date.now());
 
-			if (httpMethod != 'GET' && httpMethod != 'POST')
-				httpMethod = 'auto';
-		}
-		else
+		httpMethod = httpMethod ? httpMethod.toUpperCase() : null;
+		if (httpMethod != 'GET' && httpMethod != 'POST')
 			httpMethod = 'auto';
 
-		if (retries === undefined)
+		if (retries === null)
 			retries = this.retries;
 
 		if (this._requestPackage && (this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
@@ -405,6 +422,7 @@ const Api =
 			else
 				options.headers['Content-Type'] = data.type;
 
+			options.method = 'POST';
 			options.body = data;
 		}
 
@@ -426,7 +444,7 @@ const Api =
 			if (retries == 0) {
 				if (failure) failure(params);
 			} else {
-				this.apiCall (data, success, failure, httpMethod, retries-1);
+				this.apiCall (data, success, failure, httpMethod, retries-1, relativeUrl);
 			}
 		});
 	},
@@ -484,7 +502,7 @@ const Api =
 	/**
 	**	Executes a POST API call.
 	*/
-	post: function (params, success, failure)
+	post: function (params, success=null, failure=null)
 	{
 		return this.apiCall(params, success, failure, 'POST');
 	},
@@ -492,7 +510,7 @@ const Api =
 	/**
 	**	Executes a GET API call.
 	*/
-	get: function (params, success, failure)
+	get: function (params, success=null, failure=null)
 	{
 		return this.apiCall(params, success, failure, 'GET');
 	},
@@ -500,19 +518,37 @@ const Api =
 	/**
 	**	Executes an automatic API call, returns a promise.
 	*/
-	fetch: function (params)
+	fetch: function (url, params=null)
 	{
+		if (params === null)
+		{
+			if (typeof(url) !== 'string')
+			{
+				params = url;
+				url = '';
+			}
+		}
+
 		return new Promise((resolve, reject) => {
-			this.apiCall(params, resolve, reject);
+			this.apiCall(params, resolve, reject, null, null, url);
 		});
 	},
 
 	/**
-	**	Executes an automatic API call, returns a promise.
+	**	Builds a URL from the given data.
 	*/
-	makeUrl: function (data)
+	makeUrl: function (url, params=null)
 	{
-		return this.apiUrl + (this.apiUrl.indexOf('?') == -1 ? '?' : '&') + this.encodeParams(data);
+		if (params === null)
+		{
+			if (typeof(url) !== 'string')
+			{
+				params = url;
+				url = '';
+			}
+		}
+
+		return this.appendParam(this.getUrl(url), this.encodeParams(params));
 	}
 };
 

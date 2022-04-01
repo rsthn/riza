@@ -114,7 +114,7 @@ const Element =
 
 		this.style.display = 'block';
 
-		this.eid = Math.random().toString().substring(2);
+		this.eid = Math.random().toString().substr(2);
 
 		if (this.model != null)
 		{
@@ -401,7 +401,7 @@ const Element =
 			if (!i) return;
 
 			if (i[0] == '-' || i[0] == '+')
-				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substring(1));
+				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substr(1));
 			else
 				this.classList.add(i);
 		});
@@ -422,7 +422,7 @@ const Element =
 			if (!i) return;
 
 			if (i[0] == '-' || i[0] == '+')
-				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substring(1));
+				this.classList[i[0] == '-' ? 'remove' : 'add'](i.substr(1));
 			else
 				this.classList.remove(i);
 		});
@@ -441,12 +441,12 @@ const Element =
 			let j = (i = i.trim()).indexOf(':');
 			if (j == -1) return;
 
-			let name = i.substring(0, j).trim();
+			let name = i.substr(0, j).trim();
 			for (let k = name.indexOf('-'); k != -1; k = name.indexOf('-')) {
-				name = name.substring(0, k) + name.substring(k+1, 1).toUpperCase() + name.substring(k+2);
+				name = name.substr(0, k) + name.substr(k+1, 1).toUpperCase() + name.substr(k+2);
 			}
 
-			this.style[name] = i.substring(j+1).trim();
+			this.style[name] = i.substr(j+1).trim();
 		});
 
 		return this;
@@ -494,23 +494,23 @@ const Element =
 
 			var i = evtstr.indexOf(' ');
 
-			var name = i == -1 ? evtstr : evtstr.substring(0, i);
-			var selector = i == -1 ? '' : evtstr.substring(i + 1);
+			var name = i == -1 ? evtstr : evtstr.substr(0, i);
+			var selector = i == -1 ? '' : evtstr.substr(i + 1);
 
 			let args = null;
 
 			var j = name.indexOf('(');
 			if (j != -1)
 			{
-				args = name.substring(j+1, name.length-j-2).split(',');
-				name = name.substring(0, j);
+				args = name.substr(j+1, name.length-j-2).split(',');
+				name = name.substr(0, j);
 			}
 
 			if (selector[0] == '@')
 			{
 				if (selector != '@this')
 				{
-					this[selector.substring(1)].addEventListener(name, hdl);
+					this[selector.substr(1)].addEventListener(name, hdl);
 					continue;
 				}
 
@@ -519,14 +519,14 @@ const Element =
 			else if (selector[0] == '&')
 			{
 				if (selector != '&this')
-					selector = "[data-ref='"+selector.substring(1)+"']";
+					selector = "[data-ref='"+selector.substr(1)+"']";
 				else
 					selector = this;
 			}
 
-			if (name.substring(0, 1) == '#')
+			if (name.substr(0, 1) == '#')
 			{
-				this.listen('propertyChanged.'+name.substring(1), this, hdl);
+				this.listen('propertyChanged.'+name.substr(1), this, hdl);
 				continue;
 			}
 
@@ -570,7 +570,7 @@ const Element =
 
 		for (let routeStr in this.routes)
 		{
-			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substring(1)) : Router.getRoute(routeStr);
+			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substr(1)) : Router.getRoute(routeStr);
 			let handler = this.routes[routeStr];
 
 			if (Rinn.typeOf(handler) == 'string')
@@ -590,7 +590,7 @@ const Element =
 	{
 		for (let routeStr in routes)
 		{
-			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substring(1)) : Router.getRoute(routeStr);
+			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substr(1)) : Router.getRoute(routeStr);
 			let handler = routes[routeStr];
 
 			if (Rinn.typeOf(handler) == 'string')
@@ -683,13 +683,13 @@ const Element =
 
 		if (eventName[eventName.length-1] == '!')
 		{
-			eventName = eventName.substring(0, eventName.length-1);
+			eventName = eventName.substr(0, eventName.length-1);
 			eventCatcher = true;
 		}
 
 		if (eventName[0] == '!')
 		{
-			eventName = eventName.substring(1);
+			eventName = eventName.substr(1);
 			eventImmediate = true;
 		}
 
@@ -1162,12 +1162,12 @@ const Element =
 		{
 			if (i.startsWith('event '))
 			{
-				proto.events[i.substring(6)] = proto[i];
+				proto.events[i.substr(6)] = proto[i];
 				delete proto[i];
 			}
 			else if (i.startsWith('route '))
 			{
-				proto.routes[i.substring(6)] = proto[i];
+				proto.routes[i.substr(6)] = proto[i];
 				delete proto[i];
 			}
 		}
