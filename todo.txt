@@ -1,0 +1,2 @@
+Trigger some sort of "shown" event on the actual tab content and also panel.
+Add "data-change" default event.
