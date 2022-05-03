@@ -35,7 +35,10 @@ const Api =
 	XML_RESPONSE_SUPPORTED: 	0x08,
 	INCLUDE_CREDENTIALS:		0x10,
 	UNIQUE_STAMP:				0x20,
+};
 
+Object.assign(Api,
+{
 	/**
 	**	Target URL for all the API requests. Set by calling `setEndPoint`.
 	*/
@@ -547,6 +550,6 @@ const Api =
 
 		return this.appendParam(this.getUrl(url), this.encodeParams(params));
 	}
-};
+});
 
 export default Api;
