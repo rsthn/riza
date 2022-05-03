@@ -1,12 +1,12 @@
 {
     "name": "riza",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
     "module": "./dist/riza.m.js",
     "browser": "./dist/riza.js",
-	"packageManager": "pnpm@6.32.4",
+    "packageManager": "pnpm@6.32.4",
     "bin": {
         "riza": "bin/cli.js"
     },

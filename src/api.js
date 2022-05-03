@@ -44,7 +44,7 @@ const Api =
 	/**
 	**	Capabilities flag.
 	*/
-	flags: 0,
+	flags: Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED | Api.INCLUDE_CREDENTIALS | Api.UNIQUE_STAMP,
 
 	/**
 	**	Indicates if all request data will be packed into a req64 parameter instead of individual fields.
@@ -81,11 +81,8 @@ const Api =
 	*/
 	setEndPoint: function (apiUrl, flags=null)
 	{
-		if (flags === null)
-			flags = Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED | Api.INCLUDE_CREDENTIALS | Api.UNIQUE_STAMP;
-
 		this.apiUrl = apiUrl;
-		this.flags = flags;
+		this.flags = flags ?? this.flags;
 
 		return this;
 	},
@@ -387,7 +384,7 @@ const Api =
 
 			if (options.method == 'GET')
 			{
-				url += '&' + this.encodeParams(data);
+				url = this.appendParam(url, this.encodeParams(data));
 			}
 			else
 			{
