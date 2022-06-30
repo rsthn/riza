@@ -1,32 +1,29 @@
 {
     "name": "riza",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
     "module": "./dist/riza.m.js",
-    "browser": "./dist/riza.js",
-    "packageManager": "pnpm@6.32.4",
+    "global": "./dist/riza.js",
     "bin": {
         "riza": "bin/cli.js"
     },
     "scripts": {
         "test": "echo Ok",
-        "deploy": "pnpm build:all && node ./local/deploy.js",
         "commit": "pnpm build && node ./local/commit.js",
-        "build:all": "pnpm build:module && pnpm build:browser",
-        "build:browser": "parcel build --no-cache --target browser",
+        "deploy": "pnpm build && node ./local/deploy.js",
+        "build:global": "parcel build --no-cache --target global",
         "build:module": "parcel build --no-cache --target module",
-        "build": "pnpm build:browser"
+        "build": "pnpm build:module && pnpm build:global"
     },
-    "browserslist": "since 2020-01",
     "targets": {
         "module": {
             "source": "./src/main.js",
             "optimize": true
         },
-        "browser": {
-            "source": "./src/main.js",
+        "global": {
+            "source": "./src/_main.js",
             "optimize": true,
             "includeNodeModules": true
         }
@@ -43,7 +40,6 @@
     "homepage": "https://github.com/rsthn/riza#readme",
     "files": [
         "dist/",
-        "src/",
         "bin/cli.js",
         "bin/template/src/",
         "bin/template/.env.development",
@@ -56,6 +52,9 @@
         "base-64": "^1.0.0",
         "fs-extra": "^10.1.0",
         "node-fetch": "^2.6.7",
-        "rinn": "^2.0.42"
+        "rinn": "^2.0.45"
+    },
+    "devDependencies": {
+        "parcel": "^2.6.2"
     }
 }

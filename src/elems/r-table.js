@@ -39,15 +39,15 @@
 		}
 
 		th[data-sort] {
-			pointer: cursor; text-decoration: underline;
+			cursor: pointer; text-decoration: underline;
 		}
 
-		th[data-sort][data-order="asc"]:after {
-			content: "ASC";
+		th[data-sort][data-order="asc"]:before {
+			content: "\25B2";
 		}
 
-		th[data-sort][data-order="desc"]:after {
-			content: "DESC";
+		th[data-sort][data-order="desc"]:before {
+			content: "\25BC";
 		}
 
 	Modifiers:
