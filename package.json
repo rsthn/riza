@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "1.1.7",
+    "version": "1.1.8",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
@@ -52,7 +52,7 @@
         "base-64": "^1.0.0",
         "fs-extra": "^10.1.0",
         "node-fetch": "^2.6.7",
-        "rinn": "^2.0.45"
+        "rinn": "^2.0.46"
     },
     "devDependencies": {
         "parcel": "^2.6.2"

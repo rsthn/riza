@@ -5,13 +5,13 @@ specifiers:
   fs-extra: ^10.1.0
   node-fetch: ^2.6.7
   parcel: ^2.6.2
-  rinn: ^2.0.45
+  rinn: ^2.0.46
 
 dependencies:
   base-64: 1.0.0
   fs-extra: 10.1.0
   node-fetch: 2.6.7
-  rinn: 2.0.45
+  rinn: 2.0.46
 
 devDependencies:
   parcel: 2.6.2
@@ -1519,8 +1519,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /rinn/2.0.45:
-    resolution: {integrity: sha512-ih/cZdgrR2pkdhB00HDMjwqrdt4B3rQK9bi2K8C3efN1T9XLCNKtXat6gjO5CmrC1cd11KIyq/IUG97UY9CSJg==}
+  /rinn/2.0.46:
+    resolution: {integrity: sha512-cVg5z9iUJLzael8aGwi7/zhekmS4Pq1xkYqgFLEnXYidkVOtkAlJgqXydIS9nTOtBnElq3j43XOL64YIYfPang==}
     dev: false
 
   /safe-buffer/5.2.1:
