@@ -89,7 +89,7 @@ switch (args[0])
 				return;
 			}
 
-			patch(dest, ['package.json', 'manifest.json', 'index.html'], 'project_name', args[1]);
+			patch(dest, ['package.json', 'src/manifest.jsond', 'src/index.html'], 'project_name', args[1]);
 
 			if (args[0] == 'create-yarn')
 				manager = 'yarn';
