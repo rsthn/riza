@@ -1,18 +1,21 @@
 
 import { Element } from 'riza';
 import fs from 'fs';
+import utils from '../utils';
+import Workflow from '../workflow';
 
 Element.register('r-splash',
 {
+	contents: fs.readFileSync(__dirname + '/splash.html'),
+
 	init: function()
 	{
 		this.addClass('text-center vertical-center');
 
-		this.setInnerHTML(fs.readFileSync(__dirname + '/splash.html'));
-
-		runAfter(500, () => {
+		utils.runAfter(500, () =>
+		{
 			this.dataset.anim = 'fade-out';
-			continueTo ('home', { anim: 'fade-in' });
+			Workflow.continueTo('home');
 		});
 	}
 });

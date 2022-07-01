@@ -3,7 +3,7 @@ import { Element } from 'riza';
 
 import './dialog.css';
 
-const Dialog = Element.register('r-dialog',
+export default Element.register('r-dialog',
 {
 	isRoot: false,
 	modal: false,
@@ -62,5 +62,3 @@ const Dialog = Element.register('r-dialog',
 		this.back();
 	}
 });
-
-export default Dialog;

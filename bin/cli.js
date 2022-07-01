@@ -16,6 +16,18 @@ function msg (type, message) {
 	console.log(WHITE + 'riza: ' + type + message + BLANK);
 }
 
+function patch (dest, fileNames, searchString, newString)
+{
+	searchString = new RegExp(searchString, 'g');
+
+	for (let fileName of fileNames)
+	{
+		let data = fs.readFileSync(path.join(dest, fileName)).toString();
+		data = data.replace(searchString, newString);
+		fs.writeFileSync(path.join(dest, fileName), data);
+	}
+}
+
 function run (command)
 {
 	return new Promise ((resolve, reject) => {
@@ -42,8 +54,9 @@ if (args.length == 0)
     riza <command> [options]
 
 Command:
-    create <name>                Create a project <name> in the current folder.
-	prepare                      Installs global requirements (yarn).
+    create <name>                Create a project <name> using pnpm.
+    create-yarn <name>           Create a project <name> using yarn.
+    create-npm <name>            Create a project <name> using npm.
 `);
 
 	process.exit();
@@ -51,17 +64,21 @@ Command:
 
 const cdir = path.resolve('.');
 const sdir = path.dirname(url.fileURLToPath(import.meta.url));
+let manager = 'pnpm';
+let dest;
 
 switch (args[0])
 {
 	case 'create':
+	case 'create-yarn':
+	case 'create-npm':
 		if (args.length < 2) {
 			msg(ERROR, 'Parameter <name> missing for command `create`');
 			break;
 		}
 
-		msg(INFO, 'Creating folder ' + args[1] + '...');
-		const dest = path.join(cdir, args[1]);
+		msg(INFO, 'Creating project ' + args[1] + '...');
+		dest = path.join(cdir, args[1]);
 		if (!fs.existsSync(dest)) fs.mkdirSync(dest);
 
 		msg(INFO, 'Copying template ...');
@@ -72,28 +89,21 @@ switch (args[0])
 				return;
 			}
 
+			patch(dest, ['package.json', 'manifest.json', 'index.html'], 'project_name', args[1]);
+
+			if (args[0] == 'create-yarn')
+				manager = 'yarn';
+			else if (args[0] == 'create-npm')
+				manager = 'npm';
+
+			if (manager !== 'pnpm')
+				patch(dest, ['package.json'], 'pnpm', manager);
+
 			msg(INFO, 'Installing dependencies ...');
+
 			process.chdir(dest);
-
-			run('yarn').then(r => {
+			run(manager + ' install').then(r => {
 				msg(SUCCESS, 'Completed.');
-			});
-		});
-
-		break;
-
-	case 'prepare':
-		msg(INFO, 'Installing parcel ...');
-		run('yarn global add --ignore-optional parcel').then(r =>
-		{
-			msg(INFO, 'Installing shx ...');
-			run('yarn global add --ignore-optional shx').then(r =>
-			{
-				msg(INFO, 'Installing http-server ...');
-				run('yarn global add --ignore-optional http-server').then(r =>
-				{
-					msg(SUCCESS, 'Completed.');
-				});
 			});
 		});
 

@@ -1,9 +1,9 @@
 
 /**
- * 	Custom message strings.
+ * Custom message strings.
  */
 
-export default
+global.messages =
 {
 	'info': 'Information',
 	'error': 'Error',
@@ -15,7 +15,6 @@ export default
 	'no': 'No',
 
 	'required:true': 'Field is required.',
-	'required:image': 'Select an image file.',
 
 	'pattern:email': 'Email format is incorrect.',
 	'pattern:name': 'Please remove invalid characters.',

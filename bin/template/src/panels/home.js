@@ -4,14 +4,14 @@ import fs from 'fs';
 
 Element.register('r-home',
 {
+	contents: fs.readFileSync(__dirname + '/home.html'),
 	model: { },
 
 	init: function()
 	{
 		this.addClass('fill-parent d-flex flex-column');
-		this.dataset.anim = 'fade-in';
+		this.dataset.anim = this.args.anim || 'fade-in';
 
-		this.setInnerHTML(fs.readFileSync(__dirname + '/home.html'));
 		this.refresh();
 	},
 

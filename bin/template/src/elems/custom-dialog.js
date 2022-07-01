@@ -1,7 +1,7 @@
 
 import { Element } from 'riza';
 
-const CustomDialog = Element.register('custom-dialog',
+export default Element.register('custom-dialog',
 {
 	model: {
 		title: 'Title',
@@ -87,5 +87,3 @@ const CustomDialog = Element.register('custom-dialog',
 		});
 	}
 });
-
-export default CustomDialog;

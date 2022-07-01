@@ -6,9 +6,10 @@ import './password.css';
 
 Element.register('r-password',
 {
+	contents: fs.readFileSync(__dirname + '/password.html'),
+
 	init: function()
 	{
-		this.setInnerHTML(fs.readFileSync(__dirname + '/password.html'));
 		this.type = 'field';
 	},
 

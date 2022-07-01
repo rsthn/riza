@@ -1,6 +1,6 @@
 {
-	"short_name": "riza-app",
-	"name": "riza-app",
+	"short_name": "project_name",
+	"name": "project_name",
 	"start_url": "index.html",
 	"display": "standalone",
 	"background_color": "#ffffff",
