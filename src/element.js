@@ -3,53 +3,58 @@ import { Rinn, Model, Template } from 'rinn';
 import Router from './router.js';
 
 /**
- * 	Map containing the original prototypes for all registered elements.
+ * Map containing the original prototypes for all registered elements.
  */
 const elementPrototypes = { };
 
 /**
- * 	Map containing the final classes for all registered elements.
+ * Map containing the final classes for all registered elements.
  */
 const elementClasses = { };
 
 /**
- * 	Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
- * 	self or child-elements, and several utility methods.
+ * Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
+ * self or child-elements, and several utility methods.
  */
 
 const Element = 
 {
 	/**
-	 * 	Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
+	 * Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
 	 */
 	eid: null,
 
 	/**
-	 * 	Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
+	 * Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
 	 */
 	isRoot: true,
 
 	/**
-	 * 	Root element to which this element is attached (when applicable).
+	 * Root element to which this element is attached (when applicable).
 	 */
 	root: null,
 
 	/**
-	 * 	Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
+	 * Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
 	 */
 	isReady: 0,
 	readyReenter: 0,
 	readyLocked: 0,
 
 	/**
-	 * 	Model type (class) for the element's model.
+	 * Model type (class) for the element's model.
 	 */
 	modelt: Model,
 
 	/**
-	 * 	Data model related to the element.
+	 * Data model related to the element.
 	 */
 	model: null,
+
+	/**
+	 * Contents of the element. When set, the innerHTML will be set to this value.
+	 */
+	contents: null,
 
 	/**
 	 * 	Events map.
@@ -78,7 +83,7 @@ const Element =
 	},
 
 	/**
-	 * Routes map.
+	 * Internal routes map, set by `bindRoutes`.
 	 */
 	routes: null,
 
@@ -121,6 +126,9 @@ const Element =
 
 		if (this.events)
 			this.bindEvents (this.events);
+
+		if (this.contents)
+			this.setInnerHTML(this.contents);
 
 		setTimeout(() => {
 			if (this.tagName.toLowerCase() !== 'r-dom-probe')
@@ -1555,8 +1563,8 @@ Element.register ('r-dom-probe', {
 /* ****************************************** */
 
 /**
-**	Finds the parent element given a selector.
-*/
+ * Finds the parent element given a selector.
+ */
 HTMLElement.prototype.querySelectorParent = function (selector)
 {
 	let elem = this;
