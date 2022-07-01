@@ -5,13 +5,13 @@ specifiers:
   fs-extra: ^10.1.0
   node-fetch: ^2.6.7
   parcel: ^2.6.2
-  rinn: ^2.0.46
+  rinn: ^2.0.47
 
 dependencies:
   base-64: 1.0.0
   fs-extra: 10.1.0
   node-fetch: 2.6.7
-  rinn: 2.0.46
+  rinn: 2.0.47
 
 devDependencies:
   parcel: 2.6.2
@@ -1005,7 +1005,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001361
-      electron-to-chromium: 1.4.174
+      electron-to-chromium: 1.4.176
       node-releases: 2.0.5
       update-browserslist-db: 1.0.4_browserslist@4.21.1
     dev: true
@@ -1163,8 +1163,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /electron-to-chromium/1.4.174:
-    resolution: {integrity: sha512-JER+w+9MV2MBVFOXxP036bLlNOnzbYAWrWU8sNUwoOO69T3w4564WhM5H5atd8VVS8U4vpi0i0kdoYzm1NPQgQ==}
+  /electron-to-chromium/1.4.176:
+    resolution: {integrity: sha512-92JdgyRlcNDwuy75MjuFSb3clt6DGJ2IXSpg0MCjKd3JV9eSmuUAIyWiGAp/EtT0z2D4rqbYqThQLV90maH3Zw==}
     dev: true
 
   /entities/2.2.0:
@@ -1519,8 +1519,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /rinn/2.0.46:
-    resolution: {integrity: sha512-cVg5z9iUJLzael8aGwi7/zhekmS4Pq1xkYqgFLEnXYidkVOtkAlJgqXydIS9nTOtBnElq3j43XOL64YIYfPang==}
+  /rinn/2.0.47:
+    resolution: {integrity: sha512-B7obXg1eARdIRufkm2alwPUdJ6eYRKVGk0uD0OUskRdDvgo8d8/kGSMizteuExp+kldZbcnw9m1TnzqQLsFKYw==}
     dev: false
 
   /safe-buffer/5.2.1:
