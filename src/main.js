@@ -8,6 +8,7 @@ import _Easing from './easing.js'; export const Easing = _Easing;
 import _Anim from './anim.js'; export const Anim = _Anim;
 import _Elements from './elements.js'; export const Elements = _Elements;
 import _Utils from './utils.js'; export const Utils = _Utils;
+import _Db from './db.js'; export const Db = _Db;
 
 import * as _Rinn from 'rinn';
 export const Rinn = _Rinn.Rinn;
