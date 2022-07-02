@@ -14,9 +14,9 @@ export default
 	 * Initializes the database connection.
 	 * @param {string} dbName
 	 * @param {number} version
-	 * @param {(db: IDBDatabase, txn: IDBTransaction, version: number) => void} upgradeCallback
+	 * @param {(db: IDBDatabase, txn: IDBTransaction, oldVersion: number) => void} upgradeCallback
 	 * @returns {Promise<void>}
-	 * !static init (dbName: string, version: number, upgradeCallback: (db: IDBDatabase, txn: IDBTransaction, version: number) => void) : Promise<void>;
+	 * !static init (dbName: string, version: number, upgradeCallback: (db: IDBDatabase, txn: IDBTransaction, oldVersion: number) => void) : Promise<void>;
 	 */
 	init: function (dbName, version, upgradeCallback)
 	{

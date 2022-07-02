@@ -17,7 +17,7 @@ import _Elements from './elements.js'; export const Elements = _Elements;
 //![import "./elements"]
 import _Utils from './utils.js'; export const Utils = _Utils;
 //![import "./utils"]
-import _Db from './db.js'; export const Db = _Db;
+import _db from './db.js'; export const db = _db;
 //![import "./db"]
 
 import * as _Rinn from 'rinn';

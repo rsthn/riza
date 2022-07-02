@@ -3,6 +3,7 @@ import './global';
 
 import { Element, Router } from 'riza';
 import workflow from './workflow';
+import utils from './utils';
 
 /**
  * Root element.
