@@ -1,6 +1,8 @@
 
 import { Rinn } from 'rinn';
 
+//!class Db
+
 export default
 {
 	/**
@@ -14,6 +16,7 @@ export default
 	 * @param {number} version
 	 * @param {(db: IDBDatabase, txn: IDBTransaction, version: number) => void} upgradeCallback
 	 * @returns {Promise<void>}
+	 * !static init (dbName: string, version: number, upgradeCallback: (db: IDBDatabase, txn: IDBTransaction, version: number) => void) : Promise<void>;
 	 */
 	init: function (dbName, version, upgradeCallback)
 	{
@@ -77,6 +80,7 @@ export default
 	 * @param {string} storeName
 	 * @param {string} indexName
 	 * @returns {IDBIndex}
+	 * !static index (storeName: string, indexName: string) : IDBIndex;
 	 */
 	index: function (storeName, indexName)
 	{
@@ -96,6 +100,7 @@ export default
 	 * @param {string} id
 	 * @param { (value:object, cursor:IDBCursor) => Promise<boolean> } callback
 	 * @returns {Promise<void>}
+	 * !static forEach (storeName: string|IDBIndex, id: string, callback: (value:object, cursor:IDBCursor) => Promise<boolean>) : Promise<void>;
 	 */
 	forEach: function (storeName, id, callback)
 	{
@@ -147,9 +152,10 @@ export default
 	},
 
 	/**
-	 * Loads the count of all records from the specified data store.
+	 * Returns the count of all records from the specified data store.
 	 * @param {string|IDBIndex} storeName
 	 * @returns {Promise<number>}
+	 * !static count (storeName: string|IDBIndex) : Promise<number>;
 	 */
 	count: function (storeName)
 	{
@@ -177,10 +183,11 @@ export default
 	},
 
 	/**
-	 * Loads all records from the specified data store.
+	 * Returns all records from the specified data store.
 	 * @param {string|IDBIndex} storeName
 	 * @param {string|number|Array<string|number>} filter
 	 * @returns {Promise<Array<object>>}
+	 * !static getAll (storeName: string|IDBIndex, filter?: string|number|Array<string|number>) : Promise<Array<object>>;
 	 */
 	getAll: function (storeName, filter=null)
 	{
@@ -212,6 +219,7 @@ export default
 	 * @param {string|IDBIndex} storeName
 	 * @param {string|number|Array<string|number>} id
 	 * @returns {Promise<object>}
+	 * !static get (storeName: string|IDBIndex, id: string|number|Array<string|number>) : Promise<object>;
 	 */
 	get: function (storeName, id)
 	{
@@ -244,6 +252,7 @@ export default
 	 * @param {string} storeName
 	 * @param {object} data
 	 * @returns {Promise<void>}
+	 * !static put (storeName: string, data: object) : Promise<void>;
 	 */
 	put: function (storeName, data)
 	{
@@ -265,12 +274,13 @@ export default
 	},
 
 	/**
-	 * Loads a variable from the system table.
+	 * Returns a variable from the system table.
 	 * @param {string} name - Name of the property to read.
 	 * @param {boolean} full - When `true` the entire object will be returned.
 	 * @returns {any}
+	 * !static sysGet (name: string, full?: boolean) : any;
 	 */
-	sysRead: async function (name, full=false)
+	sysGet: async function (name, full=false)
 	{
 		let data = await this.get('system', [name]);
 		return data ? (full ? data : data.value) : null;
@@ -282,8 +292,9 @@ export default
 	 * @param {any} value - Value to write.
 	 * @param {boolean} full - When `true` the entire value will be written as-is.
 	 * @returns {void}
+	 * !static sysPut (name: string, value: any, full?: boolean) : void;
 	 */
-	sysWrite: async function (name, value, full=false)
+	sysPut: async function (name, value, full=false)
 	{
 		if (full)
 		{
@@ -300,6 +311,7 @@ export default
 	 * @param {object} [partial]
 	 * @param {object} [notPartial]
 	 * @returns {Promise<object>}
+	 * !static findOne (storeName: string|IDBIndex, partial?: object, notPartial?: object) : Promise<object>;
 	 */
 	findOne: function (storeName, partial=null, notPartial=null)
 	{
@@ -354,6 +366,7 @@ export default
 	 * @param {string} storeName
 	 * @param {string|number|Array<string|number>} id
 	 * @returns {Promise<void>}
+	 * !static delete (storeName: string, id: string|number|Array<string|number>) : Promise<void>;
 	 */
 	delete: function (storeName, id)
 	{
@@ -375,15 +388,15 @@ export default
 	},
 
 	/**
-	 * 	Returns all items in the specified index.
-	 *
-	 * 	@param {IDBIndex} idbIndex
-	 * 	@param {string} id
-	 * 	@returns Promise => object
+	 * Deletes all items in the specified store.
+	 * @param {string|IDBIndex} storeName
+	 * @param {string|number|Array<string|number>} id
+	 * @returns {Promise<void>}
+	 * !static deleteAll (storeName: string|IDBIndex, id: string|number|Array<string|number>) : Promise<void>;
 	 */
-	deleteAll: function (idbIndex, id=null)
+	deleteAll: function (storeName, id=null)
 	{
-		return this.forEach(idbIndex, id, async (value, cursor) => {
+		return this.forEach(storeName, id, async (value, cursor) => {
 			await cursor.delete();
 		});
 	},
@@ -393,6 +406,7 @@ export default
 	 * @param {string} storeName
 	 * @param {object} data
 	 * @returns {Promise<void>}
+	 * !static insert (storeName: string, data: object) : Promise<void>;
 	 */
 	insert: function (storeName, data)
 	{
@@ -413,3 +427,5 @@ export default
 		});
 	}
 };
+
+//!/class

@@ -6,67 +6,64 @@ if (!('fetch' in global))
 	global.fetch = _fetch;
 
 /**
-**	API interface utility functions.
-*/
+ * API interface utility functions.
+ */
 
 const Api =
 {
 	/**
-	**	Flags constants.
-	*/
+	 * Flags constants.
+	 */
 	REQUEST_PACKAGE_SUPPORTED:	0x01,
 	REQ64_SUPPORTED: 			0x02,
 	JSON_RESPONSE_SUPPORTED: 	0x04,
 	XML_RESPONSE_SUPPORTED: 	0x08,
 	INCLUDE_CREDENTIALS:		0x10,
 	UNIQUE_STAMP:				0x20,
-};
 
-Object.assign(Api,
-{
 	/**
-	**	Target URL for all the API requests. Set by calling `setEndPoint`.
-	*/
+	 * Target URL for all the API requests. Set by calling `setEndPoint`.
+	 */
 	apiUrl: "/api",
 
 	/**
-	**	Capabilities flag.
-	*/
-	flags: Api.REQUEST_PACKAGE_SUPPORTED | Api.REQ64_SUPPORTED | Api.JSON_RESPONSE_SUPPORTED | Api.XML_RESPONSE_SUPPORTED | Api.INCLUDE_CREDENTIALS | Api.UNIQUE_STAMP,
+	 * Capabilities flag.
+	 */
+	flags: 0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20,
 
 	/**
-	**	Indicates if all request data will be packed into a req64 parameter instead of individual fields.
-	*/
+	 * Indicates if all request data will be packed into a req64 parameter instead of individual fields.
+	 */
 	useReq64: false,
 
 	/**
-	**	Number of retries to execute each API call before giving up and invoking error handlers.
-	*/
+	 * Number of retries to execute each API call before giving up and invoking error handlers.
+	 */
 	retries: 0,
 
 	/**
-	**	Headers for the request.
-	*/
+	 * Headers for the request.
+	 */
 	headers: { },
 
 	/**
-	**	Level of the current request. Used to detect nested requests.
-	*/
+	 * Level of the current request. Used to detect nested requests.
+	 */
 	_requestLevel: 0,
 
 	/**
-	**	Indicates if all API calls should be bundled in a request package. Activated by calling the packageBegin() function and finished with packageEnd().
-	*/
+	 * Indicates if all API calls should be bundled in a request package. Activated by calling the packageBegin() function and finished with packageEnd().
+	 */
 	_requestPackage: 0,
 
 	/**
-	**	When in package-mode, this contains the package data to be sent upon a call to packageEnd().
-	*/
+	 * When in package-mode, this contains the package data to be sent upon a call to packageEnd().
+	 */
 	_packageData: [],
 
 	/**
-	**	Sets the API end-point URL address.
-	*/
+	 * Sets the API end-point URL address.
+	 */
 	setEndPoint: function (apiUrl, flags=null)
 	{
 		this.apiUrl = apiUrl;
@@ -76,16 +73,16 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Overridable filter that processes the response from the server and returns true if it was successful. The `res` parameter indicates the response data, and `req` the request data.
-	*/
+	 * Overridable filter that processes the response from the server and returns true if it was successful. The `res` parameter indicates the response data, and `req` the request data.
+	 */
 	responseFilter: function (res, req)
 	{
 		return true;
 	},
 
 	/**
-	**	Starts "package-mode" (using the `rpkg` field). Any API calls after this will be bundled together.
-	*/
+	 * Starts "package-mode" (using the `rpkg` field). Any API calls after this will be bundled together.
+	 */
 	packageBegin: function ()
 	{
 		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
@@ -95,8 +92,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Finishes "package-mode" and a single API request with the currently constructed package will be sent.
-	*/
+	 * Finishes "package-mode" and a single API request with the currently constructed package will be sent.
+	 */
 	packageEnd: function (callback)
 	{
 		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
@@ -112,8 +109,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Starts package-mode, executes the callback and finishes package-mode. Therefore any requests made by the callback will be packed together.
-	*/
+	 * Starts package-mode, executes the callback and finishes package-mode. Therefore any requests made by the callback will be packed together.
+	 */
 	packRequests: function (callback, responseCallback=null)
 	{
 		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
@@ -127,8 +124,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Sends a single API request with the currently constructed package and maintains package-mode.
-	*/
+	 * Sends a single API request with the currently constructed package and maintains package-mode.
+	 */
 	packageSend: function (callback)
 	{
 		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
@@ -193,8 +190,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Adds CSS class 'busy' to the HTML root element, works only if running inside a browser.
-	*/
+	 * Adds CSS class 'busy' to the HTML root element, works only if running inside a browser.
+	 */
 	_showProgress: function ()
 	{
 		if ('document' in global) {
@@ -204,8 +201,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Removes the 'busy' CSS class from the HTML element.
-	*/
+	 * Removes the 'busy' CSS class from the HTML element.
+	 */
 	_hideProgress: function ()
 	{
 		if ('document' in global)
@@ -221,7 +218,7 @@ Object.assign(Api,
 	},
 
 	/**
-	 * 	Sets an HTTP header.
+	 * Sets an HTTP header.
 	 */
 	header: function (name, value)
 	{
@@ -234,8 +231,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Returns a parameter string for a GET request given an object with fields.
-	*/
+	 * Returns a parameter string for a GET request given an object with fields.
+	 */
 	encodeParams: function (obj)
 	{
 		let s = [];
@@ -274,10 +271,10 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Executes an API call to the URL stored in the `apiUrl` property. By default `httpMethod` is "auto", which will determine the best depending on the data to
-	**	be sent. Any connection error will be reported to the `failure` callback, and similarly any success to the `success` callback. The `params` object can be
-	**	a FormData object or just a regular object.
-	*/
+	 * Executes an API call to the URL stored in the `apiUrl` property. By default `httpMethod` is "auto", which will determine the best depending on the data to
+	 * be sent. Any connection error will be reported to the `failure` callback, and similarly any success to the `success` callback. The `params` object can be
+	 * a FormData object or just a regular object.
+	 */
 	apiCall: function (params, success, failure, httpMethod=null, retries=null, relativeUrl='')
 	{
 		let url = this.getUrl(relativeUrl);
@@ -435,8 +432,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Decodes a result obtained using fetch into a usable object.
-	*/
+	 * Decodes a result obtained using fetch into a usable object.
+	 */
 	decodeResult: function (result)
 	{
 		let type = result.headers.get('content-type').split(';')[0].toLowerCase();
@@ -461,16 +458,16 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Makes a blob with the specified data and type.
-	*/
+	 * Makes a blob with the specified data and type.
+	 */
 	getBlob: function (data, type)
 	{
 		return new Blob ([data], { type: type });
 	},
 
 	/**
-	**	Provided access to the base64 module to encode/decode data.
-	*/
+	 * Provided access to the base64 module to encode/decode data.
+	 */
 	base64:
 	{
 		encode: function (value)
@@ -485,24 +482,24 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Executes a POST API call.
-	*/
+	 * Executes a POST API call.
+	 */
 	post: function (params, success=null, failure=null)
 	{
 		return this.apiCall(params, success, failure, 'POST');
 	},
 
 	/**
-	**	Executes a GET API call.
-	*/
+	 * Executes a GET API call.
+	 */
 	get: function (params, success=null, failure=null)
 	{
 		return this.apiCall(params, success, failure, 'GET');
 	},
 
 	/**
-	**	Executes an automatic API call, returns a promise.
-	*/
+	 * Executes an automatic API call, returns a promise.
+	 */
 	fetch: function (url, params=null)
 	{
 		if (params === null)
@@ -520,8 +517,8 @@ Object.assign(Api,
 	},
 
 	/**
-	**	Builds a URL from the given data.
-	*/
+	 * Builds a URL from the given data.
+	 */
 	makeUrl: function (url, params=null)
 	{
 		if (params === null)
@@ -535,6 +532,6 @@ Object.assign(Api,
 
 		return this.appendParam(this.getUrl(url), this.encodeParams(params));
 	}
-});
+};
 
 export default Api;

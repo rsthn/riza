@@ -1,18 +1,20 @@
 {
     "name": "riza",
-    "version": "1.1.14",
+    "version": "1.1.15",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
     "module": "./dist/riza.m.js",
     "global": "./dist/riza.js",
+    "types": "./dist/riza.d.ts",
     "bin": {
         "riza": "bin/cli.js"
     },
     "scripts": {
         "test": "echo Ok",
-        "commit": "pnpm build && node ./local/commit.js",
-        "deploy": "pnpm build && node ./local/deploy.js",
+        "commit": "pnpm build && node ./scripts/commit.js",
+        "deploy": "pnpm build && pnpm tsdoc && node ./scripts/deploy.js",
+        "tsdoc": "node ./scripts/tsdoc.js ./src/main.js ./dist/riza.d.ts",
         "build:global": "parcel build --no-cache --target global",
         "build:module": "parcel build --no-cache --target module",
         "build": "pnpm build:module && pnpm build:global"
