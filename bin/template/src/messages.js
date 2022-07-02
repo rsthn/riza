@@ -26,6 +26,7 @@ global.messages =
 
 	'err_otp_invalid': '<b>Incorrect Code</b>\n<small>You have [attempts] attempts left</small>',
 	'err_otp_timeout': '<b>Too many wrong attempts</b>\nTry later',
+	'err_credentials': 'Username or password is incorrect.',
 
 	'msg_details_saved': 'Your details have been saved.',
 	'msg_password_updated': 'Your password has been updated.'

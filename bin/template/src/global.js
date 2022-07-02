@@ -20,10 +20,9 @@ global.EventBus = new Model();
 global.DataBus = global.EventBus;
 
 /**
- * Make current environment globally available.
+ * Set API end point.
  */
-global.env = process.env;
-if (env.apiUrl) Api.setEndPoint(env.apiUrl);
+Api.setEndPoint(process.env.API_URL);
 
 
 // *****************************

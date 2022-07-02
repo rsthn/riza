@@ -2,7 +2,7 @@
 import './global';
 
 import { Element, Router } from 'riza';
-import Workflow from './workflow';
+import workflow from './workflow';
 
 /**
  * Root element.
@@ -14,12 +14,11 @@ Element.register('r-app',
 	 */
 	rready: function()
 	{
-		Router.refresh();
-
 		this.setModel(EventBus);
 		EventBus.trigger('appLoaded');
 
-		Workflow.init(this.querySelector('.app-container'));
+		workflow.init(this.querySelector('.app-container'));
+		utils.runAfter(100, () => Router.refresh());
 	},
 
 	/**

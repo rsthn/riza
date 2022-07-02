@@ -566,7 +566,7 @@ const Element =
 			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substr(1)) : Router.getRoute(routeStr);
 			let handler = this.routes[routeStr];
 
-			if (Rinn.typeOf(handler) == 'string')
+			if (Rinn.typeOf(handler) === 'string')
 				handler = this[handler];
 
 			if (routeStr[0] === '!')
@@ -579,14 +579,17 @@ const Element =
 	/**
 	 * Unbinds all routes added by bindRoutes.
 	 */
-	unbindRoutes: function (routes)
+	unbindRoutes: function ()
 	{
-		for (let routeStr in routes)
+		if (!this.routes)
+			return;
+
+		for (let routeStr in this.routes)
 		{
 			let route = routeStr[0] === '!' ? Router.getRoute(routeStr.substr(1)) : Router.getRoute(routeStr);
-			let handler = routes[routeStr];
+			let handler = this.routes[routeStr];
 
-			if (Rinn.typeOf(handler) == 'string')
+			if (Rinn.typeOf(handler) === 'string')
 				handler = this[handler];
 
 			if (routeStr[0] === '!')

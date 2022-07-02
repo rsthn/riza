@@ -2,7 +2,7 @@
 import { Element } from 'riza';
 import fs from 'fs';
 import utils from '../utils';
-import Workflow from '../workflow';
+import workflow from '../workflow';
 
 Element.register('r-splash',
 {
@@ -15,7 +15,7 @@ Element.register('r-splash',
 		utils.runAfter(500, () =>
 		{
 			this.dataset.anim = 'fade-out';
-			Workflow.continueTo('home');
+			workflow.continueTo('home');
 		});
 	}
 });
