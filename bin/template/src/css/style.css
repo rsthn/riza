@@ -116,10 +116,10 @@ span.field-error {
 }
 
 /* *** */
-r-panel {
+r-panel, .r-panel {
 	display: block;
 }
 
-r-panel:not(.active) {
+r-panel:not(.active), .r-panel:not(.active) {
 	display: none;
 }

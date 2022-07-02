@@ -1,4 +1,4 @@
-export class Db
+export class db
 {
 	/**
 	 * Initializes the database connection.

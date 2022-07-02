@@ -1,7 +1,7 @@
 
 import { Rinn } from 'rinn';
 
-//!class Db
+//!class db
 
 export default
 {
