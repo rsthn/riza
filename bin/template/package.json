@@ -11,8 +11,8 @@
       "build:prod": "pnpm clean:prod && pnpm prebuild:prod && cross-env NODE_ENV=production parcel build src/index.html --dist-dir prod --no-cache --public-url ./ --no-source-maps",
       "clean": "shx rm -rf dist",
       "prebuild": "shx mkdir -p dist && shx cp -r src/static dist",
-      "watch": "pnpm prebuild && parcel watch --dist-dir dist src/index.html --no-cache --public-url ./ --no-source-maps --no-hmr",
-      "build": "pnpm clean && pnpm prebuild && parcel build src/index.html --dist-dir dist --no-cache --public-url ./ --no-source-maps"
+      "watch": "pnpm prebuild && parcel watch --dist-dir dist src/index.html --no-cache --public-url ./ --no-hmr",
+      "build": "pnpm clean && pnpm prebuild && parcel build src/index.html --dist-dir dist --no-cache --public-url ./"
    },
    "devDependencies": {
       "@fortawesome/fontawesome-free": "^5.15.4",
@@ -22,6 +22,7 @@
       "parcel": "^2.6.2",
       "process": "^0.11.10",
       "riza": "^1.1.10",
-      "shx": "^0.3.4"
+      "shx": "^0.3.4",
+	  "cross-env": "^7.0.3"
    }
 }

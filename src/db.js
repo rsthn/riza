@@ -28,7 +28,7 @@ export default
 				return;
 			}
 
-			req = indexedDB.open(dbName, version);
+			let req = indexedDB.open(dbName, version);
 			req.onerror = (evt) =>
 			{
 				let err = evt.target.error + '';
