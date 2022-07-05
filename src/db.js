@@ -96,11 +96,11 @@ export default
 
 	/**
 	 * Runs a callback for each record in a data store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string} id
 	 * @param { (value:object, cursor:IDBCursor) => Promise<boolean> } callback
 	 * @returns {Promise<void>}
-	 * !static forEach (storeName: string|IDBIndex, id: string, callback: (value:object, cursor:IDBCursor) => Promise<boolean>) : Promise<void>;
+	 * !static forEach (storeName: string|IDBIndex|IDBObjectStore, id: string, callback: (value:object, cursor:IDBCursor) => Promise<boolean>) : Promise<void>;
 	 */
 	forEach: function (storeName, id, callback)
 	{
@@ -116,7 +116,7 @@ export default
 		{
 			let request, store;
 
-			if (!(storeName instanceof IDBIndex))
+			if (typeof(storeName) === 'string')
 				store = this.db.transaction(storeName, 'readwrite').objectStore(storeName);
 			else
 				store = storeName;
@@ -153,9 +153,9 @@ export default
 
 	/**
 	 * Returns the count of all records from the specified data store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @returns {Promise<number>}
-	 * !static count (storeName: string|IDBIndex) : Promise<number>;
+	 * !static count (storeName: string|IDBIndex|IDBObjectStore) : Promise<number>;
 	 */
 	count: function (storeName)
 	{
@@ -165,7 +165,7 @@ export default
 		{
 			let store;
 
-			if (!(storeName instanceof IDBIndex))
+			if (typeof(storeName) === 'string')
 				store = this.db.transaction(storeName, 'readonly').objectStore(storeName);
 			else
 				store = storeName;
@@ -184,10 +184,10 @@ export default
 
 	/**
 	 * Returns all records from the specified data store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string|number|Array<string|number>} filter
 	 * @returns {Promise<Array<object>>}
-	 * !static getAll (storeName: string|IDBIndex, filter?: string|number|Array<string|number>) : Promise<Array<object>>;
+	 * !static getAll (storeName: string|IDBIndex|IDBObjectStore, filter?: string|number|Array<string|number>) : Promise<Array<object>>;
 	 */
 	getAll: function (storeName, filter=null)
 	{
@@ -197,7 +197,7 @@ export default
 		{
 			let store;
 
-			if (!(storeName instanceof IDBIndex))
+			if (typeof(storeName) === 'string')
 				store = this.db.transaction(storeName, 'readonly').objectStore(storeName);
 			else
 				store = storeName;
@@ -215,11 +215,85 @@ export default
 	},
 
 	/**
-	 * Loads a single record from the specified data store.
-	 * @param {string|IDBIndex} storeName
+	 * Returns all keys from the specified data store.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
+	 * @param {string|number|Array<string|number>} filter
+	 * @returns {Promise<Array<string|number|Array<string|number>>>}
+	 * !static getAllKeys (storeName: string|IDBIndex|IDBObjectStore, filter?: string|number|Array<string|number>) : Promise<Array<object>>;
+	 */
+	getAllKeys: function (storeName, filter=null)
+	{
+		this.ensureConnected();
+
+		return new Promise((resolve, reject) =>
+		{
+			let store;
+
+			if (typeof(storeName) === 'string')
+				store = this.db.transaction(storeName, 'readonly').objectStore(storeName);
+			else
+				store = storeName;
+
+			let request = store.getAllKeys(filter);
+
+			request.onsuccess = (evt) => {
+				resolve(evt.target.result);
+			};
+
+			request.onerror = (evt) => {
+				reject(evt.target.error);
+			};
+		});
+	},
+
+	/**
+	 * Loads a list of records having unique values from the specified data store and returns the entire object or just the specified field.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
+	 * @param {string} [field]
+	 * @returns {Promise<Array<number|string|object>>}
+	 * !static getAllUnique (storeName: string|IDBIndex|IDBObjectStore) : Promise<Array<number|string|object>>;
+	 */
+	getAllUnique: function (storeName, fieldName=null)
+	{
+		this.ensureConnected();
+
+		return new Promise((resolve, reject) =>
+		{
+			let store;
+
+			if (typeof(storeName) === 'string')
+				store = this.db.transaction(storeName, 'readonly').objectStore(storeName);
+			else
+				store = storeName;
+
+			let request = store.openCursor(null, 'nextunique');
+			let list = [];
+
+			request.onsuccess = (event) =>
+			{
+				let cursor = event.target.result;
+				if (!cursor)
+				{
+					resolve(list);
+					return;
+				}
+
+				list.push(fieldName ? cursor.value[fieldName] : cursor.value);
+				cursor.continue();
+			};
+
+			request.onerror = (evt) => {
+				reject(evt.target.error);
+			};
+		});
+	},
+
+	/**
+	 * Returns a single record from the specified data store.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string|number|Array<string|number>} id
 	 * @returns {Promise<object>}
-	 * !static get (storeName: string|IDBIndex, id: string|number|Array<string|number>) : Promise<object>;
+	 * !static get (storeName: string|IDBIndex|IDBObjectStore, id: string|number|Array<string|number>) : Promise<object>;
 	 */
 	get: function (storeName, id)
 	{
@@ -229,7 +303,7 @@ export default
 		{
 			let store;
 
-			if (!(storeName instanceof IDBIndex))
+			if (typeof(storeName) === 'string')
 				store = this.db.transaction(storeName, 'readonly').objectStore(storeName);
 			else
 				store = storeName;
@@ -306,12 +380,12 @@ export default
 	},
 
 	/**
-	 * Loads a single record from the specified data store that matches the `partial` object and does NOT match the `notPartial` object.
-	 * @param {string|IDBIndex} storeName
+	 * Returns a single record from the specified data store that matches the `partial` object and does NOT match the `notPartial` object.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {object} [partial]
 	 * @param {object} [notPartial]
 	 * @returns {Promise<object>}
-	 * !static findOne (storeName: string|IDBIndex, partial?: object, notPartial?: object) : Promise<object>;
+	 * !static findOne (storeName: string|IDBIndex|IDBObjectStore, partial?: object, notPartial?: object) : Promise<object>;
 	 */
 	findOne: function (storeName, partial=null, notPartial=null)
 	{
@@ -321,7 +395,7 @@ export default
 		{
 			let store;
 
-			if (!(storeName instanceof IDBIndex))
+			if (typeof(storeName) === 'string')
 				store = this.db.transaction(storeName, 'readonly').objectStore(storeName);
 			else
 				store = storeName;
@@ -389,10 +463,10 @@ export default
 
 	/**
 	 * Deletes all items in the specified store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string|number|Array<string|number>} id
 	 * @returns {Promise<void>}
-	 * !static deleteAll (storeName: string|IDBIndex, id: string|number|Array<string|number>) : Promise<void>;
+	 * !static deleteAll (storeName: string|IDBIndex|IDBObjectStore, id: string|number|Array<string|number>) : Promise<void>;
 	 */
 	deleteAll: function (storeName, id=null)
 	{

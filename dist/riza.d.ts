@@ -19,35 +19,51 @@ export class db
 
 	/**
 	 * Runs a callback for each record in a data store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string} id
 	 * @param { (value:object, cursor:IDBCursor) => Promise<boolean> } callback
 	 * @returns {Promise<void>}
 	 */
-	static forEach (storeName: string|IDBIndex, id: string, callback: (value:object, cursor:IDBCursor) => Promise<boolean>) : Promise<void>;
+	static forEach (storeName: string|IDBIndex|IDBObjectStore, id: string, callback: (value:object, cursor:IDBCursor) => Promise<boolean>) : Promise<void>;
 
 	/**
 	 * Returns the count of all records from the specified data store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @returns {Promise<number>}
 	 */
-	static count (storeName: string|IDBIndex) : Promise<number>;
+	static count (storeName: string|IDBIndex|IDBObjectStore) : Promise<number>;
 
 	/**
 	 * Returns all records from the specified data store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string|number|Array<string|number>} filter
 	 * @returns {Promise<Array<object>>}
 	 */
-	static getAll (storeName: string|IDBIndex, filter?: string|number|Array<string|number>) : Promise<Array<object>>;
+	static getAll (storeName: string|IDBIndex|IDBObjectStore, filter?: string|number|Array<string|number>) : Promise<Array<object>>;
 
 	/**
-	 * Loads a single record from the specified data store.
-	 * @param {string|IDBIndex} storeName
+	 * Returns all keys from the specified data store.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
+	 * @param {string|number|Array<string|number>} filter
+	 * @returns {Promise<Array<string|number|Array<string|number>>>}
+	 */
+	static getAllKeys (storeName: string|IDBIndex|IDBObjectStore, filter?: string|number|Array<string|number>) : Promise<Array<object>>;
+
+	/**
+	 * Loads a list of records having unique values from the specified data store and returns the entire object or just the specified field.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
+	 * @param {string} 
+	 * @returns {Promise<Array<number|string|object>>}
+	 */
+	static getAllUnique (storeName: string|IDBIndex|IDBObjectStore) : Promise<Array<number|string|object>>;
+
+	/**
+	 * Returns a single record from the specified data store.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string|number|Array<string|number>} id
 	 * @returns {Promise<object>}
 	 */
-	static get (storeName: string|IDBIndex, id: string|number|Array<string|number>) : Promise<object>;
+	static get (storeName: string|IDBIndex|IDBObjectStore, id: string|number|Array<string|number>) : Promise<object>;
 
 	/**
 	 * Adds or overwrites a record in the specified data store (data must include the primary key).
@@ -75,13 +91,13 @@ export class db
 	static sysPut (name: string, value: any, full?: boolean) : void;
 
 	/**
-	 * Loads a single record from the specified data store that matches the `partial` object and does NOT match the `notPartial` object.
-	 * @param {string|IDBIndex} storeName
+	 * Returns a single record from the specified data store that matches the `partial` object and does NOT match the `notPartial` object.
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {object} 
 	 * @param {object} 
 	 * @returns {Promise<object>}
 	 */
-	static findOne (storeName: string|IDBIndex, partial?: object, notPartial?: object) : Promise<object>;
+	static findOne (storeName: string|IDBIndex|IDBObjectStore, partial?: object, notPartial?: object) : Promise<object>;
 
 	/**
 	 * Deletes a record from the specified data store.
@@ -93,11 +109,11 @@ export class db
 
 	/**
 	 * Deletes all items in the specified store.
-	 * @param {string|IDBIndex} storeName
+	 * @param {string|IDBIndex|IDBObjectStore} storeName
 	 * @param {string|number|Array<string|number>} id
 	 * @returns {Promise<void>}
 	 */
-	static deleteAll (storeName: string|IDBIndex, id: string|number|Array<string|number>) : Promise<void>;
+	static deleteAll (storeName: string|IDBIndex|IDBObjectStore, id: string|number|Array<string|number>) : Promise<void>;
 
 	/**
 	 * Inserts a new record in the specified data store.

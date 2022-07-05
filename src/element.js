@@ -61,9 +61,122 @@ const Element =
 	 */
 	events:
 	{
+		'mousedown [data-long-press]': function (evt)
+		{
+			evt.continuePropagation = true;
+			if (evt.source._long_press) return;
+
+			let elem = evt.source;
+
+			elem._long_press = setTimeout(() =>
+			{
+				let dx = elem._pos_fx - elem._pos_sx;
+				let dy = elem._pos_fy - elem._pos_sy;
+
+				elem._long_press = null;
+
+				let d = Math.sqrt(dx*dx + dy*dy);
+				if (d < 5) {
+					elem._long_press = false;
+					this.dispatchOn (elem, 'long-press');
+				}
+			},
+			500);
+
+			elem._pos_sx = evt.clientX;
+			elem._pos_sy = evt.clientY;
+
+			elem._pos_fx = evt.clientX;
+			elem._pos_fy = evt.clientY;
+		},
+
+		'mousemove [data-long-press]': function (evt)
+		{
+			evt.continuePropagation = true;
+			if (!evt.source._long_press) return;
+
+			evt.source._pos_fx = evt.clientX;
+			evt.source._pos_fy = evt.clientY;
+		},
+
+		'touchstart [data-long-press]': function (evt)
+		{
+			evt.continuePropagation = true;
+			if (evt.source._long_press) return;
+
+			let elem = evt.source;
+
+			elem._long_press = setTimeout(() => {
+				let dx = elem._pos_fx - elem._pos_sx;
+				let dy = elem._pos_fy - elem._pos_sy;
+
+				elem._long_press = null;
+
+				let d = Math.sqrt(dx*dx + dy*dy);
+				if (d < 5) {
+					elem._long_press = false;
+					this.dispatchOn (elem, 'long-press');
+				}
+			}, 500);
+
+			elem._pos_sx = evt.touches[0].clientX;
+			elem._pos_sy = evt.touches[0].clientY;
+
+			elem._pos_fx = evt.touches[0].clientX;
+			elem._pos_fy = evt.touches[0].clientY;
+		},
+
+		'touchmove [data-long-press]': function (evt)
+		{
+			evt.continuePropagation = true;
+			if (!evt.source._long_press) return;
+
+			evt.source._pos_fx = evt.touches[0].clientX;
+			evt.source._pos_fy = evt.touches[0].clientY;
+		},
+
+		'mouseup [data-long-press]': function (evt)
+		{
+			if (evt.source._long_press === false)
+				return;
+
+			if (evt.source._long_press) {
+				clearTimeout(evt.source._long_press);
+				evt.source._long_press = null;
+			}
+	
+			evt.continuePropagation = true;
+		},
+	
+		'touchend [data-long-press]': function (evt)
+		{
+			if (evt.source._long_press === false)
+				return;
+	
+			if (evt.source._long_press) {
+				clearTimeout(evt.source._long_press);
+				evt.source._long_press = null;
+			}
+	
+			evt.continuePropagation = true;
+		},
+
 		'click [data-action]': function(evt)
 		{
+			if (evt.source._long_press === false)
+				return;
+
 			let opts = evt.source.dataset.action.split(' ');
+
+			if (opts[0] in this)
+				this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
+			else
+				evt.continuePropagation = true;
+		},
+
+		'long-press [data-long-press]': function(evt)
+		{
+			let opts = evt.source.dataset.longPress.split(' ');
 
 			if (opts[0] in this)
 				this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
