@@ -49,10 +49,15 @@ import Router from '../router.js';
 
 export default Element.register ('r-tabs',
 {
-	/*
-	**	Container element for tab content.
-	*/
+	/**
+	 * Container element for tab content.
+	 */
 	container: null,
+
+	/**
+	 * Active tab name.
+	 */
+	activeTab: null,
 
 	/**
 	**	Element events.
@@ -170,6 +175,7 @@ export default Element.register ('r-tabs',
 				link.classList.remove('active');
 		});
 
+		this.activeTab = exceptName;
 		this.dispatch('tabChanged', { name: exceptName });
 	},
 
