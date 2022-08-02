@@ -2,6 +2,14 @@
 import CustomDialog from './elems/custom-dialog';
 
 /**
+ * Month names.
+ */
+let monthName = [
+	'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+];
+
+/**
  * Returns an object containing the differences between the given objects.
  * @param {object} oldObject
  * @param {object} newObject
@@ -184,8 +192,117 @@ function popupConfirm (text, options=null)
 	return dialog.wait();
 }
 
+/**
+ * Aligns a number to be two digits.
+ * @param {string|number} value
+ * @returns {string}
+ */
+function align2 (value)
+{
+	return (value/100).toFixed(2).substr(2);
+}
+
+/**
+ * Parses the given date string.
+ * @param {string|Date} value 
+ * @returns {Date}
+ */
+function parseDate (value)
+{
+	if (typeof(value) === 'Date')
+		return value;
+
+	if (value.length <= 10)
+		value += ' 00:00';
+
+	return new Date(str(value));
+}
+
+/**
+ * Formats the given datetime to standard format: YYYY-MM-DD hh:mm.
+ * @param {string|Date} value
+ * @returns {string}
+ */
+function formatDateTime (value)
+{
+	value = parseDate(value);
+	return value.getFullYear() + '-' + align2(value.getMonth() + 1) + '-' + align2(value.getDate()) + ' ' + align2(value.getHours()) + ':' + align2(value.getMinutes());
+}
+
+/**
+ * Formats the given datetime to short format: monthName DD hh:mm.
+ * @param {string|Date} value
+ * @returns {string}
+ */
+function formatShortDateTime (value)
+{
+	value = parseDate(value);
+	return monthName[value.getMonth()] + ' ' + align2(value.getDate()) + ' ' + align2(value.getHours()) + ':' + align2(value.getMinutes());
+}
+
+/**
+ * Formats the given datetime to standard date format: YYYY-MM-DD.
+ * @param {string|Date} value
+ * @returns {string}
+ */
+function formatDate (value)
+{
+	value = parseDate(value);
+	return value.getFullYear() + '-' + align2(value.getMonth() + 1) + '-' + align2(value.getDate());
+}
+
+/**
+ * Formats the given datetime to short date format: monthName DD.
+ * @param {string|Date} value
+ * @returns {string}
+ */
+function formatShortDate (value)
+{
+	value = parseDate(value);
+	return monthName[value.getMonth()] + ' ' + align2(value.getDate());
+}
+
+/**
+ * Formats the given value (in minutes) to hours and minutes in HH:MM format.
+ * @param {number} value
+ * @returns {string}
+ */
+function formatDuration (value)
+{
+	return align2(int(value / 60)) + ':' + align2(value % 60);
+}
+
+/**
+ * Returns the elapsed time (in minutes) between the given date objects.
+ * @param {string|Date} date2 
+ * @param {string|Date} date1 
+ * @returns {number}
+ */
+function elapsedTime (date2, date1)
+{
+	return int((parseDate(date2) - parseDate(date1)) / (60*1000));
+}
+
+/**
+ * Return a negative number if date1 is before date2, 0 if they are equal, and a positive number if date1 is after date2.
+ * @param {string|Date} date1 
+ * @param {string|Date} date2 
+ * @returns {number}
+ */
+function dateCompare (date1, date2)
+{
+	if (date1.getFullYear() != date2.getFullYear())
+		return date1.getFullYear() - date2.getFullYear();
+
+	if (date1.getMonth() != date2.getMonth())
+		return date1.getMonth() - date2.getMonth();
+
+	return date1.getDate() - date2.getDate();
+}
+
 export default
 {
+	monthName,
 	getDiff,
 	str,
 	int,
@@ -195,5 +312,15 @@ export default
 	runAfter,
 	popupInfo,
 	popupError,
-	popupConfirm
-}
+	popupConfirm,
+
+	align2,
+	parseDate,
+	formatDateTime,
+	formatShortDateTime,
+	formatDate,
+	formatShortDate,
+	formatDuration,
+	elapsedTime,
+	dateCompare,
+};
