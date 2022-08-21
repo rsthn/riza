@@ -10,15 +10,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/rsthn/babel-plugin-riza.git",
-		"directory": "packages/"
+        "url": "git+https://github.com/rsthn/riza.git",
+		"directory": "packages/babel-plugin-riza"
     },
     "author": "RedStar Technologies",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/rsthn/babel-plugin-riza/issues"
+        "url": "https://github.com/rsthn/riza/issues"
     },
-    "homepage": "https://github.com/rsthn/babel-plugin-riza#readme",
+    "homepage": "https://github.com/rsthn/riza#readme",
     "files": [
         "dist/",
         "LICENSE",
