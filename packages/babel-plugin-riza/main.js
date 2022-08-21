@@ -6,6 +6,15 @@ const hasCallExpression = function (path)
 {
 	let i = { found: false };
 
+	if (path.node.type === 'JSXExpressionContainer')
+	{
+		if (path.node.expression.type === 'Identifier')
+		{
+			if (path.node.expression.name === 'children')
+				return true;
+		}
+	}
+
 	path.traverse({
 		CallExpression: function (path) {
 			this.found = true;
@@ -200,6 +209,7 @@ export default function ()
 			if (path.scope.hasBinding(tagName))
 			{
 				let props = [];
+				let children = [];
 
 				for (let i in path.node.openingElement.attributes)
 				{
@@ -228,8 +238,43 @@ export default function ()
 					props.push(t.objectProperty(attr.name, value));
 				}
 
+				for (let i in path.node.children)
+				{
+					let child = path.node.children[i];
+					children.push(child);
+				}
+
+				// Trim the first.
+				while (children.length > 0 && children[0].type === 'StringLiteral')
+				{
+					let value = children[0].value.replace(/^\s+/gm, '');
+					if (!value.length) {
+						children.splice(0, 1);
+						continue;
+					}
+
+					children[0] = t.stringLiteral(value);
+					break;
+				}
+
+				// Trim the last.
+				while (children.length > 0 && children[children.length-1].type === 'StringLiteral')
+				{
+					let value = children[children.length-1].value.replace(/\s+$/gm, '');
+					if (!value.length) {
+						children.splice(children.length-1, 1);
+						continue;
+					}
+
+					children[children.length-1] = t.stringLiteral(value);
+					break;
+				}
+
+				if (children.length)
+					props.push(t.objectProperty(t.identifier('children'), t.arrayExpression(children)));
+
 				path.replaceWith(
-					t.jsxExpressionContainer(t.callExpression(t.identifier(tagName), [t.objectExpression(props)]))
+					t.callExpression(t.identifier(tagName), [t.objectExpression(props)])
 				);
 
 				this.context.level--;
@@ -243,6 +288,7 @@ export default function ()
 			{
 				if (!hasJsxExpression(path))
 				{
+console.log('--------------------------');
 					flattenJsxPath(path);
 					path.skip();
 					this.context.level--;
@@ -252,11 +298,8 @@ export default function ()
 
 			let _id = t.identifier(this.context.getId());
 
-			let _props = t.identifier('props');
-			let _children = t.identifier('children');
-
 			let _body = [];
-			let fn = t.functionExpression(null, [_props, _children], t.blockStatement(_body));
+			let fn = t.functionExpression(null, [], t.blockStatement(_body));
 			let _e = t.identifier('_$e');
 			let _c = t.identifier('_$c');
 
@@ -385,7 +428,7 @@ export default function ()
 				{
 					case 'JSXExpressionContainer':
 						if (hasCall) {
-							inner.push(t.stringLiteral(`<i data-__id='${elems.length}'>EXPR</i>`));
+							inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
 							elems.push(child.expression);
 						}
 						else {
@@ -399,13 +442,13 @@ export default function ()
 						break;
 
 					case 'CallExpression':
-						inner.push(t.stringLiteral(`<i data-__id='${elems.length}'>EXPR</i>`));
+						inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
 						elems.push(child);
 						break;
 
 					default:
 						if (hasCall) {
-							inner.push(t.stringLiteral(`<i data-__id='${elems.length}'>EXPR</i>`));
+							inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
 							elems.push(child);
 						}
 						else {
@@ -415,6 +458,7 @@ export default function ()
 				}
 			}
 
+			// Trim the first.
 			while (inner.length > 0 && inner[0].type === 'StringLiteral')
 			{
 				let value = inner[0].value.replace(/^\s+/gm, '');
@@ -428,6 +472,7 @@ export default function ()
 				break;
 			}
 
+			// Trim the last.
 			while (inner.length > 0 && inner[inner.length-1].type === 'StringLiteral')
 			{
 				let value = inner[inner.length-1].value.replace(/\s+$/gm, '');
@@ -499,14 +544,16 @@ export default function ()
 				}
 				else
 				{
-					for (let i in elems)
-					{
-						_body.push(
-							t.expressionStatement(
-								t.callExpression(t.memberExpression(_e, t.identifier('appendChild')), [ elems[i] ])
-							)
-						);
-					}
+					_body.push(
+						t.expressionStatement(
+						t.callExpression(this.context._effect, [
+							t.arrowFunctionExpression([], t.blockStatement([
+								t.expressionStatement(
+									t.assignmentExpression('=', t.memberExpression(_e, t.identifier('innerHTML')), elems[0])
+								)
+							]))
+						]))
+					);
 				}
 			}
 

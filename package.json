@@ -40,6 +40,6 @@
         "rinn": "^2.0.47"
     },
     "dependencies": {
-        "babel-plugin-riza": "^1.0.0"
+        "babel-plugin-riza": "^1.0"
     }
 }

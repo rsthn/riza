@@ -151,13 +151,30 @@ export function effect (fn, id=null)
 /**
  * Replaces a node by the specified value returns the new node. If the value is a string it will be converted to a node first.
  * @param {Node} node
- * @param {Node|string} value
+ * @param {Node|string|Array<Node|string>} value
  * @returns {Node}
  */
 export function replaceNode (node, value)
 {
-	if (!(value instanceof Node))
-		value = document.createTextNode(value);
+	if (value instanceof Array)
+	{
+		let elem = document.createDocumentFragment();
+
+		for (let i of value)
+		{
+			if (!(i instanceof Node))
+				i = document.createTextNode(i);
+
+			elem.appendChild(i);
+		}
+
+		value = elem;
+	}
+	else
+	{
+		if (!(value instanceof Node))
+			value = document.createTextNode(value);
+	}
 
 	node.replaceWith(value);
 	return value;

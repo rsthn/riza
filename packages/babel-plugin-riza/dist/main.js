@@ -5,6 +5,13 @@ const hasCallExpression = function (path) {
   let i = {
     found: false
   };
+
+  if (path.node.type === 'JSXExpressionContainer') {
+    if (path.node.expression.type === 'Identifier') {
+      if (path.node.expression.name === 'children') return true;
+    }
+  }
+
   path.traverse({
     CallExpression: function (path) {
       this.found = true;
@@ -115,6 +122,7 @@ export default function () {
           },
           _effect: t.identifier('effect'),
           _replaceNode: t.identifier('replaceNode'),
+          level: 0,
           decl: [],
           nextId: -1,
           getId: function () {
@@ -131,7 +139,7 @@ export default function () {
           path.unshiftContainer('body', t.importDeclaration(list, t.stringLiteral('riza')));
         }
 
-        path.pushContainer('body', this.context.decl);
+        path.unshiftContainer('body', this.context.decl);
       }
 
     },
@@ -156,30 +164,96 @@ export default function () {
     },
 
     JSXElement(path) {
-      if (!hasJsxExpression(path)) {
-        flattenJsxPath(path);
-        path.skip();
-        return;
-      }
-
+      this.context.level++;
       path.traverse(visitor, this);
       let tagName = path.node.openingElement.name.name;
       let children = path.node.children;
 
+      if (tagName === 'br' || tagName === 'hr') {
+        path.replaceWith(t.stringLiteral(`<${tagName}/>`));
+        this.context.level--;
+        return;
+      } // *********************************
+      // Using element previously defined.
+
+
+      if (path.scope.hasBinding(tagName)) {
+        let props = [];
+        let children = [];
+
+        for (let i in path.node.openingElement.attributes) {
+          let attr = path.node.openingElement.attributes[i];
+          let value = attr.value;
+          if (attr.name.type === 'JSXIdentifier') attr.name = t.identifier(attr.name.name); // Style attribute can be set using a string, object or an expression.
+
+          if (attr.name.name.toLowerCase() === 'style') {
+            if (t.isStringLiteral(value)) {
+              value = t.stringLiteral(value.split('\n').map(i => i.trim()).join(' ').trim());
+            }
+          } else {
+            if (value.type === 'JSXExpressionContainer') value = value.expression;
+          }
+
+          props.push(t.objectProperty(attr.name, value));
+        }
+
+        for (let i in path.node.children) {
+          let child = path.node.children[i];
+          children.push(child);
+        } // Trim the first.
+
+
+        while (children.length > 0 && children[0].type === 'StringLiteral') {
+          let value = children[0].value.replace(/^\s+/gm, '');
+
+          if (!value.length) {
+            children.splice(0, 1);
+            continue;
+          }
+
+          children[0] = t.stringLiteral(value);
+          break;
+        } // Trim the last.
+
+
+        while (children.length > 0 && children[children.length - 1].type === 'StringLiteral') {
+          let value = children[children.length - 1].value.replace(/\s+$/gm, '');
+
+          if (!value.length) {
+            children.splice(children.length - 1, 1);
+            continue;
+          }
+
+          children[children.length - 1] = t.stringLiteral(value);
+          break;
+        }
+
+        if (children.length) props.push(t.objectProperty(t.identifier('children'), t.arrayExpression(children)));
+        path.replaceWith(t.callExpression(t.identifier(tagName), [t.objectExpression(props)]));
+        this.context.level--;
+        return;
+      } // *********************************
+      // xasd
+
+
+      if (this.context.level > 1) {
+        if (!hasJsxExpression(path)) {
+          console.log('--------------------------');
+          flattenJsxPath(path);
+          path.skip();
+          this.context.level--;
+          return;
+        }
+      }
+
       let _id = t.identifier(this.context.getId());
 
-      let _props = t.identifier('props');
-
-      let _children = t.identifier('children');
-
       let _body = [];
-      let fn = t.functionExpression(_id, [_props, _children], t.blockStatement(_body));
+      let fn = t.functionExpression(null, [], t.blockStatement(_body));
 
       let _e = t.identifier('_$e');
 
       let _c = t.identifier('_$c');
-
-      let _t = t.identifier('_$t');
 
       _body.push(t.variableDeclaration('let', [t.variableDeclarator(_e, t.callExpression(t.memberExpression(t.identifier('document'), t.identifier('createElement')), [t.stringLiteral(tagName)]))])); // Process attributes.
 
@@ -258,7 +332,7 @@ export default function () {
         switch (child.type) {
           case 'JSXExpressionContainer':
             if (hasCall) {
-              inner.push(t.stringLiteral(`<i data-__id='${elems.length}'>EXPR</i>`));
+              inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
               elems.push(child.expression);
             } else {
               inner.push(child.expression);
@@ -272,13 +346,13 @@ export default function () {
             break;
 
           case 'CallExpression':
-            inner.push(t.stringLiteral(`<i data-__id='${elems.length}'>EXPR</i>`));
+            inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
             elems.push(child);
             break;
 
           default:
             if (hasCall) {
-              inner.push(t.stringLiteral(`<i data-__id='${elems.length}'>EXPR</i>`));
+              inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
               elems.push(child);
             } else {
               inner.push(child);
@@ -286,7 +360,8 @@ export default function () {
 
             break;
         }
-      }
+      } // Trim the first.
+
 
       while (inner.length > 0 && inner[0].type === 'StringLiteral') {
         let value = inner[0].value.replace(/^\s+/gm, '');
@@ -299,7 +374,8 @@ export default function () {
 
         inner[0] = t.stringLiteral(value);
         break;
-      }
+      } // Trim the last.
+
 
       while (inner.length > 0 && inner[inner.length - 1].type === 'StringLiteral') {
         let value = inner[inner.length - 1].value.replace(/\s+$/gm, '');
@@ -335,16 +411,19 @@ export default function () {
             _body.push(t.expressionStatement(t.callExpression(this.context._effect, [t.arrowFunctionExpression([], t.blockStatement([t.expressionStatement(t.assignmentExpression('=', t.memberExpression(_c, t.numericLiteral(Number(i)), true), t.callExpression(this.context._replaceNode, [t.memberExpression(_c, t.numericLiteral(Number(i)), true), elems[i]])))]))])));
           }
         } else {
-          for (let i in elems) {
-            _body.push(t.expressionStatement(t.callExpression(t.memberExpression(_e, t.identifier('appendChild')), [elems[i]])));
-          }
+          _body.push(t.expressionStatement(t.callExpression(this.context._effect, [t.arrowFunctionExpression([], t.blockStatement([t.expressionStatement(t.assignmentExpression('=', t.memberExpression(_e, t.identifier('innerHTML')), elems[0]))]))])));
         }
       }
 
       _body.push(t.returnStatement(_e));
 
-      this.context.decl.push(fn);
+      if (path.scope.parent) path.scope.push({
+        kind: 'const',
+        id: _id,
+        init: fn
+      });else this.context.decl.push(t.variableDeclaration('const', [t.variableDeclarator(_id, fn)]));
       path.replaceWith(t.callExpression(_id, []));
+      this.context.level--;
     },
 
     JSXText(path) {
