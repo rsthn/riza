@@ -1,0 +1,36 @@
+{
+    "name": "babel-plugin-riza",
+    "version": "1.0.0",
+    "description": "Riza JSX Transpiler (Babel)",
+    "type": "module",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo Ok",
+        "build": "babel main.js -o dist/main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rsthn/babel-plugin-riza.git",
+		"directory": "packages/"
+    },
+    "author": "RedStar Technologies",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rsthn/babel-plugin-riza/issues"
+    },
+    "homepage": "https://github.com/rsthn/babel-plugin-riza#readme",
+    "files": [
+        "dist/",
+        "LICENSE",
+        "README.md"
+    ],
+    "dependencies": {
+        "@babel/parser": "^7.18.11",
+        "@babel/plugin-syntax-jsx": "^7.18.6"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.18.10",
+        "@babel/core": "^7.18.10",
+        "@babel/types": "^7.18.10"
+    }
+}

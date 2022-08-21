@@ -1,0 +1,10 @@
+--*
+.svn
+.cache
+node_modules
+custom
+local
+.parcel-cache
+bin/template/dist
+bin/template/yarn.lock
+*.log
