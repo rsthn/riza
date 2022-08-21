@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "2.0.0-beta.1",
+    "version": "2.0.0-beta.3",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.js",
@@ -36,10 +36,10 @@
         "README.md"
     ],
     "devDependencies": {
-        "parcel": "^2.7.0",
-        "rinn": "^2.0.47"
+        "parcel": "^2.7.0"
     },
     "dependencies": {
-        "babel-plugin-riza": "^1.0"
+        "base-64": "^1.0.0",
+        "rinn": "^2.0.47"
     }
 }

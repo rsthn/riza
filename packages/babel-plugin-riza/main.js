@@ -6,17 +6,13 @@ const hasCallExpression = function (path)
 {
 	let i = { found: false };
 
-	if (path.node.type === 'JSXExpressionContainer')
-	{
-		if (path.node.expression.type === 'Identifier')
-		{
-			if (path.node.expression.name === 'children')
-				return true;
-		}
-	}
-
 	path.traverse({
-		CallExpression: function (path) {
+		CallExpression (path) {
+			this.found = true;
+			path.stop();
+		},
+
+		JSXSpreadChild (path) {
 			this.found = true;
 			path.stop();
 		}
@@ -194,7 +190,6 @@ export default function ()
 			path.traverse(visitor, this);
 
 			let tagName = path.node.openingElement.name.name;
-			let children = path.node.children;
 
 			if (tagName === 'br' || tagName === 'hr')
 			{
@@ -216,6 +211,12 @@ export default function ()
 					let attr = path.node.openingElement.attributes[i];
 					let value = attr.value;
 
+					if (attr.type === 'JSXSpreadAttribute')
+					{
+						props.push(t.spreadElement(attr.argument));
+						continue;
+					}
+	
 					if (attr.name.type === 'JSXIdentifier')
 						attr.name = t.identifier(attr.name.name);
 
@@ -270,11 +271,8 @@ export default function ()
 					break;
 				}
 
-				if (children.length)
-					props.push(t.objectProperty(t.identifier('children'), t.arrayExpression(children)));
-
 				path.replaceWith(
-					t.callExpression(t.identifier(tagName), [t.objectExpression(props)])
+					t.callExpression(t.identifier(tagName), [t.objectExpression(props), children.length ? t.arrayExpression(children) : t.nullLiteral()])
 				);
 
 				this.context.level--;
@@ -284,7 +282,8 @@ export default function ()
 			// *********************************
 			// xasd
 
-			if (this.context.level > 1)
+			// TODO Figure if this is useful, and ensure to prevent output rendered as text even when its HTML.
+			if (this.context.level > 1 && false)
 			{
 				if (!hasJsxExpression(path))
 				{
@@ -305,19 +304,50 @@ console.log('--------------------------');
 
 			_body.push(
 				t.variableDeclaration('let', [
-					t.variableDeclarator(_e, t.callExpression(t.memberExpression(t.identifier('document'), t.identifier('createElement')), [t.stringLiteral(tagName)]))
+					t.variableDeclarator(_e, t.callExpression(t.memberExpression(t.identifier('document'), t.identifier('createElement')), [
+						tagName[0] === tagName[0].toUpperCase() ? t.stringLiteral('div') : t.stringLiteral(tagName)
+					]))
 				])
 			);
 
 			// Process attributes.
-			let _setProperty = t.identifier('setProperty');
+			let _setAttribute = t.identifier('setAttribute');
 			let _style = t.identifier('style');
+			let _i = t.identifier('i');
+			let _t = t.identifier('t');
 
 			for (let i in path.node.openingElement.attributes)
 			{
 				let attr = path.node.openingElement.attributes[i];
 				let attrPath = path.get('openingElement.attributes.' + i);
 				let expr = null, value = attr.value;
+
+				if (attr.type === 'JSXSpreadAttribute')
+				{
+					_body.push(
+						t.variableDeclaration('let', [t.variableDeclarator(_t, attr.argument)])
+					);
+
+					_body.push(
+						t.forInStatement(t.variableDeclaration('let', [t.variableDeclarator(_i)]), _t,
+							t.expressionStatement(
+							t.conditionalExpression(
+								t.binaryExpression('===', _i, t.stringLiteral('style')),
+
+								t.callExpression(t.memberExpression(t.identifier('Object'), t.identifier('assign')), [
+									t.memberExpression(_e, _style),
+									t.memberExpression(_t, _i, true)
+								]),
+
+								t.callExpression(
+									t.memberExpression(_e, _setAttribute),
+									[ _i, t.memberExpression(_t, _i, true) ]
+								)
+							))
+						)
+					);
+					continue;
+				}
 
 				// Style attribute can be set using a string, object or an expression.
 				if (attr.name.name.toLowerCase() === 'style')
@@ -400,7 +430,7 @@ console.log('--------------------------');
 						expr = t.callExpression(this.context._effect, [
 							t.arrowFunctionExpression([], t.blockStatement([
 								t.expressionStatement(
-									t.callExpression(t.memberExpression(_e, _setProperty), [ t.stringLiteral(attr.name.name), value.expression ])
+									t.callExpression(t.memberExpression(_e, _setAttribute), [ t.stringLiteral(attr.name.name), value.expression ])
 								)
 							]))
 						]);
@@ -408,7 +438,7 @@ console.log('--------------------------');
 				}
 
 				if (expr === null)
-					expr = t.callExpression(t.memberExpression(_e, _setProperty), [ t.stringLiteral(attr.name.name), value ]);
+					expr = t.callExpression(t.memberExpression(_e, _setAttribute), [ t.stringLiteral(attr.name.name), value ]);
 
 				if (expr)
 					_body.push(t.expressionStatement(expr));
@@ -419,9 +449,9 @@ console.log('--------------------------');
 			let elems = [];
 			let strings = 0;
 
-			for (let i in children)
+			for (let i in path.node.children)
 			{
-				let child = children[i];
+				let child = path.node.children[i];
 				let hasCall = hasCallExpression(path.get('children.' + i));
 
 				switch (child.type)
@@ -431,11 +461,22 @@ console.log('--------------------------');
 							inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
 							elems.push(child.expression);
 						}
-						else {
-							inner.push(child.expression);
+						else
+						{
+							if (child.expression.type === 'StringLiteral') {
+								inner.push(t.stringLiteral(child.expression.value));
+								strings++;
+							}
+							else
+								inner.push(child.expression);
 						}
 						break;
 
+					case 'JSXSpreadChild':
+						inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
+						elems.push(child.expression);
+						break;
+	
 					case 'StringLiteral':
 						inner.push(t.stringLiteral(child.value));
 						strings++;
@@ -451,9 +492,8 @@ console.log('--------------------------');
 							inner.push(t.stringLiteral(`<i data-__id='${elems.length}'></i>`));
 							elems.push(child);
 						}
-						else {
+						else
 							inner.push(child);
-						}
 						break;
 				}
 			}
@@ -489,67 +529,51 @@ console.log('--------------------------');
 			if (inner.length > 0)
 			{
 				//console.log('INNER=', inner.length, 'STRINGS=', strings, 'ELEMS=', elems.length);
-				if (inner.length > 1 || strings > 0)
-				{
-					inner = inner.reduce((prev, curr) => prev ? t.binaryExpression('+', prev, curr) : curr, null);
+				inner = inner.reduce((prev, curr) => prev ? t.binaryExpression('+', prev, curr) : curr, null);
 
+				_body.push(
+					t.expressionStatement(
+						t.assignmentExpression('=', t.memberExpression(_e, t.identifier('innerHTML')), inner)
+					)
+				);
+
+				if (elems.length != 0) {
+					_body.push(
+						t.variableDeclaration('let', [ t.variableDeclarator(_c, t.arrayExpression([])) ])
+					);
+				}
+
+				let _querySelector = t.identifier('querySelector');
+
+				for (let i in elems)
+				{
 					_body.push(
 						t.expressionStatement(
-							t.assignmentExpression('=', t.memberExpression(_e, t.identifier('innerHTML')), inner)
+							t.assignmentExpression(
+								'=',
+								t.memberExpression(_c, t.numericLiteral(Number(i)), true),
+
+								t.callExpression(t.memberExpression(_e, _querySelector), [
+									t.stringLiteral(`[data-__id='${i}']`)
+								])
+							)
 						)
 					);
-
-					if (elems.length != 0) {
-						_body.push(
-							t.variableDeclaration('let', [ t.variableDeclarator(_c, t.arrayExpression([])) ])
-						);
-					}
-
-					let _querySelector = t.identifier('querySelector');
-
-					for (let i in elems)
-					{
-						_body.push(
-							t.expressionStatement(
-								t.assignmentExpression(
-									'=',
-									t.memberExpression(_c, t.numericLiteral(Number(i)), true),
-
-									t.callExpression(t.memberExpression(_e, _querySelector), [
-										t.stringLiteral(`[data-__id='${i}']`)
-									])
-								)
-							)
-						);
-					}
-
-					for (let i in elems)
-					{
-						_body.push(
-							t.expressionStatement(
-							t.callExpression(this.context._effect, [
-								t.arrowFunctionExpression([], t.blockStatement([
-									t.expressionStatement(
-										t.assignmentExpression('=', t.memberExpression(_c, t.numericLiteral(Number(i)), true),
-											t.callExpression(this.context._replaceNode, [
-												t.memberExpression(_c, t.numericLiteral(Number(i)), true),
-												elems[i]
-											])
-										)
-									)
-								]))
-							]))
-						);
-					}
 				}
-				else
+
+				for (let i in elems)
 				{
 					_body.push(
 						t.expressionStatement(
 						t.callExpression(this.context._effect, [
 							t.arrowFunctionExpression([], t.blockStatement([
 								t.expressionStatement(
-									t.assignmentExpression('=', t.memberExpression(_e, t.identifier('innerHTML')), elems[0])
+									t.assignmentExpression('=', t.memberExpression(_c, t.numericLiteral(Number(i)), true),
+										t.callExpression(this.context._replaceNode, [
+											t.memberExpression(_c, t.numericLiteral(Number(i)), true),
+											elems[i]
+										])
+									)
 								)
 							]))
 						]))

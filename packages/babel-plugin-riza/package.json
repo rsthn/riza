@@ -1,12 +1,11 @@
 {
     "name": "babel-plugin-riza",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "description": "Riza JSX Transpiler (Babel)",
     "type": "module",
     "main": "main.js",
     "scripts": {
-        "test": "echo Ok",
-        "build": "babel main.js -o dist/main.js"
+        "test": "echo Ok"
     },
     "repository": {
         "type": "git",
@@ -22,7 +21,8 @@
     "files": [
         "dist/",
         "LICENSE",
-        "README.md"
+        "README.md",
+        "main.js"
     ],
     "dependencies": {
         "@babel/parser": "^7.18.11",

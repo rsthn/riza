@@ -1,5 +1,5 @@
 
-import { List } from './utils.js';
+import { List } from './utils-jsx';
 
 /**
  */
@@ -48,7 +48,7 @@ function propagateQueue ()
 
 /**
  */
-function accessorHandler (signal, newValue)
+function accessorHandler (signal, newValue, forced)
 {
 	if (newValue === undefined)
 	{
@@ -62,7 +62,7 @@ function accessorHandler (signal, newValue)
 	}
 
 	// Do not trigger any propagation if the new value is the same as the current one.
-	if (signal.value === newValue)
+	if (signal.value === newValue && forced === false)
 		return signal.accessor;
 
 	signal.previousValue = signal.value;
@@ -108,8 +108,8 @@ export function signal (value=null)
 		wasQueued: false
 	};
 
-	data.accessor = (newValue=undefined) => {
-		return accessorHandler (data, newValue);
+	data.accessor = (newValue=undefined, forced=false) => {
+		return accessorHandler (data, newValue, forced);
 	};
 
 	return data.accessor;
@@ -156,6 +156,13 @@ export function effect (fn, id=null)
  */
 export function replaceNode (node, value)
 {
+	if (value === null || value === undefined)
+	{
+		value = document.createTextNode('');
+		node.replaceWith(value);
+		return value;
+	}
+
 	if (value instanceof Array)
 	{
 		let elem = document.createDocumentFragment();
