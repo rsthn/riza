@@ -28,15 +28,15 @@ function propagate (signal)
 	}
 
 	currentWatchers.free();
+
 	signal.isPropagating = false;
+	signal.wasQueued = false;
 }
 
 /**
  */
 function propagateQueue ()
 {
-	propagationMicroTask = false;
-
 	signalsPropagating = true;
 
 	while (propagationQueue.length) {
@@ -44,6 +44,7 @@ function propagateQueue ()
 	}
 
 	signalsPropagating = false;
+	propagationMicroTask = false;
 }
 
 /**
@@ -67,6 +68,7 @@ function accessorHandler (signal, newValue, forced)
 
 	signal.previousValue = signal.value;
 	signal.value = newValue;
+	signal.accessor.value = newValue;
 
 	if (signalsPropagating === true)
 	{
@@ -112,6 +114,7 @@ export function signal (value=null)
 		return accessorHandler (data, newValue, forced);
 	};
 
+	data.accessor.value = data.value;
 	return data.accessor;
 }
 
@@ -149,40 +152,191 @@ export function effect (fn, id=null)
 }
 
 /**
- * Replaces a node by the specified value returns the new node. If the value is a string it will be converted to a node first.
- * @param {Node} node
- * @param {Node|string|Array<Node|string>} value
- * @returns {Node}
+ * Creates a new variable.
+ * @param {any} value?
  */
-export function replaceNode (node, value)
+export function variable (value=null)
 {
-	if (value === null || value === undefined)
+	let accessor = (newValue=undefined) =>
 	{
-		value = document.createTextNode('');
-		node.replaceWith(value);
-		return value;
-	}
+		if (newValue === undefined)
+			return accessor.value;
 
-	if (value instanceof Array)
+		accessor.value = newValue;
+		return accessor;
+	};
+
+	accessor.value = value;
+	return accessor;
+}
+
+/**
+ * Helper functions.
+ */
+export const _helpers =
+{
+	/**
+	 * Replaces a node by the specified value and returns a new node. If the value is a string it will be converted to a node first. And
+	 * if the value is `null` the current node will be returned.
+	 * @param {Node} node
+	 * @param {Node|string|null|Array<Node|string>} value
+	 * @param {string} placeholder
+	 * @returns {Node}
+	 */
+	replaceNode: function (node, value, placeholder)
 	{
-		let elem = document.createDocumentFragment();
+		let result = value;
 
-		for (let i of value)
+		if (node instanceof Array)
 		{
-			if (!(i instanceof Node))
-				i = document.createTextNode(i);
+			if (value instanceof Array)
+			{
+				// Clear children.
+				if (value.length == 0)
+				{
+					while (node.length > 1)
+						node.pop().remove();
 
-			elem.appendChild(i);
+					value = document.createElement(placeholder);
+					node[0].replaceWith(value);
+					return value;
+				}
+
+				let parent = node[0].parentElement;
+				let ref = parent.lastChild;
+
+				if (ref === null || ref !== value[value.length-1])
+				{
+					//console.log('CHANGING BOTTOM');
+					ref = value[value.length-1];
+					parent.appendChild(ref);
+				}
+
+				for (let i of node)
+					i._marked = false;
+
+				ref._marked = true;
+				let n = 0;
+
+				for (let i = value.length-2; i >= 0; i--)
+				{
+					value[i]._marked = true;
+
+					if (value[i].nextSibling === value[i+1])
+						continue;
+
+					parent.insertBefore(value[i], value[i+1]);
+					n++;
+				}
+
+				//console.log('MOVED ', n);
+				n = 0;
+
+				for (let i of node)
+				{
+					if (i._marked === true)
+						continue;
+
+					i.remove();
+					n++;
+				}
+
+				//console.log('REMOVED ', n);
+				return [...value];
+			}
+
+			while (node.length > 1)
+				node.pop().remove();
+
+			node = node.length ? node[0] : null;
 		}
 
-		value = elem;
-	}
-	else
-	{
-		if (!(value instanceof Node))
-			value = document.createTextNode(value);
-	}
+		if (value === null || value === undefined)
+			result = value = document.createElement(placeholder);
 
-	node.replaceWith(value);
-	return value;
-}
+		if (value instanceof Array)
+		{
+			let elem = document.createDocumentFragment();
+			result = [];
+
+			for (let i of value)
+			{
+				if (!(i instanceof Node))
+				{
+					if (i instanceof Array)
+					{
+						let t = document.createElement('div');
+						t.innerHTML = i[0];
+						i = t.children[0];
+					}
+					else
+						i = document.createTextNode(i);
+				}
+
+				result.push(i);
+				elem.appendChild(i);
+			}
+
+			value = elem;
+
+			if (result.length == 0)
+				result = value = document.createElement(placeholder);
+		}
+		else
+		{
+			if (!(value instanceof Node))
+				result = value = document.createTextNode(value);
+		}
+
+		if (node === null)
+			return result;
+
+		node.replaceWith(value);
+		return result;
+	},
+
+	/**
+	 * Spreads the given attributes on the node.
+	 * @param {Node} node
+	 * @param {object} data 
+	 */
+	spreadAttributes (node, data)
+	{
+		for (let i in data)
+			this.setAttribute(node, i, data[i]);
+	},
+
+	/**
+	 * Sets an attribute of a node.
+	 * @param {Node} node
+	 * @param {string} name
+	 * @param {string|Array|object} data
+	 */
+	setAttribute (node, name, data)
+	{
+		if (data instanceof Array)
+		{
+			if (name === 'class')
+				node.className = data.join(' ');
+			else
+				node[name] = data;
+		}
+		else
+		{
+			if (name === 'style' && typeof data !== 'string')
+			{
+				Object.assign(node.style, data);
+			}
+			else if (name.startsWith('data-'))
+			{
+				node.dataset[name.substring(5)] = data;
+			}
+			else if (name.startsWith('on'))
+			{
+				node[name.toLowerCase()] = data;
+			}
+			else
+				node.setAttribute(name, data);
+		}
+	}
+};
