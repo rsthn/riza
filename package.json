@@ -42,11 +42,7 @@
     "homepage": "https://github.com/rsthn/riza#readme",
     "files": [
         "dist/",
-        "bin/cli.js",
-        "bin/template/src/",
-        "bin/template/.env.development",
-        "bin/template/.env.production",
-        "bin/template/package.json",
+        "bin/",
         "LICENSE",
         "README.md"
     ],
