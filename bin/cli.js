@@ -22,9 +22,12 @@ function patch (dest, fileNames, searchString, newString)
 
 	for (let fileName of fileNames)
 	{
-		let data = fs.readFileSync(path.join(dest, fileName)).toString();
+		let filePath = path.join(dest, fileName);
+		if (!path.existsSync(filePath)) continue;
+
+		let data = fs.readFileSync(filePath).toString();
 		data = data.replace(searchString, newString);
-		fs.writeFileSync(path.join(dest, fileName), data);
+		fs.writeFileSync(filePath, data);
 	}
 }
 
@@ -54,9 +57,13 @@ if (args.length == 0)
     riza <command> [options]
 
 Command:
-    create <name>                Create a project <name> using pnpm.
-    create-yarn <name>           Create a project <name> using yarn.
-    create-npm <name>            Create a project <name> using npm.
+    create <template> <name>                Create a project <name> using pnpm.
+    create-yarn <template> <name>           Create a project <name> using yarn.
+    create-npm <template> <name>            Create a project <name> using npm.
+
+Template:
+    app
+    app-v2
 `);
 
 	process.exit();
@@ -73,23 +80,33 @@ switch (args[0])
 	case 'create-yarn':
 	case 'create-npm':
 		if (args.length < 2) {
+			msg(ERROR, 'Parameter <template> missing for command `create`');
+			break;
+		}
+
+		if (args[1] != 'app' && args[1] != 'app-v2') {
+			msg(ERROR, 'Parameter <template> is incorrect, should be: `app` or `app-v2`');
+			break;
+		}
+
+		if (args.length < 3) {
 			msg(ERROR, 'Parameter <name> missing for command `create`');
 			break;
 		}
 
-		msg(INFO, 'Creating project ' + args[1] + '...');
-		dest = path.join(cdir, args[1]);
+		msg(INFO, 'Creating project ' + args[2] + '...');
+		dest = path.join(cdir, args[2]);
 		if (!fs.existsSync(dest)) fs.mkdirSync(dest);
 
-		msg(INFO, 'Copying template ...');
-		fse.copy(path.join(sdir, 'template'), dest, { overwrite: true }, function (err)
+		msg(INFO, 'Copying template for ' + args[1] + '...');
+		fse.copy(path.join(sdir, args[1]), dest, { overwrite: true }, function (err)
 		{
 			if (err) {
 				msg(ERROR, err);
 				return;
 			}
 
-			patch(dest, ['package.json', 'src/manifest.jsond', 'src/index.html'], 'project_name', args[1]);
+			patch(dest, ['package.json', 'src/manifest.jsond', 'src/index.html'], 'project_name', args[2]);
 
 			if (args[0] == 'create-yarn')
 				manager = 'yarn';

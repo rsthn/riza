@@ -1,0 +1,35 @@
+@keyframes beating-border-out {
+    0% { box-shadow: 0 0 0 12px #f7df1e; padding: 0; margin-left: 0; margin-top: 0; }
+    100% { box-shadow: 0 0 0 0px #f7df1e; padding: 128px; margin-left: -128px; margin-top: -128px; }
+}
+
+.app {
+	font-family: Poppins; text-align: center; position: absolute;
+	top: 50%; left: 50%; transform: translate(-50%, -45%);
+}
+
+.app span {
+    position: relative; display: inline-block; font-size: 0;
+}
+
+.app span:after {
+    position: absolute; display: inline-block; left: 0; top: 0; width: 100%; height: 100%; content: "";
+	animation: 2.0s beating-border-out infinite cubic-bezier(0.075, 0.82, 0.165, 1);
+	border-radius: 20rem;
+}
+
+.app span:before {
+    position: absolute; display: inline-block; left: 0; top: 0; width: 100%; height: 100%; content: "";
+	animation: 2.0s beating-border-out infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+	border-radius: 20rem;
+	animation-delay: 1.4s;
+}
+
+.app img {
+	width: 8rem;
+	border-radius: 0.5rem;
+}
+
+.app b {
+	display: block;
+}

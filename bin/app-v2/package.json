@@ -1,0 +1,21 @@
+{
+  "name": "project_name",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "shx rm -rf dist",
+    "prebuild": "shx mkdir -p dist && shx cp -r src/static dist",
+    "build": "pnpm clean && pnpm prebuild && parcel build src/index.html --public-url ./",
+    "watch": "pnpm prebuild && parcel watch src/index.html --public-url ./",
+    "dev": "parcel serve src/index.html"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@parcel/config-default": "^2.7.0",
+    "babel-plugin-riza": "^1.0.8",
+    "parcel-reporter-static-files-copy": "^1.4.0",
+    "riza": "^2.0.0",
+    "shx": "^0.3.4",
+	"@parcel/core": "^2.7.0"
+  }
+}
