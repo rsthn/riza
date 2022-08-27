@@ -31,3 +31,8 @@ export const Schema = _Rinn.Schema;
 export const Flattenable = _Rinn.Flattenable;
 export const Collection = _Rinn.Collection;
 export const Template = _Rinn.Template;
+
+/**
+ * JSX Runtime.
+ */
+export { signal, effect, variable, _helpers } from './runtime-jsx';
