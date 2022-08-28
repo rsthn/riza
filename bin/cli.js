@@ -23,7 +23,7 @@ function patch (dest, fileNames, searchString, newString)
 	for (let fileName of fileNames)
 	{
 		let filePath = path.join(dest, fileName);
-		if (!path.existsSync(filePath)) continue;
+		if (!fs.existsSync(filePath)) continue;
 
 		let data = fs.readFileSync(filePath).toString();
 		data = data.replace(searchString, newString);
@@ -94,11 +94,11 @@ switch (args[0])
 			break;
 		}
 
-		msg(INFO, 'Creating project ' + args[2] + '...');
+		msg(INFO, 'Creating project ' + args[2] + ' ...');
 		dest = path.join(cdir, args[2]);
 		if (!fs.existsSync(dest)) fs.mkdirSync(dest);
 
-		msg(INFO, 'Copying template for ' + args[1] + '...');
+		msg(INFO, 'Copying template for ' + args[1] + ' ...');
 		fse.copy(path.join(sdir, args[1]), dest, { overwrite: true }, function (err)
 		{
 			if (err) {
