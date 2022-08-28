@@ -1,6 +1,6 @@
 # Modules
 
-- [Api](./api.md) - Interface for Wind-compliant web services.
+- [Api](./api.md) - Interface for [Wind](https://github.com/rsthn/rose-core/blob/master/Wind.md)-compliant APIs.
 - [Router](./router.md) - Module to handle local routes (hash locations).
 
 # Classes

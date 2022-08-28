@@ -1,6 +1,6 @@
 # Api
 
-Provides functions to interact with a web service compliant with the behavior defined by [Wind](./wind.md).
+Provides functions to interact with an API compliant with the behavior defined by [Wind](https://github.com/rsthn/rose-core/blob/master/Wind.md).
 
 ```js
 import { Api } from 'riza';
