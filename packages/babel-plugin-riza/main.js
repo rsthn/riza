@@ -391,7 +391,7 @@ export default function ()
 			let _id = t.identifier(this.context.getId());
 
 			let _body = [];
-			let fn = t.functionExpression(null, [t.identifier('props'), t.identifier('children')], t.blockStatement(_body));
+			let fn = t.functionExpression(null, [], t.blockStatement(_body));
 			let _e = t.identifier('_$e');
 			let _c = t.identifier('_$c');
 
