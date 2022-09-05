@@ -338,5 +338,17 @@ export const _helpers =
 			else
 				node.setAttribute(name, data);
 		}
+	},
+
+	/**
+	 * Deep clones a node or an array of nodes.
+	 * @param {Node|Array<Node>} node
+	 */
+	clone (node)
+	{
+		if (node instanceof Array)
+			return node.map(i => i.cloneNode(true));
+
+		return node.cloneNode(true);
 	}
 };
