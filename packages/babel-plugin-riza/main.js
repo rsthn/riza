@@ -144,6 +144,11 @@ const flattenJsxPath = function (path)
 	path.replaceWith(elem);
 };
 
+const isNativeElement = function (tagName)
+{
+	return false;
+}
+
 export default function ()
 {
 	const visitor = 
@@ -247,15 +252,20 @@ export default function ()
 				case 'tr':
 					placeholder = 'td';
 					break;
+
+				case 'select':
+					placeholder = 'option';
+					break;
 			}
 
 			// *********************************
 			// Using element previously defined.
 
-			if (path.scope.hasBinding(tagName))
+			if (path.scope.hasBinding(tagName) && !isNativeElement(tagName))
 			{
 				let props = [];
 				let children = [];
+				let isDynamic = false;
 
 				for (let i in path.node.openingElement.attributes)
 				{
@@ -267,6 +277,10 @@ export default function ()
 						props.push(t.spreadElement(attr.argument));
 						continue;
 					}
+
+					// Detect `dynamic` attribute.
+					if (attr.name.name === 'dynamic')
+						isDynamic = value;
 
 					// Style attribute can be set using a string, object or an expression.
 					if (attr.name.name.toLowerCase() === 'style')
@@ -298,16 +312,31 @@ export default function ()
 					{
 						case 'JSXSpreadChild':
 							children.push(t.spreadElement(child.expression));
+							child = null;
+							break;
+
+						case 'JSXExpressionContainer':
+							children.push(child.expression);
+							child = null;
 							break;
 
 						case 'StringLiteral':
 							if (child.isJsx === true) {
 								children.push(t.arrayExpression([child]));
-								break;
+								child = null;
 							}
+							break;
 
-						default:
-							children.push(child);
+						case 'CallExpression':
+							if (child.isJsx === true && isDynamic) {
+								children.push(child.callee);
+								child = null;
+							}
+							break;
+					}
+
+					if (child !== null) {
+						children.push(child);
 					}
 				}
 
@@ -343,7 +372,6 @@ export default function ()
 					tmp
 				);
 
-
 				this.context.level--;
 				return;
 			}
@@ -363,7 +391,7 @@ export default function ()
 			let _id = t.identifier(this.context.getId());
 
 			let _body = [];
-			let fn = t.functionExpression(null, [], t.blockStatement(_body));
+			let fn = t.functionExpression(null, [t.identifier('props'), t.identifier('children')], t.blockStatement(_body));
 			let _e = t.identifier('_$e');
 			let _c = t.identifier('_$c');
 

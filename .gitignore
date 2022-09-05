@@ -8,3 +8,4 @@ local
 bin/template/dist
 bin/template/yarn.lock
 *.log
+pnpm-lock.yaml
