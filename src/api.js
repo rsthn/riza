@@ -107,10 +107,12 @@ const Api =
 	/**
 	 * Starts package-mode, executes the callback and finishes package-mode. Therefore any requests made by the callback will be packed together.
 	 */
-	packRequests: function (callback, responseCallback=null)
+	batch: function (callback, responseCallback=null)
 	{
 		if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
 		{
+			callback();
+			if (responseCallback) responseCallback();
 			return;
 		}
 
