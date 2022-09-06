@@ -10,12 +10,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.18.13",
+    "@babel/core": "^7.19.0",
     "@parcel/config-default": "^2.7.0",
-    "babel-plugin-riza": "^1.0.8",
+    "@parcel/core": "^2.7.0",
+    "babel-plugin-riza": "^1.0.10",
     "parcel-reporter-static-files-copy": "^1.4.0",
-    "riza": "^2.0.0",
-    "shx": "^0.3.4",
-	"@parcel/core": "^2.7.0"
+    "riza": "^2.0.6",
+    "shx": "^0.3.4"
   }
 }

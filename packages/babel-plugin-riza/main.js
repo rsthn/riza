@@ -406,8 +406,6 @@ export default function ()
 			// Process attributes.
 			let _setAttribute = t.identifier('setAttribute');
 			let _style = t.identifier('style');
-			let _i = t.identifier('i');
-			let _t = t.identifier('t');
 			let _querySelector = t.identifier('querySelector');
 
 			for (let i in path.node.openingElement.attributes)

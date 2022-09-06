@@ -316,7 +316,7 @@ export const _helpers =
 	{
 		if (data instanceof Array)
 		{
-			if (name === 'class')
+			if (name === 'class' || name === 'className')
 				node.className = data.join(' ');
 			else
 				node[name] = data;
@@ -336,7 +336,12 @@ export const _helpers =
 				node[name.toLowerCase()] = data;
 			}
 			else
-				node.setAttribute(name, data);
+			{
+				if (!(name in node))
+					node.setAttribute(name, data);
+				else
+					node[name] = data;
+			}
 		}
 	},
 
