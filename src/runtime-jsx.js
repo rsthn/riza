@@ -114,7 +114,17 @@ export function signal (value=null)
 		return accessorHandler (data, newValue, forced);
 	};
 
-	data.accessor.value = data.value;
+	Object.assign(data.accessor, {
+		get() {
+			return data.value;
+		},
+
+		set(value) {
+			data.value = value;
+			return value;
+		}
+	});
+
 	return data.accessor;
 }
 

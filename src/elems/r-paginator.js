@@ -70,9 +70,8 @@ export default Element.register ('r-paginator',
 	rready: function()
 	{
 		let source = this.getFieldByPath(this.dataset.source);
-		if (!source)
-		{
-			console.error('data-source not found: ' + this.dataset.source);
+		if (!source) {
+			if (this.dataset.source) console.error('data-source not found: ' + this.dataset.source);
 			return;
 		}
 

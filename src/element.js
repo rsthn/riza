@@ -424,6 +424,9 @@ const Element =
 	{
 		if (!path) return null;
 
+		if (typeof(path) !== 'string')
+			return path;
+
 		let tmp = path.split('.');
 		let ref = global;
 

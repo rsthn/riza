@@ -104,13 +104,12 @@ export default Element.register ('r-list',
 	rready: function()
 	{
 		let list = this.getFieldByPath(this.dataset.list);
-		if (!list)
-		{
-			console.error('List not found: ' + this.dataset.list);
+		if (!list) {
+			if (this.dataset.list) console.error('data-list not found: ' + this.dataset.list);
 			return;
 		}
 
-		this.setList (list);
+		this.setList(list);
 	},
 
 	/*

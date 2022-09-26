@@ -4,10 +4,10 @@ const Utils =
 	/**
 	**	Forces the browser to show a download dialog.
 	*/
-	showDownload: function (filename, dataUrl)
+	showDownload: function (filename, url)
 	{
 		var link = document.createElement("a");
-		link.href = dataUrl;
+		link.href = url;
 
 		link.style.display = 'none';
 		link.download = filename;
