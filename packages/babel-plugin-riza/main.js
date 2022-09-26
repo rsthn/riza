@@ -146,6 +146,12 @@ const flattenJsxPath = function (path)
 
 const isNativeElement = function (tagName)
 {
+	switch (tagName)
+	{
+		case 'i': case 'em': case 'b': case 'table': case 'form':
+			return true;
+	}
+
 	return false;
 }
 
@@ -231,7 +237,7 @@ export default function ()
 			let tagName = path.node.openingElement.name.name;
 			let placeholder = 'span';
 
-			switch (tagName.toLowerCase())
+			switch (tagName)
 			{
 				case 'br':
 				case 'hr':
@@ -282,6 +288,10 @@ export default function ()
 					if (attr.name.name === 'dynamic')
 						isDynamic = value;
 
+					// Rename `className` to `class`.
+					if (attr.name.name === 'className')
+						attr.name.name = 'class';
+
 					// Style attribute can be set using a string, object or an expression.
 					if (attr.name.name.toLowerCase() === 'style')
 					{
@@ -292,10 +302,29 @@ export default function ()
 							);
 						}
 					}
-					else
+
+					// Expand expressions.
+					if (value.type === 'JSXExpressionContainer')
+						value = value.expression;
+
+					// Wrap data-on* event handlers in arrow functions.
+					if (attr.name.name.startsWith('data-on'))
 					{
-						if (value.type === 'JSXExpressionContainer')
-							value = value.expression;
+						let args = t.objectPattern([
+							t.objectProperty(t.identifier('currentTarget'), t.identifier('elem')),
+							t.objectProperty(t.identifier('currentTarget'),
+								t.objectPattern([
+									t.objectProperty(t.identifier('dataset'), t.identifier('dataset'))
+								])
+							),
+							t.restElement(t.identifier('evt'))
+						]);
+
+						value = t.arrowFunctionExpression([ args ], t.blockStatement([
+							t.expressionStatement(value)
+						]));
+
+						attr.name.name = attr.name.name.substr(5);
 					}
 
 					if (attr.name.type === 'JSXIdentifier')
@@ -412,13 +441,17 @@ export default function ()
 			{
 				let attr = path.node.openingElement.attributes[i];
 				let attrPath = path.get('openingElement.attributes.' + i);
-				let expr = null, value = attr.value ?? t.stringLiteral('');
+				let expr = null, value = attr.value ?? t.booleanLiteral(true);
 
 				if (attr.type === 'JSXSpreadAttribute')
 				{
 					_body.push(t.callExpression(t.memberExpression(this.context._helpers, this.context._spreadAttributes), [_e, attr.argument]));
 					continue;
 				}
+
+				// Rename `className` to `class`.
+				if (attr.name.name === 'className')
+					attr.name.name = 'class';
 
 				// Style attribute can be set using a string, object or an expression.
 				if (attr.name.name.toLowerCase() === 'style')
@@ -498,6 +531,26 @@ export default function ()
 				{
 					if (value.type === 'JSXExpressionContainer')
 					{
+						// Wrap data-on* event handlers in arrow functions.
+						if (attr.name.name.startsWith('data-on'))
+						{
+							let args = t.objectPattern([
+								t.objectProperty(t.identifier('currentTarget'), t.identifier('elem')),
+								t.objectProperty(t.identifier('currentTarget'),
+									t.objectPattern([
+										t.objectProperty(t.identifier('dataset'), t.identifier('dataset'))
+									])
+								),
+								t.restElement(t.identifier('evt'))
+							]);
+
+							value.expression = t.arrowFunctionExpression([ args ], t.blockStatement([
+								t.expressionStatement(value.expression)
+							]));
+
+							attr.name.name = attr.name.name.substr(5);
+						}
+
 						if (attr.name.name.startsWith('on'))
 						{
 							expr = t.assignmentExpression('=', t.memberExpression(_e, t.identifier(attr.name.name.toLowerCase())), value.expression);
