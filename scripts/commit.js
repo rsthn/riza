@@ -1,5 +1,4 @@
-import { exec } from 'child_process';
-import fs from 'fs';
+import { exec } from "child_process";
 
 function run (command)
 {
@@ -21,7 +20,6 @@ function run (command)
 		});
 	});
 };
-
 
 run('svn-commit')
 .then(r => run('git add .'))
