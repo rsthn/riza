@@ -23,12 +23,14 @@
     "targets": {
         "module": {
             "source": "./src/main.js",
-            "optimize": true
+            "optimize": true,
+			"isLibrary": true
         },
         "global": {
             "source": "./src/_main.js",
             "optimize": true,
-            "includeNodeModules": true
+            "includeNodeModules": true,
+			"isLibrary": true
         }
     },
     "repository": {
