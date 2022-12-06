@@ -116,12 +116,7 @@ switch (args[0])
 			if (manager !== 'pnpm')
 				patch(dest, ['package.json'], 'pnpm', manager);
 
-			msg(INFO, 'Installing dependencies ...');
-
-			process.chdir(dest);
-			run(manager + ' install').then(r => {
-				msg(SUCCESS, 'Completed.');
-			});
+			msg(SUCCESS, 'Please run `'+manager+' install`\nCompleted.');
 		});
 
 		break;

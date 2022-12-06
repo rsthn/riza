@@ -137,7 +137,7 @@ export function effect (fn, id=null)
 	let previousWatcher = null;
 	let active = false;
 
-	const watcher = function()
+	const watcher = async function()
 	{
 		if (active === true) return;
 		active = true;
@@ -146,7 +146,7 @@ export function effect (fn, id=null)
 		activeWatcher = watcher;
 
 		try {
-			fn();
+			await fn();
 		}
 		finally {
 		}

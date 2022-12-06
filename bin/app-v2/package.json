@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "clean": "shx rm -rf dist",
-    "prebuild": "shx mkdir -p dist && shx cp -r src/static dist",
+    "prebuild": "shx mkdir -p dist",
     "build": "pnpm clean && pnpm prebuild && parcel build src/index.html --public-url ./",
     "watch": "pnpm prebuild && parcel watch src/index.html --public-url ./",
     "dev": "parcel serve src/index.html"

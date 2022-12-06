@@ -16,6 +16,7 @@ const Api =
 	XML_RESPONSE_SUPPORTED: 	0x08,
 	INCLUDE_CREDENTIALS:		0x10,
 	UNIQUE_STAMP:				0x20,
+	DISABLE_CORS:				0x40,
 
 	/**
 	 * Target URL for all the API requests. Set by calling `setEndPoint`.
@@ -302,7 +303,7 @@ const Api =
 
 		let options =
 		{
-			mode: 'cors',
+			mode: this.flags & Api.DISABLE_CORS ? 'no-cors' : 'cors',
 			headers: {
 				'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9',
 				...this.headers
@@ -477,6 +478,25 @@ const Api =
 		{
 			return base64.decode(value);
 		}
+	},
+
+	/**
+	 * Executes an API request, returns a promise.
+	 */
+	request: function (method, url, params=null)
+	{
+		if (params === null)
+		{
+			if (typeof(url) !== 'string')
+			{
+				params = url;
+				url = '';
+			}
+		}
+
+		return new Promise((resolve, reject) => {
+			this.apiCall(params, resolve, reject, null, method, url);
+		});
 	},
 
 	/**

@@ -22,7 +22,7 @@ export const Flattenable = _Rinn.Flattenable;
 export const Collection = _Rinn.Collection;
 export const Template = _Rinn.Template;
 
-/*global.riza =
+global.riza =
 {
 	Router: Router,
 	Element: Element,
@@ -34,7 +34,7 @@ export const Template = _Rinn.Template;
 	Anim: Anim,
 	Elements: Elements,
 	Utils: Utils,
-	Db: Db,
+	db: db,
 
 	Rinn: Rinn,
 	Class: Class,
@@ -47,4 +47,3 @@ export const Template = _Rinn.Template;
 	Collection: Collection,
 	Template: Template,
 };
-*/
