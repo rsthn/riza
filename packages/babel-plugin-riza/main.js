@@ -308,6 +308,7 @@ export default function ()
 						value = value.expression;
 
 					// Wrap data-on* event handlers in arrow functions.
+					// { currentTarget: elem, currentTarget.dataset: dataset, evt }
 					if (attr.name.name.startsWith('data-on'))
 					{
 						let args = t.objectPattern([

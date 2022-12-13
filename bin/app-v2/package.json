@@ -12,14 +12,14 @@
   "parcelIgnore": [
   ],
   "devDependencies": {
-	"parcel": "~2.7.0",
-    "@parcel/core": "~2.7.0",
-    "@babel/core": "~7.19.6",
-    "@parcel/config-default": "~2.7.0",
-    "babel-plugin-riza": "~1.0.13",
-    "parcel-reporter-static-files-copy": "~1.4.0",
-	"parcel-resolver-ignore": "~2.1.3",
-    "riza": "~2.0.10",
-    "shx": "~0.3.4"
+	  "@parcel/core": "~2.7.0",
+	  "@babel/core": "~7.19.6",
+	  "@parcel/config-default": "~2.7.0",
+	  "babel-plugin-riza": "~1.0.13",
+	  "parcel-reporter-static-files-copy": "~1.4.0",
+	  "parcel-resolver-ignore": "~2.1.3",
+	  "riza": "~2.0.10",
+	  "shx": "~0.3.4",
+	  "parcel": "~2.7.0"
   }
 }

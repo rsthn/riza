@@ -1,20 +1,4 @@
 /*
-**	elems/r-panel
-**
-**	Copyright (c) 2019-2021, RedStar Technologies, All rights reserved.
-**	https://www.rsthn.com/
-**
-**	THIS LIBRARY IS PROVIDED BY REDSTAR TECHNOLOGIES "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-**	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
-**	PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL REDSTAR TECHNOLOGIES BE LIABLE FOR ANY
-**	DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-**	NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
-**	OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
-**	STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
-**	USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/*
 	<r-panel data-route="name">
 	</r-panel>
 
@@ -26,6 +10,11 @@
 		display: none;
 	}
 
+	r-panel.inactive {
+	}
+
+	r-panel.active {
+	}
 */
 
 import Element from '../element.js';
@@ -34,13 +23,13 @@ import Router from '../router.js';
 export default Element.register ('r-panel',
 {
 	/**
-	**	Route object used by this element.
-	*/
+	 * Route object used by this element.
+	 */
 	route: null,
 
 	/**
-	**	Initializes the element.
-	*/
+	 * Initializes the element.
+	 */
 	init: function()
 	{
 		this.style.display = '';
@@ -64,8 +53,8 @@ export default Element.register ('r-panel',
 	},
 
 	/**
-	**	Adds a handler to Router if the data-route attribute was set.
-	*/
+	 * Adds a handler to Router if the data-route attribute was set.
+	 */
 	onConnected: function()
 	{
 		if (this.dataset.route)
@@ -78,8 +67,8 @@ export default Element.register ('r-panel',
 	},
 
 	/**
-	**	Removes a handler previously added to Router if the data-route attribute was set.
-	*/
+	 * Removes a handler previously added to Router if the data-route attribute was set.
+	 */
 	onDisconnected: function()
 	{
 		if (this.dataset.route)
@@ -87,18 +76,20 @@ export default Element.register ('r-panel',
 	},
 
 	/**
-	**	Hides the panel by removing the `active` class from the element. Fires `panelHidden` event.
-	*/
+	 * Hides the panel by removing the `active` and adding `inactive` class to the element. Fires `panelHidden` event.
+	 */
 	hide: function ()
 	{
 		this.classList.remove('active');
+		this.classList.add('inactive');
 		this.dispatch('panelHidden', this.route ? this.route.args : { });
 	},
 
 	/**
-	**	Shows the panel visible by adding `active` class to the element. If `silent` is true and `data-route` enabled, the current route
-	**	will not be updated. Fires `panelShown` event.
-	*/
+	 * Shows the panel visible by adding `active` and removing `inactive` class from the element. If `silent` is true and `data-route` enabled,
+	 * the current route will not be updated. Fires `panelShown` event.
+	 * @param {boolean} silent 
+	 */
 	show: function (silent=false)
 	{
 		if (this.dataset.route && !silent)
@@ -112,6 +103,7 @@ export default Element.register ('r-panel',
 			}
 		}
 
+		this.classList.remove('inactive');
 		this.classList.add('active');
 		this.dispatch('panelShown', this.route ? this.route.args : { });
 	}
