@@ -6,8 +6,8 @@
 const Easing =
 {
 	/**
-	**	Interpolates numeric values between two objects (`src` and `dst`) using the specified `duration` (in seconds) and `easing` function. Note that all four parameters
-	**	`src`, `dst`, `duration` and `easing` must be objects having the same number of values.
+	**	Interpolates numeric values between two objects (`src` and `dst`) using the specified `duration` (in seconds) and `easing` function. Note
+	**	that all four parameters `src`, `dst`, `duration` and `easing` must be objects having the same number of values.
 	*/
 	interpolate: function (src, dst, duration, easing, callback/* function(data, isFinished) */)
 	{

@@ -1,3 +1,13 @@
+# v2.0.11 - Dec 13 2022
+
+#### Elements
+- Cleaned up comments in files of elems folder.
+
+#### r-panel
+- Added `inactive` class when panel is not shown.
+
+<br/>
+
 # v2.0.10 - Dec 12 2022
 
 #### Global
