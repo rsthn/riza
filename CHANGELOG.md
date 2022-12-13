@@ -1,3 +1,11 @@
+# v2.0.10 - Dec 12 2022
+
+#### Global
+- Updated version strings in base and cli modules to prevent wrong upgrades.
+- Updated versions of dependencies for babel-plugin-riza.
+
+<br/>
+
 # v2.0.9 - Dec 05 2022
 
 #### Api
