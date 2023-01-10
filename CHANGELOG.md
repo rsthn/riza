@@ -1,3 +1,10 @@
+# v2.0.12 - Jan 09 2023
+
+#### JsxRuntime
+- Removed async/await from regular effect function.
+
+<br/>
+
 # v2.0.11 - Dec 13 2022
 
 #### Elements

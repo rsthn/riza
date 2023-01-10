@@ -58,7 +58,7 @@ function accessorHandler (signal, newValue, forced)
 			if (signal.watchers.find(activeWatcher) === null)
 				signal.watchers.push(activeWatcher);
 		}
-	
+
 		return signal.value;
 	}
 
@@ -137,7 +137,7 @@ export function effect (fn, id=null)
 	let previousWatcher = null;
 	let active = false;
 
-	const watcher = async function()
+	const watcher = function()
 	{
 		if (active === true) return;
 		active = true;
@@ -146,7 +146,7 @@ export function effect (fn, id=null)
 		activeWatcher = watcher;
 
 		try {
-			await fn();
+			fn();
 		}
 		finally {
 		}
