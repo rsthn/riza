@@ -423,7 +423,7 @@ const Api =
 			this._hideProgress();
 
 			if (retries == 0) {
-				if (failure) failure(params);
+				if (failure) failure(err, params);
 			} else {
 				this.apiCall (data, success, failure, httpMethod, retries-1, relativeUrl);
 			}

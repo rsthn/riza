@@ -106,6 +106,7 @@ export function signal (value=null)
 	const data = {
 		watchers: List.create(),
 		value: value,
+		default: value,
 		isPropagating: false,
 		wasQueued: false
 	};
