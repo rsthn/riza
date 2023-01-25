@@ -106,7 +106,6 @@ export function signal (value=null)
 	const data = {
 		watchers: List.create(),
 		value: value,
-		default: value,
 		isPropagating: false,
 		wasQueued: false
 	};
@@ -123,7 +122,13 @@ export function signal (value=null)
 		set(value) {
 			data.value = value;
 			return value;
-		}
+		},
+
+		reset(forced=false) {
+			data.accessor(data.accessor.default, forced);
+		},
+
+		default: value
 	});
 
 	return data.accessor;

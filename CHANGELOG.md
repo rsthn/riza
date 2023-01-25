@@ -1,10 +1,11 @@
-# v2.0.13 - Jan 25 2023
+# v2.0.14 - Jan 25 2023
 
 #### Api
 - Failure callback now includes `err` as first parameter.
 
 #### RuntimeJsx
 - Added `default` property to signal, set as the value passed when creating it.
+- Added method `reset` used to set the signal to its default value.
 
 <br/>
 
