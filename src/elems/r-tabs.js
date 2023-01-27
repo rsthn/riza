@@ -72,10 +72,14 @@ export default Element.register ('r-tabs',
 				{
 					if (!link.href) return;
 
-					if (Router.location.startsWith(link.href.substr(link.href.indexOf('#')+1)))
+					if (Router.location.startsWith(link.href.substr(link.href.indexOf('#')+1))) {
 						link.classList.add('active');
-					else
+						link.classList.add('is-active');
+					}
+					else {
 						link.classList.remove('active');
+						link.classList.remove('is-active');
+					}
 				});
 			}
 
@@ -128,7 +132,7 @@ export default Element.register ('r-tabs',
 
 	/**
 	**	Hides all tabs except the one with the specified exceptName, if none specified then all tabs will be hidden (adds `.x-hidden` CSS class),
-	**	additionally the respective link item in the tab definition will have class `.active`.
+	**	additionally the respective link item in the tab definition will have class `.active` and `.is-active`.
 	*/
 	_hideTabsExcept: function (exceptName)
 	{
@@ -153,10 +157,13 @@ export default Element.register ('r-tabs',
 
 		this.querySelectorAll("[data-name]").forEach(link =>
 		{
-			if (link.dataset.name == exceptName)
+			if (link.dataset.name == exceptName) {
 				link.classList.add('active');
-			else
+				link.classList.add('is-active');
+			} else {
 				link.classList.remove('active');
+				link.classList.remove('is-active');
+			}
 		});
 
 		this.activeTab = exceptName;
