@@ -1,7 +1,8 @@
-# v3.0.0 - May 23 2023
+# v3.0.2 - May 23 2023
 
 - Replaced entire JSX runtime to be compatible with the latest optimized `babel-plugin-riza`
 - Updated riza and related packages to support parcel 2.8
+- Fixed minor bug in JSX transpiler and runtime causing `class` not to be properly in elements.
 
 <br/>
 
