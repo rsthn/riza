@@ -1,12 +1,12 @@
 {
     "name": "babel-plugin-riza",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Riza JSX Transpiler (Babel)",
     "main": "main.js",
     "scripts": {
         "test": "echo Ok",
-        "sample": "cls && babel test.jsx",
-        "dev": "parcel serve test.html"
+        "sample": "cls && babel debug/test.jsx",
+        "dev": "parcel serve debug/test.html"
     },
     "repository": {
         "type": "git",
@@ -34,6 +34,6 @@
         "@babel/cli": "^7.21.5",
         "@babel/types": "^7.21.5",
         "parcel": "^2.8.3",
-        "riza": "^3.0.0"
+        "riza": "^3.0.1"
     }
 }

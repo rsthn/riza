@@ -6,3 +6,4 @@ debug
 .parcel-cache
 *.log
 todo.txt
+dist

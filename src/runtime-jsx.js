@@ -172,6 +172,10 @@ export const helpers =
 	 */
 	setValue: function (root, path, lastIndex, value)
 	{
+		// Rename properties `class`, `classList` to `className`.
+		if (path[0] === 'class' || path[0] === 'classList')
+			path[0] = 'className';
+
 		// Object used to set `style` or `class` attribute.
 		if (path.length === 1 && typeof(value) === 'object')
 		{
@@ -182,9 +186,7 @@ export const helpers =
 						watch([i, value[i]], (i, value) => root.style[i] = value);
 					return;
 
-				case 'class':
 				case 'className':
-				case 'classList':
 					if (value instanceof Array)
 					{
 						watch([value], (value) => {
@@ -202,7 +204,7 @@ export const helpers =
 		}
 
 		// Specific CSS class such as `class:hidden`.
-		if (path.length === 2 && (path[0] === 'class' || path[0] === 'className' || path[0] === 'classList'))
+		if (path.length === 2 && path[0] === 'className')
 		{
 			watch([path[1], value], (i, value) => root.classList[value == true ? 'add' : 'remove'](i));
 			return;

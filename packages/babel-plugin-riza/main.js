@@ -4,6 +4,11 @@ const syntaxJsx = require('./syntax-jsx.js');
 const { default: generate } = require('@babel/generator');
 
 /**
+ * When using test-mode, the imports are not forced to be from the 'riza' package.
+ */
+const TEST_MODE = true;
+
+/**
  * Visitors to detect or extract certain features from an AST path.
  */
 
@@ -205,7 +210,7 @@ const jsxTransformer =
 	 */
 	ImportDeclaration (path)
 	{
-		if (this.context.importsReady || path.node.source.value !== this.context.runtimePackage)
+		if (this.context.importsReady || (TEST_MODE === false && path.node.source.value !== this.context.runtimePackage))
 			return;
 
 		let info = checkRequiredImports(path);
@@ -247,6 +252,12 @@ const jsxTransformer =
 	},
 
 	ExpressionStatement (path)
+	{
+		if (path.parent.type === 'Program')
+			this.context.lastDecl = path;
+	},
+
+	ExportDefaultDeclaration (path)
 	{
 		if (path.parent.type === 'Program')
 			this.context.lastDecl = path;
