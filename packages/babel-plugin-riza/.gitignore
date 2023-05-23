@@ -2,9 +2,7 @@
 .svn
 .cache
 node_modules
-custom
-local
+debug
 .parcel-cache
-bin/template/dist
-bin/template/yarn.lock
 *.log
+todo.txt

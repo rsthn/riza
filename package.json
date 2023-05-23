@@ -1,13 +1,12 @@
 {
     "name": "riza",
-    "version": "2.0.15",
+    "version": "3.0.0",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
     "module": "./dist/riza.m.js",
     "global": "./dist/riza.js",
     "types": "./dist/riza.d.ts",
-    "parcel-version": "parcel@2.7.0",
     "bin": {
         "riza": "bin/cli.js"
     },
@@ -54,5 +53,8 @@
         "base-64": "^1.0.0",
         "fs-extra": "^10.1.0",
         "rinn": "^2.0.47"
+    },
+    "devDependencies": {
+        "parcel": "^2.8.3"
     }
 }
