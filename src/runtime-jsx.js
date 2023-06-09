@@ -33,6 +33,15 @@ export class Signal
 		this.notify();
 	}
 
+	get() {
+		return this.value;
+	}
+
+	set(value) {
+		this.value = value;
+		return this;
+	}
+
 	label (value=null)
 	{
 		if (value === null)
@@ -43,10 +52,12 @@ export class Signal
 
 	reset() {
 		this.value = this.#defvalue;
+		return this;
 	}
 
 	connect (callback) {
 		this.#listeners.push(callback);
+		return this;
 	}
 
 	notify()
@@ -417,6 +428,10 @@ export const helpers =
 			}
 
 			elem.isCustom = true;
+
+			if (elem.oncreated)
+				elem.oncreated(elem);
+
 			return elem;
 		};
 	}

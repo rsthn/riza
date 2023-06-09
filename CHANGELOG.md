@@ -1,3 +1,11 @@
+# v3.0.3 - Jun 9 2023
+
+- Added special event `oncreated` for elements created with JSX.
+- Added methods get/set to the Signal class to get or set the signal's value.
+- Minor bug fixes.
+
+<br/>
+
 # v3.0.2 - May 23 2023
 
 - Replaced entire JSX runtime to be compatible with the latest optimized `babel-plugin-riza`
