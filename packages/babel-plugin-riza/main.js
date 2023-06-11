@@ -6,7 +6,7 @@ const { default: generate } = require('@babel/generator');
 /**
  * When using test-mode, the imports are not forced to be from the 'riza' package.
  */
-const TEST_MODE = false;
+const TEST_MODE = true;
 
 /**
  * Visitors to detect or extract certain features from an AST path.
@@ -119,7 +119,7 @@ function trimChildren (childList)
 	// Trim the first string literal.
 	while (childList.length > 0 && childList[0].type === 'StringLiteral')
 	{
-		let value = childList[0].value.replace(/^\s+/gm, '');
+		let value = childList[0].value.replace(/^[\r\n\f\v\t ]+/gm, '');
 		if (!value.length) {
 			childList.splice(0, 1);
 			continue;
@@ -132,7 +132,7 @@ function trimChildren (childList)
 	// Trim the last string literal.
 	while (childList.length > 0 && childList[childList.length-1].type === 'StringLiteral')
 	{
-		let value = childList[childList.length-1].value.replace(/\s+$/gm, '');
+		let value = childList[childList.length-1].value.replace(/[\r\n\f\v\t ]+$/gm, '');
 		if (!value.length) {
 			childList.splice(childList.length-1, 1);
 			continue;

@@ -245,21 +245,22 @@ export const helpers =
 
 	/**
 	 * Ensures the provided value is a node or a node-compatible (such as an array of nodes).
-	 * @param {*} value
+	 * @param {Node|Array<Node|string>|string} value
+	 * @param {boolean} [cloneNode=false]
 	 * @returns {Node|Array<Node>}
 	 */
-	ensureNode: function (value)
+	ensureNode: function (value, cloneNode=false)
 	{
 		if (value instanceof Array) {
 			for (let i = 0; i < value.length; i++)
-				value[i] = helpers.ensureNode(value[i]);
+				value[i] = helpers.ensureNode(value[i], cloneNode);
 			return value;
 		}
 
 		if (!(value instanceof Node))
 			return document.createTextNode(value);
 
-		return value;
+		return cloneNode ? value.cloneNode(true) : value;
 	},
 
 	/**
@@ -385,13 +386,13 @@ export const helpers =
 
 			if (firstBuild || dynamicBuild)
 			{
-				let target = dynamicBuild ? baseElement.cloneNode(true) : baseElement;
+				let target = dynamicBuild ? baseElement.cloneNode() : baseElement;
 				for (let i in children)
 				{
 					if (children[i] instanceof Array)
 						throw new Error('Document fragments not fully supported!');
-		
-					helpers.replaceNode(target, target, helpers.ensureNode(children[i]), true);
+
+					helpers.replaceNode(target, target, helpers.ensureNode(children[i], true), true);
 				}
 
 				if (dynamicBuild) elem = target;

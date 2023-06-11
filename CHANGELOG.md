@@ -1,8 +1,8 @@
-# v3.0.3 - Jun 9 2023
+# v3.0.4 - Jun 9 2023
 
 - Added special event `oncreated` for elements created with JSX.
 - Added methods get/set to the Signal class to get or set the signal's value.
-- Minor bug fixes.
+- Fixed bugs in the runtime-jsx causing elements to be recycled and thus showing only a single instance.
 
 <br/>
 
