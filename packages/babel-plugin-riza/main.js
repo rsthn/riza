@@ -43,9 +43,6 @@ const v_checkRequiredImports = {
 const v_getSignalIdentifiers = {
 	Identifier: function (path)
 	{
-		if (path.parent.type === 'MemberExpression')
-			return;
-
 		if (path.node.name[0] === '$' && !(path.node.name.substr(1) in this.names))
 		{
 			this.names[path.node.name.substr(1)] = true;
