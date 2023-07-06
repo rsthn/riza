@@ -244,6 +244,40 @@ export const helpers =
 	},
 
 	/**
+	 * Clones an element node and ensures certain properties are copied over.
+	 * @param {Element} node
+	 * @param {boolean} [deep=false]
+	 */
+	cloneNode: function (node, deep=false)
+	{
+		let newNode = node.cloneNode();
+
+		if (deep) {
+			for (let childNode of node.childNodes)
+				newNode.appendChild(helpers.cloneNode(childNode, true));
+		}
+
+		// Copy property event listeners.
+		for (let propName in node)
+		{
+			if (!propName.startsWith('on') || propName.startsWith('onmoz') || !node[propName])
+				continue;
+
+			newNode[propName] = node[propName];
+		}
+
+		// Copy custom properties.
+		for (let propName of Object.getOwnPropertyNames(node))
+			newNode[propName] = node[propName];
+
+		// Execute `oncreated` handler.
+		if ('oncreated' in newNode)
+			newNode.oncreated(newNode);
+
+		return newNode;
+	},
+
+	/**
 	 * Ensures the provided value is a node or a node-compatible (such as an array of nodes).
 	 * @param {Node|Array<Node|string>|string} value
 	 * @param {boolean} [cloneNode=false]
@@ -260,7 +294,7 @@ export const helpers =
 		if (!(value instanceof Node))
 			return document.createTextNode(value);
 
-		return cloneNode ? value.cloneNode(true) : value;
+		return cloneNode ? helpers.cloneNode(value, true) : value;
 	},
 
 	/**
@@ -386,7 +420,8 @@ export const helpers =
 
 			if (firstBuild || dynamicBuild)
 			{
-				let target = dynamicBuild ? baseElement.cloneNode() : baseElement;
+				let target = dynamicBuild ? helpers.cloneNode(baseElement) : baseElement;
+
 				for (let i in children)
 				{
 					if (children[i] instanceof Array)
@@ -400,8 +435,9 @@ export const helpers =
 			}
 
 			if (elem === null)
-				elem = baseElement.cloneNode(true);
+				elem = helpers.cloneNode(baseElement, true);
 
+			const hadOnCreated = 'oncreated' in elem;
 			const dynamicChildren = dynamicChildrenIndices.map(idx => helpers.createReplacer(elem.childNodes[idx]));
 
 			for (let i = 0; i < N; i++)
@@ -421,18 +457,17 @@ export const helpers =
 						if (i.indexOf(':') !== -1)
 							path = i.split(':');
 						else
-							path = [i];
+							path = [ i ];
 
 						helpers.setValue(elem, path, path.length-1, attributes[i]);
 					}
 				}
 			}
 
-			elem.isCustom = true;
-
-			if (elem.oncreated)
+			if (!hadOnCreated && 'oncreated' in elem)
 				elem.oncreated(elem);
 
+			elem.isCustom = true;
 			return elem;
 		};
 	}

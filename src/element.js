@@ -887,6 +887,12 @@ const Element =
 	*/
 	dispatch: function (eventName, args=null, bubbles=true)
 	{
+		let propName = 'on' + eventName.toLowerCase();
+		if (propName in this) {
+			this[propName] (args);
+			return;
+		}
+
 		this.dispatchEvent (this.createEventObject(eventName, args, bubbles));
 	},
 
