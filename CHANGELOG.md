@@ -1,3 +1,14 @@
+# v3.0.5 - Jul 06 2023
+
+#### Element
+- Updated `dispatch` method to trigger immediate event handler first when available.
+
+#### RuntimeJsx
+- Fixed bugs causing uninitialized elements after cloning.
+- Added helper function 'cloneNode' which clones nodes including custom properties.
+
+<br/>
+
 # v3.0.4 - Jun 9 2023
 
 - Added special event `oncreated` for elements created with JSX.
