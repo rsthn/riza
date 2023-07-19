@@ -6,7 +6,7 @@ const { default: generate } = require('@babel/generator');
 /**
  * When using test-mode, the imports are not forced to be from the 'riza' package.
  */
-const TEST_MODE = true;
+const TEST_MODE = false;
 
 /**
  * Visitors to detect or extract certain features from an AST path.
@@ -263,6 +263,12 @@ module.exports = function()
 		},
 
 		ExportDefaultDeclaration (path)
+		{
+			if (path.parent.type === 'Program')
+				this.context.lastDecl = path;
+		},
+
+		ExportNamedDeclaration (path)
 		{
 			if (path.parent.type === 'Program')
 				this.context.lastDecl = path;

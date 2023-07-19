@@ -394,7 +394,7 @@ const Api =
 				}
 				else
 				{
-					if (data[0] === '{')
+					if (data[0] === '{' || data[0] === '[')
 						options.headers['Content-Type'] = 'application/json';
 					else
 						options.headers['Content-Type'] = 'application/octet-stream';

@@ -326,6 +326,9 @@ export const helpers =
 			let frag = document.createDocumentFragment();
 			newRefNode = [];
 
+			if (newNode.length == 0)
+				newNode = [document.createTextNode('')];
+
 			for (let i = 0; i < newNode.length; i++) {
 				newRefNode.push(newNode[i]);
 				frag.appendChild(newNode[i]);
