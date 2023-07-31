@@ -43,3 +43,5 @@ Add to elements that should be shown only when **there are items** in the data s
 
 </r-list>
 ```
+
+<small>NOTE: When using JSX, you can use the `dataList` property directly with a `DataList` object instead of passing a name via `data-list`. Additionally the `content` property (function callback) of `r-list` can also be used to format each item in the list.</small>

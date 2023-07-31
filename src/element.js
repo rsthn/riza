@@ -301,6 +301,8 @@ const Element =
 				console.log('>> ' + this.tagName + ' READY');
 
 			this.ready();
+			if (this.onchildrenready) this.onchildrenready();
+
 			this.collectWatchers();
 		}
 		else
@@ -354,8 +356,9 @@ const Element =
 				if ('rready' in this._super[i])
 					this._super[i].rready();
 			});
-		
+
 			this.rready();
+			if (this.onready) this.onready();
 		}
 
 		this.readyLocked--;

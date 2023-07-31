@@ -20,10 +20,6 @@ Operation is to create an actual `<select>` with the same attributes as the `r-s
 
 ## Example
 
-```html
-<r-select data-list="dataList" data-blank="Select ..."></r-select>
-```
-
 ```js
 import { ModelList } from 'riza';
 
@@ -33,3 +29,9 @@ dataList.push({ id: 1, label: 'Red' });
 dataList.push({ id: 2, label: 'Green' });
 dataList.push({ id: 3, label: 'Blue' });
 ```
+
+```html
+<r-select data-list="dataList" data-blank="Select ..."></r-select>
+```
+
+<small>NOTE: When using JSX, you can use the `dataList` property directly with a `DataList` object instead of passing a name via `data-list`.</small>

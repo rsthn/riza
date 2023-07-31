@@ -15,16 +15,16 @@ Filtering can be achieved by creating input elements that alter the model of the
 
 <br/>
 
-### int `offsetStart`
+### `offsetStart`: _int_
 Offset of the first item (starts from 1) in the data source (list).
 
-### int `offsetEnd`
+### `offsetEnd`: _int_
 Offset of the last item in the data source (list).
 
-### int `count`
+### `count`: _int_
 Total number of items in the data source.
 
-### int `pageSize`
+### `pageSize`: _int_
 Number of items to show per page (default is 25).
 
 <br/>
@@ -33,22 +33,22 @@ Number of items to show per page (default is 25).
 
 > The following methods can be accessed directly using `[data-action]` property in any child element.
 
-### void `prevPage` ()
+### `prevPage` ()
 Moves to the previous page.
 
-### void `nextPage` ()
+### `nextPage` ()
 Moves to the next page.
 
-### void `firstPage` ()
+### `firstPage` ()
 Moves to the first page.
 
-### void `lastPage` ()
+### `lastPage` ()
 Moves to the last page.
 
-### void `refresh` ()
+### `refresh` ()
 Refreshes the data source.
 
-### void `clear` (array fieldNames)
+### `clear` (`fieldNames`: _Array\<string\>_)
 Clears (set to empty) the specified fields from the data source's request parameters.
 
 <br/>
@@ -68,3 +68,5 @@ Clears (set to empty) the specified fields from the data source's request parame
     <input type="text" data-property="pageSize" />
 </r-paginator>
 ```
+
+<small>NOTE: When using JSX, you can use the `dataSource` property directly with a `DataSource` object instead of passing a name via `data-source`.</small>

@@ -59,14 +59,11 @@ export default Element.register ('r-list',
 		}
 
 		let tmp = this.template_elem = this.querySelector('template');
-		if (tmp)
-		{
-			if (tmp.dataset.mode != 'dynamic')
-			{
+		if (tmp) {
+			if (tmp.dataset.mode != 'dynamic') {
 				this.template = Template.compile(tmp.innerHTML);
 			}
-			else
-			{
+			else {
 				this.template = () => tmp.innerHTML;
 				this.isDynamicTemplate = true;
 			}
@@ -87,7 +84,7 @@ export default Element.register ('r-list',
 	*/
 	rready: function()
 	{
-		let list = this.getFieldByPath(this.dataset.list);
+		let list = this.dataList ?? this.getFieldByPath(this.dataset.list);
 		if (!list) {
 			if (this.dataset.list) console.error('data-list not found: ' + this.dataset.list);
 			return;
@@ -182,6 +179,18 @@ export default Element.register ('r-list',
 	*/
 	buildItem: function (iid, data, asHtml=false)
 	{
+		if (this.content) {
+			let elem = this.content(data.get());
+			elem.dataset.iid = iid;
+			return elem;
+		}
+
+		if (this.container.content) {
+			let elem = this.container.content(data.get());
+			elem.dataset.iid = iid;
+			return elem;
+		}
+
 		let html = this.template(data.get());
 		if (asHtml) return html;
 

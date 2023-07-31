@@ -87,13 +87,13 @@ export default Element.register ('r-table',
 	*/
 	rready: function()
 	{
-		let source = this.getFieldByPath(this.dataset.source);
+		let source = this.dataSource ?? this.getFieldByPath(this.dataset.source);
 		if (!source) {
 			if (this.dataset.source) console.error('data-source not found: ' + this.dataset.source);
 			return;
 		}
 
-		this.setSource (source);
+		this.setSource(source);
 	},
 
 	/*
@@ -200,6 +200,12 @@ export default Element.register ('r-table',
 	*/
 	buildItem: function (iid, data)
 	{
+		if (this.container.content) {
+			let elem = this.container.content(data.get());
+			elem.dataset.iid = iid;
+			return elem;
+		}
+
 		let elem = this.temporalBody;
 
 		elem.innerHTML = this.template(data.get());

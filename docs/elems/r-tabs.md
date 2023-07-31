@@ -14,19 +14,25 @@ Tab selection is done by locating an immediate children of the `container` havin
 
 # Events
 
-### `tabShown` { string name, HTMLElement el } 
-### `tabHidden` { string name, HTMLElement el }
+### `tabShown` { `name`: _string_, `el`: _HTMLElement_ }
+Dispatched when a tab is shown. Event arguments are the `name` of the newly focused tab, and tab content element `el`.
+
+### `tabHidden` { `name`: _string_, `el`: _HTMLElement_ }
+Dispatched when a tab is hidden. Event arguments are the `name` of the just unfocused tab, and its tab content element `el`.
+
+### `tabChanged` { `name`: _string_, `el`: _HTMLElement_ }
+Dispatched when a tab changes, `name` is the newly focused tab, and `el` is the `r-tabs` element.
 
 <br/>
 
 # Methods
 
-### void `showTab` (string name)
+### `showTab` (`name`: _string_)
 Shows the tab with the specified name, ignores `data-base-route` and current route as well.
 
 <br/>
 
-### void `selectTab` (string name)
+### `selectTab` (`name`: _string_)
 Shows a tab given its name. The route will be changed automatically if `data-base-route` is enabled.
 
 <br/>

@@ -59,17 +59,17 @@ r-form .message.error {
 
 # Events
 
-### `formSuccess` { object res } 
+### `formSuccess` { `res`: _object_ } 
 Fired when the API function returns response code `200`. The `res` parameter has the API's response object.
 
-### `formError` { object res }
+### `formError` { `res`: _object_ }
 Fired when the API returns response code `407`, `409` or any other than `200`. The `res` parameter has the API's response object.
 
 <br/>
 
 # Methods
 
-### void `clearMarkers` ()
+### `clearMarkers` ()
 Clears the markers of the form to return it to its initial visual state. It will:
 
 - Remove the `.busy` class from the form.
@@ -79,12 +79,12 @@ Clears the markers of the form to return it to its initial visual state. It will
 
 <br/>
 
-### void `reset` ()
+### `reset` ()
 Reset's the form fields to their default values, when no default values are specified, empty strings will be used, or an integer zero (0) in checkbox elements.
 
 <br/>
 
-### void `submit` ()
+### `submit` ()
 Submits the form to the target API function.
 
 <br/>

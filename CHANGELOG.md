@@ -1,3 +1,25 @@
+# v3.0.6 - Jul 31 2023
+
+#### r-table
+- Added support for `dataSource` property to directly set the table's data source.
+- Added support for `content` property (function) in the tbody to format each row.
+
+#### r-paginator
+- Added support for `dataSource` property.
+
+#### r-select
+- Added support for `dataList` property.
+
+#### r-list
+- Added support for `dataList` property.
+- Added support for `content` property (function) to format each item in the list.
+
+#### General
+- Updated documentation of custom elements to show new events and properties compatible with JSX.
+- Minor bug fixes.
+
+<br/>
+
 # v3.0.5 - Jul 06 2023
 
 #### Element

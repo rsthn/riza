@@ -167,7 +167,7 @@ export default Element.register ('r-tabs',
 		});
 
 		this.activeTab = exceptName;
-		this.dispatch('tabChanged', { name: exceptName });
+		this.dispatch('tabChanged', { name: exceptName, el: this });
 	},
 
 	/**

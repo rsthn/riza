@@ -520,10 +520,8 @@ const Api =
 	 */
 	fetch: function (url, params=null)
 	{
-		if (params === null)
-		{
-			if (typeof(url) !== 'string')
-			{
+		if (params === null) {
+			if (typeof(url) !== 'string') {
 				params = url;
 				url = '';
 			}

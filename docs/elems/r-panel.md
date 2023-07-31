@@ -10,19 +10,32 @@ Content panel with router support. Useful to easily show/hide content based on t
 
 # Events
 
-### `panelShown`
 ### `panelHidden`
+Dispatched when the panel is hidden because of a change in the current route.
+
+<br/>
+
+### `panelShown` { `...args` }
+Dispatched when the current route matches the panel's route, and thus the panel is shown. The event arguments contain the route arguments. For example, for the following:
+
+```html
+<r-panel data-route="users/edit/:id">
+    Test
+</r-panel>
+```
+
+The `id` part is a route parameter, and thus its value (argument) will be passed to the `panelShown` event when it is triggered.
 
 <br/>
 
 # Methods
 
-### void `show` (bool silent=false)
-Shows the panel visible by adding `active` class to the element. If `silent` is true and `data-route` enabled, the current route will not be updated. Fires `panelShown` event.
+### `show` (`silent`: _bool_ = false)
+Sets the `active` class of the panel element, thus making it visible (if the CSS is properly configured). If `silent` is true and `data-route` enabled, the current route will **not** be updated. Fires the `panelShown` event.
 
 <br/>
 
-### void `hide` ()
+### `hide` ()
 Hides the panel by removing the `active` class from the element. Fires `panelHidden` event.
 
 <br/>

@@ -48,12 +48,9 @@ export default Element.register ('r-paginator',
 		});
 	},
 
-	/**
-	**	Executed when the children of the element are ready.
-	*/
 	rready: function()
 	{
-		let source = this.getFieldByPath(this.dataset.source);
+		let source = this.dataSource ?? this.getFieldByPath(this.dataset.source);
 		if (!source) {
 			if (this.dataset.source) console.error('data-source not found: ' + this.dataset.source);
 			return;

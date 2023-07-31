@@ -19,10 +19,10 @@ Filtering can be achieved by creating input elements that alter the model of the
 
 > The following methods can be accessed directly using `[data-action]` property in any child element.
 
-### void `refresh` ()
-Refreshes the data source.
+### `refresh` ()
+Refreshes the data source, and causes the table to re-render.
 
-### void `clear` (array fieldNames)
+### `clear` (`fieldNames`: _Array\<string\>_)
 Clears (set to empty) the specified fields from the data source's request parameters.
 
 <br/>
@@ -54,30 +54,40 @@ th[data-sort] {
 }
 
 th[data-sort][data-order="asc"]:after {
-    content: "ASC";
+    content: "▲";
 }
 
 th[data-sort][data-order="desc"]:after {
-    content: "DESC";
+    content: "▼";
 }
 ```
 
 ## Example
 
+```js
+window.ds_candies = new DataSource('candies');
+```
+
 ```html
-<r-table data-source="dataSource">
+<r-table data-source="ds_candies">
     <table>
-        <tr>
-            <th data-sort="col1">Col 1</th>
-            <th>Col 2</th>
-        </tr>
+		<thead>
+			<tr>
+				<th data-sort="name">Name</th>
+				<th>Price</th>
+				<th>Availability</th>
+			</tr>
+		</thead>
 
         <tbody class="x-data">
             <tr>
-                <td>[col1]</td>
-                <td>[col2]</td>
+                <td>[name]</td>
+                <td>$ [price]</td>
+                <td>[availability]</td>
             </tr>
         </tbody>
     </table>
 </r-table>
 ```
+
+<small>NOTE: When using JSX, you can use the `dataSource` property directly with a `DataSource` object instead of passing a name via `data-source`.</small>
