@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "3.0.6",
+    "version": "3.0.7",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
@@ -16,8 +16,8 @@
         "deploy": "pnpm build && pnpm tsdoc && node ./scripts/deploy.js",
         "tsdoc": "node ./scripts/tsdoc.js ./src/main.js ./dist/riza.d.ts",
         "changes": "rose ./scripts/changes",
-        "build:global": "parcel build --no-cache --target global",
-        "build:module": "parcel build --no-cache --target module",
+        "build:global": "parcel build --target global",
+        "build:module": "parcel build --target module",
         "build": "pnpm build:module && pnpm build:global"
     },
     "targets": {

@@ -1,3 +1,10 @@
+# v3.0.7 - Aug 7 2023
+
+#### General
+- Renamed template app-v2 to app-jsx for semantic consistency.
+
+<br/>
+
 # v3.0.6 - Jul 31 2023
 
 #### r-table

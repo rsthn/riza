@@ -63,7 +63,7 @@ Command:
 
 Template:
     app
-    app-v2
+    app-jsx
 `);
 
 	process.exit();
@@ -84,8 +84,8 @@ switch (args[0])
 			break;
 		}
 
-		if (args[1] != 'app' && args[1] != 'app-v2') {
-			msg(ERROR, 'Parameter <template> is incorrect, should be: `app` or `app-v2`');
+		if (args[1] != 'app' && args[1] != 'app-jsx') {
+			msg(ERROR, 'Parameter <template> is incorrect, should be: `app` or `app-jsx`');
 			break;
 		}
 
