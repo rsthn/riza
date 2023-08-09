@@ -358,7 +358,7 @@ const Element =
 			});
 
 			this.rready();
-			if (this.onready) this.onready();
+			if (this.onready) this.onready(this);
 		}
 
 		this.readyLocked--;
