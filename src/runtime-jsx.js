@@ -9,65 +9,65 @@ export let debugSignals = false;
  */
 export class Signal
 {
-	#value;
-	#defvalue;
-	#listeners;
-	#label;
+    #value;
+    #defvalue;
+    #listeners;
+    #label;
 
-	constructor (value, defvalue)
-	{
-		this.#value = value;
-		this.#label = null;
+    constructor (value, defvalue)
+    {
+        this.#value = value;
+        this.#label = null;
 
-		this.#defvalue = defvalue;
-		this.#listeners = [];
-	}
+        this.#defvalue = defvalue;
+        this.#listeners = [];
+    }
 
-	get value() {
-		return this.#value;
-	}
+    get value() {
+        return this.#value;
+    }
 
-	set value(val) {
-		if (this.#value === val) return;
-		this.#value = val;
-		this.notify();
-	}
+    set value(val) {
+        if (this.#value === val) return;
+        this.#value = val;
+        this.notify();
+    }
 
-	get() {
-		return this.value;
-	}
+    get() {
+        return this.value;
+    }
 
-	set(value) {
-		this.value = value;
-		return this;
-	}
+    set(value) {
+        this.value = value;
+        return this;
+    }
 
-	label (value=null)
-	{
-		if (value === null)
-			return this.#label;
-		this.#label = value;
-		return this;
-	}
+    label (value=null)
+    {
+        if (value === null)
+            return this.#label;
+        this.#label = value;
+        return this;
+    }
 
-	reset() {
-		this.value = this.#defvalue;
-		return this;
-	}
+    reset() {
+        this.value = this.#defvalue;
+        return this;
+    }
 
-	connect (callback) {
-		this.#listeners.push(callback);
-		return this;
-	}
+    connect (callback) {
+        this.#listeners.push(callback);
+        return this;
+    }
 
-	notify()
-	{
-		if (debugSignals)
-			console.log('CHANGED', this.#label, this.#listeners.length);
+    notify()
+    {
+        if (debugSignals)
+            console.log('CHANGED', this.#label, this.#listeners.length);
 
-		for (let callback of this.#listeners)
-			callback();
-	}
+        for (let callback of this.#listeners)
+            callback();
+    }
 };
 
 /**
@@ -78,7 +78,7 @@ export class Signal
  */
 export function signal (value=null, defaultValue=null)
 {
-	return new Signal (value, defaultValue);
+    return new Signal (value, defaultValue);
 }
 
 /**
@@ -89,38 +89,38 @@ export function signal (value=null, defaultValue=null)
  */
 export function expr (signals, evaluator)
 {
-	let active = [];
-	let notified = false;
+    let active = [];
+    let notified = false;
 
-	for (let i = 0; i < signals.length; i++)
-	{
-		if (signals[i] instanceof Signal)
-			active.push([i, signals[i]]);
-	}
+    for (let i = 0; i < signals.length; i++)
+    {
+        if (signals[i] instanceof Signal)
+            active.push([i, signals[i]]);
+    }
 
-	if (!active.length)
-		return evaluator(...signals);
+    if (!active.length)
+        return evaluator(...signals);
 
-	const sgn = signal();
+    const sgn = signal();
 
-	const update = function() {
-		for (let i of active)
-			signals[i[0]] = i[1].value;
-		sgn.value = evaluator(...signals);
-		notified = false;
-	};
+    const update = function() {
+        for (let i of active)
+            signals[i[0]] = i[1].value;
+        sgn.value = evaluator(...signals);
+        notified = false;
+    };
 
-	const debouncer = function() {
-		if (notified) return;
-		notified = true;
-		queueMicrotask(update);
-	};
+    const debouncer = function() {
+        if (notified) return;
+        notified = true;
+        queueMicrotask(update);
+    };
 
-	for (let i of active)
-		i[1].connect(debouncer);
+    for (let i of active)
+        i[1].connect(debouncer);
 
-	update();
-	return sgn;
+    update();
+    return sgn;
 }
 
 /**
@@ -131,37 +131,37 @@ export function expr (signals, evaluator)
  */
 export function watch (signals, evaluator, initialRun=true)
 {
-	let active = [];
-	let notified = false;
+    let active = [];
+    let notified = false;
 
-	for (let i = 0; i < signals.length; i++)
-	{
-		if (signals[i] instanceof Signal)
-			active.push([i, signals[i]]);
-	}
+    for (let i = 0; i < signals.length; i++)
+    {
+        if (signals[i] instanceof Signal)
+            active.push([i, signals[i]]);
+    }
 
-	if (!active.length) {
-		if (initialRun) evaluator(...signals);
-		return;
-	}
+    if (!active.length) {
+        if (initialRun) evaluator(...signals);
+        return;
+    }
 
-	const update = function() {
-		for (let i of active)
-			signals[i[0]] = i[1].value;
-		evaluator(...signals);
-		notified = false;
-	};
+    const update = function() {
+        for (let i of active)
+            signals[i[0]] = i[1].value;
+        evaluator(...signals);
+        notified = false;
+    };
 
-	const debouncer = function() {
-		if (notified) return;
-		notified = true;
-		queueMicrotask(update);
-	};
+    const debouncer = function() {
+        if (notified) return;
+        notified = true;
+        queueMicrotask(update);
+    };
 
-	for (let i of active)
-		i[1].connect(debouncer);
+    for (let i of active)
+        i[1].connect(debouncer);
 
-	if (initialRun) update();
+    if (initialRun) update();
 }
 
 /**
@@ -169,309 +169,355 @@ export function watch (signals, evaluator, initialRun=true)
  */
 export const helpers =
 {
-	/**
-	 * Special object to tag dynamic attributes.
-	 */
-	DYNAMIC: { },
+    /**
+     * Special object to tag dynamic attributes.
+     */
+    DYNAMIC: { },
 
-	/**
-	 * Sets the value of a property inside an object.
-	 * @param {Element|Text} root
-	 * @param {string[]} path
-	 * @param {number} lastIndex
-	 * @param {object} value
-	 */
-	setValue: function (root, path, lastIndex, value)
-	{
-		// Rename properties `class`, `classList` to `className`.
-		if (path[0] === 'class' || path[0] === 'classList')
-			path[0] = 'className';
+    /**
+     * Sets the value of a property inside an object.
+     * @param {Element|Text} root
+     * @param {string[]} path
+     * @param {number} lastIndex
+     * @param {object} value
+     */
+    setValue: function (root, path, lastIndex, value)
+    {
+        // Rename properties `class`, `classList` to `className`.
+        if (path[0] === 'class' || path[0] === 'classList')
+            path[0] = 'className';
 
-		// Object used to set `style` or `class` attribute.
-		if (path.length === 1 && typeof(value) === 'object')
-		{
-			switch (path[0])
-			{
-				case 'style':
-					for (let i in value)
-						watch([i, value[i]], (i, value) => root.style[i] = value);
-					return;
+        if (path.length > 1 && path[0] === 'trait')
+        {
+            switch (path[1])
+            {
+                case 'valueSignal':
+                    root.onchange = (e) => value.set(e.currentTarget.value);
+                    watch([value], (value) => root.value = value);
+                    break;
 
-				case 'className':
-					if (value instanceof Array)
-					{
-						watch([value], (value) => {
-							root.className = '';
-							for (let i in value)
-								root.classList.add(value[i]);
-						});
-					}
-					else {
-						for (let i in value)
-							watch([i, value[i]], (i, value) => root.classList[value == true ? 'add' : 'remove'](i));
-					}
-					return;
-			}
-		}
+                case 'inputSignal':
+                    root.oninput = (e) => value.set(e.currentTarget.value);
+                    watch([value], (value) => root.value = value);
+                    break;
 
-		// Specific CSS class such as `class:hidden`.
-		if (path.length === 2 && path[0] === 'className')
-		{
-			watch([path[1], value], (i, value) => root.classList[value == true ? 'add' : 'remove'](i));
-			return;
-		}
+                default:
+                    console.error('Unknown trait: ' + path[1]);
+                    break;
+            }
 
-		// Any other attribute/property.
-		for (let i = 0; i < lastIndex && root; i++)
-			root = root[path[i]];
+            return;
+        }
 
-		if (root)
-			watch([path[lastIndex], value], (name, value) => root[name] = value);
-	},
+        // Object used to set `style` or `class` attribute.
+        if (path.length === 1 && typeof(value) === 'object')
+        {
+            switch (path[0])
+            {
+                case 'style':
+                    for (let i in value)
+                        watch([i, value[i]], (i, value) => root.style[i] = value);
+                    return;
 
-	/**
-	 * Creates a setter for a specified path inside an object.
-	 * @param {string[]} path 
-	 * @returns {(root: Element|Text, value: object) => void}
-	 */
-	createSetter: function (path)
-	{
-		const n = path.length-1;
+                case 'className':
+                    if (value instanceof Array)
+                    {
+                        watch([value], (value) => {
+                            root.className = '';
+                            for (let i in value)
+                                root.classList.add(value[i]);
+                        });
+                    }
+                    else {
+                        for (let i in value)
+                            watch([i, value[i]], (i, value) => root.classList[value == true ? 'add' : 'remove'](i));
+                    }
+                    return;
+            }
+        }
 
-		return function (root, value) {
-			helpers.setValue(root, path, n, value);
-		};
-	},
+        // Specific CSS class such as `class:hidden`.
+        if (path.length === 2 && path[0] === 'className')
+        {
+            watch([path[1], value], (i, value) => root.classList[value == true ? 'add' : 'remove'](i));
+            return;
+        }
 
-	/**
-	 * Clones an element node and ensures certain properties are copied over.
-	 * @param {Element} node
-	 * @param {boolean} [deep=false]
-	 */
-	cloneNode: function (node, deep=false)
-	{
-		let newNode = node.cloneNode();
+        // Any other attribute/property.
+        for (let i = 0; i < lastIndex && root; i++)
+            root = root[path[i]];
 
-		if (deep) {
-			for (let childNode of node.childNodes)
-				newNode.appendChild(helpers.cloneNode(childNode, true));
-		}
+        if (root)
+            watch([path[lastIndex], value], (name, value) => root[name] = value);
+    },
 
-		// Copy property event listeners.
-		for (let propName in node)
-		{
-			if (!propName.startsWith('on') || propName.startsWith('onmoz') || !node[propName])
-				continue;
+    /**
+     * Creates a setter for a specified path inside an object.
+     * @param {string[]} path 
+     * @returns {(root: Element|Text, value: object) => void}
+     */
+    createSetter: function (path)
+    {
+        const n = path.length-1;
 
-			newNode[propName] = node[propName];
-		}
+        return function (root, value) {
+            helpers.setValue(root, path, n, value);
+        };
+    },
 
-		// Copy custom properties.
-		for (let propName of Object.getOwnPropertyNames(node))
-			newNode[propName] = node[propName];
+    /**
+     * Clones an element node and ensures certain properties are copied over.
+     * @param {Element} node
+     * @param {boolean} [deep=false]
+     */
+    cloneNode: function (node, deep=false)
+    {
+        if (!deep && node.isCustom === true)
+            throw new Error ('cloneNode only available as deep clone for custom elements.');
 
-		// Execute `oncreated` handler.
-		if ('oncreated' in newNode)
-			newNode.oncreated(newNode);
+        if (deep && node.isCustom === true)
+            return node.cloneNodeCustom();
 
-		return newNode;
-	},
+        let newNode = node.cloneNode();
 
-	/**
-	 * Ensures the provided value is a node or a node-compatible (such as an array of nodes).
-	 * @param {Node|Array<Node|string>|string} value
-	 * @param {boolean} [cloneNode=false]
-	 * @returns {Node|Array<Node>}
-	 */
-	ensureNode: function (value, cloneNode=false)
-	{
-		if (value instanceof Array) {
-			for (let i = 0; i < value.length; i++)
-				value[i] = helpers.ensureNode(value[i], cloneNode);
-			return value;
-		}
+        if (deep) {
+            for (let childNode of node.childNodes)
+                newNode.appendChild(helpers.cloneNode(childNode, true));
+        }
 
-		if (!(value instanceof Node))
-			return document.createTextNode(value);
+        // Copy property event listeners.
+        for (let propName in node)
+        {
+            if (!propName.startsWith('on') || propName.startsWith('onmoz') || !node[propName])
+                continue;
 
-		return cloneNode ? helpers.cloneNode(value, true) : value;
-	},
+            newNode[propName] = node[propName];
+        }
 
-	/**
-	 * Replaces the specified refNode by a newNode and returns the new reference node.
-	 * @param {Node} parent
-	 * @param {Node|Array<Node>} refNode
-	 * @param {Node|Array<Node>} newNode
-	 * @returns {Node|Array<Node>}
-	 */
-	replaceNode: function (parent, refNode, newNode, appendChild=false)
-	{
-		// When refNode is an array, remove all those nodes but leave just one for reference.
-		if (refNode instanceof Array)
-		{
-			while (refNode.length > 1) {
-				let tmp = refNode.shift();
-				if (tmp.parentElement === parent)
-					tmp.remove();
-			}
-			refNode = refNode.shift();
-		}
+        // Copy custom properties.
+        for (let propName of Object.getOwnPropertyNames(node))
+        {
+            if (~~propName == propName) // Skip numeric properties.
+                continue;
 
-		let newRefNode = newNode;
-		let firstNode = newNode;
+            newNode[propName] = node[propName];
+        }
 
-		// When newNode is an array, create a document fragment for faster append of all children.
-		if (newNode instanceof Array)
-		{
-			let frag = document.createDocumentFragment();
-			newRefNode = [];
+        // Execute `oncreated` handler.
+        if ('oncreated' in newNode)
+            newNode.oncreated(newNode);
 
-			if (newNode.length == 0)
-				newNode = [document.createTextNode('')];
+        return newNode;
+    },
 
-			for (let i = 0; i < newNode.length; i++) {
-				newRefNode.push(newNode[i]);
-				frag.appendChild(newNode[i]);
-			}
+    /**
+     * Ensures the provided value is a node or a node-compatible (such as an array of nodes).
+     * @param {Node|Array<Node|string>|string} value
+     * @param {boolean} [cloneNode=false]
+     * @returns {Node|Array<Node>}
+     */
+    ensureNode: function (value, cloneNode=false)
+    {
+        if (value instanceof Array) {
+            for (let i = 0; i < value.length; i++)
+                value[i] = helpers.ensureNode(value[i], cloneNode);
+            return value;
+        }
 
-			firstNode = newNode[0];
-			newNode = frag;
-		}
+        if (!(value instanceof Node))
+            return document.createTextNode(value);
 
-		if (appendChild === false)
-		{
-			refNode.replaceWith(newNode);
+        return cloneNode ? helpers.cloneNode(value, true) : value;
+    },
 
-			let tmpNode = document.createComment('');
-			firstNode.parentElement.insertBefore(tmpNode, firstNode);
+    /**
+     * Replaces the specified refNode by a newNode and returns the new reference node.
+     * @param {Node} parent
+     * @param {Node|Array<Node>} refNode
+     * @param {Node|Array<Node>} newNode
+     * @returns {Node|Array<Node>}
+     */
+    replaceNode: function (parent, refNode, newNode, appendChild=false)
+    {
+        // When refNode is an array, remove all those nodes but leave just one for reference.
+        if (refNode instanceof Array)
+        {
+            while (refNode.length > 1) {
+                let tmp = refNode.shift();
+                if (tmp.parentElement === parent)
+                    tmp.remove();
+            }
+            refNode = refNode.shift();
+        }
 
-			if (!(newRefNode instanceof Array))
-				newRefNode = [ newRefNode ];
+        let newRefNode = newNode;
+        let firstNode = newNode;
 
-			newRefNode.push(tmpNode);
-		}
-		else
-			refNode.appendChild(newNode);
+        // When newNode is an array, create a document fragment for faster append of all children.
+        if (newNode instanceof Array)
+        {
+            let frag = document.createDocumentFragment();
+            newRefNode = [];
 
-		return newRefNode;
-	},
+            if (newNode.length == 0)
+                newNode = [document.createTextNode('')];
 
-	/**
-	 * Creates a DOM node replacer.
-	 * @param {Element|Text|Array<Element|Text>} refNode
-	 * @returns {(root: Element|Text, newNode: any) => void}
-	 */
-	createReplacer: function (refNode)
-	{
-		return function (root, newNode) {
-			refNode = helpers.replaceNode(root, refNode, helpers.ensureNode(newNode));
-		};
-	},
+            for (let i = 0; i < newNode.length; i++) {
+                newRefNode.push(newNode[i]);
+                frag.appendChild(newNode[i]);
+            }
 
-	/**
-	 * Creates a function that builds an element.
-	 * @param {string} tagName - Tag of the element to create.
-	 * @param {array} attributes - Array of name-value pairs. When dynamic attributes are present use the helpers.DYNAMIC as value placeholder.
-	 * @param {Array<Element|Text|string|null>} children - When dynamic children are present use the placeholder `null`.
-	 * @returns { (runtimeAttributeValues: Array<string>, runtimeChildren: Array<Element|Text|Array<Element|Text>>) => HTMLElement }
-	 */
-	create: function (tagName, attributes, children)
-	{
-		// Attach static attributes.
-		let baseElement = document.createElement(tagName);
-		let dynamicAttributes = [];
+            firstNode = newNode[0];
+            newNode = frag;
+        }
 
-		for (let i = 0; i < attributes.length; i += 2)
-		{
-			let path = null;
+        if (appendChild === false)
+        {
+            refNode.replaceWith(newNode);
 
-			if (attributes[i].indexOf(':') !== -1)
-				path = attributes[i].split(':');
-			else
-				path = [attributes[i]];
+            let tmpNode = document.createComment('');
+            firstNode.parentElement.insertBefore(tmpNode, firstNode);
 
-			if (attributes[i+1] !== helpers.DYNAMIC) {
-				helpers.setValue(baseElement, path, path.length-1, attributes[i+1]);
-				continue;
-			}
+            if (!(newRefNode instanceof Array))
+                newRefNode = [ newRefNode ];
 
-			dynamicAttributes.push(helpers.createSetter(path));
-		}
+            newRefNode.push(tmpNode);
+        }
+        else
+            refNode.appendChild(newNode);
 
-		// Attach static children.
-		let dynamicChildrenIndices = [];
-		let dynamicBuild = false;
-		let firstBuild = true;
+        return newRefNode;
+    },
 
-		// Get indices of dynamic children and detect if any child is a custom element.
-		for (let i in children)
-		{
-			if (children[i].isCustom === true)
-				dynamicBuild = true;
+    /**
+     * Creates a DOM node replacer.
+     * @param {Element|Text|Array<Element|Text>} refNode
+     * @returns {(root: Element|Text, newNode: any) => void}
+     */
+    createReplacer: function (refNode)
+    {
+        return function (root, newNode) {
+            refNode = helpers.replaceNode(root, refNode, helpers.ensureNode(newNode));
+        };
+    },
 
-			if (children[i] === helpers.DYNAMIC)
-				dynamicChildrenIndices.push(i);
-		}
+    /**
+     * Creates a function that builds an element.
+     * @param {string} tagName - Tag of the element to create.
+     * @param {array} attributes - Array of name-value pairs. When dynamic attributes are present use the helpers.DYNAMIC as value placeholder.
+     * @param {Array<Element|Text|string|null>} children - When dynamic children are present use the placeholder `null`.
+     * @returns { (runtimeAttributeValues: Array<string>, runtimeChildren: Array<Element|Text|Array<Element|Text>>) => HTMLElement }
+     */
+    create: function (tagName, attributes, children)
+    {
+        // Attach static attributes.
+        let baseElement = document.createElement(tagName);
+        let dynamicAttributes = [];
 
-		// Create and return the element builder fuction.
-		const N = dynamicAttributes.length;
-		const M = dynamicChildrenIndices.length;
+        for (let i = 0; i < attributes.length; i += 2)
+        {
+            let path = null;
 
-		return function (runtimeDynamicAttributes, runtimeChildren, spreadAttributes=null)
-		{
-			let elem = null;
+            if (attributes[i].indexOf(':') !== -1)
+                path = attributes[i].split(':');
+            else
+                path = [attributes[i]];
 
-			if (firstBuild || dynamicBuild)
-			{
-				let target = dynamicBuild ? helpers.cloneNode(baseElement) : baseElement;
+            if (attributes[i+1] !== helpers.DYNAMIC) {
+                helpers.setValue(baseElement, path, path.length-1, attributes[i+1]);
+                continue;
+            }
 
-				for (let i in children)
-				{
-					if (children[i] instanceof Array)
-						throw new Error('Document fragments not fully supported!');
+            dynamicAttributes.push(helpers.createSetter(path));
+        }
 
-					helpers.replaceNode(target, target, helpers.ensureNode(children[i], true), true);
-				}
+        // Attach static children.
+        let dynamicChildrenIndices = [];
+        let dynamicBuild = false;
+        let firstBuild = true;
 
-				if (dynamicBuild) elem = target;
-				firstBuild = false;
-			}
+        // Get indices of dynamic children and detect if any child is a custom element.
+        for (let i in children)
+        {
+            if (children[i].isCustom === true)
+                dynamicBuild = true;
 
-			if (elem === null)
-				elem = helpers.cloneNode(baseElement, true);
+            if (children[i] === helpers.DYNAMIC)
+                dynamicChildrenIndices.push(i);
+        }
 
-			const hadOnCreated = 'oncreated' in elem;
-			const dynamicChildren = dynamicChildrenIndices.map(idx => helpers.createReplacer(elem.childNodes[idx]));
+        // Create and return the element builder fuction.
+        const N = dynamicAttributes.length;
+        const M = dynamicChildrenIndices.length;
 
-			for (let i = 0; i < N; i++)
-				dynamicAttributes[i](elem, runtimeDynamicAttributes[i]);
+        return function (runtimeDynamicAttributes, runtimeChildren, spreadAttributes=null)
+        {
+            const getElement = (runtimeChildren) =>
+            {
+                let elem = null;
 
-			for (let i = 0; i < M; i++)
-				watch([runtimeChildren[i], i], (val, i) => dynamicChildren[i](elem, val));
+                if (firstBuild || dynamicBuild)
+                {
+                    let target = dynamicBuild ? helpers.cloneNode(baseElement) : baseElement;
 
-			if (spreadAttributes !== null)
-			{
-				for (let attributes of spreadAttributes)
-				{
-					for (let i in attributes)
-					{
-						let path = null;
+                    for (let i in children)
+                    {
+                        if (children[i] instanceof Array)
+                            throw new Error('Document fragments not fully supported!');
 
-						if (i.indexOf(':') !== -1)
-							path = i.split(':');
-						else
-							path = [ i ];
+                        helpers.replaceNode(target, target, helpers.ensureNode(children[i], true), true);
+                    }
 
-						helpers.setValue(elem, path, path.length-1, attributes[i]);
-					}
-				}
-			}
+                    if (dynamicBuild) elem = target;
+                    firstBuild = false;
+                }
 
-			if (!hadOnCreated && 'oncreated' in elem)
-				elem.oncreated(elem);
+                if (elem === null)
+                    elem = helpers.cloneNode(baseElement, true);
 
-			elem.isCustom = true;
-			return elem;
-		};
-	}
+                const hadOnCreated = 'oncreated' in elem;
+                const dynamicChildren = dynamicChildrenIndices.map(idx => helpers.createReplacer(elem.childNodes[idx]));
+
+                for (let i = 0; i < N; i++)
+                    dynamicAttributes[i](elem, runtimeDynamicAttributes[i]);
+
+                for (let i = 0; i < M; i++)
+                    watch([runtimeChildren[i], i], (val, i) => dynamicChildren[i](elem, val));
+
+                if (spreadAttributes !== null)
+                {
+                    for (let attributes of spreadAttributes)
+                    {
+                        for (let i in attributes)
+                        {
+                            let path = null;
+                            if (i.indexOf(':') !== -1)
+                                path = i.split(':');
+                            else
+                                path = [ i ];
+
+                            helpers.setValue(elem, path, path.length-1, attributes[i]);
+                        }
+                    }
+                }
+
+                if (!hadOnCreated && 'oncreated' in elem)
+                    elem.oncreated(elem);
+
+                elem.isCustom = true;
+
+                elem.cloneNode = () => {
+                    throw new Error ('Use of cloneNode is forbidden in custom elements, use cloneNodeCustom instead.');
+                };
+
+                elem.cloneNodeCustom = () => {
+                    return getElement(runtimeChildren.map(e => e instanceof Node && e.isCustom === true ? e.cloneNodeCustom() : e));
+                };
+
+                return elem;
+            };
+
+            return getElement(runtimeChildren);
+        };
+    }
 };
