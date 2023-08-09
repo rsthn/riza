@@ -301,7 +301,7 @@ const Element =
 				console.log('>> ' + this.tagName + ' READY');
 
 			this.ready();
-			if (this.onchildrenready) this.onchildrenready();
+			if (this.onready) this.onready(this);
 
 			this.collectWatchers();
 		}
@@ -358,7 +358,7 @@ const Element =
 			});
 
 			this.rready();
-			if (this.onready) this.onready(this);
+			if (this.onrootready) this.onrootready(this);
 		}
 
 		this.readyLocked--;
@@ -1108,6 +1108,7 @@ const Element =
 	*/
 	onConnected: function()
 	{
+        if (this.onconnected) this.onconnected(this);
 	},
 
 	/**
@@ -1115,6 +1116,7 @@ const Element =
 	*/
 	onDisconnected: function()
 	{
+        if (this.ondisconnected) this.ondisconnected(this);
 	},
 
 	/**
