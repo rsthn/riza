@@ -1,3 +1,14 @@
+# v3.0.11 - Aug 20 2023
+
+#### General
+- Updated template of app-jsx to include more features.
+- Patched minor bugs in r-form and r-panel.
+- Patched runtime-jsx to ensure custom properties are copied to cloned elements.
+- Added event `onbeforesubmit` to r-form, fired before the form is submitted.
+- Added new refresh mode `enum` to DataSource.
+
+<br/>
+
 # v3.0.7 - Aug 7 2023
 
 #### General
