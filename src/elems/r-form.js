@@ -366,6 +366,9 @@ export default Element.register ('r-form',
 		this.querySelectorAll('[data-field]').forEach(e => list[e.dataset.field] = true);
 		Object.keys(list).forEach(f => data[f] = this._getField(f));
 
+        if (this.onbeforesubmit)
+            this.onbeforesubmit(data);
+
 		this.model.set(data);
 
 		let f = this.dataset.formAction || this.formAction;

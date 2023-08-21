@@ -1,4 +1,7 @@
 
-import App from './App.jsx';
+import { Api } from 'riza';
+import App from './app.jsx';
 
-document.getElementById("app").appendChild(App());
+Api.setEndPoint(process.env.API_URL);
+
+document.body.appendChild(App());

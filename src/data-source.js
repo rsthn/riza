@@ -80,18 +80,16 @@ export default EventDispatcher.extend
 	**	Executes one or more API functions (depending on `includeCount`, `includeEnum` and `includeList` properties) to retrieve the
 	**	required data (uses debounce to prevent too-quick refreshes).
 	**
-	**	Refresh mode can be: order, filter, range or full. Setting `mode` to `true` will cause a full refresh without debouncing.
+	**	Refresh mode can be: order, filter, range, enum or full. Setting `mode` to `true` will cause a full refresh without debouncing.
 	*/
 	refresh: function (mode='full', callback=null)
 	{
-		if (typeof(mode) == 'function')
-		{
+		if (typeof(mode) == 'function') {
 			callback = mode;
 			mode = 'full';
 		}
 
-		if (this._timeout)
-		{
+		if (this._timeout) {
 			clearTimeout(this._timeout);
 			this._timeout = null;
 		}
@@ -102,15 +100,14 @@ export default EventDispatcher.extend
 
 			Api.packageBegin();
 
-			if (this.includeCount && (mode == 'full' || mode == 'filter')) this.fetchCount();
-			if (this.includeEnum && (mode == 'full')) this.fetchEnum();
-			if (this.includeList) this.fetchList();
+			if (this.includeCount && (mode === 'full' || mode === 'filter')) this.fetchCount();
+			if (this.includeEnum && (mode === 'full' || mode === 'enum')) this.fetchEnum();
+			if (this.includeList && mode !== 'enum') this.fetchList();
 
 			Api.packageEnd(callback);
 		};
 
-		if (mode === true)
-		{
+		if (mode === true) {
 			mode = 'full';
 			fn();
 		}

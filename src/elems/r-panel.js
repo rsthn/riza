@@ -1,20 +1,20 @@
 /*
-	<r-panel data-route="name">
-	</r-panel>
+    <r-panel data-route="name">
+    </r-panel>
 
-	r-panel {
-		display: block;
-	}
+    r-panel {
+        display: block;
+    }
 
-	r-panel:not(.active) {
-		display: none;
-	}
+    r-panel:not(.active) {
+        display: none;
+    }
 
-	r-panel.inactive {
-	}
+    r-panel.inactive {
+    }
 
-	r-panel.active {
-	}
+    r-panel.active {
+    }
 */
 
 import Element from '../element.js';

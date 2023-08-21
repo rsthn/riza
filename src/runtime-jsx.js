@@ -266,6 +266,35 @@ export const helpers =
     },
 
     /**
+     * Copies the event listeners and custom properties from `node` to `newNode`.
+     * @param {Element} node
+     * @param {Element} newNode
+     * @returns {Element}
+     */
+    copyProps: function (node, newNode)
+    {
+        // Copy property event listeners.
+        for (let propName in node)
+        {
+            if (!propName.startsWith('on') || propName.startsWith('onmoz') || !node[propName])
+                continue;
+
+            newNode[propName] = node[propName];
+        }
+
+        // Copy custom properties.
+        for (let propName of Object.getOwnPropertyNames(node))
+        {
+            if (~~propName == propName) // Skip numeric properties.
+                continue;
+
+            newNode[propName] = node[propName];
+        }
+
+        return newNode;
+    },
+
+    /**
      * Clones an element node and ensures certain properties are copied over.
      * @param {Element} node
      * @param {boolean} [deep=false]
@@ -285,23 +314,8 @@ export const helpers =
                 newNode.appendChild(helpers.cloneNode(childNode, true));
         }
 
-        // Copy property event listeners.
-        for (let propName in node)
-        {
-            if (!propName.startsWith('on') || propName.startsWith('onmoz') || !node[propName])
-                continue;
-
-            newNode[propName] = node[propName];
-        }
-
-        // Copy custom properties.
-        for (let propName of Object.getOwnPropertyNames(node))
-        {
-            if (~~propName == propName) // Skip numeric properties.
-                continue;
-
-            newNode[propName] = node[propName];
-        }
+        // Copy handlers and properties.
+        helpers.copyProps(node, newNode);
 
         // Execute `oncreated` handler.
         if ('oncreated' in newNode)
@@ -452,7 +466,7 @@ export const helpers =
 
         return function (runtimeDynamicAttributes, runtimeChildren, spreadAttributes=null)
         {
-            const getElement = (runtimeChildren) =>
+            const getElement = (runtimeChildren, originalElement=null) =>
             {
                 let elem = null;
 
@@ -501,6 +515,10 @@ export const helpers =
                     }
                 }
 
+                if (originalElement !== null) {
+                    helpers.copyProps(originalElement, elem);
+                }
+
                 if (!hadOnCreated && 'oncreated' in elem)
                     elem.oncreated(elem);
 
@@ -511,7 +529,7 @@ export const helpers =
                 };
 
                 elem.cloneNodeCustom = () => {
-                    return getElement(runtimeChildren.map(e => e instanceof Node && e.isCustom === true ? e.cloneNodeCustom() : e));
+                    return getElement(runtimeChildren.map(e => e instanceof Node && e.isCustom === true ? e.cloneNodeCustom() : e), elem);
                 };
 
                 return elem;

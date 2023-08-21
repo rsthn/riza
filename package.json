@@ -18,7 +18,7 @@
         "changes": "rose ./scripts/changes",
         "build:global": "parcel build --target global",
         "build:module": "parcel build --target module",
-        "build": "pnpm build:module && pnpm build:global"
+        "build": "shx rm -rf .parcel-cache && pnpm build:module && pnpm build:global"
     },
     "targets": {
         "module": {
@@ -55,6 +55,7 @@
         "rinn": "^2.0.47"
     },
     "devDependencies": {
-        "parcel": "^2.8.3"
+        "parcel": "^2.8.3",
+        "shx": "^0.3.4"
     }
 }

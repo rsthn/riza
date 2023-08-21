@@ -1,0 +1,78 @@
+body {
+    display: flex; width: 100vw; height: 100vh; margin: 0; padding: 0; overflow: hidden; box-sizing: border-box;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+select option {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.debug {
+    border: 1px solid red;
+}
+
+.debug-2 {
+    border: 1px solid blue;
+}
+
+.debug-3 {
+    border: 1px solid magenta;
+}
+
+.debug-4 {
+    border: 1px solid cyan;
+}
+
+.ovf-hidden {
+    overflow: hidden;
+}
+
+.ovf-auto {
+    overflow-x: hidden; overflow-y: auto; scrollbar-width: none;
+}
+
+.is-hidden, .x-hidden {
+    display: none;
+}
+
+.xx-hidden {
+    display: none !important;
+}
+
+/* *** */
+.flex-row {
+    display: flex !important; flex-direction: row; box-sizing: border-box;
+}
+
+.flex-col {
+    display: flex !important; flex-direction: column; height: 100%; box-sizing: border-box;
+}
+
+.flex-fill {
+    flex: 1 1 auto;
+}
+
+.flex-static {
+    flex: 0 0 auto;
+}
+
+.flex-even {
+    flex: 1 1 0;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-items-center {
+    align-items: center;
+}
+
+/* *** */
+r-panel:not(.active) {
+    display: none !important;
+}

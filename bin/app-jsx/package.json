@@ -9,7 +9,9 @@
     "dev": "parcel serve src/index.html"
   },
   "license": "MIT",
-  "parcelIgnore": [],
+  "parcelIgnore": [
+    "manifest.json"
+  ],
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "@parcel/config-default": "^2.8.3",

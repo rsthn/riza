@@ -1,14 +1,12 @@
 
-import "./App.css"
+import "./css/xui.css"
+import "./css/main.css"
 
-export default function()
-{
-	return (
-		<div class="app">
-			<span>
-				<img src="js-logo.png" />
-			</span>
-			<b>Riza Ready!</b>
-		</div>
-	);
-}
+export default () =>
+    <div class="app">
+        <span>
+            <img src="js-logo.png" />
+        </span>
+        <b>Riza Ready!</b>
+    </div>
+;
