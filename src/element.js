@@ -207,6 +207,7 @@ const Element =
 	{
 		this._list_watch = [];
 		this._list_visible = [];
+		this._list_attr = [];
 		this._list_property = [];
 
 		if ('root' in this.dataset)
@@ -920,8 +921,8 @@ const Element =
 	},
 
 	/**
-	**	Collects all watchers (data-watch, data-visible, data-property), that depend on the model, should be invoked when the structure
-	**	of the element changed (added/removed children). This is automatically called when the setInnerHTML method is called.
+	**	Collects all watchers (data-watch, data-visible, data-attr, data-property), that depend on the model, should be invoked when the
+    **  structure of the element changed (added/removed children). This is automatically called when the setInnerHTML method is called.
 	**
 	**	Note that for 3rd party libs that add children to this element (which could probably have a watcher) will possibly result in
 	**	duplication of the added elements when compiling the innerHTML template. To prevent this add the 'pseudo' CSS class to any
@@ -939,6 +940,7 @@ const Element =
 
 		let _list_watch_length = this._list_watch.length;
 		let _list_visible_length = this._list_visible.length;
+		let _list_attr_length = this._list_attr.length;
 		let _list_property_length = this._list_property.length;
 
 		/* *** */
@@ -985,6 +987,46 @@ const Element =
 
 			this.removeAttribute('data-self-visible');
 			this._list_visible.push(this);
+		}
+
+		/* *** */
+		list = this.querySelectorAll('[data-attr]');
+		for (let i = 0; i < list.length; i++)
+		{
+            list[i]._attr = [];
+
+            for (let j of list[i].dataset.attr.split(';'))
+            {
+                j = j.split(':');
+                if (j.length != 2) continue;
+
+                list[i]._attr.push({
+                    name: j[0].trim(),
+                    value: Template.compile(j[1].trim())
+                });
+            }
+
+			list[i].removeAttribute('data-attr');
+			this._list_attr.push(list[i]);
+		}
+
+		if ('selfAttr' in this.dataset)
+		{
+            this._attr = [];
+
+            for (let j of this.dataset.selfAttr.split(';'))
+            {
+                j = j.split(':');
+                if (j.length != 2) continue;
+
+                this._attr.push({
+                    name: j[0].trim(),
+                    value: Template.compile(j[1].trim())
+                });
+            }
+
+			this.removeAttribute('data-self-attr');
+			this._list_attr.push(this);
 		}
 
 		/* *** */
@@ -1071,6 +1113,9 @@ const Element =
 
 		this._list_visible = this._list_visible.filter(i => i.parentElement != null);
 		if (_list_visible_length != this._list_visible.length) modified = true;
+
+        this._list_attr = this._list_attr.filter(i => i.parentElement != null);
+		if (_list_attr_length != this._list_attr.length) modified = true;
 
 		this._list_property = this._list_property.filter(i => i.parentElement != null);
 		if (_list_property_length != this._list_property.length) modified = true;
@@ -1161,6 +1206,12 @@ const Element =
 				this._list_visible[i].style.removeProperty('display');
 			else
 				this._list_visible[i].style.setProperty('display', 'none', 'important');
+		}
+
+		for (let i = 0; i < this._list_attr.length; i++)
+		{
+            for (let j of this._list_attr[i]._attr)
+                this._list_attr[i][j.name] = j.value(data, 'arg');
 		}
 
 		this.onModelChanged(evt, args);

@@ -1,3 +1,10 @@
+# v3.0.12 - Aug 23 2023
+
+#### Element
+- Added support for `data-attr` and `data-self-attr` attribute used to change attributes of the element.
+
+<br/>
+
 # v3.0.11 - Aug 20 2023
 
 #### General
