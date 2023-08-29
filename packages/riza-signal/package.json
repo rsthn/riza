@@ -1,0 +1,26 @@
+{
+    "name": "riza-signal",
+    "version": "1.0.0",
+    "description": "Riza Signal Support",
+    "type": "module",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo Ok"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rsthn/riza.git",
+        "directory": "packages/riza-signal"
+    },
+    "author": "RedStar Technologies",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rsthn/riza/issues"
+    },
+    "homepage": "https://github.com/rsthn/riza#readme",
+    "files": [
+        "LICENSE",
+        "README.md",
+        "main.js"
+    ]
+}
