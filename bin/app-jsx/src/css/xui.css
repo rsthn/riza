@@ -27,6 +27,10 @@ select option {
     border: 1px solid cyan;
 }
 
+.no-pointer-events {
+    pointer-events: none;
+}
+
 .ovf-hidden {
     overflow: hidden;
 }
@@ -70,9 +74,4 @@ select option {
 
 .flex-items-center {
     align-items: center;
-}
-
-/* *** */
-r-panel:not(.active) {
-    display: none !important;
 }

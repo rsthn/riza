@@ -45,7 +45,7 @@ Note that the attribute `data-order` will be added to the column and set to eith
 ## CSS
 
 ```css
-.x-hidden {
+.is-hidden {
     display: none;
 }
 

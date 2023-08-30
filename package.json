@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "3.0.12",
+    "version": "3.0.13",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
@@ -52,10 +52,11 @@
     "dependencies": {
         "base-64": "^1.0.0",
         "fs-extra": "^10.1.0",
-        "rinn": "^2.0.47"
+        "rinn": "^2.0.48",
+        "riza-signal": "^1.0.0"
     },
     "devDependencies": {
-        "parcel": "^2.8.3",
+        "parcel": "^2.9.3",
         "shx": "^0.3.4"
     }
 }

@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "parcelIgnore": [
-    "manifest.json"
+    "img/*"
   ],
   "devDependencies": {
     "@babel/core": "^7.21.8",

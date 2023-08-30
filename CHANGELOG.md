@@ -1,3 +1,18 @@
+# v3.0.13 - Aug 30 2023
+
+#### General
+- Separated code of signals into its own package `riza-signal` so it can be reused more easily without much overhead.
+- Renamed CSS classes x-hidden, x-active, x-inactive and x-loading to is-hidden, is-active, is-inactive and is-loading respectively.
+- Added support to use attribute `dataModel` in r-item to directly set the model.
+- Added method `toggleVisibility` to r-panel.
+- Updated logic of r-panel and r-tabs to include CSS class `anim-ended` when the animation of the element has finished.
+- Updated behavior of r-form to clear markers until data is available from the API to improve responsiveness.
+
+#### Element
+- Updated logic of direct event handlers (on* properties) to include the self element as second parameter.
+
+<br/>
+
 # v3.0.12 - Aug 23 2023
 
 #### Element

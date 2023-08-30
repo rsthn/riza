@@ -893,7 +893,7 @@ const Element =
 	{
 		let propName = 'on' + eventName.toLowerCase();
 		if (propName in this) {
-			this[propName] (args);
+			this[propName] (args, this);
 			return;
 		}
 

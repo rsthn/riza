@@ -412,8 +412,7 @@ const _Router =
 	{
 		location = this.realLocation(location);
 
-		if (globalThis.location.hash == '#'+location)
-		{
+		if (globalThis.location.hash == '#'+location) {
 			this.refresh();
 			return;
 		}

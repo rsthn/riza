@@ -40,7 +40,7 @@ Shows a tab given its name. The route will be changed automatically if `data-bas
 ## CSS
 
 ```css
-.x-hidden {
+.is-hidden {
     display: none;
 }
 

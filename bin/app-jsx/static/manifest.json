@@ -1,8 +1,0 @@
-{
-	"short_name": "project_name",
-	"name": "project_name",
-	"display": "fullscreen",
-	"orientation": "portrait-primary",
-	"background_color": "#131313",
-	"start_url": "index.html"
-}

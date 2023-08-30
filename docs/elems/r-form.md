@@ -18,7 +18,7 @@ Provides functionality to send forms using [Api](../api.md). Per-field error mes
 ## CSS
 
 ```css
-.x-hidden {
+.is-hidden {
     display: none;
 }
 
@@ -73,7 +73,7 @@ Fired when the API returns response code `407`, `409` or any other than `200`. T
 Clears the markers of the form to return it to its initial visual state. It will:
 
 - Remove the `.busy` class from the form.
-- Add class `.x-hidden` to all `.message` and `.loading-indicator` elements.
+- Add class `.is-hidden` to all `.message` and `.loading-indicator` elements.
 - Remove all `span.field-error` elements.
 - And, remove class `.field-error` and `.is-invalid` from all elements.
 
@@ -93,7 +93,7 @@ Submits the form to the target API function.
 
 - When the form submission is in progress, the form element will get CSS class `.busy`, and this class will be removed when the call is completed. This feature can be used to create loading spinners.
 
-- The `.loading-indicator` element (when present) is hidden by default (with `.x-hidden`) and shown when the form is being submitted.
+- The `.loading-indicator` element (when present) is hidden by default (with `.is-hidden`) and shown when the form is being submitted.
 
 - When the API returns non-200 response code and an `error` field, it will be placed in the `.message.error` element.
 

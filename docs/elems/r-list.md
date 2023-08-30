@@ -22,7 +22,7 @@ Add to elements that should be shown only when **there are items** in the data s
 ## CSS
 
 ```css
-.x-hidden {
+.is-hidden {
     display: none;
 }
 ```
