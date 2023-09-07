@@ -177,13 +177,13 @@ export default Element.register ('r-list',
     buildItem: function (iid, data, asHtml=false)
     {
         if (this.content) {
-            let elem = this.content(data.get());
+            let elem = this.content(data.get(), data);
             elem.dataset.iid = iid;
             return elem;
         }
 
         if (this.container.content) {
-            let elem = this.container.content(data.get());
+            let elem = this.container.content(data.get(), data);
             elem.dataset.iid = iid;
             return elem;
         }

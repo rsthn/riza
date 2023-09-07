@@ -201,7 +201,7 @@ export default Element.register ('r-table',
     buildItem: function (iid, data)
     {
         if (this.container.content) {
-            let elem = this.container.content(data.get());
+            let elem = this.container.content(data.get(), data);
             elem.dataset.iid = iid;
             return elem;
         }

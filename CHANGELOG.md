@@ -1,3 +1,10 @@
+# v3.0.14 - Sep 07 2023
+
+#### General
+- Elements `r-list` and `r-table` now also pass the actual Model object to the item builder (second parameter).
+
+<br/>
+
 # v3.0.13 - Aug 30 2023
 
 #### General
