@@ -1,3 +1,15 @@
+# v3.0.15 - Sep 21 2023
+
+#### General
+- Updated app-jsx template.
+- Bug fixes in runtime-jsx.
+
+#### babel-plugin-riza
+- Fixed bug causing spread-attributes not to be marked dynamic.
+- Patched transpiler to force elements to be dynamic to prevent clones.
+
+<br/>
+
 # v3.0.14 - Sep 07 2023
 
 #### General
