@@ -448,15 +448,15 @@ module.exports = function()
                     t.objectExpression(finalAttributes), t.arrayExpression(finalChildren)
                 ]);
 
-                node.isDynamic = dynamicAttributeList.length != 0 || dynamicChildrenList.length != 0 || spreadAttributes.length != 0;
+                //node.isDynamic = dynamicAttributeList.length != 0 || dynamicChildrenList.length != 0 || spreadAttributes.length != 0;
+                node.isDynamic = true;
                 node.isDynamicChild = true;
                 path.replaceWith(node);
             }
             else
             {
                 let _id = this.context.custom[signature];
-                if (!_id)
-                {
+                if (!_id) {
                     _id = this.context.allocateId();
                     this.context.custom[signature] = _id;
 
@@ -466,15 +466,12 @@ module.exports = function()
                                     [ t.stringLiteral(tagName), t.arrayExpression(attributeList), t.arrayExpression(childList) ]
                                 )
                             )]);
-
                     this.context.lastDecl.insertBefore(decl);
                 }
 
                 // ***
-                for (let i in dynamicAttributeList)
-                {
+                for (let i in dynamicAttributeList) {
                     let exprPath = dynamicAttributeList[i];
-
                     let signalIds = getSignalIdentifiers(exprPath);
                     if (signalIds.length > 0)
                         dynamicAttributeList[i] = t.callExpression(this.context.id.expr, [t.arrayExpression(signalIds.names), t.arrowFunctionExpression(signalIds.list, exprPath.node)])
@@ -483,10 +480,8 @@ module.exports = function()
                 }
 
                 // ***
-                for (let i in dynamicChildrenList)
-                {
+                for (let i in dynamicChildrenList) {
                     let exprPath = dynamicChildrenList[i];
-
                     let signalIds = getSignalIdentifiers(exprPath);
                     if (signalIds.length > 0 && !exprPath.node.isDynamicChild)
                         dynamicChildrenList[i] = t.callExpression(this.context.id.expr, [t.arrayExpression(signalIds.names), t.arrowFunctionExpression(signalIds.list, exprPath.node)])
@@ -495,13 +490,13 @@ module.exports = function()
                 }
 
                 let node = null;
-
                 if (spreadAttributes.length)
                     node = t.callExpression(_id, [ t.arrayExpression(dynamicAttributeList), t.arrayExpression(dynamicChildrenList), t.arrayExpression(spreadAttributes) ]);
                 else
                     node = t.callExpression(_id, [ t.arrayExpression(dynamicAttributeList), t.arrayExpression(dynamicChildrenList) ]);
 
-                node.isDynamic = dynamicAttributeList.length != 0 || dynamicChildrenList.length != 0 || spreadAttributes.length != 0;
+                //node.isDynamic = dynamicAttributeList.length != 0 || dynamicChildrenList.length != 0 || spreadAttributes.length != 0;
+                node.isDynamic = true;
                 node.isDynamicChild = true;
                 path.replaceWith(node);
             }
