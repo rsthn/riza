@@ -1,6 +1,6 @@
 {
     "name": "riza-signal",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Riza Signal Support",
     "type": "module",
     "main": "main.js",
