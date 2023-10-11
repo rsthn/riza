@@ -32,4 +32,4 @@ export const Flattenable = _Rinn.Flattenable;
 export const Collection = _Rinn.Collection;
 export const Template = _Rinn.Template;
 
-export { debugSignals, signal, expr, watch, helpers } from './runtime-jsx';
+export { signal, expr, watch, validator, helpers } from './runtime-jsx';

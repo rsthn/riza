@@ -1,11 +1,11 @@
 
 import * as rizaSignal from 'riza-signal';
 
-export const debugSignals = rizaSignal.debugSignals;
 export const Signal = rizaSignal.Signal;
 export const signal = rizaSignal.signal;
 export const expr = rizaSignal.expr;
 export const watch = rizaSignal.watch;
+export const validator = rizaSignal.validator;
 
 /**
  * Helper functions used by the JSX transformer.
@@ -34,12 +34,14 @@ export const helpers =
         {
             switch (path[1])
             {
-                case 'valueSignal':
+                case 'valueSignal'://DEPRECATED
+                case 'value':
                     root.onchange = (e) => value.set(e.currentTarget.value);
                     watch([value], (value) => root.value = value);
                     break;
 
-                case 'inputSignal':
+                case 'inputSignal'://DEPRECATED
+                case 'input':
                     root.oninput = (e) => value.set(e.currentTarget.value);
                     watch([value], (value) => root.value = value);
                     break;
@@ -63,8 +65,7 @@ export const helpers =
                     return;
 
                 case 'className':
-                    if (value instanceof Array)
-                    {
+                    if (value instanceof Array) {
                         watch([value], (value) => {
                             root.className = '';
                             for (let i in value)

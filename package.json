@@ -53,10 +53,10 @@
         "base-64": "^1.0.0",
         "fs-extra": "^10.1.0",
         "rinn": "^2.0.48",
-        "riza-signal": "^1.0.0"
+        "riza-signal": "^1.0.2"
     },
     "devDependencies": {
-        "parcel": "^2.9.3",
+        "parcel": "^2.10.0",
         "shx": "^0.3.4"
     }
 }
