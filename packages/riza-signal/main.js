@@ -18,16 +18,6 @@ export class Signal
     {
         this.#value = value;
         this.#type = null;
-
-        if (value !== null) {
-            if (typeof value === 'string')
-                this.#type = 'string';
-            else if (typeof value === 'number')
-                this.#type = ~~value === value ? 'int' : 'number';
-            else if (typeof value === 'boolean')
-                this.#type = 'bool';
-        }
-
         this.#defvalue = defvalue;
         this.#listeners = [];
     }
@@ -37,7 +27,7 @@ export class Signal
      * @param {'string'|'bool'|'int'|'number'|'*'} type 
      * @returns {Signal}
      */
-    as(type) {
+    is(type) {
         this.#type = type === '*' ? null : type;
         return this;
     }
@@ -140,6 +130,18 @@ export class Signal
      */
     connect (callback) {
         this.#listeners.push(callback);
+        return this;
+    }
+
+    /**
+     * Disconnects a callback from the signal.
+     * @param {function} callback
+     * @returns {Signal}
+     */
+    disconnect (callback) {
+        const index = this.#listeners.indexOf(callback);
+        if (index !== -1)
+            this.#listeners.splice(index, 1);
         return this;
     }
 
