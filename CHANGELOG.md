@@ -1,7 +1,7 @@
 # v3.0.15 - Sep 21 2023
 
 #### General
-- Updated app-jsx template.
+- Updated app-jsx template to include `xui` CSS helphers and upgraded dependencies.
 - Bug fixes in runtime-jsx.
 
 #### babel-plugin-riza

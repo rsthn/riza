@@ -13,14 +13,14 @@
     "img/*"
   ],
   "devDependencies": {
-    "@babel/core": "^7.22.20",
+    "@babel/core": "^7.23.0",
     "@parcel/config-default": "^2.9.3",
     "@parcel/core": "^2.9.3",
     "babel-plugin-riza": "^2.0.8",
     "parcel": "^2.9.3",
     "parcel-reporter-static-files-copy": "^1.5.3",
     "parcel-resolver-ignore": "^2.1.5",
-    "riza": "^3.0.14",
+    "riza": "^3.0.15",
     "shx": "^0.3.4"
   }
 }
