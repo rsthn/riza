@@ -1,3 +1,20 @@
+# v3.0.17 - Oct 11 2023
+
+#### riza-signal
+- Added support for typed signals by using the `is` method to specify the signal type.
+- Patched to remove automatic type detection.
+- Added method `disconnect` to remove a listener.
+- Added support for signal validators using the `validator` function.
+- Added validators: `min` and `max`.
+
+#### RuntimeJsx
+- Renamed traits `valueSignal` to `value`, and `inputSignal` to `input`. Old names will be available until next minor version.
+
+#### General
+- Added `signal-utils.js` and `file-utils.js` to common folder of app-jsx.
+
+<br/>
+
 # v3.0.15 - Sep 21 2023
 
 #### General
