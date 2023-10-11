@@ -247,3 +247,55 @@ export function watch (signals, evaluator, initialRun=true)
 
     if (initialRun) update();
 }
+
+/**
+ * A validator is a function that is called when a signal changes. It is passed the signal and the config parameter
+ * of the validator. If the validator returns `false` the validation cycle will be stopped.
+ */
+const validators = { };
+
+/**
+ * Create a new validation watcher for the signal.
+ * @param {Signal} signal
+ * @param {object} rules
+ * @returns {Signal}
+ */
+/**
+ * Register a new validation rule.
+ * @param {string} ruleName
+ * @param {(Signal, *) => boolean} handler
+ */
+export function validator (signal, rules)
+{
+    // Register a new validation rule.
+    if (typeof signal === 'string') {
+        if (typeof rules !== 'function')
+            throw new Error('Validator handler must be a function');
+        validators[signal] = rules;
+        return;
+    }
+
+    // Ensure all validators are defined.
+    for (let rule in rules) {
+        if (!(rule in validators))
+            throw new Error('Validator `' + rule + '` not defined');
+    }
+
+    // Create a new validation watcher for the signal.
+    watch([signal], () => {
+        for (let rule in rules) {
+            if (validators[rule](signal, rules[rule]) === false)
+                break;
+        }
+    });
+
+    return signal;
+}
+
+validator('min', (signal, val) => {
+    if (signal.get() < val) signal.set(val);
+});
+
+validator('max', (signal, val) => {
+    if (signal.get() > val) signal.set(val);
+});
