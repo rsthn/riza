@@ -77,3 +77,37 @@ export function ifTrue (condition, result, alternative='') {
 export function ifFalse (condition, result, alternative='') {
     return expr([condition], (condition) => !condition ? result : alternative);
 }
+
+/**
+ * Returns a signal that outputs `result` if `condition` is `null`, otherwise outputs `alternative`.
+ * @param {Signal} condition
+ * @param {*} [result]
+ * @param {*} [alternative]
+ * @returns {Signal}
+ */
+export function ifNull (condition, result=true, alternative=false) {
+    return expr([condition], (condition) => condition === null ? result : alternative);
+}
+
+/**
+ * Returns a signal that outputs `result` if `condition` is not `null`, otherwise outputs `alternative`.
+ * @param {Signal} condition
+ * @param {*} [result]
+ * @param {*} [alternative]
+ * @returns {Signal}
+ */
+export function ifNotNull (condition, result=true, alternative=false) {
+    return expr([condition], (condition) => condition === null ? result : alternative);
+}
+
+/**
+ * Returns a signal that outputs `result` if `condition` is equal to the given value, otherwise outputs `alternative`.
+ * @param {Signal} condition
+ * @param {*} value
+ * @param {*} [result]
+ * @param {*} [alternative]
+ * @returns {Signal}
+ */
+export function ifEqual (condition, value, result=true, alternative=false) {
+    return expr([condition], (condition) => condition == value ? result : alternative);
+}

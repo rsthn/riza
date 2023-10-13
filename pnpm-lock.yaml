@@ -15,8 +15,8 @@ dependencies:
     specifier: ^2.0.48
     version: 2.0.48
   riza-signal:
-    specifier: ^1.0.2
-    version: 1.0.2
+    specifier: ^1.0.3
+    version: 1.0.3
 
 devDependencies:
   parcel:
@@ -1922,8 +1922,8 @@ packages:
     resolution: {integrity: sha512-27FP6XThwlJH01V4T2FtrVDsqBDReyWK4w8hs4y+0/NjXCwDjXkZ7oJFIOk/p7q54GlqmSIU2fcO9rNaBEdbLA==}
     dev: false
 
-  /riza-signal@1.0.2:
-    resolution: {integrity: sha512-C3fGrq1vlJZm38ap6jGYDoSVCPb1blnqVaqHuKVfo1ZQkDWWw/Yx9H2A1KZTwrHZaLcv/sxLAVcCvxtVgHvm8w==}
+  /riza-signal@1.0.3:
+    resolution: {integrity: sha512-Ru9XovfdzwUkJ5QKxHF7FJls5yyJQPK6Je3x0SlArfRNDpGlor0a3qa8CaTTUkomdw6roMDNT88B9Jc62Yq+vA==}
     dev: false
 
   /safe-buffer@5.2.1:
