@@ -17,8 +17,11 @@ import _Elements from './elements.js'; export const Elements = _Elements;
 //![import "./elements"]
 import _Utils from './utils.js'; export const Utils = _Utils;
 //![import "./utils"]
+
 import _db from './db.js'; export const db = _db;
 //![import "./db"]
+import _geo from './geo.js'; export const geo = _geo;
+//![import "./geo"]
 
 import * as _Rinn from 'rinn';
 export const Rinn = _Rinn.Rinn;
