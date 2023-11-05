@@ -346,8 +346,8 @@ module.exports = function()
                 }
 
                 // Event names are always stored in lowercase.
-                if (attr.name.name.startsWith('on'))
-                    attr.name.name = attr.name.name.toLowerCase();
+                //if (attr.name.name.startsWith('on'))
+                //    attr.name.name = attr.name.name.toLowerCase();
 
                 // Data-* attributes should be properly renamed to be use as properties.
                 if (attr.name.name.startsWith('data-')) {
