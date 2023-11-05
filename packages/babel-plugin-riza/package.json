@@ -1,6 +1,6 @@
 {
     "name": "babel-plugin-riza",
-    "version": "2.0.8",
+    "version": "2.0.9",
     "description": "Riza JSX Transpiler (Babel)",
     "main": "main.js",
     "scripts": {
