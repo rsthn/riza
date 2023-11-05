@@ -91,8 +91,12 @@ export const helpers =
         for (let i = 0; i < lastIndex && root; i++)
             root = root[path[i]];
 
-        if (root)
-            watch([path[lastIndex], value], (name, value) => root[name] = value);
+        if (!root) return;
+
+        let name = path[lastIndex];
+        if (name.startsWith('on')) name = name.toLowerCase();
+
+        watch([name, value], (name, value) => root[name] = value);
     },
 
     /**

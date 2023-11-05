@@ -276,7 +276,7 @@ export default Element.register ('r-form',
         this.clearMarkers();
         let tmp;
 
-        this.dispatch ('formSuccess', r);
+        this.dispatch('formSuccess', r);
 
         if (r.message && (tmp = this.querySelector('.message.success')) != null)
         {
@@ -292,7 +292,7 @@ export default Element.register ('r-form',
         this.clearMarkers();
         let tmp;
 
-        this.dispatch ('formError', r);
+        this.dispatch('formError', r);
 
         if (r.fields)
         {
@@ -368,8 +368,7 @@ export default Element.register ('r-form',
         this.querySelectorAll('[data-field]').forEach(e => list[e.dataset.field] = true);
         Object.keys(list).forEach(f => data[f] = this._getField(f));
 
-        if (this.onbeforesubmit)
-            this.onbeforesubmit(data);
+        this.dispatch('beforeSubmit', data);
 
         this.model.set(data);
 

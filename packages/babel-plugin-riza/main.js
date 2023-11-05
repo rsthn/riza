@@ -345,10 +345,6 @@ module.exports = function()
                     value = this.context.expr.DYNAMIC;
                 }
 
-                // Event names are always stored in lowercase.
-                //if (attr.name.name.startsWith('on'))
-                //    attr.name.name = attr.name.name.toLowerCase();
-
                 // Data-* attributes should be properly renamed to be use as properties.
                 if (attr.name.name.startsWith('data-')) {
                     attr.name.name = 'dataset:' + attr.name.name.substr(5).split('-').map((s,idx) => idx ? s[0].toUpperCase()+s.substr(1) : s).join('');

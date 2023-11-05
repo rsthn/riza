@@ -1,3 +1,11 @@
+# v3.0.19 - Nov 05 2023
+
+#### General
+- Patched runtime-jsx to convert event attribute names (starting with `on`) to lower case.
+- Updated dependencies (riza-signal).
+
+<br/>
+
 # v3.0.18 - Oct 21 2023
 
 #### General

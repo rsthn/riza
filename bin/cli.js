@@ -57,13 +57,13 @@ if (args.length == 0)
     riza <command> [options]
 
 Command:
-    create <template> <name>                Create a project <name> using pnpm.
-    create-yarn <template> <name>           Create a project <name> using yarn.
-    create-npm <template> <name>            Create a project <name> using npm.
+    new [<template>] <name>              Create a new project <name> using pnpm.
+    new:yarn [<template>] <name>         Create a new project <name> using yarn.
+    new:npm [<template>] <name>          Create a new project <name> using npm.
 
 Template:
     app
-    app-jsx
+    app-jsx (default)
 `);
 
 	process.exit();
@@ -76,13 +76,18 @@ let dest;
 
 switch (args[0])
 {
-	case 'create':
-	case 'create-yarn':
-	case 'create-npm':
+	case 'new':
+	case 'new-yarn':
+	case 'new-npm':
 		if (args.length < 2) {
-			msg(ERROR, 'Parameter <template> missing for command `create`');
+			msg(ERROR, 'Parameter <name> missing for command `new`');
 			break;
 		}
+
+        if (args.length < 3) {
+            args[2] = args[1];
+            args[1] = 'app-jsx';
+        }
 
 		if (args[1] != 'app' && args[1] != 'app-jsx') {
 			msg(ERROR, 'Parameter <template> is incorrect, should be: `app` or `app-jsx`');
@@ -90,7 +95,7 @@ switch (args[0])
 		}
 
 		if (args.length < 3) {
-			msg(ERROR, 'Parameter <name> missing for command `create`');
+			msg(ERROR, 'Parameter <name> missing for command `new`');
 			break;
 		}
 
@@ -108,9 +113,9 @@ switch (args[0])
 
 			patch(dest, ['package.json', 'src/manifest.jsond', 'src/index.html'], 'project_name', args[2]);
 
-			if (args[0] == 'create-yarn')
+			if (args[0] == 'new:yarn')
 				manager = 'yarn';
-			else if (args[0] == 'create-npm')
+			else if (args[0] == 'new:npm')
 				manager = 'npm';
 
 			if (manager !== 'pnpm')
