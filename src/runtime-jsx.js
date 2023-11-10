@@ -46,6 +46,16 @@ export const helpers =
                     watch([value], (value) => root.value = value);
                     break;
 
+                case 'checked':
+                    root.onchange = (e) => value.set(e.currentTarget.checked);
+                    watch([value], (value) => root.checked = value);
+                    break;
+
+                case 'selected':
+                    root.onchange = (e) => value.set(e.currentTarget.selected);
+                    watch([value], (value) => root.selected = value);
+                    break;
+
                 default:
                     console.error('Unknown trait: ' + path[1]);
                     break;

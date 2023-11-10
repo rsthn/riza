@@ -79,181 +79,181 @@ import{Rinn as t,Class as e,Event as s,EventDispatcher as n,Model as o,ModelList
 	*/navigate:function(t,e=!1){if(t=this.realLocation(t),globalThis.location.hash=="#"+t){this.refresh();return}e?globalThis.location.replace("#"+t):globalThis.location.hash=t}};b.init();/**
  * Map containing the original prototypes for all registered elements.
  */let v={},y={},_={/**
-	 * Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
-	 */eid:null,/**
-	 * Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
-	 */isRoot:!0,/**
-	 * Root element to which this element is attached (when applicable).
-	 */root:null,/**
-	 * Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
-	 */isReady:0,readyReenter:0,readyLocked:0,/**
-	 * Model type (class) for the element's model.
-	 */modelt:o,/**
-	 * Data model related to the element.
-	 */model:null,/**
-	 * Contents of the element. When set, the innerHTML will be set to this value.
-	 */contents:null,/**
-	 * 	Events map.
-	 */events:{"mousedown [data-long-press]":function(t){if(t.continuePropagation=!0,t.source._long_press)return;let e=t.source;e._long_press=setTimeout(()=>{let t=e._pos_fx-e._pos_sx,s=e._pos_fy-e._pos_sy;e._long_press=null,5>Math.sqrt(t*t+s*s)&&(e._long_press=!1,this.dispatchOn(e,"long-press"))},500),e._pos_sx=t.clientX,e._pos_sy=t.clientY,e._pos_fx=t.clientX,e._pos_fy=t.clientY},"mousemove [data-long-press]":function(t){t.continuePropagation=!0,t.source._long_press&&(t.source._pos_fx=t.clientX,t.source._pos_fy=t.clientY)},"touchstart [data-long-press]":function(t){if(t.continuePropagation=!0,t.source._long_press)return;let e=t.source;e._long_press=setTimeout(()=>{let t=e._pos_fx-e._pos_sx,s=e._pos_fy-e._pos_sy;e._long_press=null,5>Math.sqrt(t*t+s*s)&&(e._long_press=!1,this.dispatchOn(e,"long-press"))},500),e._pos_sx=t.touches[0].clientX,e._pos_sy=t.touches[0].clientY,e._pos_fx=t.touches[0].clientX,e._pos_fy=t.touches[0].clientY},"touchmove [data-long-press]":function(t){t.continuePropagation=!0,t.source._long_press&&(t.source._pos_fx=t.touches[0].clientX,t.source._pos_fy=t.touches[0].clientY)},"mouseup [data-long-press]":function(t){!1!==t.source._long_press&&(t.source._long_press&&(clearTimeout(t.source._long_press),t.source._long_press=null),t.continuePropagation=!0)},"touchend [data-long-press]":function(t){!1!==t.source._long_press&&(t.source._long_press&&(clearTimeout(t.source._long_press),t.source._long_press=null),t.continuePropagation=!0)},"click [data-action]":function(t){if(!1===t.source._long_press)return;let e=t.source.dataset.action.split(" ");e[0]in this?this[e[0]]({...t.params,...t.source.dataset,...e,length:e.length},t):t.continuePropagation=!0},"long-press [data-long-press]":function(t){let e=t.source.dataset.longPress.split(" ");e[0]in this?this[e[0]]({...t.params,...t.source.dataset,...e,length:e.length},t):t.continuePropagation=!0},"keyup(13) input[data-enter]":function(t){let e=t.source.dataset.enter.split(" ");e[0]in this?this[e[0]]({...t.params,...t.source.dataset,...e,length:e.length},t):t.continuePropagation=!0}},/**
-	 * Internal routes map, set by `bindRoutes`.
-	 */routes:null,/**
-	 * 	Element constructor.
-	 */__ctor:function(){if(this._list_watch=[],this._list_visible=[],this._list_attr=[],this._list_property=[],"root"in this.dataset&&"false"==this.dataset.root&&(this.isRoot=!1),this.style.display="block",this.eid=Math.random().toString().substr(2),null!=this.model){let t=this.model;this.model=null,this.setModel(t,!1)}Object.keys(this._super).reverse().forEach(t=>{"init"in this._super[t]&&this._super[t].init()}),_.debug&&console.log(">> "+this.tagName+" INIT ON "+this.parentElement.tagName),this.init(),this.events&&this.bindEvents(this.events),this.contents&&this.setInnerHTML(this.contents),setTimeout(()=>{"r-dom-probe"!==this.tagName.toLowerCase()?this.appendChild(document.createElement("r-dom-probe")):this.markReady()},0)},/**
-	 * 	Initializes the element. Called after construction of the instance.
-	 */init:function(){},/**
-	 * 	Executed when the children of the element are ready.
-	 */ready:function(){},/**
-	 * 	Executed after ready and after the root is also ready.
-	 */rready:function(){},/**
-	 * 	Marks the element as ready.
-	 */markReady:function(t=null){if(this.readyLocked++,this.isReady)this.collectWatchers();else{// Set model is `model` property was set in the element.
+     * Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
+     */eid:null,/**
+     * Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
+     */isRoot:!1,/**
+     * Root element to which this element is attached (when applicable).
+     */root:null,/**
+     * Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
+     */isReady:0,readyReenter:0,readyLocked:0,/**
+     * Model type (class) for the element's model.
+     */modelt:o,/**
+     * Data model related to the element.
+     */model:null,/**
+     * Contents of the element. When set, the innerHTML will be set to this value.
+     */contents:null,/**
+     * 	Events map.
+     */events:{"mousedown [data-long-press]":function(t){if(t.continuePropagation=!0,t.source._long_press)return;let e=t.source;e._long_press=setTimeout(()=>{let t=e._pos_fx-e._pos_sx,s=e._pos_fy-e._pos_sy;e._long_press=null,5>Math.sqrt(t*t+s*s)&&(e._long_press=!1,this.dispatchOn(e,"long-press"))},500),e._pos_sx=t.clientX,e._pos_sy=t.clientY,e._pos_fx=t.clientX,e._pos_fy=t.clientY},"mousemove [data-long-press]":function(t){t.continuePropagation=!0,t.source._long_press&&(t.source._pos_fx=t.clientX,t.source._pos_fy=t.clientY)},"touchstart [data-long-press]":function(t){if(t.continuePropagation=!0,t.source._long_press)return;let e=t.source;e._long_press=setTimeout(()=>{let t=e._pos_fx-e._pos_sx,s=e._pos_fy-e._pos_sy;e._long_press=null,5>Math.sqrt(t*t+s*s)&&(e._long_press=!1,this.dispatchOn(e,"long-press"))},500),e._pos_sx=t.touches[0].clientX,e._pos_sy=t.touches[0].clientY,e._pos_fx=t.touches[0].clientX,e._pos_fy=t.touches[0].clientY},"touchmove [data-long-press]":function(t){t.continuePropagation=!0,t.source._long_press&&(t.source._pos_fx=t.touches[0].clientX,t.source._pos_fy=t.touches[0].clientY)},"mouseup [data-long-press]":function(t){!1!==t.source._long_press&&(t.source._long_press&&(clearTimeout(t.source._long_press),t.source._long_press=null),t.continuePropagation=!0)},"touchend [data-long-press]":function(t){!1!==t.source._long_press&&(t.source._long_press&&(clearTimeout(t.source._long_press),t.source._long_press=null),t.continuePropagation=!0)},"click [data-action]":function(t){if(!1===t.source._long_press)return;let e=t.source.dataset.action.split(" ");e[0]in this?this[e[0]]({...t.params,...t.source.dataset,...e,length:e.length},t):t.continuePropagation=!0},"long-press [data-long-press]":function(t){let e=t.source.dataset.longPress.split(" ");e[0]in this?this[e[0]]({...t.params,...t.source.dataset,...e,length:e.length},t):t.continuePropagation=!0},"keyup(13) input[data-enter]":function(t){let e=t.source.dataset.enter.split(" ");e[0]in this?this[e[0]]({...t.params,...t.source.dataset,...e,length:e.length},t):t.continuePropagation=!0}},/**
+     * Internal routes map, set by `bindRoutes`.
+     */routes:null,/**
+     * 	Element constructor.
+     */__ctor:function(){if(this._list_watch=[],this._list_visible=[],this._list_attr=[],this._list_property=[],"root"in this.dataset&&(this.isRoot="true"===this.dataset.root),this.style.display="block",this.eid=Math.random().toString().substr(2),null!=this.model){let t=this.model;this.model=null,this.setModel(t,!1)}Object.keys(this._super).reverse().forEach(t=>{"init"in this._super[t]&&this._super[t].init()}),_.debug&&console.log(">> "+this.tagName+" INIT ON "+this.parentElement.tagName),this.init(),this.events&&this.bindEvents(this.events),this.contents&&this.setInnerHTML(this.contents),setTimeout(()=>{"r-dom-probe"!==this.tagName.toLowerCase()?this.appendChild(document.createElement("r-dom-probe")):this.markReady()},0)},/**
+     * 	Initializes the element. Called after construction of the instance.
+     */init:function(){},/**
+     * 	Executed when the children of the element are ready.
+     */ready:function(){},/**
+     * 	Executed after ready and after the root is also ready.
+     */rready:function(){},/**
+     * 	Marks the element as ready.
+     */markReady:function(t=null){if(this.readyLocked++,this.isReady)this.collectWatchers();else{// Set model is `model` property was set in the element.
 if(this.isReady=1,"model"in this.dataset){let t=this.getFieldByPath(this.dataset.model);t&&this.setModel(t)}// Run ready methods in class hierarchy.
 Object.keys(this._super).reverse().forEach(t=>{"ready"in this._super[t]&&this._super[t].ready()}),_.debug&&console.log(">> "+this.tagName+" READY"),this.ready(),this.onready&&this.onready(this),this.collectWatchers()}let e=this.findCustomParent(this);_.debug&&console.log(this.tagName+" ROOT IS "+(e?e.tagName:"NULL")),e&&0===e.isReady&&0!=this.isReady&&e.checkReady();let s=!1;if(e&&2===e.isReady&&2!==this.isReady&&(this.getRoot(),this.root&&this.dataset.ref&&(_.debug&&console.log(this.tagName+" REF AS `"+this.dataset.ref+"` ON "+this.root.tagName),this.root[this.dataset.ref]=this,this.root.onRefAdded(this.dataset.ref,this)),s=!0),e||2===this.isReady||(s=!0),s){if(this.isReady=2,null!==t)for(let e of t)e.checkReady();_.debug&&console.log(">> "+this.tagName+" RREADY"),Object.keys(this._super).reverse().forEach(t=>{"rready"in this._super[t]&&this._super[t].rready()}),this.rready(),this.onrootready&&this.onrootready(this)}this.readyLocked--,this.readyReenter&&!this.readyLocked&&(this.readyReenter=!1,this.checkReady()),"r-dom-probe"===this.tagName.toLowerCase()&&this.remove()},/**
-	 *	Checks if all children are ready and fires the appropriate function (`ready` and/or `rready`).
-	 */checkReady:function(){if(0==this.childNodes.length)return;if(this.readyLocked){this.readyReenter=!0;return}let t=!0,e=[],s=document.evaluate(".//*[contains(name(),'-')]",this,null,XPathResult.ANY_TYPE,null);for(_.debug&&console.log("# CHECKING "+this.tagName);;){let n=s.iterateNext();if(!n)break;n!==this&&this.findCustomParent(n)===this&&(_.debug&&console.log("   "+n.tagName+" = "+n.isReady),n.isReady||(t=!1),e.push(n))}t&&this.markReady(e)},/**
-	 * 	Returns the value of a field given its path. Starts from `global`, unless the first item in the path is `this`, in which case it will start from the element.
-	 */getFieldByPath:function(t){if(!t)return null;if("string"!=typeof t)return t;let e=t.split("."),s=g;for(e.length&&"this"==e[0]&&(s=this,e.shift()),e.length&&"root"==e[0]&&(s=this.getRoot(),e.shift());null!=s&&0!=e.length;)s=s[e.shift()];return s},/**
-	 * 	Returns the root of the element (that is, the `root` property). If not set it will attempt to find the root first.
-	 */getRoot:function(){return this.root?this.root:this.root=this.findRoot()},/**
-	 * 	Sets the model of the element and executes the `modelChanged` event handler (unless `update` is set to false).
-	 */setModel:function(e,s=!0){return e&&(e=t.ensureTypeOf(this.modelt,e),this.model!==e&&(null!=this.model&&(this.model.removeEventListener(this.eid+":modelChanged",this.onModelPreChanged,this),this.model.removeEventListener(this.eid+":propertyChanging",this.onModelPropertyChanging,this),this.model.removeEventListener(this.eid+":propertyChanged",this.onModelPropertyPreChanged,this),this.model.removeEventListener(this.eid+":propertyRemoved",this.onModelPropertyRemoved,this)),this.model=e,this.model.addEventListener(this.eid+":modelChanged",this.onModelPreChanged,this),this.model.addEventListener(this.eid+":propertyChanging",this.onModelPropertyChanging,this),this.model.addEventListener(this.eid+":propertyChanged",this.onModelPropertyPreChanged,this),this.model.addEventListener(this.eid+":propertyRemoved",this.onModelPropertyRemoved,this)),!1!==s&&this.model.setNamespace(this.eid).update(!0).setNamespace(null)),this},/**
-	 * 	Returns the model of the element. Added for symmetry only, exactly the same as accesing public property `model` of this class.
-	 */getModel:function(){return this.model},/**
-	 * 	Adds one or more CSS classes (separated by space) to the element.
-	 */addClass:function(t){return t&&t.split(" ").forEach(t=>{(t=t.trim())&&("-"==t[0]||"+"==t[0]?this.classList["-"==t[0]?"remove":"add"](t.substr(1)):this.classList.add(t))}),this},/**
-	 * 	Removes one or more CSS classes (separated by space) from the element.
-	 */removeClass:function(t){return t&&t.split(" ").forEach(t=>{(t=t.trim())&&("-"==t[0]||"+"==t[0]?this.classList["-"==t[0]?"remove":"add"](t.substr(1)):this.classList.remove(t))}),this},/**
-	 * 	Sets one or more style properties to the element (separated by semi-colon).
-	 */setStyle:function(t){return t&&t.split(";").forEach(t=>{let e=(t=t.trim()).indexOf(":");if(-1==e)return;let s=t.substr(0,e).trim();for(let t=s.indexOf("-");-1!=t;t=s.indexOf("-"))s=s.substr(0,t)+s.substr(t+1,1).toUpperCase()+s.substr(t+2);this.style[s]=t.substr(e+1).trim()}),this},/**
-	 * 	Returns the width of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
-	 */getWidth:function(t=null){return(t||this).getBoundingClientRect().width},/**
-	 * 	Returns the height of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
-	 */getHeight:function(t=null){return(t||this).getBoundingClientRect().height},/**
-	**	Binds all events in the specified map to the element, the events map can have one of the following forms:
-	**
-	**		"click .button": "doSomething",		(Delegated Event)
-	**		"click .button": function() { },	(Delegated Event)
-	**		"myevt &this": "...",				(Self Event)
-	**		"myevt": "...",						(Element Event)
-	**		"myevt @objName": "...",			(EventDispatcher Event)
-	**		"#propname": "...",					(Property Changed Event)
-	**		"keyup(10) .input": "..."			(Delegated Event with Parameters)
-	**
-	**	>> Element bindEvents (object events);
-	*/bindEvents:function(e){for(let r in e){let l=e[r];"string"==t.typeOf(l)&&(l=this[l]),l=l.bind(this);var s=r.indexOf(" "),n=-1==s?r:r.substr(0,s),o=-1==s?"":r.substr(s+1);let h=null;var a=n.indexOf("(");if(-1!=a&&(h=n.substr(a+1,n.length-a-2).split(","),n=n.substr(0,a)),"@"==o[0]){if("@this"!=o){this[o.substr(1)].addEventListener(n,l);continue}o=this}else"&"==o[0]&&(o="&this"!=o?"[data-ref='"+o.substr(1)+"']":this);if("#"==n.substr(0,1)){this.listen("propertyChanged."+n.substr(1),this,l);continue}if(null!=h)switch(n){case"keyup":case"keydown":this.listen(n,o,function(e){if(-1!=t.indexOf(h,e.keyCode.toString()))return l(e,h);e.continuePropagation=!0});continue}this.listen(n,o,l)}return this},/**
-	**	Binds all routes in the specified map to the Router object.
-	**
-	**		"route-path": "doSomething"						On-Route
-	**		"route-path": function (evt, args) { }			On-Route
-	**		"!route-path": "doSomething"					On-UnRoute
-	**		"!route-path": function (evt, args) { }			On-UnRoute
-	**
-	**	>> Element bindRoutes ();
-	*/bindRoutes:function(){if(this.routes)for(let e in this.routes){let s="!"===e[0]?b.getRoute(e.substr(1)):b.getRoute(e),n=this.routes[e];"string"===t.typeOf(n)&&(n=this[n]),"!"===e[0]?s.addHandler(n,!0,this):s.addHandler(n,!1,this)}},/**
-	 * Unbinds all routes added by bindRoutes.
-	 */unbindRoutes:function(){if(this.routes)for(let e in this.routes){let s="!"===e[0]?b.getRoute(e.substr(1)):b.getRoute(e),n=this.routes[e];"string"===t.typeOf(n)&&(n=this[n]),"!"===e[0]?s.removeHandler(n,!0,this):s.removeHandler(n,!1,this)}},/**
-	**	Executes the underlying event handler given an event and a selector. Called internally by listen().
-	**
-	**	>> void _eventHandler (event evt, string selector, function handler);
-	*/_eventHandler:function(e,s,n){if(!1!==e.continuePropagation){if(e.continuePropagation=!0,e.source=e.target,s&&s instanceof HTMLElement)e.source===s&&(e.continuePropagation=!1,!0===n.call(this,e,e.detail)&&(e.continuePropagation=!0));else if(s&&"*"!=s){let o=this.querySelectorAll(s);for(;e.source!==this;){if(-1!==t.indexOf(o,e.source,!0)){e.continuePropagation=!1,!0===n.call(this,e,e.detail)&&(e.continuePropagation=!0);break}e.source=e.source.parentElement}}else e.continuePropagation=!1,!0===n.call(this,e,e.detail)&&(e.continuePropagation=!0);!1===e.continuePropagation&&(e.preventDefault(),e.stopPropagation())}},/**
-	**	Listens for an event on elements matching the specified selector, returns an object with a single method `remove` used
-	**	to remove the listener when it is no longer needed.
-	**
-	**	>> object listen (string eventName, string selector, function handler);
-	**	>> object listen (string eventName, function handler);
-	*/listen:function(e,s,n){let o=!1,a=!1;"function"==t.typeOf(s)&&(n=s,s=null),"!"==e[e.length-1]&&(e=e.substr(0,e.length-1),o=!0),"!"==e[0]&&(e=e.substr(1),a=!0);let r=null,l=null,h=this;return this.addEventListener(e,r=t=>{!1!==t.continuePropagation&&(t.firstCapture||(t.firstCapture=this,t.firstCaptureCount=0,t.queue=[]),t.firstCapture===this&&t.firstCaptureCount++,!0==o&&t.queue.push([this,s,n]),!0==a&&this._eventHandler(t,s,n))},!0),this.addEventListener(e,l=t=>{if(!1!==t.continuePropagation&&(!0!=o&&!0!=a&&this._eventHandler(t,s,n),t.firstCapture===this&&!1!==t.continuePropagation&&0==--t.firstCaptureCount)){for(;t.queue.length;){let e=t.queue.pop();e[0]._eventHandler(t,e[1],e[2])}t.continuePropagation=!1}},!1),{removed:!1,remove:function(){this.removed||(this.removed=!0,h.removeEventListener(e,r,!0),h.removeEventListener(e,l,!1))}}},/**
-	**	Creates an event object for later dispatch.
-	*/createEventObject:function(t,e,s){return"click"==t?new MouseEvent(t,{bubbles:s,detail:e}):new CustomEvent(t,{bubbles:s,detail:e})},/**
-	**	Dispatches a new event with the specified name and the given arguments.
-	*/dispatch:function(t,e=null,s=!0){let n="on"+t.toLowerCase();if(n in this){this[n](e,this);return}this.dispatchEvent(this.createEventObject(t,e,s))},/**
-	**	Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
-	*/dispatchOn:function(t,e,s=null,n=!0){t.dispatchEvent(this.createEventObject(e,s,n))},/**
-	**	Sets the innerHTML property of the element and runs some post set-content tasks.
-	**
-	**	>> void setInnerHTML (value);
-	*/setInnerHTML:function(t){this.readyLocked++,this.innerHTML=t,this.readyLocked--},/**
-	**	Collects all watchers (data-watch, data-visible, data-attr, data-property), that depend on the model, should be invoked when the
+     *	Checks if all children are ready and fires the appropriate function (`ready` and/or `rready`).
+     */checkReady:function(){if(0==this.childNodes.length)return;if(this.readyLocked){this.readyReenter=!0;return}let t=!0,e=[],s=document.evaluate(".//*[contains(name(),'-')]",this,null,XPathResult.ANY_TYPE,null);for(_.debug&&console.log("# CHECKING "+this.tagName);;){let n=s.iterateNext();if(!n)break;n!==this&&this.findCustomParent(n)===this&&(_.debug&&console.log("   "+n.tagName+" = "+n.isReady),n.isReady||(t=!1),e.push(n))}t&&this.markReady(e)},/**
+     * 	Returns the value of a field given its path. Starts from `global`, unless the first item in the path is `this`, in which case it will start from the element.
+     */getFieldByPath:function(t){if(!t)return null;if("string"!=typeof t)return t;let e=t.split("."),s=g;for(e.length&&"this"==e[0]&&(s=this,e.shift()),e.length&&"root"==e[0]&&(s=this.getRoot(),e.shift());null!=s&&0!=e.length;)s=s[e.shift()];return s},/**
+     * 	Returns the root of the element (that is, the `root` property). If not set it will attempt to find the root first.
+     */getRoot:function(){return this.root?this.root:this.root=this.findRoot()},/**
+     * 	Sets the model of the element and executes the `modelChanged` event handler (unless `update` is set to false).
+     */setModel:function(e,s=!0){return e&&(e=t.ensureTypeOf(this.modelt,e),this.model!==e&&(null!=this.model&&(this.model.removeEventListener(this.eid+":modelChanged",this.onModelPreChanged,this),this.model.removeEventListener(this.eid+":propertyChanging",this.onModelPropertyChanging,this),this.model.removeEventListener(this.eid+":propertyChanged",this.onModelPropertyPreChanged,this),this.model.removeEventListener(this.eid+":propertyRemoved",this.onModelPropertyRemoved,this)),this.model=e,this.model.addEventListener(this.eid+":modelChanged",this.onModelPreChanged,this),this.model.addEventListener(this.eid+":propertyChanging",this.onModelPropertyChanging,this),this.model.addEventListener(this.eid+":propertyChanged",this.onModelPropertyPreChanged,this),this.model.addEventListener(this.eid+":propertyRemoved",this.onModelPropertyRemoved,this)),!1!==s&&this.model.setNamespace(this.eid).update(!0).setNamespace(null)),this},/**
+     * 	Returns the model of the element. Added for symmetry only, exactly the same as accesing public property `model` of this class.
+     */getModel:function(){return this.model},/**
+     * 	Adds one or more CSS classes (separated by space) to the element.
+     */addClass:function(t){return t&&t.split(" ").forEach(t=>{(t=t.trim())&&("-"==t[0]||"+"==t[0]?this.classList["-"==t[0]?"remove":"add"](t.substr(1)):this.classList.add(t))}),this},/**
+     * 	Removes one or more CSS classes (separated by space) from the element.
+     */removeClass:function(t){return t&&t.split(" ").forEach(t=>{(t=t.trim())&&("-"==t[0]||"+"==t[0]?this.classList["-"==t[0]?"remove":"add"](t.substr(1)):this.classList.remove(t))}),this},/**
+     * 	Sets one or more style properties to the element (separated by semi-colon).
+     */setStyle:function(t){return t&&t.split(";").forEach(t=>{let e=(t=t.trim()).indexOf(":");if(-1==e)return;let s=t.substr(0,e).trim();for(let t=s.indexOf("-");-1!=t;t=s.indexOf("-"))s=s.substr(0,t)+s.substr(t+1,1).toUpperCase()+s.substr(t+2);this.style[s]=t.substr(e+1).trim()}),this},/**
+     * 	Returns the width of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+     */getWidth:function(t=null){return(t||this).getBoundingClientRect().width},/**
+     * 	Returns the height of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+     */getHeight:function(t=null){return(t||this).getBoundingClientRect().height},/**
+    **	Binds all events in the specified map to the element, the events map can have one of the following forms:
+    **
+    **		"click .button": "doSomething",		(Delegated Event)
+    **		"click .button": function() { },	(Delegated Event)
+    **		"myevt &this": "...",				(Self Event)
+    **		"myevt": "...",						(Element Event)
+    **		"myevt @objName": "...",			(EventDispatcher Event)
+    **		"#propname": "...",					(Property Changed Event)
+    **		"keyup(10) .input": "..."			(Delegated Event with Parameters)
+    **
+    **	>> Element bindEvents (object events);
+    */bindEvents:function(e){for(let r in e){let l=e[r];"string"==t.typeOf(l)&&(l=this[l]),l=l.bind(this);var s=r.indexOf(" "),n=-1==s?r:r.substr(0,s),o=-1==s?"":r.substr(s+1);let h=null;var a=n.indexOf("(");if(-1!=a&&(h=n.substr(a+1,n.length-a-2).split(","),n=n.substr(0,a)),"@"==o[0]){if("@this"!=o){this[o.substr(1)].addEventListener(n,l);continue}o=this}else"&"==o[0]&&(o="&this"!=o?"[data-ref='"+o.substr(1)+"']":this);if("#"==n.substr(0,1)){this.listen("propertyChanged."+n.substr(1),this,l);continue}if(null!=h)switch(n){case"keyup":case"keydown":this.listen(n,o,function(e){if(-1!=t.indexOf(h,e.keyCode.toString()))return l(e,h);e.continuePropagation=!0});continue}this.listen(n,o,l)}return this},/**
+    **	Binds all routes in the specified map to the Router object.
+    **
+    **		"route-path": "doSomething"						On-Route
+    **		"route-path": function (evt, args) { }			On-Route
+    **		"!route-path": "doSomething"					On-UnRoute
+    **		"!route-path": function (evt, args) { }			On-UnRoute
+    **
+    **	>> Element bindRoutes ();
+    */bindRoutes:function(){if(this.routes)for(let e in this.routes){let s="!"===e[0]?b.getRoute(e.substr(1)):b.getRoute(e),n=this.routes[e];"string"===t.typeOf(n)&&(n=this[n]),"!"===e[0]?s.addHandler(n,!0,this):s.addHandler(n,!1,this)}},/**
+     * Unbinds all routes added by bindRoutes.
+     */unbindRoutes:function(){if(this.routes)for(let e in this.routes){let s="!"===e[0]?b.getRoute(e.substr(1)):b.getRoute(e),n=this.routes[e];"string"===t.typeOf(n)&&(n=this[n]),"!"===e[0]?s.removeHandler(n,!0,this):s.removeHandler(n,!1,this)}},/**
+    **	Executes the underlying event handler given an event and a selector. Called internally by listen().
+    **
+    **	>> void _eventHandler (event evt, string selector, function handler);
+    */_eventHandler:function(e,s,n){if(!1!==e.continuePropagation){if(e.continuePropagation=!0,e.source=e.target,s&&s instanceof HTMLElement)e.source===s&&(e.continuePropagation=!1,!0===n.call(this,e,e.detail)&&(e.continuePropagation=!0));else if(s&&"*"!=s){let o=this.querySelectorAll(s);for(;e.source!==this;){if(-1!==t.indexOf(o,e.source,!0)){e.continuePropagation=!1,!0===n.call(this,e,e.detail)&&(e.continuePropagation=!0);break}e.source=e.source.parentElement}}else e.continuePropagation=!1,!0===n.call(this,e,e.detail)&&(e.continuePropagation=!0);!1===e.continuePropagation&&(e.preventDefault(),e.stopPropagation())}},/**
+    **	Listens for an event on elements matching the specified selector, returns an object with a single method `remove` used
+    **	to remove the listener when it is no longer needed.
+    **
+    **	>> object listen (string eventName, string selector, function handler);
+    **	>> object listen (string eventName, function handler);
+    */listen:function(e,s,n){let o=!1,a=!1;"function"==t.typeOf(s)&&(n=s,s=null),"!"==e[e.length-1]&&(e=e.substr(0,e.length-1),o=!0),"!"==e[0]&&(e=e.substr(1),a=!0);let r=null,l=null,h=this;return this.addEventListener(e,r=t=>{!1!==t.continuePropagation&&(t.firstCapture||(t.firstCapture=this,t.firstCaptureCount=0,t.queue=[]),t.firstCapture===this&&t.firstCaptureCount++,!0==o&&t.queue.push([this,s,n]),!0==a&&this._eventHandler(t,s,n))},!0),this.addEventListener(e,l=t=>{if(!1!==t.continuePropagation&&(!0!=o&&!0!=a&&this._eventHandler(t,s,n),t.firstCapture===this&&!1!==t.continuePropagation&&0==--t.firstCaptureCount)){for(;t.queue.length;){let e=t.queue.pop();e[0]._eventHandler(t,e[1],e[2])}t.continuePropagation=!1}},!1),{removed:!1,remove:function(){this.removed||(this.removed=!0,h.removeEventListener(e,r,!0),h.removeEventListener(e,l,!1))}}},/**
+    **	Creates an event object for later dispatch.
+    */createEventObject:function(t,e,s){return"click"==t?new MouseEvent(t,{bubbles:s,detail:e}):new CustomEvent(t,{bubbles:s,detail:e})},/**
+    **	Dispatches a new event with the specified name and the given arguments.
+    */dispatch:function(t,e=null,s=!0){let n="on"+t.toLowerCase();if(n in this){this[n](e,this);return}this.dispatchEvent(this.createEventObject(t,e,s))},/**
+    **	Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
+    */dispatchOn:function(t,e,s=null,n=!0){t.dispatchEvent(this.createEventObject(e,s,n))},/**
+    **	Sets the innerHTML property of the element and runs some post set-content tasks.
+    **
+    **	>> void setInnerHTML (value);
+    */setInnerHTML:function(t){this.readyLocked++,this.innerHTML=t,this.readyLocked--},/**
+    **	Collects all watchers (data-watch, data-visible, data-attr, data-property), that depend on the model, should be invoked when the
     **  structure of the element changed (added/removed children). This is automatically called when the setInnerHTML method is called.
-	**
-	**	Note that for 3rd party libs that add children to this element (which could probably have a watcher) will possibly result in
-	**	duplication of the added elements when compiling the innerHTML template. To prevent this add the 'pseudo' CSS class to any
-	**	element that should not be added to the HTML template.
-	**
-	**	>> void collectWatchers ();
-	*/collectWatchers:function(){let t,e=this,s=!1;if(!this.isRoot)return;let n=this._list_watch.length,o=this._list_visible.length,a=this._list_attr.length,r=this._list_property.length;/* *** */t=this.querySelectorAll("[data-watch]");for(let e=0;e<t.length;e++){for(let s of t[e].querySelectorAll(".pseudo"))s.remove();t[e]._template=c.compile(t[e].innerHTML),t[e]._watch=RegExp("^("+t[e].dataset.watch+")$"),t[e].innerHTML="",t[e].removeAttribute("data-watch"),this._list_watch.push(t[e])}if("selfWatch"in this.dataset){for(let t of this.querySelectorAll(".pseudo"))t.remove();this._template=c.compile(this.innerHTML),this._watch=RegExp("^("+this.dataset.selfWatch+")$"),this.innerHTML="",this.removeAttribute("data-self-watch"),this._list_watch.push(this)}/* *** */t=this.querySelectorAll("[data-visible]");for(let e=0;e<t.length;e++)t[e]._visible=c.compile(t[e].dataset.visible),t[e].removeAttribute("data-visible"),this._list_visible.push(t[e]);"selfVisible"in this.dataset&&(this._visible=c.compile(this.dataset.selfVisible),this.removeAttribute("data-self-visible"),this._list_visible.push(this)),/* *** */t=this.querySelectorAll("[data-attr]");for(let e=0;e<t.length;e++){for(let s of(t[e]._attr=[],t[e].dataset.attr.split(";")))2==(s=s.split(":")).length&&t[e]._attr.push({name:s[0].trim(),value:c.compile(s[1].trim())});t[e].removeAttribute("data-attr"),this._list_attr.push(t[e])}if("selfAttr"in this.dataset){for(let t of(this._attr=[],this.dataset.selfAttr.split(";")))2==(t=t.split(":")).length&&this._attr.push({name:t[0].trim(),value:c.compile(t[1].trim())});this.removeAttribute("data-self-attr"),this._list_attr.push(this)}/* *** */t=this.querySelectorAll("[data-property]");for(let s=0;s<t.length;s++)t[s].onchange=t[s].onblur=function(){switch(this.type){case"radio":this.checked&&e.getModel().set(this.name,this.value);break;case"checkbox":e.getModel().set(this.name,this.checked?"1":"0");break;case"field":e.getModel().set(this.name,this.getValue());break;default:e.getModel().set(this.name,this.value)}},"SELECT"==t[s].tagName&&(t[s].onmouseup=function(){e.getModel().set(this.name,this.value)}),t[s].name=t[s].dataset.property,t[s].removeAttribute("data-property"),this._list_property.push(t[s]);"selfProperty"in this.dataset&&(this.onchange=this.onblur=function(){switch(this.type){case"radio":this.checked&&e.getModel().set(this.name,this.value);break;case"checkbox":e.getModel().set(this.name,this.checked?"1":"0");break;case"field":e.getModel().set(this.name,this.getValue());break;default:e.getModel().set(this.name,this.value)}},"SELECT"==this.tagName&&(this.onmouseup=function(){e.getModel().set(this.name,this.value)}),this.name=this.dataset.selfProperty,this.removeAttribute("data-self-property"),this._list_property.push(this)),/* *** */this._list_watch=this._list_watch.filter(t=>null!=t.parentElement),n!=this._list_watch.length&&(s=!0),this._list_visible=this._list_visible.filter(t=>null!=t.parentElement),o!=this._list_visible.length&&(s=!0),this._list_attr=this._list_attr.filter(t=>null!=t.parentElement),a!=this._list_attr.length&&(s=!0),this._list_property=this._list_property.filter(t=>null!=t.parentElement),r!=this._list_property.length&&(s=!0),null!=this.model&&s&&this.model.setNamespace(this.eid).update(!0).setNamespace(null)},/**
-	**	Executed when the element is created and yet not attached to the DOM tree.
-	*/onCreated:function(){},/**
-	 * Executed when the element is attached to the DOM tree.
-	 */elementConnected:function(){this.bindRoutes(),this.onConnected()},/**
-	 * Executed when the element is no longer a part of the DOM tree.
-	 */elementDisconnected:function(){this.unbindRoutes()},/**
-	**	Executed when the element is attached to the DOM tree.
-	*/onConnected:function(){this.onconnected&&this.onconnected(this)},/**
-	**	Executed when the element is no longer a part of the DOM tree.
-	*/onDisconnected:function(){this.ondisconnected&&this.ondisconnected(this)},/**
-	**	Executed on the root element when a child element has `data-ref` attribute and it was added to it.
-	*/onRefAdded:function(t,e){},/**
-	**	Executed on the root element when a child element has `data-ref` attribute and it was removed from it.
-	*/onRefRemoved:function(t,e){},/**
-	**	Event handler invoked when the model has changed, executed before onModelChanged() to update internal dependencies,
-	**	should not be overriden or elements watching the model will not be updated.
-	**
-	**	>> void onModelPreChanged (evt, args);
-	*/onModelPreChanged:function(t,e){let s=this.getModel().get();for(let t=0;t<this._list_watch.length;t++)for(let n of e.fields)if(this._list_watch[t]._watch.test(n)){this._list_watch[t].innerHTML=this._list_watch[t]._template(s);break}for(let t=0;t<this._list_visible.length;t++)this._list_visible[t]._visible(s,"arg")?this._list_visible[t].style.removeProperty("display"):this._list_visible[t].style.setProperty("display","none","important");for(let t=0;t<this._list_attr.length;t++)for(let e of this._list_attr[t]._attr)this._list_attr[t][e.name]=e.value(s,"arg");this.onModelChanged(t,e)},/**
-	**	Event handler invoked when the model has changed.
-	*/onModelChanged:function(t,e){},/**
-	**	Event handler invoked when a property of the model is changing. Fields `name` and `value` can be found in the `args` object.
-	*/onModelPropertyChanging:function(t,e){},/**
-	**	Event handler invoked when a property of the model has changed, executed before onModelPropertyChanged() to update internal
-	**	dependencies. Automatically triggers internal events named `propertyChanged.<propertyName>` and `propertyChanged`.
-	**	Should not be overriden or elements depending on the property will not be updated.
-	*/onModelPropertyPreChanged:function(t,e){for(let t=0;t<this._list_property.length;t++)if(this._list_property[t].name==e.name){let s=!0;switch(this._list_property[t].type){case"radio":if(this._list_property[t].value!=e.value){this._list_property[t].parentElement.classList.remove("active");continue}this._list_property[t].checked=!0,this._list_property[t].parentElement.classList.add("active");break;case"checkbox":~~e.value?(this._list_property[t].checked=!0,this._list_property[t].parentElement.classList.add("active")):(this._list_property[t].checked=!1,this._list_property[t].parentElement.classList.remove("active"));break;case"field":this._list_property[t].val=this._list_property[t].dataset.value=e.value,this._list_property[t].setValue(e.value),s=!1;break;default:this._list_property[t].value=e.value,this._list_property[t].val=this._list_property[t].dataset.value=e.value,this._list_property[t].value!=e.value&&(s=!1)}s&&this._list_property[t].onchange&&this._list_property[t].onchange()}this.dispatch("propertyChanged."+e.name,e,!1),this.dispatch("propertyChanged",e,!1),this.onModelPropertyChanged(t,e)},/**
-	**	Event handler invoked when a property of the model has changed.
-	*/onModelPropertyChanged:function(t,e){},/**
-	**	Event handler invoked when a property of the model is removed. Field `name` can be found in the `args` object.
-	*/onModelPropertyRemoved:function(t,e){},/*
-	**	Runs the following preparation procedures on the specified prototype:
-	**		- All functions named 'event <event-name> [event-selector]' will be moved to the 'events' map.
-	**		- All functions named 'route <route-path>' will be moved to the 'routes' map.
-	**
-	**	>> void preparePrototype (object proto);
-	*/preparePrototype:function(t){if(!0!==t.__prototypePrepared)for(let e in t.__prototypePrepared=!0,t.hasOwnProperty("events")&&t.events||(t.events={}),t.hasOwnProperty("routes")&&t.routes||(t.routes={}),t)e.startsWith("event ")?(t.events[e.substr(6)]=t[e],delete t[e]):e.startsWith("route ")&&(t.routes[e.substr(6)]=t[e],delete t[e])},/*
-	**	Registers a new custom element with the specified name. Extra functionality can be added with one or more prototypes, by default
-	**	all elements also get the `Element` prototype. Note that the final prototypes of all registered elements are stored, and if you want
-	**	to inherit another element's prototype just provide its name (string) in the protos argument list.
-	**
-	**	>> class register (string name, ...(object|string) protos);
-	*/register:function(e,...s){let n;let o=class extends HTMLElement{constructor(){for(let t of(super(),this.invokeConstructor=!0,_.debug&&console.log("CREATED "+this.tagName),this._super={},Object.entries(this.constructor.prototype._super)))for(let e of(this._super[t[0]]={},Object.entries(t[1])))this._super[t[0]][e[0]]=e[1].bind(this);this.onCreated()}findRoot(t){let e=t||this.parentElement;for(;null!=e;){if("isRoot"in e&&!0===e.isRoot)return e;e=e.parentElement}return null}findCustomParent(t){let e=t?t.parentElement:this.parentElement;for(;null!=e;){if(-1!==e.tagName.indexOf("-"))return e;e=e.parentElement}return null}connectReference(t=null,e=255){this.root||(1&e)!=1||(null==t&&(t=this.findRoot()),null==t||(this.dataset.ref&&(t[this.dataset.ref]=this),this.root=t))}connectedCallback(){this.connectReference(null,1),this.invokeConstructor&&(this.invokeConstructor=!1,this.__ctor()),this.connectReference(null,2),this.elementConnected(),this.dataset.xref&&(globalThis[this.dataset.xref]=this)}disconnectedCallback(){this.root&&(this.dataset.ref&&(this.root.onRefRemoved(this.dataset.ref,this),delete this.root[this.dataset.ref]),this.root=null),this.elementDisconnected(),this.dataset.xref&&delete globalThis[this.dataset.xref]}};t.override(o.prototype,_);let a={},r={},l=t.clone(_.events),h=!0,c=!0,u=!0;for(let e=0;e<s.length;e++)if(s[e]){if("string"==t.typeOf(s[e])){let o=s[e];if(s[e]=v[o],!s[e])continue;for(let n in r[o]={},s[e])"function"==t.typeOf(s[e][n])&&(r[o][n]=s[e][n]);h=!1,c=!1,u=!1,n=!1}else _.preparePrototype(s[e]),n=!0;"_super"in s[e]&&t.override(r,s[e]._super),"events"in s[e]&&t.override(l,s[e].events),t.override(o.prototype,s[e]),t.override(a,s[e]),n&&(!h&&"init"in s[e]&&(h=!0),!c&&"ready"in s[e]&&(c=!0),!u&&"rready"in s[e]&&(u=!0))}let d=function(){};return h||(o.prototype.init=d,a.init=d),c||(o.prototype.ready=d,a.ready=d),u||(o.prototype.rready=d,a.rready=d),o.prototype._super=r,o.prototype.events=l,a._super=r,a.events=l,customElements.define(e,o),v[e]=a,y[e]=o,o},/*
-	**	Expands an already created custom element with the specified prototype(s).
-	**
-	**	>> void expand (string elementName, ...object protos);
-	*/expand:function(e,...s){if(!(e in v))return;let n=v[e],o=y[e],a=n._super,r=n.events;for(let e of s)_.preparePrototype(e),"_super"in e&&t.override(a,e._super),"events"in e&&t.override(r,e.events),t.override(o.prototype,e),t.override(n,e);o.prototype._super=a,o.prototype.events=r,n._super=a,n.events=r},/*
-	**	Appends a hook to a function of a custom element.
-	*/hookAppend:function(e,s,n){if(!(e in v))return;let o=t.hookAppend(v[e],s,n),a=t.hookAppend(y[e].prototype,s,n);return{unhook:function(){o.unhook(),a.unhook()}}},/*
-	**	Prepends a hook to a function of a custom element.
-	*/hookPrepend:function(e,s,n){if(!(e in v))return;let o=t.hookPrepend(v[e],s,n),a=t.hookPrepend(y[e].prototype,s,n);return{unhook:function(){o.unhook(),a.unhook()}}},/**
-	**	Built-in action handlers.
-	*//**
-	**	:toggleClass <className> [<selector>]
-	**
-	**	Toggles a CSS class on the element.
-	*/":toggleClass":function(t,e){let s=e.source;"2"in t&&(s=document.querySelector(t[2])),s&&(s.classList.contains(t[1])?s.classList.remove(t[1]):s.classList.add(t[1]))},/**
-	**	:setClass <className> [<selector>]
-	**
-	**	Sets a CSS class on the element.
-	*/":setClass":function(t,e){let s=e.source;"2"in t&&(s=document.querySelector(t[2])),s&&s.classList.add(t[1])},/**
-	**	:volatileClass <className> [<selector>]
-	**
-	**	Adds the CSS class to the element and any click outside will cause it to be removed.
-	*/":volatileClass":function(t,e){let s=e.source;if("2"in t&&(s=document.querySelector(t[2])),!s)return;s.classList.add(t[1]);let n=()=>{window.removeEventListener("click",n,!0),s.classList.remove(t[1])};window.addEventListener("click",n,!0)},/**
-	**	:toggleClassUnique <className> <parentSelector> <childSelector>
-	**
-	**	Toggles a CSS class on the element and only one element in the selected parent can have the class.
-	*/":toggleClassUnique":function(t,e){let s=e.source;s&&(s.classList.contains(t[1])?s.classList.remove(t[1]):(s.querySelectorParent(t[2]).querySelectorAll(t[3]).forEach(e=>e.classList.remove(t[1])),s.classList.add(t[1])))},/**
-	**	:setClassUnique <className> <parentSelector> <childSelector>
-	**
-	**	Sets a CSS class on the element and only that element in the selected parent can have the class.
-	*/":setClassUnique":function(t,e){let s=e.source;s&&(s.querySelectorParent(t[2]).querySelectorAll(t[3]).forEach(e=>e.classList.remove(t[1])),s.classList.add(t[1]))}};_.debug=!1,_.register("r-elem",{}),_.register("r-dom-probe",{}),/* ****************************************** *//**
+    **
+    **	Note that for 3rd party libs that add children to this element (which could probably have a watcher) will possibly result in
+    **	duplication of the added elements when compiling the innerHTML template. To prevent this add the 'pseudo' CSS class to any
+    **	element that should not be added to the HTML template.
+    **
+    **	>> void collectWatchers ();
+    */collectWatchers:function(){let t,e=this,s=!1;if(!this.isRoot)return;let n=this._list_watch.length,o=this._list_visible.length,a=this._list_attr.length,r=this._list_property.length;/* *** */t=this.querySelectorAll("[data-watch]");for(let e=0;e<t.length;e++){for(let s of t[e].querySelectorAll(".pseudo"))s.remove();t[e]._template=c.compile(t[e].innerHTML),t[e]._watch=RegExp("^("+t[e].dataset.watch+")$"),t[e].innerHTML="",t[e].removeAttribute("data-watch"),this._list_watch.push(t[e])}if("selfWatch"in this.dataset){for(let t of this.querySelectorAll(".pseudo"))t.remove();this._template=c.compile(this.innerHTML),this._watch=RegExp("^("+this.dataset.selfWatch+")$"),this.innerHTML="",this.removeAttribute("data-self-watch"),this._list_watch.push(this)}/* *** */t=this.querySelectorAll("[data-visible]");for(let e=0;e<t.length;e++)t[e]._visible=c.compile(t[e].dataset.visible),t[e].removeAttribute("data-visible"),this._list_visible.push(t[e]);"selfVisible"in this.dataset&&(this._visible=c.compile(this.dataset.selfVisible),this.removeAttribute("data-self-visible"),this._list_visible.push(this)),/* *** */t=this.querySelectorAll("[data-attr]");for(let e=0;e<t.length;e++){for(let s of(t[e]._attr=[],t[e].dataset.attr.split(";")))2==(s=s.split(":")).length&&t[e]._attr.push({name:s[0].trim(),value:c.compile(s[1].trim())});t[e].removeAttribute("data-attr"),this._list_attr.push(t[e])}if("selfAttr"in this.dataset){for(let t of(this._attr=[],this.dataset.selfAttr.split(";")))2==(t=t.split(":")).length&&this._attr.push({name:t[0].trim(),value:c.compile(t[1].trim())});this.removeAttribute("data-self-attr"),this._list_attr.push(this)}/* *** */t=this.querySelectorAll("[data-property]");for(let s=0;s<t.length;s++)t[s].onchange=t[s].onblur=function(){switch(this.type){case"radio":this.checked&&e.getModel().set(this.name,this.value);break;case"checkbox":e.getModel().set(this.name,this.checked?"1":"0");break;case"field":e.getModel().set(this.name,this.getValue());break;default:e.getModel().set(this.name,this.value)}},"SELECT"==t[s].tagName&&(t[s].onmouseup=function(){e.getModel().set(this.name,this.value)}),t[s].name=t[s].dataset.property,t[s].removeAttribute("data-property"),this._list_property.push(t[s]);"selfProperty"in this.dataset&&(this.onchange=this.onblur=function(){switch(this.type){case"radio":this.checked&&e.getModel().set(this.name,this.value);break;case"checkbox":e.getModel().set(this.name,this.checked?"1":"0");break;case"field":e.getModel().set(this.name,this.getValue());break;default:e.getModel().set(this.name,this.value)}},"SELECT"==this.tagName&&(this.onmouseup=function(){e.getModel().set(this.name,this.value)}),this.name=this.dataset.selfProperty,this.removeAttribute("data-self-property"),this._list_property.push(this)),/* *** */this._list_watch=this._list_watch.filter(t=>null!=t.parentElement),n!=this._list_watch.length&&(s=!0),this._list_visible=this._list_visible.filter(t=>null!=t.parentElement),o!=this._list_visible.length&&(s=!0),this._list_attr=this._list_attr.filter(t=>null!=t.parentElement),a!=this._list_attr.length&&(s=!0),this._list_property=this._list_property.filter(t=>null!=t.parentElement),r!=this._list_property.length&&(s=!0),null!=this.model&&s&&this.model.setNamespace(this.eid).update(!0).setNamespace(null)},/**
+    **	Executed when the element is created and yet not attached to the DOM tree.
+    */onCreated:function(){},/**
+     * Executed when the element is attached to the DOM tree.
+     */elementConnected:function(){this.bindRoutes(),this.onConnected()},/**
+     * Executed when the element is no longer a part of the DOM tree.
+     */elementDisconnected:function(){this.unbindRoutes()},/**
+    **	Executed when the element is attached to the DOM tree.
+    */onConnected:function(){this.onconnected&&this.onconnected(this)},/**
+    **	Executed when the element is no longer a part of the DOM tree.
+    */onDisconnected:function(){this.ondisconnected&&this.ondisconnected(this)},/**
+    **	Executed on the root element when a child element has `data-ref` attribute and it was added to it.
+    */onRefAdded:function(t,e){},/**
+    **	Executed on the root element when a child element has `data-ref` attribute and it was removed from it.
+    */onRefRemoved:function(t,e){},/**
+    **	Event handler invoked when the model has changed, executed before onModelChanged() to update internal dependencies,
+    **	should not be overriden or elements watching the model will not be updated.
+    **
+    **	>> void onModelPreChanged (evt, args);
+    */onModelPreChanged:function(t,e){let s=this.getModel().get();for(let t=0;t<this._list_watch.length;t++)for(let n of e.fields)if(this._list_watch[t]._watch.test(n)){this._list_watch[t].innerHTML=this._list_watch[t]._template(s);break}for(let t=0;t<this._list_visible.length;t++)this._list_visible[t]._visible(s,"arg")?this._list_visible[t].style.removeProperty("display"):this._list_visible[t].style.setProperty("display","none","important");for(let t=0;t<this._list_attr.length;t++)for(let e of this._list_attr[t]._attr)this._list_attr[t][e.name]=e.value(s,"arg");this.onModelChanged(t,e)},/**
+    **	Event handler invoked when the model has changed.
+    */onModelChanged:function(t,e){},/**
+    **	Event handler invoked when a property of the model is changing. Fields `name` and `value` can be found in the `args` object.
+    */onModelPropertyChanging:function(t,e){},/**
+    **	Event handler invoked when a property of the model has changed, executed before onModelPropertyChanged() to update internal
+    **	dependencies. Automatically triggers internal events named `propertyChanged.<propertyName>` and `propertyChanged`.
+    **	Should not be overriden or elements depending on the property will not be updated.
+    */onModelPropertyPreChanged:function(t,e){for(let t=0;t<this._list_property.length;t++)if(this._list_property[t].name==e.name){let s=!0;switch(this._list_property[t].type){case"radio":if(this._list_property[t].value!=e.value){this._list_property[t].parentElement.classList.remove("active");continue}this._list_property[t].checked=!0,this._list_property[t].parentElement.classList.add("active");break;case"checkbox":~~e.value?(this._list_property[t].checked=!0,this._list_property[t].parentElement.classList.add("active")):(this._list_property[t].checked=!1,this._list_property[t].parentElement.classList.remove("active"));break;case"field":this._list_property[t].val=this._list_property[t].dataset.value=e.value,this._list_property[t].setValue(e.value),s=!1;break;default:this._list_property[t].value=e.value,this._list_property[t].val=this._list_property[t].dataset.value=e.value,this._list_property[t].value!=e.value&&(s=!1)}s&&this._list_property[t].onchange&&this._list_property[t].onchange()}this.dispatch("propertyChanged."+e.name,e,!1),this.dispatch("propertyChanged",e,!1),this.onModelPropertyChanged(t,e)},/**
+    **	Event handler invoked when a property of the model has changed.
+    */onModelPropertyChanged:function(t,e){},/**
+    **	Event handler invoked when a property of the model is removed. Field `name` can be found in the `args` object.
+    */onModelPropertyRemoved:function(t,e){},/*
+    **	Runs the following preparation procedures on the specified prototype:
+    **		- All functions named 'event <event-name> [event-selector]' will be moved to the 'events' map.
+    **		- All functions named 'route <route-path>' will be moved to the 'routes' map.
+    **
+    **	>> void preparePrototype (object proto);
+    */preparePrototype:function(t){if(!0!==t.__prototypePrepared)for(let e in t.__prototypePrepared=!0,t.hasOwnProperty("events")&&t.events||(t.events={}),t.hasOwnProperty("routes")&&t.routes||(t.routes={}),t)e.startsWith("event ")?(t.events[e.substr(6)]=t[e],delete t[e]):e.startsWith("route ")&&(t.routes[e.substr(6)]=t[e],delete t[e])},/*
+    **	Registers a new custom element with the specified name. Extra functionality can be added with one or more prototypes, by default
+    **	all elements also get the `Element` prototype. Note that the final prototypes of all registered elements are stored, and if you want
+    **	to inherit another element's prototype just provide its name (string) in the protos argument list.
+    **
+    **	>> class register (string name, ...(object|string) protos);
+    */register:function(e,...s){let n;let o=class extends HTMLElement{constructor(){for(let t of(super(),this.invokeConstructor=!0,_.debug&&console.log("CREATED "+this.tagName),this._super={},Object.entries(this.constructor.prototype._super)))for(let e of(this._super[t[0]]={},Object.entries(t[1])))this._super[t[0]][e[0]]=e[1].bind(this);this.onCreated()}findRoot(t){let e=t||this.parentElement;for(;null!=e;){if("isRoot"in e&&!0===e.isRoot)return e;e=e.parentElement}return null}findCustomParent(t){let e=t?t.parentElement:this.parentElement;for(;null!=e;){if(-1!==e.tagName.indexOf("-"))return e;e=e.parentElement}return null}connectReference(t=null,e=255){this.root||(1&e)!=1||(null==t&&(t=this.findRoot()),null==t||(this.dataset.ref&&(t[this.dataset.ref]=this),this.root=t))}connectedCallback(){this.connectReference(null,1),this.invokeConstructor&&(this.invokeConstructor=!1,this.__ctor()),this.connectReference(null,2),this.elementConnected(),this.dataset.xref&&(globalThis[this.dataset.xref]=this)}disconnectedCallback(){this.root&&(this.dataset.ref&&(this.root.onRefRemoved(this.dataset.ref,this),delete this.root[this.dataset.ref]),this.root=null),this.elementDisconnected(),this.dataset.xref&&delete globalThis[this.dataset.xref]}};t.override(o.prototype,_);let a={},r={},l=t.clone(_.events),h=!0,c=!0,u=!0;for(let e=0;e<s.length;e++)if(s[e]){if("string"==t.typeOf(s[e])){let o=s[e];if(s[e]=v[o],!s[e])continue;for(let n in r[o]={},s[e])"function"==t.typeOf(s[e][n])&&(r[o][n]=s[e][n]);h=!1,c=!1,u=!1,n=!1}else _.preparePrototype(s[e]),n=!0;"_super"in s[e]&&t.override(r,s[e]._super),"events"in s[e]&&t.override(l,s[e].events),t.override(o.prototype,s[e]),t.override(a,s[e]),n&&(!h&&"init"in s[e]&&(h=!0),!c&&"ready"in s[e]&&(c=!0),!u&&"rready"in s[e]&&(u=!0))}let d=function(){};return h||(o.prototype.init=d,a.init=d),c||(o.prototype.ready=d,a.ready=d),u||(o.prototype.rready=d,a.rready=d),o.prototype._super=r,o.prototype.events=l,a._super=r,a.events=l,customElements.define(e,o),v[e]=a,y[e]=o,o},/*
+    **	Expands an already created custom element with the specified prototype(s).
+    **
+    **	>> void expand (string elementName, ...object protos);
+    */expand:function(e,...s){if(!(e in v))return;let n=v[e],o=y[e],a=n._super,r=n.events;for(let e of s)_.preparePrototype(e),"_super"in e&&t.override(a,e._super),"events"in e&&t.override(r,e.events),t.override(o.prototype,e),t.override(n,e);o.prototype._super=a,o.prototype.events=r,n._super=a,n.events=r},/*
+    **	Appends a hook to a function of a custom element.
+    */hookAppend:function(e,s,n){if(!(e in v))return;let o=t.hookAppend(v[e],s,n),a=t.hookAppend(y[e].prototype,s,n);return{unhook:function(){o.unhook(),a.unhook()}}},/*
+    **	Prepends a hook to a function of a custom element.
+    */hookPrepend:function(e,s,n){if(!(e in v))return;let o=t.hookPrepend(v[e],s,n),a=t.hookPrepend(y[e].prototype,s,n);return{unhook:function(){o.unhook(),a.unhook()}}},/**
+    **	Built-in action handlers.
+    *//**
+    **	:toggleClass <className> [<selector>]
+    **
+    **	Toggles a CSS class on the element.
+    */":toggleClass":function(t,e){let s=e.source;"2"in t&&(s=document.querySelector(t[2])),s&&(s.classList.contains(t[1])?s.classList.remove(t[1]):s.classList.add(t[1]))},/**
+    **	:setClass <className> [<selector>]
+    **
+    **	Sets a CSS class on the element.
+    */":setClass":function(t,e){let s=e.source;"2"in t&&(s=document.querySelector(t[2])),s&&s.classList.add(t[1])},/**
+    **	:volatileClass <className> [<selector>]
+    **
+    **	Adds the CSS class to the element and any click outside will cause it to be removed.
+    */":volatileClass":function(t,e){let s=e.source;if("2"in t&&(s=document.querySelector(t[2])),!s)return;s.classList.add(t[1]);let n=()=>{window.removeEventListener("click",n,!0),s.classList.remove(t[1])};window.addEventListener("click",n,!0)},/**
+    **	:toggleClassUnique <className> <parentSelector> <childSelector>
+    **
+    **	Toggles a CSS class on the element and only one element in the selected parent can have the class.
+    */":toggleClassUnique":function(t,e){let s=e.source;s&&(s.classList.contains(t[1])?s.classList.remove(t[1]):(s.querySelectorParent(t[2]).querySelectorAll(t[3]).forEach(e=>e.classList.remove(t[1])),s.classList.add(t[1])))},/**
+    **	:setClassUnique <className> <parentSelector> <childSelector>
+    **
+    **	Sets a CSS class on the element and only that element in the selected parent can have the class.
+    */":setClassUnique":function(t,e){let s=e.source;s&&(s.querySelectorParent(t[2]).querySelectorAll(t[3]).forEach(e=>e.classList.remove(t[1])),s.classList.add(t[1]))}};_.debug=!1,_.register("r-elem",{}),_.register("r-dom-probe",{}),/* ****************************************** *//**
  * Finds the parent element given a selector.
  */HTMLElement.prototype.querySelectorParent=function(t){let e=this;for(;null!=e&&!e.matches(t);)e=e.parentElement;return e};/**
  * API interface utility functions.
@@ -640,7 +640,7 @@ this._onDeactivate=(t,e)=>{this.hide()},this.hide()},/**
      * @param {string[]} path
      * @param {number} lastIndex
      * @param {object} value
-     */setValue:function(t,e,s,n){if(("class"===e[0]||"classList"===e[0])&&(e[0]="className"),e.length>1&&"trait"===e[0]){switch(e[1]){case"valueSignal":case"value":t.onchange=t=>n.set(t.currentTarget.value),$([n],e=>t.value=e);break;case"inputSignal":case"input":t.oninput=t=>n.set(t.currentTarget.value),$([n],e=>t.value=e);break;default:console.error("Unknown trait: "+e[1])}return}// Object used to set `style` or `class` attribute.
+     */setValue:function(t,e,s,n){if(("class"===e[0]||"classList"===e[0])&&(e[0]="className"),e.length>1&&"trait"===e[0]){switch(e[1]){case"valueSignal":case"value":t.onchange=t=>n.set(t.currentTarget.value),$([n],e=>t.value=e);break;case"inputSignal":case"input":t.oninput=t=>n.set(t.currentTarget.value),$([n],e=>t.value=e);break;case"checked":t.onchange=t=>n.set(t.currentTarget.checked),$([n],e=>t.checked=e);break;case"selected":t.onchange=t=>n.set(t.currentTarget.selected),$([n],e=>t.selected=e);break;default:console.error("Unknown trait: "+e[1])}return}// Object used to set `style` or `class` attribute.
 if(1===e.length&&"object"==typeof n)switch(e[0]){case"style":for(let e in n)$([e,n[e]],(e,s)=>t.style[e]=s);return;case"className":if(n instanceof Array)$([n],e=>{for(let s in t.className="",e)t.classList.add(e[s])});else for(let e in n)$([e,n[e]],(e,s)=>t.classList[!0==s?"add":"remove"](e));return}// Specific CSS class such as `class:hidden`.
 if(2===e.length&&"className"===e[0]){$([e[1],n],(e,s)=>t.classList[!0==s?"add":"remove"](e));return}// Any other attribute/property.
 for(let n=0;n<s&&t;n++)t=t[e[n]];if(!t)return;let o=e[s];o.startsWith("on")&&(o=o.toLowerCase()),$([o,n],(e,s)=>t[e]=s)},/**
