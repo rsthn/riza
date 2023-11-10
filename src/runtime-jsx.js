@@ -34,13 +34,11 @@ export const helpers =
         {
             switch (path[1])
             {
-                case 'valueSignal'://DEPRECATED
                 case 'value':
                     root.onchange = (e) => value.set(e.currentTarget.value);
                     watch([value], (value) => root.value = value);
                     break;
 
-                case 'inputSignal'://DEPRECATED
                 case 'input':
                     root.oninput = (e) => value.set(e.currentTarget.value);
                     watch([value], (value) => root.value = value);

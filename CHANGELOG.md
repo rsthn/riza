@@ -1,3 +1,12 @@
+# v3.0.20 - Nov 10 2023
+
+#### RuntimeJsx
+- Added new trait 'trait::checked' to link a signal to the checked property of an input.
+- Added new trait 'trait::selected' to link a signal to the 'selected' property of an option.
+- Deprecated traits 'valueSignal' and 'inputSignal' in favor of 'value' and 'input'.
+
+<br/>
+
 # v3.0.19 - Nov 05 2023
 
 #### General
