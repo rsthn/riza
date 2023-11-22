@@ -124,3 +124,25 @@ export class db
 	static insert (storeName: string, data: object) : Promise<void>;
 
 }
+export class geo
+{
+	/**
+	 * Initializes the geolocation interface. Returns boolean indicating whether geolocation
+	 * is supported on the device.
+	 * @returns {boolean}
+	 */
+	static init() : boolean;
+
+	/**
+	 * Single-shot positioning operation. While the geolocation operation is in progress, the `.busy-geo` CSS class
+	 * will be set in the `html` element. You can use this to display a spinner or other indicator.
+	 * @returns {Promise<GeolocationPosition>}
+	 */
+	static getCurrentPosition() : Promise<GeolocationPosition>;
+
+	/**
+	 * Cancels the active positioning operation (if any).
+	 */
+	static cancel() : void;
+
+}

@@ -1,3 +1,12 @@
+# v3.0.21 - Nov 22 2023
+
+#### General
+- Added new riza application template `app` with more pre-defined features.
+- Added tsdocs for `geo` static class.
+- Updated dependencies
+
+<br/>
+
 # v3.0.20 - Nov 10 2023
 
 #### RuntimeJsx
