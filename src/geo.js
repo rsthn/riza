@@ -1,4 +1,6 @@
 
+//!class geo
+
 const geo =
 {	
     E_NONE:					0x0000,
@@ -23,6 +25,7 @@ const geo =
      * Initializes the geolocation interface. Returns boolean indicating whether geolocation
      * is supported on the device.
      * @returns {boolean}
+     * !static init() : boolean;
      */
     init: function() {
         this.supported = navigator.geolocation ? true : false;
@@ -30,8 +33,10 @@ const geo =
     },
 
     /**
-     * Single-shot positioning operation.
-     * @returns {Promise<{  }>}
+     * Single-shot positioning operation. While the geolocation operation is in progress, the `.busy-geo` CSS class
+     * will be set in the `html` element. You can use this to display a spinner or other indicator.
+     * @returns {Promise<GeolocationPosition>}
+     * !static getCurrentPosition() : Promise<GeolocationPosition>;
      */
     getCurrentPosition: function()
     {
@@ -96,6 +101,7 @@ const geo =
 
     /**
      * Cancels the active positioning operation (if any).
+     * !static cancel() : void;
      */
     cancel: function()
     {
@@ -108,5 +114,7 @@ const geo =
         this.status = null;
     }
 };
+
+//!/class
 
 export default geo;

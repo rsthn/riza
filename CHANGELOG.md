@@ -18,7 +18,7 @@
 # v3.0.18 - Oct 21 2023
 
 #### General
-- Added `geo` object to access geolocation features.
+- Added `geo` static class to access geolocation features.
 
 #### app-jsx
 - Added more functions to signal-utils.

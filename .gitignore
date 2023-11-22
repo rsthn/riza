@@ -6,6 +6,3 @@ custom
 .parcel-cache
 *.log
 pnpm-lock.yaml
-compile.fn
-make.bat
-xui.src.css

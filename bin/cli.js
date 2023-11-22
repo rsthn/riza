@@ -61,9 +61,10 @@ Command:
     new:yarn [<template>] <name>         Create a new project <name> using yarn.
     new:npm [<template>] <name>          Create a new project <name> using npm.
 
-Template:
-    app
-    app-jsx (default)
+Templates:
+    classic
+    minimal (default)
+    app (beta)
 `);
 
 	process.exit();
@@ -86,11 +87,11 @@ switch (args[0])
 
         if (args.length < 3) {
             args[2] = args[1];
-            args[1] = 'app-jsx';
+            args[1] = 'minimal';
         }
 
-		if (args[1] != 'app' && args[1] != 'app-jsx') {
-			msg(ERROR, 'Parameter <template> is incorrect, should be: `app` or `app-jsx`');
+		if (args[1] != 'app' && args[1] != 'minimal') {
+			msg(ERROR, 'Parameter <template> is incorrect: ' . args[1]);
 			break;
 		}
 

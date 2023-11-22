@@ -1,28 +1,26 @@
 {
-   "name": "project_name",
-   "type": "module",
-   "version": "1.0.0",
-   "private": true,
-   "scripts": {
-      "test": "echo Ok",
-      "clean:prod": "shx rm -rf prod",
-      "prebuild:prod": "shx mkdir -p prod && shx cp -r src/static prod",
-      "watch:prod": "pnpm prebuild:prod && cross-env NODE_ENV=production parcel watch --dist-dir prod src/index.html --no-cache --public-url ./ --no-source-maps --no-hmr",
-      "build:prod": "pnpm clean:prod && pnpm prebuild:prod && cross-env NODE_ENV=production parcel build src/index.html --dist-dir prod --no-cache --public-url ./ --no-source-maps",
-      "clean": "shx rm -rf dist",
-      "prebuild": "shx mkdir -p dist && shx cp -r src/static dist",
-      "watch": "pnpm prebuild && parcel watch --dist-dir dist src/index.html --no-cache --public-url ./ --no-hmr",
-      "build": "pnpm clean && pnpm prebuild && parcel build src/index.html --dist-dir dist --no-cache --public-url ./"
-   },
-   "devDependencies": {
-      "@fortawesome/fontawesome-free": "^5.15.4",
-      "@popperjs/core": "^2.11.8",
-      "bootstrap": "^5.3.2",
-      "buffer": "^6.0.3",
-      "cross-env": "^7.0.3",
-      "parcel": "^2.9.3",
-      "process": "^0.11.10",
-      "riza": "^3.0.14",
-      "shx": "^0.3.4"
-   }
+  "name": "project_name",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "shx rm -rf dist",
+    "prebuild": "shx mkdir -p dist",
+    "build": "pnpm clean && pnpm prebuild && parcel build src/index.html --no-source-maps --public-url ./",
+    "watch": "pnpm prebuild && parcel watch src/index.html --public-url ./",
+    "dev": "parcel serve src/index.html"
+  },
+  "license": "MIT",
+  "parcelIgnore": [
+    "img/*"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.23.3",
+    "@parcel/config-default": "^2.10.3",
+    "@parcel/core": "^2.10.3",
+    "babel-plugin-riza": "^2.0.9",
+    "parcel": "^2.10.3",
+    "parcel-reporter-static-files-copy": "^1.5.3",
+    "parcel-resolver-ignore": "^2.1.5",
+    "riza": "^3.0.20",
+    "shx": "^0.3.4"
+  }
 }
