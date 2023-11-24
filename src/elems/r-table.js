@@ -44,28 +44,30 @@ import { Rinn, Template } from 'rinn';
 import Element from '../element.js';
 import DataSource from '../data-source.js';
 
-/*
-**	Connects to a DataSource and renders its contents as a table.
-*/
+/**
+ * Connects to a DataSource and renders its contents as a table.
+ */
 
 export default Element.register ('r-table',
 {
+    isRoot: true,
+
     source: null,
     template: null,
     container: null,
     isEmpty: null,
 
     /**
-    **	Initializes the element.
-    */
+     * Initializes the element.
+     */
     init: function()
     {
         this.setModel({ });
     },
 
     /**
-    **	Executed when the children of the element are ready.
-    */
+     * Executed when the children of the element are ready.
+     */
     ready: function()
     {
         this.container = this.querySelector(this.dataset.container || 'tbody.x-data');
@@ -83,8 +85,8 @@ export default Element.register ('r-table',
     },
 
     /**
-    **	Executed when the children and root elements are ready.
-    */
+     * Executed when the children and root elements are ready.
+     */
     rready: function()
     {
         let source = this.dataSource ?? this.getFieldByPath(this.dataset.source);

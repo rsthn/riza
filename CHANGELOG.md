@@ -1,9 +1,11 @@
-# v3.0.21 - Nov 22 2023
+# v3.0.22 - Nov 24 2023
 
 #### General
 - Added new riza application template `app` with more pre-defined features.
 - Added tsdocs for `geo` static class.
-- Updated dependencies
+- All custom elements have now `isRoot` set to `false` by default.
+- Elements `r-form`, `r-item` and `r-table` have `isRoot` set to `true`, can be overridden with the `data-root` attribute.
+- Updated dependencies.
 
 <br/>
 

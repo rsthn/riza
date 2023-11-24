@@ -7,15 +7,17 @@ import Element from '../element.js';
 
 export default Element.register ('r-item',
 {
+    isRoot: true,
+
     /**
-    **	Initializes the element.
-    */
+     * Initializes the element.
+     */
     init: function() {
     },
 
     /**
-    **	Executed when the children and root are ready.
-    */
+     * Executed when the children and root are ready.
+     */
     rready: function()
     {
         let model = this.dataModel ?? this.getFieldByPath(this.dataset.model);

@@ -19,9 +19,16 @@ import Api from '../api.js';
 
 export default Element.register ('r-form',
 {
+    isRoot: true,
+
     /**
-    **	Element events.
-    */
+     * Initial form model.
+     */
+    model: { },
+
+    /**
+     * Element events.
+     */
     events:
     {
         'change [data-field]': '_fieldChanged',
@@ -35,14 +42,9 @@ export default Element.register ('r-form',
         'submit form': 'submit'
     },
 
-    /*
-    **	Initial form model.
-    */
-    model: { },
-
     /**
-    **	Executed when the children of the element are ready.
-    */
+     * Executed when the children of the element are ready.
+     */
     ready: function()
     {
         let formElement = document.createElement('form');
@@ -104,9 +106,9 @@ export default Element.register ('r-form',
         this.clearMarkers();
     },
 
-    /*
-    **	Transforms an string returned by the server to a local representation.
-    */
+    /**
+     * Transforms an string returned by the server to a local representation.
+     */
     filterString: function (str, r)
     {
         if (!str || !('messages' in global))
