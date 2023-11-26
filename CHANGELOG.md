@@ -1,3 +1,15 @@
+# v3.0.23 - Nov 26 2023
+
+#### Template
+- Added error area to show when authStatus is ERROR.
+- Added logo for the splash screen.
+- Added common/utils.js file with utility functions.
+
+#### Api
+- Added parameter `method` to function `fetch`.
+
+<br/>
+
 # v3.0.22 - Nov 24 2023
 
 #### General

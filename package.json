@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "3.0.22",
+    "version": "3.0.23",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
