@@ -5,6 +5,7 @@ import { checkAuth } from './actions';
 import AreaSplash from './area-splash';
 import AreaPublic from './area-public';
 import AreaPrivate from './area-private';
+import AreaError from './area-error';
 
 import "./css/main.css"
 import "./css/xui.css"
@@ -13,6 +14,7 @@ const panel = { };
 panel[authStatus.UNDEF] = <AreaSplash />;
 panel[authStatus.NOT_AUTH] = <AreaPublic />;
 panel[authStatus.AUTH] = <AreaPrivate />;
+panel[authStatus.ERROR] = <AreaError />;
 
 function init() {
     if (localStorage.showSplash !== 'false') {

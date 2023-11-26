@@ -8,3 +8,4 @@ authStatus.UNDEF = 0;
 authStatus.AUTH = 1;
 authStatus.NOT_AUTH = 2;
 authStatus.INITIAL = 3;
+authStatus.ERROR = 4;

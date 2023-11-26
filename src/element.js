@@ -1376,7 +1376,7 @@ const Element =
                 this.onCreated();
             }
 
-            findRoot (srcElement)
+            findRoot (srcElement=null)
             {
                 let elem = srcElement ? srcElement : this.parentElement;
 
@@ -1391,7 +1391,7 @@ const Element =
                 return null;
             }
 
-            findCustomParent (srcElement)
+            findCustomParent (srcElement=null)
             {
                 let elem = srcElement ? srcElement.parentElement : this.parentElement;
 
