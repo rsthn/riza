@@ -1,5 +1,34 @@
 
 /**
+ * Formats a number with the given format.
+ * @param {number} value
+ * @param {string} format
+ * @returns {string}
+ */
+export function formatNumber (value, format=".2,") {
+    let decimalPlaces = parseInt(format[1]);
+    let isNegative = value < 0;
+
+    value = Math.abs(value);
+    let integerPart = Math.floor(value).toString();
+    let decimalPart = (value - Math.floor(value)).toFixed(decimalPlaces).substring(2);
+
+    let result = "";
+    let i = 0;
+    for (let j = integerPart.length-1; j >= 0; j--) {
+        if (i > 0 && i % 3 === 0)
+            result = format[2] + result;
+        result = integerPart[j] + result;
+        i++;
+    }
+
+    if (decimalPlaces > 0)
+        result += format[0] + decimalPart;
+
+    return isNegative ? "-" + result : result;
+}
+
+/**
  * Returns the date part of a date object as YYYY-MM-DD.
  * @param {Date} date
  * @returns {string}

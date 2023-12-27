@@ -518,15 +518,21 @@ const Api =
     /**
      * Executes an automatic API call, returns a promise.
      */
-    fetch: function (method, url, params=null)
+    fetch: function (method, url=null, params=null)
     {
+        // fetch (method, relativePath, params)
+        // fetch (relativePath, params)
+        let shift = true;
         if (typeof(method) === 'string') {
             let tmp = method.toUpperCase();
-            if (tmp !== 'GET' && tmp !== 'POST' && tmp !== 'PUT' && tmp !== 'DELETE' && tmp !== 'PATCH' && tmp !== 'HEAD') {
-                params = url;
-                url = method;
-                method = null;
-            }
+            if (tmp === 'GET' || tmp === 'POST' || tmp === 'PUT' || tmp === 'DELETE' || tmp === 'PATCH' || tmp === 'HEAD' || tmp === 'OPTIONS')
+                shift = false;
+        }
+
+        if (shift) {
+            params = url;
+            url = method;
+            method = null;
         }
 
         if (params === null) {

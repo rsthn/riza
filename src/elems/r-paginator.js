@@ -22,6 +22,8 @@ import DataSource from '../data-source.js';
 
 export default Element.register ('r-paginator',
 {
+    isRoot: true,
+
     source: null,
     template: null,
 

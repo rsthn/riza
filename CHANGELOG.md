@@ -1,3 +1,16 @@
+# v3.0.24 - Dec 27 2023
+
+#### Template
+- Added `formatNumber` function to utils.js
+
+#### r-paginator
+- Added default property isRoot set to true.
+
+#### Api
+- Fixed bug when calling `fetch` with a single object parameter.
+
+<br/>
+
 # v3.0.23 - Nov 26 2023
 
 #### Template
