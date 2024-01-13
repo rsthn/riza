@@ -890,30 +890,30 @@ const Element =
         let propName = 'on' + eventName.toLowerCase();
         if (propName in this) {
             this[propName] (args, this);
-            return;
+            return this;
         }
 
         this.dispatchEvent (this.createEventObject(eventName, args, bubbles));
+        return this;
     },
 
     /**
     **	Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
     */
-    dispatchOn: function (elem, eventName, args=null, bubbles=true)
-    {
+    dispatchOn: function (elem, eventName, args=null, bubbles=true) {
         elem.dispatchEvent (this.createEventObject(eventName, args, bubbles));
+        return this;
     },
 
     /**
     **	Sets the innerHTML property of the element and runs some post set-content tasks.
-    **
-    **	>> void setInnerHTML (value);
     */
     setInnerHTML: function (value)
     {
         this.readyLocked++;
         this.innerHTML = value;
         this.readyLocked--;
+        return this;
     },
 
     /**
