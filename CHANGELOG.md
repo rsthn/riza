@@ -1,3 +1,16 @@
+# v3.0.25 - Jan 13 2024
+
+#### Element
+- Methods `dispatch`, `dispatchOn` and `setInnerHTML` now return the self element.
+
+#### Router
+- The `location` and `args` properties are automatically set now upon Router initialization.
+
+#### Template
+- Updated function `tr` in i18n.js to support arguments (using placeholder '@@').
+
+<br/>
+
 # v3.0.24 - Dec 27 2023
 
 #### Template
