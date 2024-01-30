@@ -1,4 +1,4 @@
-# v3.0.25 - Jan 13 2024
+# v3.0.26 - Jan 13 2024
 
 #### Element
 - Methods `dispatch`, `dispatchOn` and `setInnerHTML` now return the self element.

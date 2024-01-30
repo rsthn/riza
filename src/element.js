@@ -78,7 +78,7 @@ const Element =
                 let d = Math.sqrt(dx*dx + dy*dy);
                 if (d < 5) {
                     elem._long_press = false;
-                    this.dispatchOn (elem, 'long-press');
+                    this.dispatchOn(elem, 'long-press');
                 }
             },
             500);
@@ -115,7 +115,7 @@ const Element =
                 let d = Math.sqrt(dx*dx + dy*dy);
                 if (d < 5) {
                     elem._long_press = false;
-                    this.dispatchOn (elem, 'long-press');
+                    this.dispatchOn(elem, 'long-press');
                 }
             }, 500);
 
@@ -282,8 +282,7 @@ const Element =
             this.isReady = 1;
 
             // Set model is `model` property was set in the element.
-            if ('model' in this.dataset)
-            {
+            if ('model' in this.dataset) {
                 let ref = this.getFieldByPath(this.dataset.model);
                 if (ref) this.setModel(ref);
             }
@@ -299,7 +298,7 @@ const Element =
                 console.log('>> ' + this.tagName + ' READY');
 
             this.ready();
-            if (this.onready) this.onready(this);
+            this.trigger('ready').dispatch('_ready', null, false);
 
             this.collectWatchers();
         }
@@ -319,7 +318,6 @@ const Element =
         if (root && root.isReady === 2 && this.isReady !== 2)
         {
             this.getRoot();
-
             if (this.root && this.dataset.ref)
             {
                 if (Element.debug)
@@ -332,8 +330,7 @@ const Element =
             rootReady = true;
         }
 
-        if (!root && this.isReady !== 2)
-        {
+        if (!root && this.isReady !== 2) {
             rootReady = true;
         }
 
@@ -349,20 +346,18 @@ const Element =
             if (Element.debug)
                 console.log('>> ' + this.tagName + ' RREADY');
 
-            Object.keys(this._super).reverse().forEach(i =>
-            {
+            Object.keys(this._super).reverse().forEach(i => {
                 if ('rready' in this._super[i])
                     this._super[i].rready();
             });
 
             this.rready();
-            if (this.onrootready) this.onrootready(this);
+            this.trigger('rootready');
         }
 
         this.readyLocked--;
 
-        if (this.readyReenter && !this.readyLocked)
-        {
+        if (this.readyReenter && !this.readyLocked) {
             this.readyReenter = false;
             this.checkReady();
         }
@@ -644,7 +639,7 @@ const Element =
                 switch (name)
                 {
                     case 'keyup': case 'keydown':
-                        this.listen (name, selector, function (evt)
+                        this.listen(name, selector, function (evt)
                         {
                             if (Rinn.indexOf(args, evt.keyCode.toString()) != -1)
                                 return hdl (evt, args);
@@ -656,7 +651,7 @@ const Element =
                 }
             }
 
-            this.listen (name, selector, hdl);
+            this.listen(name, selector, hdl);
         }
 
         return this;
@@ -787,20 +782,17 @@ const Element =
         let eventCatcher = false;
         let eventImmediate = false;
 
-        if (Rinn.typeOf(selector) == 'function')
-        {
+        if (Rinn.typeOf(selector) == 'function') {
             handler = selector;
             selector = null;
         }
 
-        if (eventName[eventName.length-1] == '!')
-        {
+        if (eventName[eventName.length-1] == '!') {
             eventName = eventName.substr(0, eventName.length-1);
             eventCatcher = true;
         }
 
-        if (eventName[0] == '!')
-        {
+        if (eventName[0] == '!') {
             eventName = eventName.substr(1);
             eventImmediate = true;
         }
@@ -809,13 +801,12 @@ const Element =
         let callback1 = null;
         let self = this;
 
-        this.addEventListener (eventName, callback0 = (evt) =>
+        this.addEventListener(eventName, callback0 = (evt) =>
         {
             if (evt.continuePropagation === false)
                 return;
 
-            if (!evt.firstCapture)
-            {
+            if (!evt.firstCapture) {
                 evt.firstCapture = this;
                 evt.firstCaptureCount = 0;
                 evt.queue = [];
@@ -837,15 +828,14 @@ const Element =
             if (evt.continuePropagation === false)
                 return;
 
-            if (eventCatcher != true && eventImmediate != true)
+            if (eventCatcher !== true && eventImmediate !== true)
                 this._eventHandler(evt, selector, handler);
 
             if (evt.firstCapture === this && evt.continuePropagation !== false)
             {
                 if (--evt.firstCaptureCount == 0)
                 {
-                    while (evt.queue.length)
-                    {
+                    while (evt.queue.length) {
                         let q = evt.queue.pop();
                         q[0]._eventHandler(evt, q[1], q[2]);
                     }
@@ -893,7 +883,19 @@ const Element =
             return this;
         }
 
-        this.dispatchEvent (this.createEventObject(eventName, args, bubbles));
+        this.dispatchEvent(this.createEventObject(eventName, args, bubbles));
+        return this;
+    },
+
+    /**
+    **	Dispatches a local event, does not bubble up and invokes only the local event handler if present.
+    */
+    trigger: function (eventName, args=null)
+    {
+        let propName = 'on' + eventName.toLowerCase();
+        if (!(propName in this)) return this;
+
+        this[propName] (args, this);
         return this;
     },
 
@@ -901,15 +903,14 @@ const Element =
     **	Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
     */
     dispatchOn: function (elem, eventName, args=null, bubbles=true) {
-        elem.dispatchEvent (this.createEventObject(eventName, args, bubbles));
+        elem.dispatchEvent(this.createEventObject(eventName, args, bubbles));
         return this;
     },
 
     /**
     **	Sets the innerHTML property of the element and runs some post set-content tasks.
     */
-    setInnerHTML: function (value)
-    {
+    setInnerHTML: function (value) {
         this.readyLocked++;
         this.innerHTML = value;
         this.readyLocked--;
@@ -1089,10 +1090,8 @@ const Element =
                 }
             };
 
-            if (this.tagName == 'SELECT')
-            {
-                this.onmouseup = function()
-                {
+            if (this.tagName == 'SELECT') {
+                this.onmouseup = function() {
                     self.getModel().set(this.name, this.value);
                 };
             }
@@ -1128,12 +1127,33 @@ const Element =
     },
 
     /**
+     * Executes the callback (just once) when the element is ready.
+     * @param {function} callback 
+     * @returns {Element}
+     */
+    whenReady: function(callback)
+    {
+        if (this.isReady) {
+            callback();
+            return this;
+        }
+
+        let hdl = this.listen('_ready', this, () => {
+            hdl.remove();
+            callback();
+        });
+
+        return this;
+    },
+
+    /**
      * Executed when the element is attached to the DOM tree.
      */
     elementConnected: function()
     {
         this.bindRoutes();
         this.onConnected();
+        this.trigger('connected');
     },
 
     /**
@@ -1142,6 +1162,8 @@ const Element =
     elementDisconnected: function()
     {
         this.unbindRoutes();
+        this.onDisconnected();
+        this.trigger('disconnected');
     },
 
     /**
@@ -1149,7 +1171,6 @@ const Element =
     */
     onConnected: function()
     {
-        if (this.onconnected) this.onconnected(this);
     },
 
     /**
@@ -1157,7 +1178,6 @@ const Element =
     */
     onDisconnected: function()
     {
-        if (this.ondisconnected) this.ondisconnected(this);
     },
 
     /**
@@ -1288,9 +1308,8 @@ const Element =
             }
         }
 
-        this.dispatch ('propertyChanged.' + args.name, args, false);
-        this.dispatch ('propertyChanged', args, false);
-
+        this.dispatch('propertyChanged.' + args.name, args, false);
+        this.dispatch('propertyChanged', args, false);
         this.onModelPropertyChanged(evt, args);
     },
 
