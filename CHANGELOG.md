@@ -1,3 +1,11 @@
+# v3.0.27 - Feb 09 2024
+
+#### Template
+- Added support for device authentication in `checkAuth` function of `actions.js`
+- Added fields to detect and store device token and device secret in login and otp panels.
+
+<br/>
+
 # v3.0.26 - Jan 13 2024
 
 #### Element
