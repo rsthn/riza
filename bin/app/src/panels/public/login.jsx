@@ -5,16 +5,28 @@ import { tr } from '../../common/i18n';
 export default ({ ref, onActionRequired }, children) =>
 {
     function checkResponse (response, form) {
-        if (response.actionRequired)
-            onActionRequired({ response, data: form.model.get() }, form.getRoot());
-        else
+        if (!response.action_required) {
+            localStorage.setItem('device_token', response.device_token);
+            localStorage.setItem('device_secret', response.device_secret);
             checkAuth();
+            return;
+        }
+        onActionRequired({ response, data: form.model.get() }, form.getRoot());
+    }
+
+    async function resetForm (form) {
+        form.reset();
+        form.model.set('user_agent', navigator.userAgent);
+        form.model.set('device_token', localStorage.getItem('device_token'));
     }
 
     return <r-panel data-root="true" data-ref={ref} data-anim="fade-in" data-route="/login/"
-                onPanelShown={ (args, panel) => panel.form.reset() }>
+                onPanelShown={ (args, panel) => resetForm(panel.form) }>
 
         <r-form data-ref="form" data-form-action="auth.login" onFormSuccess={ checkResponse }>
+
+            <input type="hidden" data-field="user_agent" />
+            <input type="hidden" data-field="device_token" />
 
             <br/>
             <div class="field" data-field-container="phone_number">

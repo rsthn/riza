@@ -1,6 +1,8 @@
 
 import { Router, Api } from 'riza';
 import { authStatus, userData } from './signals';
+import { tr } from './common/i18n';
+import { HMAC } from './common/utils';
 
 /**
  * Navigates to the previous page.
@@ -30,15 +32,38 @@ export function navigate (location, replace=false, evt=null)
 /**
  * Checks if the user is authenticated.
  */
-export async function checkAuth (callback=null)
+export function checkAuth (callback=null, tryDeviceAuth=true)
 {
-    Api.fetch('account/get').then(r =>
+    Api.fetch('account/get').then(async r =>
     {
-        if (r.response != 200) {
-            authStatus.set(authStatus.NOT_AUTH);
+        if (r.response != 200)
+        {
+            if (tryDeviceAuth && localStorage.getItem('device_secret') !== null)
+            {
+                const data = {
+                    timestamp: (new Date()).toISOString().split(".")[0].split("T").join(" "),
+                    device_token: localStorage.getItem('device_token'),
+                };
+                data.signature = await HMAC('SHA-512', localStorage.getItem('device_secret'), JSON.stringify(data));
+
+                Api.fetch('POST', 'auth/login-device', data).then(r => {
+                    if (r.response == 200) {
+                        localStorage.setItem('device_token', r.device_token);
+                        checkAuth(callback, false);
+                    }
+                    else {
+                        authStatus.set(authStatus.NOT_AUTH, true);
+                        if (callback !== null && typeof(callback) === 'function')
+                            callback();
+                    }
+                });
+                return;
+            }
+
+            authStatus.set(authStatus.NOT_AUTH, true);
         }
         else {
-            authStatus.set(authStatus.AUTH);
+            authStatus.set(authStatus.AUTH, true);
             userData.set(r);
         }
 
@@ -53,7 +78,9 @@ export async function checkAuth (callback=null)
 export function logout()
 {
     Api.fetch('auth/logout').then(r => {
-        location.reload();
+        if (r.response == 200)
+            localStorage.removeItem('device_secret');
+        checkAuth();
     });
 
     return false;
@@ -75,7 +102,7 @@ export function clearTableFilters (evt) {
  */
 export function deleteRecord (id, ds, callback=null)
 {
-    if (!confirm('Are you sure you want to delete this record?'))
+    if (!confirm(tr('Are you sure you want to delete this record?')))
         return;
 
     ds.delete({ id }).then(() => {
@@ -95,7 +122,7 @@ export function deleteRecord (id, ds, callback=null)
 export function loadForm (params, ds, form, err, callback=null)
 {
     form.reset();
-    ds.fetch(params).then(r => {
+    ds.fetch('POST', params).then(r => {
         form.model.set(r);
         if (callback) callback(r);
     }).catch((errmsg => {

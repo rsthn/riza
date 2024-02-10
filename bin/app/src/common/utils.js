@@ -49,15 +49,16 @@ export function formatTime (date=null) {
 }
 
 /**
- * Returns the HMAC of a message using SHA-512.
+ * Returns the HMAC of a message.
+ * @param {string} hashName (i.e. SHA-512)
  * @param {string} key
  * @param {string} message
  * @returns {string}
  */
-export async function HMAC (key, message) {
+export async function HMAC (hashName, key, message) {
     key = await crypto.subtle.importKey(
         "raw", new TextEncoder().encode(key),
-        { name: "HMAC", hash: { name: "SHA-512" } }, 
+        { name: "HMAC", hash: { name: hashName } }, 
         false, ["sign"]
     );
     message = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(message));

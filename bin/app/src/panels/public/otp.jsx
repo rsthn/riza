@@ -5,17 +5,19 @@ import { tr } from '../../common/i18n';
 export default ({ ref }, children) =>
 {
     function checkResponse (response, form) {
+        localStorage.setItem('device_token', response.device_token);
+        localStorage.setItem('device_secret', response.device_secret);
         checkAuth();
     }
 
-    function onActivate (data, panel) {
+    function activate (data, panel) {
         panel.form.reset();
         panel.form.model.set(data);
         navigate('/otp/');
     }
 
     return <r-panel data-root="true" data-ref={ref} data-anim="fade-in" data-route="/otp/"
-                onActivate={ onActivate }>
+                onActivate={ activate }>
 
         <r-form data-ref="form" data-form-action="auth.login" onFormSuccess={ checkResponse }>
 
@@ -24,6 +26,8 @@ export default ({ ref }, children) =>
             <span>{tr('Enter the verification code we sent via SMS to your phone:')}</span>
             <br/><br/>
 
+            <input type="hidden" data-field="user_agent" />
+            <input type="hidden" data-field="device_token" />
             <input type="hidden" data-field="phone_country_code" />
             <input type="hidden" data-field="phone_number" />
 
