@@ -29,13 +29,20 @@ export function loadImage (url) {
 /**
  * Shows a dialog to select a file from the user's device.
  * @param {string} accept
- * @returns {Promise<string>}
+ * @returns {Promise<string|null>}
  */
-export function selectFile (accept) {
+export function selectFile (accept, detectCancellation=false) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = accept;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =>
+    {
+        if (detectCancellation) {
+            input.oncancel = async (evt) => {
+                resolve(null);
+            };
+        }
+
         input.onchange = async (evt) => {
             resolve(await readAsDataURL(evt.target.files[0]));
         };

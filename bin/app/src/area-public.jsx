@@ -28,7 +28,7 @@ watch([authStatus], (status) =>
 export default () =>
     <r-panel data-root="true" class="s-fill f-row" onRootReady={ init } style:alignItems="start">
 
-        <div class="s-static form p-0 pb-5 auto no-shadow f-col s-12 s-6-md s-4-lg s-4-xl" style="margin-top:10vh;">
+        <div class="s-static form auto p-0 pb-5 no-shadow f-col s-12 s-6-md s-4-lg s-4-xl" style="margin-top:10vh;">
 
             <div class="s-static mb-4">
                 <div class="p-abs" style="left:0; top:0; background:linear-gradient(#4d49cd,#6d29ed); width:100%; height:20vh; z-index:0;">

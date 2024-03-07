@@ -1,3 +1,13 @@
+# v3.0.28 - Mar 07 2024
+
+#### Template
+- Updated actions, public-area, and file-utils
+
+#### r-form
+- Field-level errors (span) are no longer shown if the message is empty.
+
+<br/>
+
 # v3.0.27 - Feb 09 2024
 
 #### Template

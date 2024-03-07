@@ -301,15 +301,17 @@ export default Element.register ('r-form',
             for (let i in r.fields)
             {
                 let f = this.querySelector('[data-field-container="'+i+'"]');
-                if (!f)
-                {
+                if (!f) {
                     f = this.querySelector('[data-field="'+i+'"]');
                     if (!f) continue;
                 }
 
+                let message = this.filterString(r.fields[i], r).replace(/\n/g, '<br/>');
+                if (!message) continue;
+
                 let tmp = document.createElement('span');
                 tmp.classList.add('field-error');
-                tmp.innerHTML = this.filterString(r.fields[i], r).replace(/\n/g, '<br/>');
+                tmp.innerHTML = message;
 
                 f.classList.add('field-error');
                 f.classList.add('is-invalid');

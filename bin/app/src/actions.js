@@ -73,6 +73,17 @@ export function checkAuth (callback=null, tryDeviceAuth=true)
 }
 
 /**
+ * Refreshes the user data.
+ */
+export function refreshUserData()
+{
+    Api.fetch('account/get').then(r => {
+        if (r.response == 200)
+            userData.set(r);
+    });
+}
+
+/**
  * Logs out the user.
  */
 export function logout()
