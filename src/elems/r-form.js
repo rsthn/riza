@@ -306,15 +306,15 @@ export default Element.register ('r-form',
                     if (!f) continue;
                 }
 
+                f.classList.add('field-error');
+                f.classList.add('is-invalid');
+
                 let message = this.filterString(r.fields[i], r).replace(/\n/g, '<br/>');
                 if (!message) continue;
 
                 let tmp = document.createElement('span');
                 tmp.classList.add('field-error');
                 tmp.innerHTML = message;
-
-                f.classList.add('field-error');
-                f.classList.add('is-invalid');
 
                 if (this.dataset.errorsAt == 'bottom')
                     f.parentElement.append(tmp);
