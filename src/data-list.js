@@ -6,13 +6,12 @@ import Api from './api.js';
 **	Provides an interface to connect with a listing API function.
 */
 
-export default ModelList.extend
+const DataList = ModelList.extend
 ({
 	className: 'DataList',
 	debounceDelay: 250,
 
 	request: null,
-
 	eid: null,
 
 	/*
@@ -23,7 +22,7 @@ export default ModelList.extend
 	{
 		this._super.ModelList.__ctor();
 
-		if (config !==  null)
+		if (config !== null)
 			Object.assign(this, config);
 
 		if (!this.request)
@@ -78,3 +77,21 @@ export default ModelList.extend
 		this._timeout = setTimeout(fn, this.debounceDelay);
 	}
 });
+
+/**
+ * Returns a data list by name or creates a new one if it doesn't exist (if `create` is `true`).
+ * @param {string} name The name of the data list. A scope can be added as a prefix, separated by a colon.
+ * @param {boolean} create Whether to create the data list if it doesn't exist.
+ * @returns {DataList} The data list.
+ */
+DataList.globals = { };
+DataList.get = function (name, create=false) {
+    if (!(name in DataList.globals)) {
+        if (!create)
+            return null;
+        DataList.globals[name] = new DataList(name.split(':').at(-1));
+    }
+    return DataList.globals[name];
+}
+
+export default DataList;

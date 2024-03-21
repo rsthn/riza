@@ -71,7 +71,7 @@ const _Router =
 
             while (true)
             {
-                var m = /:([!@A-Za-z0-9_-]+)/.exec(route);
+                let m = /:([!@A-Za-z0-9_-]+)/.exec(route);
                 if (!m) break;
     
                 route = route.replace(m[0], '([^/]+)');
@@ -111,7 +111,7 @@ const _Router =
         */
         dispatch: function (route)
         {
-            var matches = route.match(this.routeRegex);
+            let matches = route.match(this.routeRegex);
             if (!matches)
             {
                 this.s_args = null;
@@ -123,10 +123,10 @@ const _Router =
                 return;
             }
 
-            var args = { route: this };
-            var str = '';
+            let args = { route: this };
+            let str = '';
 
-            for (var i = 0; i < this.params.length; i++)
+            for (let i = 0; i < this.params.length; i++)
             {
                 args[this.params[i]] = matches[i+1];
                 str += '_' + matches[i+1];
@@ -196,7 +196,7 @@ const _Router =
     */
     setRoute: function (route, silent)
     {
-        var location = this.realLocation (route);
+        let location = this.realLocation (route);
         if (location == this.location) return;
 
         if (silent) this.ignoreHashChangeEvent++;
@@ -252,7 +252,7 @@ const _Router =
     */
     addRoutes: function (routes)
     {
-        for (var i in routes)
+        for (let i in routes)
         {
             if (!this.routes[i]) {
                 this.routes[i] = new this.Route (i);
@@ -288,7 +288,7 @@ const _Router =
     */
     removeRoutes: function (routes)
     {
-        for (var i in routes)
+        for (let i in routes)
         {
             if (!this.routes[i]) continue;
             this.routes[i].removeHandler (routes[i]);
@@ -303,8 +303,8 @@ const _Router =
         if (!pLocation) pLocation = this.location;
         if (!pLocation) pLocation = ' ';
 
-        var state = 0, i = 0, j = 0, k;
-        var rLocation = '';
+        let state = 0, i = 0, j = 0, k;
+        let rLocation = '';
 
         while (state != -1 && i < cLocation.length && j < pLocation.length)
         {
@@ -376,8 +376,11 @@ const _Router =
     */
     onLocationChanged: function ()
     {
-        var cLocation = globalThis.location.hash.substring(1);
-        var rLocation = this.realLocation(cLocation);
+        if (this.prevLocation !== this.location)
+            this.prevLocation = this.location;
+
+        let cLocation = globalThis.location.hash.substring(1);
+        let rLocation = this.realLocation(cLocation);
 
         if (cLocation !== rLocation) {
             globalThis.location.replace('#' + rLocation);
@@ -392,7 +395,7 @@ const _Router =
             return;
         }
 
-        for (var i = 0; i < this.sortedRoutes.length; i++)
+        for (let i = 0; i < this.sortedRoutes.length; i++)
             this.routes[this.sortedRoutes[i]].dispatch (this.location);
     },
 

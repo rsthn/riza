@@ -49,7 +49,14 @@ export default Element.register ('r-select',
     */
     rready: function()
     {
-        let list = this.dataList ?? this.getFieldByPath(this.dataset.list);
+        let list = this.dataList
+        if (list) {
+            if (typeof(list) === 'string')
+                list = DataList.get(list);
+        }
+        else
+            list = this.getFieldByPath(this.dataset.list);
+
         if (!list) {
             if (this.dataset.list) console.error('data-list not found: ' + this.dataset.list);
             return;

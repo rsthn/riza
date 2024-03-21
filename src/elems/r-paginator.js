@@ -52,7 +52,14 @@ export default Element.register ('r-paginator',
 
     rready: function()
     {
-        let source = this.dataSource ?? this.getFieldByPath(this.dataset.source);
+        let source = this.dataSource;
+        if (source) {
+            if (typeof(source) === 'string')
+                source = DataSource.get(source);
+        }
+        else
+            source = this.getFieldByPath(this.dataset.source);
+
         if (!source) {
             if (this.dataset.source) console.error('data-source not found: ' + this.dataset.source);
             return;

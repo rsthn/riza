@@ -6,7 +6,7 @@ import Api from './api.js';
 **	Provides several methods to quickly interface with a remote data-source as defined by Wind.
 */
 
-export default EventDispatcher.extend
+const DataSource = EventDispatcher.extend
 ({
     className: 'DataSource',
     debounceDelay: 250,
@@ -236,3 +236,21 @@ export default EventDispatcher.extend
         return Api.makeUrl(data);
     }
 });
+
+/**
+ * Returns a data source by name or creates a new one if it doesn't exist (if `create` is `true`).
+ * @param {string} name The name of the data source. A scope can be added as a prefix, separated by a colon.
+ * @param {boolean} create Whether to create the data source if it doesn't exist.
+ * @returns {DataSource} The data source.
+ */
+DataSource.globals = { };
+DataSource.get = function (name, create=false) {
+    if (!(name in DataSource.globals)) {
+        if (!create)
+            return null;
+        DataSource.globals[name] = new DataSource(name.split(':').at(-1));
+    }
+    return DataSource.globals[name];
+}
+
+export default DataSource;

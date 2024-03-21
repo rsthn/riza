@@ -27,6 +27,7 @@
 
 import { Rinn, ModelList, Template } from 'rinn';
 import Element from '../element.js';
+import DataList from '../data-list.js';
 
 /*
 **	Connects to a ModelList and renders its contents using a template. When using "dynamic" template, the contents can be other custom elements, and
@@ -83,7 +84,14 @@ export default Element.register ('r-list',
     */
     rready: function()
     {
-        let list = this.dataList ?? this.getFieldByPath(this.dataset.list);
+        let list = this.dataList
+        if (list) {
+            if (typeof(list) === 'string')
+                list = DataList.get(list);
+        }
+        else
+            list = this.getFieldByPath(this.dataset.list);
+
         if (!list) {
             if (this.dataset.list) console.error('data-list not found: ' + this.dataset.list);
             return;
