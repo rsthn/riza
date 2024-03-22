@@ -99,6 +99,20 @@ const Element =
             evt.source._pos_fy = evt.clientY;
         },
 
+        'mouseup [data-long-press]': function (evt)
+        {
+            if (evt.source._long_press === false)
+                return;
+
+            if (evt.source._long_press) {
+                clearTimeout(evt.source._long_press);
+                evt.source._long_press = null;
+            }
+
+            this.dispatchOn(evt.source, 'short-press', null, false);
+            evt.continuePropagation = true;
+        },
+
         'touchstart [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
@@ -135,19 +149,6 @@ const Element =
             evt.source._pos_fy = evt.touches[0].clientY;
         },
 
-        'mouseup [data-long-press]': function (evt)
-        {
-            if (evt.source._long_press === false)
-                return;
-
-            if (evt.source._long_press) {
-                clearTimeout(evt.source._long_press);
-                evt.source._long_press = null;
-            }
-    
-            evt.continuePropagation = true;
-        },
-    
         'touchend [data-long-press]': function (evt)
         {
             if (evt.source._long_press === false)
@@ -157,7 +158,8 @@ const Element =
                 clearTimeout(evt.source._long_press);
                 evt.source._long_press = null;
             }
-    
+
+            this.dispatchOn(evt.source, 'short-press', null, false);
             evt.continuePropagation = true;
         },
 
