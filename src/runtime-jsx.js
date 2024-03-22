@@ -378,6 +378,9 @@ export const helpers =
                 if (!hadOnCreated && 'oncreated' in elem)
                     elem.oncreated(elem);
 
+                if ('onlongpress' in elem)
+                    elem.dataset.longPress = 'true';
+
                 elem.isCustom = true;
 
                 elem.cloneNode = () => {

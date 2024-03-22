@@ -892,7 +892,7 @@ const Element =
     */
     trigger: function (eventName, args=null)
     {
-        let propName = 'on' + eventName.toLowerCase();
+        let propName = 'on' + eventName.replace(/-/g, '').toLowerCase();
         if (!(propName in this)) return this;
 
         this[propName] (args, this);
@@ -902,7 +902,14 @@ const Element =
     /**
     **	Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
     */
-    dispatchOn: function (elem, eventName, args=null, bubbles=true) {
+    dispatchOn: function (elem, eventName, args=null, bubbles=true)
+    {
+        let propName = 'on' + eventName.replace(/-/g, '').toLowerCase();
+        if (propName in elem) {
+            elem[propName] (args, elem);
+            return this;
+        }
+
         elem.dispatchEvent(this.createEventObject(eventName, args, bubbles));
         return this;
     },

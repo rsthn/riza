@@ -1,5 +1,6 @@
 
 import { expr, watch } from 'riza';
+import { userData } from '../signals';
 
 /**
  * Returns a function that toggles the specified boolean signal.
@@ -110,4 +111,23 @@ export function ifNotNull (condition, result=true, alternative=false) {
  */
 export function ifEqual (condition, value, result=true, alternative=false) {
     return expr([condition], (condition) => condition == value ? result : alternative);
+}
+
+/**
+ * Returns a signal that outputs `trueVal` if the current user has certain privilege or `falseVal` otherwise.
+ * @param {*} privileges
+ * @param {*} [trueVal]
+ * @param {*} [falseVal]
+ * @returns {Signal}
+ */
+export function hasPrivilege (privileges, trueVal=true, falseVal=false)
+{
+    if (typeof(privileges) === 'string')
+        privileges = [ privileges ];
+
+    return expr([ userData ], (userData) => {
+        if (!userData.privileges)
+            return falseVal;
+        return userData.privileges.some(privilege => privileges.includes(privilege)) ? trueVal : falseVal;
+    });
 }

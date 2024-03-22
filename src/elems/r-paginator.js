@@ -55,7 +55,7 @@ export default Element.register ('r-paginator',
         let source = this.dataSource;
         if (source) {
             if (typeof(source) === 'string')
-                source = DataSource.get(source);
+                source = DataSource.get(source, true);
         }
         else
             source = this.getFieldByPath(this.dataset.source);

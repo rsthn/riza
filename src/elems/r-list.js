@@ -87,7 +87,7 @@ export default Element.register ('r-list',
         let list = this.dataList
         if (list) {
             if (typeof(list) === 'string')
-                list = DataList.get(list);
+                list = DataList.get(list, true);
         }
         else
             list = this.getFieldByPath(this.dataset.list);
