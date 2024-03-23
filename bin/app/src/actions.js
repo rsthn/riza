@@ -30,6 +30,20 @@ export function navigate (location, replace=false, evt=null)
 }
 
 /**
+ * Returns a function that executes the callback and prevents the propagation of the event.
+ * @param {function} callback
+ * @returns {function}
+ */
+export function runHandler (callback)
+{
+    return function(evt, ...args) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        callback(evt, ...args);
+    };
+}
+
+/**
  * Checks if the user is authenticated.
  */
 export function checkAuth (callback=null, tryDeviceAuth=true)
