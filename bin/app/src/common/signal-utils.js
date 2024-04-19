@@ -15,6 +15,42 @@ export function toggle (signal) {
 }
 
 /**
+ * Returns a function that sets the value of a signal.
+ * @param {Signal} signal
+ * @param {any} value
+ * @returns {function}
+ */
+export function set (signal, value) {
+    return function() {
+        signal.set(value);
+    };
+}
+
+/**
+ * Executes a function when the condition is `true`.
+ * @param {Signal} condition
+ * @param {Function} fn
+ */
+export function when (condition, fn) {
+    watch([condition], (condition) => {
+        if (condition)
+            fn();
+    });
+}
+
+/**
+ * Executes a function when the condition is `false`.
+ * @param {Signal} condition
+ * @param {Function} fn
+ */
+export function whenNot (condition, fn) {
+    watch([condition], (condition) => {
+        if (!condition)
+            fn();
+    });
+}
+
+/**
  * Creates a forwarding watcher, when the `condition` is `true` any change to `source` will be forwarded to the `destination` signal.
  * @param {Signal} condition
  * @param {Signal} source 
@@ -55,6 +91,24 @@ export function mirror (condition, source, destination)
  */
 export function not (input) {
     return expr([input], (value) => !value);
+}
+
+/**
+ * Returns a signal representing the logical AND of the inputs.
+ * @param {Signal} inputs
+ * @returns {Signal}
+ */
+export function and (...inputs) {
+    return expr(inputs, (...values) => values.every(val => val == true));
+}
+
+/**
+ * Returns a signal representing the logical OR of the inputs.
+ * @param {Signal} inputs
+ * @returns {Signal}
+ */
+export function or (...inputs) {
+    return expr(inputs, (...values) => values.some(val => val == true));
 }
 
 /**
@@ -109,8 +163,20 @@ export function ifNotNull (condition, result=true, alternative=false) {
  * @param {*} [alternative]
  * @returns {Signal}
  */
-export function ifEqual (condition, value, result=true, alternative=false) {
+export function eq (condition, value, result=true, alternative=false) {
     return expr([condition], (condition) => condition == value ? result : alternative);
+}
+
+/**
+ * Returns a signal that outputs `result` if `condition` is NOT equal to the given value, otherwise outputs `alternative`.
+ * @param {Signal} condition
+ * @param {*} value
+ * @param {*} [result]
+ * @param {*} [alternative]
+ * @returns {Signal}
+ */
+export function neq (condition, value, result=true, alternative=false) {
+    return expr([condition], (condition) => condition != value ? result : alternative);
 }
 
 /**
