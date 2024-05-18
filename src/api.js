@@ -17,6 +17,7 @@ const Api =
     INCLUDE_CREDENTIALS:		0x10,
     UNIQUE_STAMP:				0x20,
     DISABLE_CORS:				0x40,
+    WIND_V3:                    0x80,
 
     /**
      * Target URL for all the API requests. Set by calling `setEndPoint`.
@@ -282,8 +283,7 @@ const Api =
             url = this.appendParam(url, '_='+Date.now());
 
         httpMethod = httpMethod ? httpMethod.toUpperCase() : null;
-        if (httpMethod != 'GET' && httpMethod != 'POST')
-            httpMethod = 'auto';
+        if (httpMethod === null) httpMethod = 'auto';
 
         if (retries === null)
             retries = this.retries;
@@ -318,12 +318,9 @@ const Api =
 
         if (typeof(data) !== 'string' && !(data instanceof Blob))
         {
-            if (!(data instanceof FormData))
-            {
+            if (!(data instanceof FormData)) {
                 data = new FormData();
-
-                for (let i in params)
-                {
+                for (let i in params) {
                     if ((params[i] instanceof File) || (params[i] instanceof Blob))
                         data.append(i, params[i], params[i].name);
                     else
@@ -335,45 +332,37 @@ const Api =
             {
                 if ((i[1] instanceof File) || (i[1] instanceof Blob))
                 {
-                    options.method = 'POST';
+                    if (options.method === 'auto') options.method = 'POST';
                     options.multipart = true;
                     break;
                 }
             }
 
-            if (this.useReq64 && (this.flags & Api.REQ64_SUPPORTED) && !options.multipart)
-            {
+            if (this.useReq64 && (this.flags & Api.REQ64_SUPPORTED) && !options.multipart) {
                 let tmp = new FormData();
                 tmp.append('req64', base64.encode(this.encodeParams(data)));
                 data = tmp;
             }
 
-            if (options.method == 'auto')
+            if (options.method === 'auto')
             {
                 let l = 0;
-
                 options.method = 'GET';
-
-                for (let i of data.entries())
-                {
+                for (let i of data.entries()) {
                     l += i[0].length + i[1].length + 2;
-
-                    if (l > 960)
-                    {
+                    if (l > 960) {
                         options.method = 'POST';
                         break;
                     }
                 }	
             }
 
-            if (options.method == 'GET')
-            {
+            if (options.method === 'GET') {
                 url = this.appendParam(url, this.encodeParams(data));
             }
             else
             {
-                if (!options.multipart)
-                {
+                if (!options.multipart) {
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
                     options.body = this.encodeParams(data);
                 }
@@ -403,7 +392,7 @@ const Api =
             else
                 options.headers['Content-Type'] = data.type;
 
-            options.method = 'POST';
+            if (options.method === 'auto') options.method = 'POST';
             options.body = data;
         }
 
@@ -438,14 +427,23 @@ const Api =
         let type = result.headers.get('content-type').split(';')[0].toLowerCase();
 
         if ((this.flags & Api.JSON_RESPONSE_SUPPORTED) && type.indexOf('json') !== -1)
+        {
+            if (this.flags & Api.WIND_V3) {
+                return async function() {
+                    let data = await result.json();
+                    data.response = result.status;
+                    return data;
+                }();
+            }
+
             return result.json();
+        }
 
         if ((this.flags & Api.XML_RESPONSE_SUPPORTED) && type.indexOf('xml') !== -1)
         {
             return new Promise((resolve, reject) =>
             {
-                result.text().then(data =>
-                {
+                result.text().then(data => {
                     data = (new DOMParser).parseFromString(data, 'text/xml');
                     resolve(data);
                 })
@@ -499,20 +497,29 @@ const Api =
         });
     },
 
-    /**
-     * Executes a POST API call.
-     */
-    post: function (params, success=null, failure=null)
+    post: function (url=null, params=null)
     {
-        return this.apiCall(params, success, failure, 'POST');
+        return this.fetch('POST', url, params);
     },
 
-    /**
-     * Executes a GET API call.
-     */
-    get: function (params, success=null, failure=null)
+    get: function (url=null, params=null)
     {
-        return this.apiCall(params, success, failure, 'GET');
+        return this.fetch('GET', url, params);
+    },
+
+    put: function (url=null, params=null)
+    {
+        return this.fetch('PUT', url, params);
+    },
+
+    patch: function (url=null, params=null)
+    {
+        return this.fetch('PATCH', url, params);
+    },
+
+    delete: function (url=null, params=null)
+    {
+        return this.fetch('DELETE', url, params);
     },
 
     /**

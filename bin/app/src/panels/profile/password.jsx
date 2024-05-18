@@ -10,15 +10,15 @@ export default () =>
 
             <div className="field">
                 <label>Current Password</label>
-                <input type="password" data-field="cpassword" />
+                <input type="password" data-field="current_password" />
             </div>
             <div className="field">
                 <label>New Password</label>
-                <input type="password" data-field="npassword" />
+                <input type="password" data-field="new_password" />
             </div>
             <div className="field">
-                <label>Repeat New Password</label>
-                <input type="password" data-field="rpassword" />
+                <label>Confirm New Password</label>
+                <input type="password" data-field="confirm_password" />
             </div>
 
             <br/>

@@ -13,6 +13,11 @@ const elementPrototypes = { };
 const elementClasses = { };
 
 /**
+ * Contains the state of the current long-press operation.
+ */
+let longPressState = { elem: null, state: null };
+
+/**
  * Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
  * self or child-elements, and several utility methods.
  */
@@ -64,20 +69,20 @@ const Element =
         'mousedown [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (evt.source._long_press) return;
+            if (longPressState.state) return;
+            evt.continuePropagation = false;
 
             let elem = evt.source;
-
-            elem._long_press = setTimeout(() =>
+            longPressState.elem = elem;
+            longPressState.state = setTimeout(() =>
             {
                 let dx = elem._pos_fx - elem._pos_sx;
                 let dy = elem._pos_fy - elem._pos_sy;
-
-                elem._long_press = null;
+                longPressState.state = null;
 
                 let d = Math.sqrt(dx*dx + dy*dy);
-                if (d < 5) {
-                    elem._long_press = false;
+                if (d < 5 && longPressState.elem === elem) {
+                    longPressState.state = false;
                     this.dispatchOn(elem, 'long-press');
                 }
             },
@@ -85,7 +90,6 @@ const Element =
 
             elem._pos_sx = evt.clientX;
             elem._pos_sy = evt.clientY;
-
             elem._pos_fx = evt.clientX;
             elem._pos_fy = evt.clientY;
         },
@@ -93,7 +97,8 @@ const Element =
         'mousemove [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (!evt.source._long_press) return;
+            if (!longPressState.state) return;
+            evt.continuePropagation = false;
 
             evt.source._pos_fx = evt.clientX;
             evt.source._pos_fy = evt.clientY;
@@ -101,41 +106,39 @@ const Element =
 
         'mouseup [data-long-press]': function (evt)
         {
-            if (evt.source._long_press === false)
+            if (longPressState.state === false)
                 return;
 
-            if (evt.source._long_press) {
-                clearTimeout(evt.source._long_press);
-                evt.source._long_press = null;
+            if (longPressState.state) {
+                clearTimeout(longPressState.state);
+                longPressState.state = null;
             }
 
-            this.dispatchOn(evt.source, 'short-press', null, false);
-            evt.continuePropagation = true;
+            if (longPressState.elem === evt.source)
+                this.dispatchOn(evt.source, 'short-press', [], false);
         },
 
         'touchstart [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (evt.source._long_press) return;
+            if (longPressState.state) return;
 
             let elem = evt.source;
-
-            elem._long_press = setTimeout(() => {
+            longPressState.elem = elem;
+            longPressState.state = setTimeout(() => {
                 let dx = elem._pos_fx - elem._pos_sx;
                 let dy = elem._pos_fy - elem._pos_sy;
-
-                elem._long_press = null;
+                longPressState.state = null;
 
                 let d = Math.sqrt(dx*dx + dy*dy);
-                if (d < 5) {
-                    elem._long_press = false;
+                if (d < 5 && longPressState.elem === elem) {
+                    longPressState.state = false;
                     this.dispatchOn(elem, 'long-press');
                 }
             }, 500);
 
             elem._pos_sx = evt.touches[0].clientX;
             elem._pos_sy = evt.touches[0].clientY;
-
             elem._pos_fx = evt.touches[0].clientX;
             elem._pos_fy = evt.touches[0].clientY;
         },
@@ -143,7 +146,7 @@ const Element =
         'touchmove [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (!evt.source._long_press) return;
+            if (!longPressState.state) return;
 
             evt.source._pos_fx = evt.touches[0].clientX;
             evt.source._pos_fy = evt.touches[0].clientY;
@@ -151,21 +154,21 @@ const Element =
 
         'touchend [data-long-press]': function (evt)
         {
-            if (evt.source._long_press === false)
+            if (longPressState.state === false)
                 return;
     
-            if (evt.source._long_press) {
-                clearTimeout(evt.source._long_press);
-                evt.source._long_press = null;
+            if (longPressState.state) {
+                clearTimeout(longPressState.state);
+                longPressState.state = null;
             }
 
-            this.dispatchOn(evt.source, 'short-press', null, false);
-            evt.continuePropagation = true;
+            if (longPressState.elem === evt.source)
+                this.dispatchOn(evt.source, 'short-press', null, false);
         },
 
         'click [data-action]': function(evt)
         {
-            if (evt.source._long_press === false)
+            if (longPressState.state === false)
                 return;
 
             let opts = evt.source.dataset.action.split(' ');

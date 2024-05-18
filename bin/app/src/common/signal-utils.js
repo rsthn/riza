@@ -1,5 +1,5 @@
 
-import { expr, watch } from 'riza';
+import { signal, expr, watch } from 'riza';
 import { userData } from '../signals';
 
 /**
@@ -196,4 +196,13 @@ export function hasPrivilege (privileges, trueVal=true, falseVal=false)
             return falseVal;
         return userData.privileges.some(privilege => privileges.includes(privilege)) ? trueVal : falseVal;
     });
+}
+
+/**
+ * Converts a list of objects to a list of signals.
+ * @param {object[]} list
+ * @returns {Signal[]}
+ */
+export function signalize (list) {
+    return list.map(item => signal(item));
 }

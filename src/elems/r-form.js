@@ -381,9 +381,20 @@ export default Element.register ('r-form',
 
         this.classList.add('busy');
 
-        if (typeof(f) != 'function') {
-            data.f = f;
-            Api.apiCall(data, (r) => this[r.response == 200 ? '_onSuccess' : '_onFailure'](r), (r) => this._onFailure({ error: 'Unable to execute request.' }), this.dataset.method ?? 'POST');
+        if (typeof(f) != 'function')
+        {
+            let modern = f.indexOf('/') !== -1;
+            if (!modern)
+                data.f = f;
+
+            Api.apiCall(
+                modern ? JSON.stringify(data) : data,
+                (r) => this[r.response == 200 ? '_onSuccess' : '_onFailure'](r), 
+                (r) => this._onFailure({ error: 'Unable to execute request.' }), 
+                this.dataset.method ?? 'POST',
+                null,
+                modern ? f : null
+            );
         }
         else
             f(data, (r) => this[r.response == 200 ? '_onSuccess' : '_onFailure'](r));

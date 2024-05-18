@@ -56,7 +56,7 @@
         "riza-signal": "^1.0.3"
     },
     "devDependencies": {
-        "parcel": "^2.10.3",
+        "parcel": "^2.12.0",
         "shx": "^0.3.4"
     }
 }

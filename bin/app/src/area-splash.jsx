@@ -14,7 +14,7 @@ export default () =>
             <div style="font-size:2rem; font-weight:700;">{tr('Default Template')}</div>
             <div style="font-size:1rem; font-weight:200;">{tr('Splash Screen')}</div>
 
-            <img style="width:14%; margin-top:2.0rem;" src="img/button-spinner.svg" />
+            <img style="width:14%; margin-top:2.0rem;" src="img/splash-spinner.svg" />
         </div>
 
     </r-panel>

@@ -5,6 +5,11 @@ import { tr } from './common/i18n';
 import { HMAC } from './common/utils';
 
 /**
+ * Navigation context object, set by `contextNavigate`.
+ */
+export let navigationContext = { };
+
+/**
  * Navigates to the previous page.
  */
 export function goBack() {
@@ -18,10 +23,28 @@ export function goBack() {
  */
 export function navigate (location, replace=false, evt=null)
 {
+    navigationContext = null;
+
     if (evt) {
         evt.preventDefault();
         evt.stopPropagation();
     }
+
+    if (Router.location !== location)
+        Router.navigate(location, replace);
+    else
+        Router.refresh();
+}
+
+/**
+ * Navigate to the specified location with context data.
+ * @param {string} location
+ * @param {*} contextData
+ * @param {bool} [replace]
+ */
+export function contextNavigate (location, contextData, replace=false)
+{
+    navigationContext = contextData;
 
     if (Router.location !== location)
         Router.navigate(location, replace);
