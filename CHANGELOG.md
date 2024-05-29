@@ -1,3 +1,38 @@
+# v3.0.30 - May 29 2024
+
+#### Template
+- Added 'hasPrivilege' to signal-utils.
+- Updated signal-utils with new functions and renamed old ones to be more simple.
+- Fixed minor CSS issues.
+- Added `signalize` to signal-utils.
+- Updated xui dependency.
+- Updated panels/profile/password to use new change password fields.
+
+#### Element
+- Added short-press event to be used when a simple click event is desired and using long-press at the same time.
+- Fixed bug causing multiple 'short-press' and 'long-press' events firing when activated.
+
+#### Router
+- Added `navigationContext` property and `contextNavigate`.
+
+#### Api
+- Added option WIND_V3 to flags to enable compatibility with Wind V3 behavior.
+- Methods 'get', 'post', 'put', 'patch' and 'delete' are now async and return a promise.
+
+#### r-form
+- Added support for JSON payload when the data-action is a path instead of a function name.
+
+#### DataList
+- Added static method 'get' to create or return a global data list.
+
+#### DataSource
+- Added static method 'get' to create or return a global data source.
+
+#### Global
+- Elements r-list, r-paginator, r-select and r-table now accept a string for dataList or dataSource respectively to create a global DataList or DataSource if desired.
+
+<br/>
+
 # v3.0.29 - Mar 07 2024
 
 #### Template
