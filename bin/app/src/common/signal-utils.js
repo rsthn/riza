@@ -180,21 +180,21 @@ export function neq (condition, value, result=true, alternative=false) {
 }
 
 /**
- * Returns a signal that outputs `trueVal` if the current user has certain privilege or `falseVal` otherwise.
+ * Returns a signal that outputs `trueVal` if the current user has certain permission or `falseVal` otherwise.
  * @param {*} privileges
  * @param {*} [trueVal]
  * @param {*} [falseVal]
  * @returns {Signal}
  */
-export function hasPrivilege (privileges, trueVal=true, falseVal=false)
+export function hasPerm (permissions, trueVal=true, falseVal=false)
 {
-    if (typeof(privileges) === 'string')
-        privileges = [ privileges ];
+    if (typeof(permissions) === 'string')
+        permissions = [ permissions ];
 
     return expr([ userData ], (userData) => {
-        if (!userData.privileges)
+        if (!userData.permissions)
             return falseVal;
-        return userData.privileges.some(privilege => privileges.includes(privilege)) ? trueVal : falseVal;
+        return userData.permissions.some(perm => permissions.includes(perm)) ? trueVal : falseVal;
     });
 }
 

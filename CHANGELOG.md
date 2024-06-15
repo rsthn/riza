@@ -1,3 +1,6 @@
+# v3.0.31 - Jun 15 2024
+- Quick fixup to `apiCall` to prevent undefined value when `relativeUrl` is not specified.
+
 # v3.0.30 - May 29 2024
 
 #### Template

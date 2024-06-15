@@ -277,7 +277,7 @@ const Api =
      */
     apiCall: function (params, success, failure, httpMethod=null, retries=null, relativeUrl='')
     {
-        let url = this.getUrl(relativeUrl);
+        let url = this.getUrl(relativeUrl ?? '');
 
         if (this.flags & Api.UNIQUE_STAMP)
             url = this.appendParam(url, '_='+Date.now());
