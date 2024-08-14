@@ -9,6 +9,9 @@ export class Signal
     #listeners;
     #type;
 
+    getter;
+    setter;
+
     /**
      * Creates a new signal object.
      * @param {*} value
@@ -20,6 +23,9 @@ export class Signal
         this.#type = null;
         this.#defvalue = defvalue;
         this.#listeners = [];
+
+        this.getter = this.get.bind(this);
+        this.setter = this.set.bind(this);
     }
 
     /**
@@ -101,14 +107,6 @@ export class Signal
     }
 
     /**
-     * Returns a getter function for the signal.
-     * @returns {function}
-     */
-    getter() {
-        return this.get.bind(this);
-    }
-
-    /**
      * Sets the value of the signal, when `forced` is true the signal will be updated even if its value is the same.
      * @param {*} value
      * @param {boolean} [forced]
@@ -120,14 +118,6 @@ export class Signal
         this.#value = value;
         this.notify();
         return this;
-    }
-
-    /**
-     * Returns a setter function for the signal.
-     * @returns {function}
-     */
-    setter() {
-        return this.set.bind(this);
     }
 
     /**
