@@ -27,7 +27,7 @@ export class Signal
      * @param {'string'|'bool'|'int'|'number'|'*'} type 
      * @returns {Signal}
      */
-    is(type) {
+    is (type) {
         this.#type = type === '*' ? null : type;
         return this;
     }
@@ -101,6 +101,14 @@ export class Signal
     }
 
     /**
+     * Returns a getter function for the signal.
+     * @returns {function}
+     */
+    getter() {
+        return this.get.bind(this);
+    }
+
+    /**
      * Sets the value of the signal, when `forced` is true the signal will be updated even if its value is the same.
      * @param {*} value
      * @param {boolean} [forced]
@@ -112,6 +120,14 @@ export class Signal
         this.#value = value;
         this.notify();
         return this;
+    }
+
+    /**
+     * Returns a setter function for the signal.
+     * @returns {function}
+     */
+    setter() {
+        return this.set.bind(this);
     }
 
     /**
