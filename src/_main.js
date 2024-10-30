@@ -24,6 +24,8 @@ export const Flattenable = _Rinn.Flattenable;
 export const Collection = _Rinn.Collection;
 export const Template = _Rinn.Template;
 
+export { signal, expr, watch, validator, helpers } from './runtime-jsx';
+
 global.riza =
 {
 	Router: Router,
@@ -37,6 +39,7 @@ global.riza =
 	Elements: Elements,
 	Utils: Utils,
 	db: db,
+    geo: geo,
 
 	Rinn: Rinn,
 	Class: Class,
@@ -48,4 +51,10 @@ global.riza =
 	Flattenable: Flattenable,
 	Collection: Collection,
 	Template: Template,
+
+    signal: signal,
+    expr: expr,
+    watch: watch,
+    validator: validator,
+    helpers: helpers
 };
