@@ -1,0 +1,38 @@
+#!rose :deploy
+
+BEGIN
+    ;; Load version from CHANGELOG.md file.
+    (set version (re:get "/v\([0-9.]+\)/" (file:read "CHANGELOG.md") 1))
+    (assert (version) "Could not find version in CHANGELOG.md")
+    (assert (le? (len (version)) 11) "Version is too long")
+    (assert (ge? (len (version)) 5) "Version is too short")
+
+    ;; Check if there are no changes to deploy.
+    (set package (json:parse (file:read "package.json")))
+    (assert (ne? (version) (package.version)) "(clr 97)No new version found to deploy(clr 0)")
+    (set-var NEW_VERSION (version))
+    (set package.version (version))
+END
+
+ECHO {clr 92}Building ...{clr 0}
+    RUN pnpm build
+
+ECHO {clr 92}Updating documentation ...{clr 0}
+    RUN node ./scripts/tsdoc.js ./src/main.js ./dist/riza.d.ts
+
+ECHO {clr 92}Commiting ...{clr 0}
+    BEGIN
+        (file:write "package.json" (json:dump (package)))
+    END
+    RUN git add .
+    RUN git commit -m "{coalesce {args.0} 'v{NEW_VERSION}'}"
+
+ECHO {clr 92}Pushing ...{clr 0}
+    RUN git push
+    RUN git tag v{NEW_VERSION}
+    RUN git push --tags
+
+ECHO {clr 92}Publishing ...{clr 0}
+    RUN npm publish
+
+ECHO {clr 92}* Published: v{NEW_VERSION}{clr 0}

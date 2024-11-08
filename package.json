@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "3.0.31",
+    "version": "3.0.32",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
@@ -12,9 +12,6 @@
     },
     "scripts": {
         "test": "echo Ok",
-        "commit": "node ./scripts/commit.js",
-        "deploy": "pnpm build && pnpm tsdoc && node ./scripts/deploy.js",
-        "tsdoc": "node ./scripts/tsdoc.js ./src/main.js ./dist/riza.d.ts",
         "changes": "rose ./scripts/changes",
         "build:global": "parcel build --target global",
         "build:module": "parcel build --target module",

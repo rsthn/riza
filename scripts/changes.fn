@@ -41,7 +41,7 @@
         (continue)
     )
 
-    (set tmp (re:match `/^- \\[([^\\]]+)\] (.+)$/` (i)))
+    (set tmp (re:match `/^\\[([^\\]]+)\] (.+)$/` (i)))
     (when-not (tmp.0) (continue))
 
     (array:push (changes) (& name (tmp.1) text (tmp.2)))

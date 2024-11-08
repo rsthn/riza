@@ -1,3 +1,12 @@
+# v3.0.32 - Nov 08 2024
+
+#### General
+- Added support for global variable `riza_element_prefix` to override the `r-` prefix of custom elements.
+- Updated dependencies and added riza signal exports to standalone browser build.
+- Added `get` and `set` methods to riza signals.
+
+<br/>
+
 # v3.0.31 - Jun 15 2024
 - Quick fixup to `apiCall` to prevent undefined value when `relativeUrl` is not specified.
 
