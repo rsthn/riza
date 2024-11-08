@@ -1383,6 +1383,9 @@ const Element =
     */
     register: function (name, ...protos)
     {
+        if ('riza_element_prefix' in globalThis)
+            name = name.replace('r-', globalThis['riza_element_prefix'] + '-');
+
         const newElement = class extends HTMLElement
         {
             constructor()
