@@ -54,13 +54,15 @@ export default Element.register ('r-panel',
     onConnected: function()
     {
         if (this.dataset.route) {
-            this.route = Router.addRoute (this.dataset.route, this._onActivate, this._onDeactivate);
+            this.route = Router.addRoute(this.dataset.route, this._onActivate, this._onDeactivate);
             this.classList.remove('is-active');
             this.classList.add('is-inactive');
         }
         else {
-            this.classList.add('is-active');
-            this.classList.remove('is-inactive');
+            if (!this.classList.contains('is-inactive')) {
+                this.classList.add('is-active');
+                this.classList.remove('is-inactive');
+            }
         }
 
         this.classList.add('anim-ended');
@@ -84,6 +86,7 @@ export default Element.register ('r-panel',
         this.classList.remove('anim-ended');
         this.classList.remove('is-active');
         this.classList.add('is-inactive');
+        this.classList.add('anim-out');
         this.onanimationend = () => {
             this.classList.add('anim-ended');
             this.onanimationend = null;

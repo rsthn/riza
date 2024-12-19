@@ -14,7 +14,7 @@ function onShown() {
 export default () => 
     <r-panel class="s-fill" data-route="/profile/details/" onPanelShown={ onShown }>
 
-        <r-form class="form left" data-form-action="account.update-details" onFormSuccess={ formSuccess } onCreated={ f=>form=f }>
+        <r-form class="form left" data-method="patch" data-form-action="account/update-details" onFormSuccess={ formSuccess } onCreated={ f=>form=f }>
 
             <h3>General Information</h3>
 

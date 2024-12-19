@@ -4,7 +4,7 @@ let form;
 export default () => 
     <r-panel class="s-fill" data-route="/profile/password/" onPanelShown={ () => form.reset() }>
 
-        <r-form class="form left" data-form-action="account.update-password" onFormSuccess={ () => form.reset() } onCreated={ f=>form=f }>
+        <r-form class="form left" data-form-action="account/update-password" onFormSuccess={ () => form.reset() } onCreated={ f=>form=f }>
 
             <h3>Update Password</h3>
 

@@ -1779,16 +1779,20 @@ Element.register ('r-dom-probe', {
 HTMLElement.prototype.querySelectorParent = function (selector)
 {
     let elem = this;
-
-    while (elem != null)
-    {
+    while (elem != null) {
         if (elem.matches(selector))
             break;
-
         elem = elem.parentElement;
     }
-
     return elem;
+};
+
+/**
+ * Returns the first parent element with the [data-root] attribute.
+ */
+HTMLElement.prototype.getRoot = function()
+{
+    return this.querySelectorParent('[data-root]');
 };
 
 export default Element;
