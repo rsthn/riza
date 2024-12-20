@@ -28,7 +28,12 @@ export default Element.register ('r-select',
 
         for (let attr of this.attributes)
         {
-            if (attr.nodeName.startsWith('data-_') || attr.nodeName == 'data-list' || attr.nodeName == 'data-blank')
+            if (attr.nodeName.startsWith('data-_') 
+                    || attr.nodeName == 'data-list' 
+                    || attr.nodeName == 'data-blank' 
+                    || attr.nodeName == 'data-option-value' 
+                    || attr.nodeName == 'data-option-label'
+                )
                 continue;
 
             this.container.setAttribute(attr.nodeName, attr.nodeValue);
@@ -117,6 +122,12 @@ export default Element.register ('r-select',
 
         if (list[0].has('label')) label = 'label';
         else if (list[0].has('name')) label = 'name';
+
+        if (this.dataset.optionValue)
+            value = this.dataset.optionValue;
+
+        if (this.dataset.optionLabel)
+            label = this.dataset.optionLabel;
 
         if ('blank' in this.dataset)
             s += '<option value="">'+this.dataset.blank+'</option>';

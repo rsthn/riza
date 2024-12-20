@@ -13,7 +13,7 @@ r-form span.field-error {
 }
 */
 
-import { Template } from 'rinn';
+import { Model, Template } from 'rinn';
 import Element from '../element.js';
 import Api from '../api.js';
 
@@ -358,23 +358,28 @@ export default Element.register ('r-form',
         return false;
     },
 
-    submit: function ()
+    submit: async function ()
     {
         if (this.classList.contains('busy'))
             return;
 
         let data = { };
 
-        if (this.dataset.strict == 'false')
+        if (this.dataset.strict === 'false')
             Object.assign(data, this.model.get());
 
         let list = { };
         this.querySelectorAll('[data-field]').forEach(e => list[e.dataset.field] = true);
         Object.keys(list).forEach(f => data[f] = this._getField(f));
 
-        this.dispatch('beforeSubmit', data);
+        if (this.constraints)
+            data = (new Model(data, null, this.constraints)).get();
 
+        this.dispatch('beforeSubmit', data);
         this.model.set(data);
+
+        if (this.preprocess)
+            await this.preprocess(data);
 
         let f = this.dataset.formAction || this.formAction;
         if (!f) return;
@@ -384,8 +389,7 @@ export default Element.register ('r-form',
         if (typeof(f) != 'function')
         {
             let modern = f.indexOf('/') !== -1;
-            if (!modern)
-                data.f = f;
+            if (!modern) data.f = f;
 
             Api.apiCall(
                 modern ? JSON.stringify(data) : data,

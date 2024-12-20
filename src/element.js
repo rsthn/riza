@@ -1774,7 +1774,7 @@ Element.register ('r-dom-probe', {
 /* ****************************************** */
 
 /**
- * Finds the parent element given a selector.
+ * Finds the parent element given a selector. Includes the current element in the search.
  */
 HTMLElement.prototype.querySelectorParent = function (selector)
 {
@@ -1792,7 +1792,7 @@ HTMLElement.prototype.querySelectorParent = function (selector)
  */
 HTMLElement.prototype.getRoot = function()
 {
-    return this.querySelectorParent('[data-root]');
+    return this.parentElement.querySelectorParent('[data-root]');
 };
 
 export default Element;

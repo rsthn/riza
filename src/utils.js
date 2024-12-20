@@ -70,6 +70,25 @@ const Utils =
     },
 
     /**
+     * Loads a file or blob and returns the base64 data.
+     * @param {File|Blob} file
+     */
+    loadAsBase64: async function (file)
+    {
+        return new Promise((resolve, reject) =>
+        {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                resolve(e.target.result.split(',')[1]);
+            };
+            reader.onerror = function(e) {
+                reject(e);
+            };
+            reader.readAsDataURL(file);
+        });
+    },
+
+    /**
      * Loads a file or blob and returns the content as text.
      * @param {File|Blob} file
      * @param {function(string)} callback

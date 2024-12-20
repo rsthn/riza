@@ -357,7 +357,7 @@ const Api =
                 }	
             }
 
-            if (options.method === 'GET') {
+            if (options.method === 'GET' || options.method === 'DELETE' || options.method === 'TRACE' || options.method === 'OPTIONS' || options.method === 'HEAD') {
                 url = this.appendParam(url, this.encodeParams(data));
             }
             else
