@@ -1,3 +1,22 @@
+# v3.0.33 - Dec 20 2024
+
+#### General
+- [Element] Added global method `getRoot`.
+- [Api] Added fixup to ensure methods not allowing body will use the query parameters to pass data.
+- [Utils] Added method `loadAsBase64`.
+
+#### r-panel
+- Fixed bug that removed `is-inactive` if the panel had that class already from the start.
+
+#### r-form
+- Added method `preprocess` called right before sending the data to the API.
+- Added support for model constraints.
+
+#### r-select
+- Added options `data-option-value` and `data-option-label` to change the default value/label fields.
+
+<br/>
+
 # v3.0.32 - Nov 08 2024
 
 #### General
