@@ -1,3 +1,10 @@
+# v3.0.35 - Dec 21 2024
+
+#### r-panel
+- Fixed bug with the `is-inactive` class when pre-set in the element.
+
+<br/>
+
 # v3.0.34 - Dec 21 2024
 
 #### Api
