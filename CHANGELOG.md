@@ -1,3 +1,17 @@
+# v3.0.34 - Dec 21 2024
+
+#### Api
+- Added docstrings to document public functions.
+- Added `headers` method to set global headers using an object.
+- Added methods `appendParams` and `getAbsoluteUrl`.
+- Removed deprecated `makeUrl` in favor of `getAbsoluteUrl`.
+- Polished new `request` function.
+
+#### r-form
+- Added method `onfieldchanged` triggered when a field of the form changes.
+
+<br/>
+
 # v3.0.33 - Dec 20 2024
 
 #### General

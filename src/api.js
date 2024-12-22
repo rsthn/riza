@@ -327,6 +327,14 @@ const Api =
     },
 
     /**
+     * Returns whether the given HTTP method allows a body.
+     * @param {string} method 
+     */
+    methodAllowsBody: function (method) {
+        return method === 'POST' || method === 'PUT' || method === 'PATCH';
+    },
+
+    /**
      * Executes an API call to the URL stored in the `apiUrl` property. By default `httpMethod` is "auto", which will determine the best depending on the data to
      * be sent. Any connection error will be reported to the `failure` callback, and similarly any success to the `success` callback. The `params` object can be
      * a FormData object or just a regular object.
@@ -407,7 +415,7 @@ const Api =
                 }	
             }
 
-            if (options.method === 'GET' || options.method === 'DELETE' || options.method === 'TRACE' || options.method === 'OPTIONS' || options.method === 'HEAD') {
+            if (!this.methodAllowsBody(options.method)) {
                 url = this.appendParams(url, data);
             }
             else
@@ -536,7 +544,7 @@ const Api =
      */
     request: function (method, url, query=null, body=null)
     {
-        if (typeof(body) !== 'string' && !(body instanceof Blob))
+        if (typeof(body) !== 'string' && !(body instanceof Blob) && this.methodAllowsBody(method))
             body = JSON.stringify(body);
 
         return new Promise((resolve, reject) => {
