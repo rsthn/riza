@@ -1,6 +1,8 @@
 
 import base64 from 'base-64';
 
+//!class Api
+
 /**
  * API interface utility functions.
  */
@@ -42,7 +44,7 @@ const Api =
     /**
      * Headers for the request.
      */
-    headers: { },
+    _headers: { },
 
     /**
      * Level of the current request. Used to detect nested requests.
@@ -60,8 +62,19 @@ const Api =
     _packageData: [],
 
     /**
-     * Sets the API end-point URL address.
+     * Sets the API's base URL address.
+     * @param {string} baseURL
+     * @param {number} flags
+     * !static setBaseUrl (baseURL: string, flags?: number) : Api;
      */
+    setBaseUrl: function (baseURL, flags=null)
+    {
+        this.apiUrl = baseURL;
+        this.flags = flags ?? this.flags;
+
+        return this;
+    },
+
     setEndPoint: function (apiUrl, flags=null)
     {
         this.apiUrl = apiUrl;
@@ -71,7 +84,11 @@ const Api =
     },
 
     /**
-     * Overridable filter that processes the response from the server and returns true if it was successful. The `res` parameter indicates the response data, and `req` the request data.
+     * Overridable filter that processes the response from the server and returns `true` if it was successful.
+     * The `res` parameter indicates the response data, and `req` the request data.
+     * @param {object} res
+     * @param {object} req
+     * !static responseFilter (res: object, req: object) : boolean;
      */
     responseFilter: function (res, req)
     {
@@ -79,9 +96,11 @@ const Api =
     },
 
     /**
-     * Starts "package-mode" (using the `rpkg` field). Any API calls after this will be bundled together.
+     * Starts package-mode (using the `rpkg` field). Any API calls after this will be bundled together, note that the
+     * feature flag `REQUEST_PACKAGE_SUPPORTED` must be set.
+     * !static packageBegin() : void;
      */
-    packageBegin: function ()
+    packageBegin: function()
     {
         if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
             return;
@@ -90,7 +109,10 @@ const Api =
     },
 
     /**
-     * Finishes "package-mode" and a single API request with the currently constructed package will be sent.
+     * Finishes package-mode and if there is any data in the package a single API request will be sent, when the package
+     * is sent the `callback` will be invoked. Note that the feature flag `REQUEST_PACKAGE_SUPPORTED` must be set.
+     * @param {function} callback
+     * !static packageEnd (callback: function) : void;
      */
     packageEnd: function (callback)
     {
@@ -107,12 +129,16 @@ const Api =
     },
 
     /**
-     * Starts package-mode, executes the callback and finishes package-mode. Therefore any requests made by the callback will be packed together.
+     * Utility function to batch together multiple API calls, requires feature flag `REQUEST_PACKAGE_SUPPORTED` to be set. Any
+     * API calls made during the callback will be bundled together and sent in a single request. When the request is sent
+     * the `responseCallback` will be invoked.
+     * @param {function} callback
+     * @param {function} responseCallback
+     * !static batch (callback: function, responseCallback?: function) : void;
      */
     batch: function (callback, responseCallback=null)
     {
-        if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
-        {
+        if (!(this.flags & Api.REQUEST_PACKAGE_SUPPORTED)) {
             callback();
             if (responseCallback) responseCallback();
             return;
@@ -124,7 +150,9 @@ const Api =
     },
 
     /**
-     * Sends a single API request with the currently constructed package and maintains package-mode.
+     * Sends a single API request with the currently constructed package and maintains package-mode. After the request
+     * is sent the `callback` will be invoked. Note that the feature flag `REQUEST_PACKAGE_SUPPORTED` must be set.
+     * !static packageSend (callback: function) : void;
      */
     packageSend: function (callback)
     {
@@ -137,9 +165,8 @@ const Api =
         let _packageData = this._packageData;
         this._packageData = [];
 
-        var rpkg = "";
-
-        for (var i = 0; i < _packageData.length; i++)
+        let rpkg = "";
+        for (let i = 0; i < _packageData.length; i++)
             rpkg += "r"+i+","+base64.encode(this.encodeParams(_packageData[i][2]))+";";
 
         this._showProgress();
@@ -147,27 +174,20 @@ const Api =
         this.apiCall (
             { rpkg: rpkg },
 
-            (res, req) =>
-            {
+            (res, req) => {
                 this._hideProgress();
-
                 for (let i = 0; i < _packageData.length; i++)
                 {
-                    try
-                    {
-                        var response = res["r"+i];
-                        if (!response)
-                        {
+                    try {
+                        let response = res["r"+i];
+                        if (!response) {
                             if (_packageData[i][1] != null) _packageData[i][1] (_packageData[i][2]);
                             continue;
                         }
 
-                        if (_packageData[i][0] != null)
-                        {
+                        if (_packageData[i][0] != null) {
                             if (this.responseFilter (response, _packageData[i][2]))
-                            {
                                 _packageData[i][0] (response, _packageData[i][2]);
-                            }
                         }
                     }
                     catch (e) {
@@ -177,12 +197,9 @@ const Api =
                 if (callback) callback();
             },
 
-            (req) =>
-            {
+            (req) => {
                 this._hideProgress();
-
-                for (let i = 0; i < _packageData.length; i++)
-                {
+                for (let i = 0; i < _packageData.length; i++) {
                     if (_packageData[i][1] != null) _packageData[i][1] (_packageData[i][2]);
                 }
             }
@@ -219,31 +236,61 @@ const Api =
 
     /**
      * Sets an HTTP header.
+     * @deprecated
+     * @param {string} name
+     * @param {string} value
+     * !static header (name: string, value: string) : Api;
      */
     header: function (name, value)
     {
         if (value === null)
-            delete this.headers[name];
+            delete this._headers[name];
         else
-            this.headers[name] = value;
+            this._headers[name] = value;
 
         return this;
     },
 
     /**
-     * Returns a parameter string for a GET request given an object with fields.
+     * Sets global HTTP headers for subsequent requests. When `update` is `true` existing headers will be updated rather
+     * than replaced, and any header with a `null` value will be removed.
+     * @param {object} values
+     * @param {boolean} update
+     * !static headers (values: object, update: boolean = false) : Api;
+     */
+    headers: function (values, update=false)
+    {
+        if (!update) {
+            this._headers = values;
+            return this;
+        }
+
+        for (let name in values)
+        {
+            let value = values[name];
+            if (value === null)
+                delete this._headers[name];
+            else
+                this._headers[name] = value;
+        }
+
+        return this;
+    },
+
+    /**
+     * Encodes parameters into a query string safe for use in URLs.
+     * @param {object|FormData} obj
+     * !static encodeParams (obj: object|FormData) : string;
      */
     encodeParams: function (obj)
     {
         let s = [];
 
-        if (obj instanceof FormData)
-        {
+        if (obj instanceof FormData) {
             for (let i of obj.entries())
                 s.push(encodeURIComponent(i[0]) + '=' + encodeURIComponent(i[1]));
         }
-        else
-        {
+        else {
             for (let i in obj)
                 s.push(encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]));
         }
@@ -252,22 +299,31 @@ const Api =
     },
 
     /**
-     * Returns a URL given a relative or absolute URL.
+     * Appends a parameter to the given URL.
+     * @param {string} url
+     * @param {object} queryParams
+     * !static appendParams (url: string, queryParams: object) : string;
      */
-    getUrl: function (url)
+    appendParams: function (url, queryParams)
     {
-        if (url.indexOf('//') !== -1)
+        if (queryParams === null)
             return url;
 
-        return this.apiUrl + url;
+        return url + (url.indexOf('?') === -1 ? '?' : '&') + this.encodeParams(queryParams);
     },
 
     /**
-     * Appends a parameter to the URL.
+     * Returns an absolute URL formed with the given relative URL (or absolute URL) and the provided query parameters.
+     * @param {string} url
+     * @param {object} queryParams
+     * !static getAbsoluteUrl (url: string, queryParams: object) : string;
      */
-    appendParam: function (url, param)
+    getAbsoluteUrl: function (url, queryParams=null)
     {
-        return url + (url.indexOf('?') == -1 ? '?' : '&') + param;
+        if (url.indexOf('//') !== -1)
+            return this.appendParams(url, queryParams);
+
+        return this.appendParams(this.apiUrl + url, queryParams);
     },
 
     /**
@@ -277,10 +333,10 @@ const Api =
      */
     apiCall: function (params, success, failure, httpMethod=null, retries=null, relativeUrl='')
     {
-        let url = this.getUrl(relativeUrl ?? '');
+        let url = this.getAbsoluteUrl(relativeUrl ?? '');
 
         if (this.flags & Api.UNIQUE_STAMP)
-            url = this.appendParam(url, '_='+Date.now());
+            url = this.appendParams(url, { "_": Date.now() });
 
         httpMethod = httpMethod ? httpMethod.toUpperCase() : null;
         if (httpMethod === null) httpMethod = 'auto';
@@ -288,25 +344,21 @@ const Api =
         if (retries === null)
             retries = this.retries;
 
-        if (this._requestPackage && (this.flags & Api.REQUEST_PACKAGE_SUPPORTED))
-        {
+        if (this._requestPackage && (this.flags & Api.REQUEST_PACKAGE_SUPPORTED)) {
             if (!(params instanceof FormData))
-                params = {...params};
-
-            this._packageData.push([success, failure, params]);
+                params = { ...params };
+            this._packageData.push([ success, failure, params ]);
             return;
         }
 
         this._showProgress();
 
         let data = params;
-
-        let options =
-        {
+        let options = {
             mode: this.flags & Api.DISABLE_CORS ? 'no-cors' : 'cors',
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9',
-                ...this.headers
+                ...this._headers
             },
             method: httpMethod,
             body: null,
@@ -330,8 +382,7 @@ const Api =
 
             for (let i of data.entries())
             {
-                if ((i[1] instanceof File) || (i[1] instanceof Blob))
-                {
+                if ((i[1] instanceof File) || (i[1] instanceof Blob)) {
                     if (options.method === 'auto') options.method = 'POST';
                     options.multipart = true;
                     break;
@@ -344,8 +395,7 @@ const Api =
                 data = tmp;
             }
 
-            if (options.method === 'auto')
-            {
+            if (options.method === 'auto') {
                 let l = 0;
                 options.method = 'GET';
                 for (let i of data.entries()) {
@@ -358,7 +408,7 @@ const Api =
             }
 
             if (options.method === 'GET' || options.method === 'DELETE' || options.method === 'TRACE' || options.method === 'OPTIONS' || options.method === 'HEAD') {
-                url = this.appendParam(url, this.encodeParams(data));
+                url = this.appendParams(url, data);
             }
             else
             {
@@ -389,7 +439,7 @@ const Api =
                         options.headers['Content-Type'] = 'application/octet-stream';
                 }
             }
-            else
+            else // Blob
                 options.headers['Content-Type'] = data.type;
 
             if (options.method === 'auto') options.method = 'POST';
@@ -425,7 +475,6 @@ const Api =
     decodeResult: function (result)
     {
         let type = result.headers.get('content-type').split(';')[0].toLowerCase();
-
         if ((this.flags & Api.JSON_RESPONSE_SUPPORTED) && type.indexOf('json') !== -1)
         {
             if (this.flags & Api.WIND_V3) {
@@ -441,8 +490,7 @@ const Api =
 
         if ((this.flags & Api.XML_RESPONSE_SUPPORTED) && type.indexOf('xml') !== -1)
         {
-            return new Promise((resolve, reject) =>
-            {
+            return new Promise((resolve, reject) => {
                 result.text().then(data => {
                     data = (new DOMParser).parseFromString(data, 'text/xml');
                     resolve(data);
@@ -456,9 +504,11 @@ const Api =
 
     /**
      * Makes a blob with the specified data and type.
+     * @param {string} data
+     * @param {string} type
+     * !static getBlob (data: string, type: string) : Blob
      */
-    getBlob: function (data, type)
-    {
+    getBlob: function (data, type) {
         return new Blob ([data], { type: type });
     },
 
@@ -467,64 +517,59 @@ const Api =
      */
     base64:
     {
-        encode: function (value)
-        {
+        encode: function (value) {
             return base64.encode(value);
         },
 
-        decode: function (value)
-        {
+        decode: function (value) {
             return base64.decode(value);
         }
     },
 
     /**
-     * Executes an API request, returns a promise.
+     * Executes an API request.
+     * @param {string} method
+     * @param {string} url
+     * @param {object} query
+     * @param {string|object|Blob} body
+     * !static request (method: string, url: string, query?: object, body?: object) : Promise
      */
-    request: function (method, url, params=null)
+    request: function (method, url, query=null, body=null)
     {
-        if (params === null)
-        {
-            if (typeof(url) !== 'string')
-            {
-                params = url;
-                url = '';
-            }
-        }
+        if (typeof(body) !== 'string' && !(body instanceof Blob))
+            body = JSON.stringify(body);
 
         return new Promise((resolve, reject) => {
-            this.apiCall(params, resolve, reject, null, method, url);
+            this.apiCall(
+                body,
+                resolve, reject,
+                method,
+                null,
+                this.getAbsoluteUrl(url, query)
+            )
         });
     },
 
-    post: function (url=null, params=null)
-    {
+    post: function (url=null, params=null) {
         return this.fetch('POST', url, params);
     },
 
-    get: function (url=null, params=null)
-    {
+    get: function (url=null, params=null) {
         return this.fetch('GET', url, params);
     },
 
-    put: function (url=null, params=null)
-    {
+    put: function (url=null, params=null) {
         return this.fetch('PUT', url, params);
     },
 
-    patch: function (url=null, params=null)
-    {
+    patch: function (url=null, params=null) {
         return this.fetch('PATCH', url, params);
     },
 
-    delete: function (url=null, params=null)
-    {
+    delete: function (url=null, params=null) {
         return this.fetch('DELETE', url, params);
     },
 
-    /**
-     * Executes an automatic API call, returns a promise.
-     */
     fetch: function (method, url=null, params=null)
     {
         // fetch (method, relativePath, params)
@@ -552,24 +597,9 @@ const Api =
         return new Promise((resolve, reject) => {
             this.apiCall(params, resolve, reject, method, null, url);
         });
-    },
-
-    /**
-     * Builds a URL from the given data.
-     */
-    makeUrl: function (url, params=null)
-    {
-        if (params === null)
-        {
-            if (typeof(url) !== 'string')
-            {
-                params = url;
-                url = '';
-            }
-        }
-
-        return this.appendParam(this.getUrl(url), this.encodeParams(params));
     }
 };
 
 export default Api;
+
+//!/class

@@ -125,8 +125,7 @@ export default Element.register ('r-form',
 
     _change: function(elem)
     {
-        if ('createEvent' in document)
-        {
+        if ('createEvent' in document) {
             let evt = document.createEvent('HTMLEvents');
             evt.initEvent('change', false, true);
             elem.dispatchEvent(evt);
@@ -138,6 +137,9 @@ export default Element.register ('r-form',
     _setField: function (f, value, silent)
     {
         if (!f) return;
+
+        if (this.onfieldchanged)
+            value = this.onfieldchanged(f, value, this);
 
         for (f of this.querySelectorAll('[data-field="'+f+'"]'))
         {
