@@ -45,6 +45,9 @@ export default Element.register ('r-panel',
             this.hide();
         };
 
+        if (this.classList.contains('is-inactive'))
+            this.classList.add('_is-inactive');
+
         this.hide();
     },
 
@@ -59,12 +62,13 @@ export default Element.register ('r-panel',
             this.classList.add('is-inactive');
         }
         else {
-            if (!this.classList.contains('is-inactive')) {
+            if (!this.classList.contains('_is-inactive')) {
                 this.classList.add('is-active');
                 this.classList.remove('is-inactive');
             }
         }
 
+        this.classList.remove('_is-inactive');
         this.classList.add('anim-ended');
     },
 
