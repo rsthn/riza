@@ -1,3 +1,10 @@
+# v3.0.36 - Jan 04 2025
+
+#### r-tabs
+- Fixed bug causing partial routes not to keep the respective link with 'is-active' class.
+
+<br/>
+
 # v3.0.35 - Dec 21 2024
 
 #### r-panel

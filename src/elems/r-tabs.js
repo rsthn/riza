@@ -59,6 +59,16 @@ export default Element.register ('r-tabs',
     },
 
     /**
+     * Removes trailing slash.
+     */
+    chop: function(value)
+    {
+        if (value.endsWith('/'))
+            return value.substr(0, value.length-1);
+        return value;
+    },
+
+    /**
      * Initializes the element.
      */
     init: function()
@@ -67,13 +77,17 @@ export default Element.register ('r-tabs',
         {
             if (Router.location !== '')
             {
-                let n = this.dataset.baseRoute.split('/').length;
+                let n = this.chop(this.dataset.baseRoute).split('/').length;
+                let location = this.chop(Router.location) + '/';
 
                 this.querySelectorAll("[href]").forEach(link =>
                 {
                     if (!link.href) return;
 
-                    if (Router.location.startsWith( link.href.substr(link.href.indexOf('#')+1).split('/').slice(0,n).join('/') )) {
+                    let a = this.chop(link.href.substr(link.href.indexOf('#')+1));
+                    a = a.split('/').slice(0,n).join('/') + '/';
+
+                    if (location.startsWith(a)) {
                         link.classList.add('is-active');
                         link.classList.remove('is-inactive');
                     } else {
