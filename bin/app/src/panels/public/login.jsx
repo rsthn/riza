@@ -41,7 +41,7 @@ export default ({ ref, onActionRequired }, children) =>
 
             <div class="field">
                 <label>{tr('Username')}</label>
-                <input type="text" data-field="username" autocomplete="off" />
+                <input type="text" data-field="username" autocomplete="off" autocapitalize="off" />
             </div>
 
             <div class="field">

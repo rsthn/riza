@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "bin"
+		},
+		{
+			"path": "custom"
+		},
+		{
+			"path": "docs"
+		},
+		{
+			"path": "packages"
+		},
+		{
+			"path": "scripts"
+		},
+		{
+			"path": "src"
+		}
+	]
+}

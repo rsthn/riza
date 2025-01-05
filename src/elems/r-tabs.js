@@ -44,8 +44,8 @@ export default Element.register ('r-tabs',
     activeTab: null,
 
     /**
-    **	Element events.
-    */
+     * Events.
+     */
     'event click [data-name]': function (evt)
     {
         evt.continuePropagation = true;
@@ -55,23 +55,25 @@ export default Element.register ('r-tabs',
             return;
         }
 
-        this.selectTab (evt.source.dataset.name);
+        this.selectTab(evt.source.dataset.name);
     },
 
     /**
-    **	Initializes the Tabs element.
-    */
+     * Initializes the element.
+     */
     init: function()
     {
         this._routeHandler = (evt, args) =>
         {
-            if (Router.location != '')
+            if (Router.location !== '')
             {
+                let n = this.dataset.baseRoute.split('/').length;
+
                 this.querySelectorAll("[href]").forEach(link =>
                 {
                     if (!link.href) return;
 
-                    if (Router.location.startsWith(link.href.substr(link.href.indexOf('#')+1))) {
+                    if (Router.location.startsWith( link.href.substr(link.href.indexOf('#')+1).split('/').slice(0,n).join('/') )) {
                         link.classList.add('is-active');
                         link.classList.remove('is-inactive');
                     } else {
@@ -90,20 +92,20 @@ export default Element.register ('r-tabs',
             if (!args.route.changed)
                 return;
 
-            this.showTab (args.tabName);
+            this.showTab(args.tabName);
         };
     },
 
     /**
-    **	Executed when the children of the element are ready.
-    */
+     * Executed when the children of the element are ready.
+     */
     ready: function()
     {
         if ("container" in this.dataset)
         {
-            if (this.dataset.container == ':previousElement')
+            if (this.dataset.container === ':previousElement' || this.dataset.container === ':prev')
                 this.container = this.previousElementSibling;
-            else if (this.dataset.container == ':nextElement')
+            else if (this.dataset.container === ':nextElement' || this.dataset.container === ':next')
                 this.container = this.nextElementSibling;
             else if (this.dataset.container == ':none')
                 this.container = null;
@@ -117,27 +119,25 @@ export default Element.register ('r-tabs',
     },
 
     /**
-    **	Adds a handler to Router if the data-base-route attribute was set.
-    */
-    onConnected: function()
-    {
+     * Adds a handler to the router if the `data-base-route` attribute is set.
+     */
+    onConnected: function() {
         if (this.dataset.baseRoute)
             Router.addRoute (this.dataset.baseRoute.replace('@', ':tabName'), this._routeHandler);
     },
 
     /**
-    **	Removes a handler previously added to Router if the data-base-route attribute was set.
-    */
-    onDisconnected: function()
-    {
+     * Removes a handler previously added to the router if the `data-base-route` attribute is set.
+     */
+    onDisconnected: function() {
         if (this.dataset.baseRoute)
             Router.removeRoute(this.dataset.baseRoute.replace('@', ':tabName'), this._routeHandler);
     },
 
     /**
-    **	Hides all tabs except the one with the specified exceptName, if none specified then all tabs will be hidden (adds `.is-hidden` CSS class),
-    **	additionally the respective link item in the tab definition will have class `.is-active`.
-    */
+     * Hides all tabs except the one with the specified name, if none specified then all tabs will be hidden (adds `.is-hidden` CSS class to the respective
+     * tab container), additionally the respective link item in the tab definition will get class `.is-active` or `.is-inactive`.
+     */
     _hideTabsExcept: function (exceptName)
     {
         if (!exceptName) exceptName = '';
@@ -157,7 +157,7 @@ export default Element.register ('r-tabs',
             });
         }
 
-        this.querySelectorAll("[data-name]").forEach(link =>
+        this.querySelectorAll('[data-name]').forEach(link =>
         {
             if (link.dataset.name === exceptName) {
                 link.classList.add('is-active');
@@ -179,28 +179,25 @@ export default Element.register ('r-tabs',
     },
 
     /**
-    **	Shows the tab with the specified name, ignores `data-base-route` and current route as well.
-    */
-    showTab: function (name)
-    {
-        return this._hideTabsExcept (name);
+     * Shows the tab with the specified name, ignores `data-base-route` and current route as well.
+     */
+    showTab: function (name) {
+        return this._hideTabsExcept(name);
     },
 
     /**
-    **	Shows a tab given its name. The route will be changed automatically if `data-base-route` is enabled.
-    */
+     * Shows a tab given its name. The route will be changed automatically if `data-base-route` is enabled.
+     */
     selectTab: function (name)
     {
-        if (this.dataset.baseRoute)
-        {
+        if (this.dataset.baseRoute) {
             const hash = "#" + Router.realLocation(this.dataset.baseRoute.replace('@', name));
-
             if (location.hash != hash) {
                 location = hash;
                 return;
             }
         }
 
-        this.showTab (name);
+        this.showTab(name);
     }
 });

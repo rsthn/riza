@@ -77,6 +77,9 @@ export default Element.register ('r-panel',
      */
     onDisconnected: function()
     {
+        if (this.classList.contains('is-inactive'))
+            this.classList.add('_is-inactive');
+
         if (this.dataset.route)
             Router.removeRoute(this.dataset.route, this._onActivate, this._onDeactivate);
     },

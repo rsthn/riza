@@ -20,9 +20,9 @@ global.EventBus = new Model();
 global.DataBus = global.EventBus;
 
 /**
- * Set API end point.
+ * Set API base URL.
  */
-Api.setEndPoint(process.env.API_URL);
+Api.setBaseUrl(process.env.API_URL, Api.flags | Api.WIND_V3);
 
 
 // *****************************
