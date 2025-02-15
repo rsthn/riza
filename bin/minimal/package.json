@@ -5,6 +5,7 @@
     "clean": "shx rm -rf dist",
     "prebuild": "shx mkdir -p dist",
     "build": "pnpm clean && pnpm prebuild && parcel build src/index.html --no-source-maps --public-url ./",
+    "release": "shx rm -rf redist && shx mkdir -p redist && parcel build src/index.html --no-source-maps --public-url ./ --dist-dir redist",
     "watch": "pnpm prebuild && parcel watch src/index.html --public-url ./",
     "dev": "parcel serve src/index.html"
   },
