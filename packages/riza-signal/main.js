@@ -95,7 +95,7 @@ export class Signal
         val = this.transform(val);
         if (this.#value === val) return;
         this.#value = val;
-        this.notify();
+        this.emit();
     }
 
     /**
@@ -114,9 +114,10 @@ export class Signal
      */
     set(value, forced=false) {
         value = this.transform(value);
-        if (this.#value === value && forced !== true) return;
+        if (this.#value === value && forced !== true)
+            return this;
         this.#value = value;
-        this.notify();
+        this.emit();
         return this;
     }
 
@@ -152,11 +153,19 @@ export class Signal
     }
 
     /**
-     * Notifies all the listeners of the signal that it has changed its value.
+     * Notifies all the listeners of the signal.
      */
     notify() {
         for (let callback of this.#listeners)
-            callback();
+            callback(this.#value);
+    }
+
+    /**
+     * Executes the callback of all signal listeners.
+     */
+    emit() {
+        for (let callback of this.#listeners)
+            callback(this.#value);
     }
 };
 
