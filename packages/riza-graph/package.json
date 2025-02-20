@@ -1,0 +1,36 @@
+{
+    "name": "riza-graph",
+    "version": "1.0.0",
+    "description": "Riza Graph",
+    "type": "module",
+    "main": "redist/riza-graph.m.js",
+    "types": "redist/riza-graph.d.ts",
+    "scripts": {
+        "test": "echo Ok",
+        "dev": "parcel serve src/index.html",
+        "tsdoc": "dts-bundle-generator --no-banner --disable-symlinks-following -o ./redist/riza-graph.d.ts ./src/main.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rsthn/riza.git",
+        "directory": "packages/riza-graph"
+    },
+    "author": "RedStar Technologies",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rsthn/riza/issues"
+    },
+    "homepage": "https://github.com/rsthn/riza#readme",
+    "files": [
+        "LICENSE",
+        "README.md",
+        "main.js"
+    ],
+    "dependencies": {
+        "riza-signal": "^1.0.6"
+    },
+    "devDependencies": {
+        "dts-bundle-generator": "^9.5.1",
+        "parcel": "^2.13.3"
+    }
+}
