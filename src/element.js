@@ -247,8 +247,8 @@ const Element =
             this.setInnerHTML(this.contents);
 
         setTimeout(() => {
-            if (this.tagName.toLowerCase() !== 'r-dom-probe')
-                this.appendChild(document.createElement('r-dom-probe'));
+            if (this.tagName.toLowerCase() !== 'rr-dom-probe')
+                this.appendChild(document.createElement('rr-dom-probe'));
             else
                 this.markReady();
         }, 0);
@@ -367,7 +367,7 @@ const Element =
             this.checkReady();
         }
 
-        if (this.tagName.toLowerCase() === 'r-dom-probe')
+        if (this.tagName.toLowerCase() === 'rr-dom-probe')
             this.remove();
     },
 
@@ -1383,8 +1383,8 @@ const Element =
     */
     register: function (name, ...protos)
     {
-        if ('riza_element_prefix' in globalThis)
-            name = name.replace('r-', globalThis['riza_element_prefix'] + '-');
+        if ('riza_element_prefix' in globalThis && name.startsWith('r-'))
+            name = globalThis.riza_element_prefix + name.substring(1);
 
         const newElement = class extends HTMLElement
         {
@@ -1768,7 +1768,7 @@ Element.debug = false;
 Element.register('r-elem', {
 });
 
-Element.register ('r-dom-probe', {
+Element.register ('rr-dom-probe', {
 });
 
 /* ****************************************** */

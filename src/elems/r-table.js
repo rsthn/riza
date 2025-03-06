@@ -78,9 +78,8 @@ export default Element.register ('r-table',
         else
             this.template = () => this.container.innerHTML;
 
-        this.temporalBody = document.createElement('tbody');
+        this.temporalBody = document.createElement((this.dataset.container || 'tbody').split('.')[0] || 'tbody');
         this.container.textContent = ' ';
-
         this.setEmpty(true);
     },
 
@@ -216,9 +215,7 @@ export default Element.register ('r-table',
         }
 
         let elem = this.temporalBody;
-
         elem.innerHTML = this.template(data.get());
-
         elem.querySelectorAll('[data-model=":list-item"]').forEach(i => {
             i.model = data;
             i.dataset.model = "this.model";
@@ -226,7 +223,6 @@ export default Element.register ('r-table',
 
         elem = elem.firstElementChild;
         elem.dataset.iid = iid;
-
         return elem;
     },
 
