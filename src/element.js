@@ -1039,7 +1039,8 @@ const Element =
         }
 
         /* *** */
-        list = this.querySelectorAll('[data-property]');
+        const property_ = 'riza_data_property' in globalThis ? globalThis.riza_data_property : 'property';
+        list = this.querySelectorAll(`[data-${property_}]`);
         for (let i = 0; i < list.length; i++)
         {
             list[i].onchange = list[i].onblur = function()
@@ -1064,17 +1065,14 @@ const Element =
                 }
             };
 
-            if (list[i].tagName == 'SELECT')
-            {
-                list[i].onmouseup = function()
-                {
+            if (list[i].tagName === 'SELECT') {
+                list[i].onmouseup = function() {
                     self.getModel().set(this.name, this.value);
                 };
             }
 
-            list[i].name = list[i].dataset.property;
-
-            list[i].removeAttribute('data-property');
+            list[i].name = list[i].dataset[property_];
+            list[i].removeAttribute(`data-${property_}`);
             this._list_property.push(list[i]);
         }
 

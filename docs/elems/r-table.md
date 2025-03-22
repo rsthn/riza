@@ -5,7 +5,7 @@ Connects to a `DataSource` and renders its contents as a table. Supports filteri
 |Attribute|Required|Description
 |---------|--------|-----------
 |`data-source`|Required|Path to a `DataSource` object. Its `list` property will be used as input.
-|`data-container`|Optional|Selector of the container where rows will be placed (must be a `<tbody>`). If none is provided `.x-data` will be used.
+|`data-container`|Optional|Selector of the container where rows will be placed, ensure to include the element type (e.g. `div.x-data`), if none is provided `tbody.x-data` will be used.
 
 <br/>
 
