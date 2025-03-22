@@ -1,3 +1,18 @@
+# v3.0.37 - Mar 22 2025
+
+#### Riza Signal
+- Added `emit` function as future replacement for `notify`.
+- Function `emit` and `notify` now include the signal's value.
+
+#### Element
+- Fixed bug causing r-dom-probe not to be detected when a custom prefix is used.
+- Added option 'riza_data_property' to override data-property attribute name.
+
+#### r-table
+- Container tag is now taken from the data-container attribute.
+
+<br/>
+
 # v3.0.36 - Jan 04 2025
 
 #### r-tabs
