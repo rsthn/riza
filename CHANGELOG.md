@@ -1,3 +1,10 @@
+# v3.0.38 - Apr 11 2025
+
+#### QoL
+- Updated dependencies
+
+<br/>
+
 # v3.0.37 - Mar 22 2025
 
 #### Riza Signal
