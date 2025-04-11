@@ -47,8 +47,14 @@ const v_checkRequiredImports = {
 const v_getSignalIdentifiers = {
     Identifier: function (path)
     {
+        // legacy mode, using '$' as prefix for signals
         if (path.node.name[0] === '$' && !(path.node.name.substr(1) in this.names)) {
             this.names[path.node.name.substr(1)] = true;
+            path.node.name = path.node.name;
+            this.list.push(path.node);
+        }
+        else if (!(path.node.name in this.names)) {
+            this.names[path.node.name] = true;
             path.node.name = path.node.name;
             this.list.push(path.node);
         }

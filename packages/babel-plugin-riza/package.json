@@ -1,12 +1,17 @@
 {
     "name": "babel-plugin-riza",
-    "version": "2.0.9",
+    "version": "2.1.1",
     "description": "Riza JSX Transpiler (Babel)",
     "main": "main.js",
     "scripts": {
         "test": "echo Ok",
-        "sample": "cls && babel debug/test.jsx",
-        "dev": "parcel serve debug/test.html"
+        "sample": "babel debug/test.jsx",
+        "dev": "parcel serve --target sample"
+    },
+    "targets": {
+        "sample": {
+            "source": "./debug/test.html"
+        }
     },
     "repository": {
         "type": "git",
@@ -26,14 +31,14 @@
         "syntax-jsx.js"
     ],
     "dependencies": {
-        "@babel/core": "^7.22.20",
-        "@babel/generator": "^7.22.15",
-        "@babel/helper-plugin-utils": "^7.22.5"
+        "@babel/core": "^7.26.10",
+        "@babel/generator": "^7.27.0",
+        "@babel/helper-plugin-utils": "^7.26.5"
     },
     "devDependencies": {
-        "@babel/cli": "^7.22.15",
-        "@babel/types": "^7.22.19",
-        "parcel": "^2.9.3",
-        "riza": "^3.0.14"
+        "@babel/cli": "^7.27.0",
+        "@babel/types": "^7.27.0",
+        "parcel": "^2.14.4",
+        "riza": "^3.0.37"
     }
 }
