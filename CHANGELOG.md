@@ -1,7 +1,8 @@
 # v3.0.38 - Apr 11 2025
 
 #### QoL
-- Updated dependencies
+- Using now babel-plugin-riza 2.1.1 which no longer requires '$' for signal variables.
+- Updated dependencies.
 
 <br/>
 
