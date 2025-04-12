@@ -42,18 +42,135 @@ const v_checkRequiredImports = {
 };
 
 /**
- * Visitor to collect all signal identifiers, that is, all identifiers starting with a "$" character.
+ * Visitor to collect all signal identifiers.
  */
-const v_getSignalIdentifiers = {
-    Identifier: function (path)
-    {
-        if (path.node.name[0] === '$' && !(path.node.name.substr(1) in this.names)) {
-            this.names[path.node.name.substr(1)] = true;
-            path.node.name = path.node.name;
-            this.list.push(path.node);
+function makeExpr(id_expr, vars, node) {
+    let vals = Object.values(vars);
+    return t.callExpression(id_expr, [t.arrayExpression(vals.map(({id, node}) => node)), t.arrowFunctionExpression(vals.map(({id, node}) => id), node)]);
+}
+
+function ctraverse(ctx, path, visitor)
+{
+    if (!(path.node.type in visitor))
+        throw new Error('ctraverse: ' + path.node.type);
+
+    if ('enter' in visitor)
+        visitor['enter'](ctx, path);
+
+    let node = visitor[path.node.type](ctx, path);
+    if (node)
+        path.replaceWith(node);
+}
+
+const visitorTransformSignalExpr =
+{
+    Identifier(ctx, path) {
+        ctx.vars[0][path.node.name] = { id: path.node, node: path.node };
+        ctx.last = path.node;
+    },
+
+    NumericLiteral(ctx, path) {
+        ctx.last = path.node;
+    },
+
+    BooleanLiteral(ctx, path) {
+        ctx.last = path.node;
+    },
+
+    StringLiteral(ctx, path) {
+        ctx.last = path.node;
+    },
+
+    NullLiteral(ctx, path) {
+        ctx.last = path.node;
+    },
+
+    UnaryExpression(ctx, path) {
+        let vars = transformSignalExpr(ctx, 'unary_expr', path.get('argument'));
+        let id = t.identifier(`_u${ctx.id++}`);
+        ctx.vars[0][id.name] = { id, node: ctx.last = makeExpr(ctx.id_expr, vars, path.node) };
+        return id;
+    },
+
+    BinaryExpression(ctx, path) {
+        if (ctx.mode[0] === 'bin_expr') {
+            ctraverse(ctx, path.get("left"), this);
+            ctraverse(ctx, path.get("right"), this);
+            ctx.last = path.node;
+            return;
         }
-    }
+
+        let vars = transformSignalExpr(ctx, 'bin_expr', path);
+        let id = t.identifier(`_b${ctx.id++}`);
+        ctx.vars[0][id.name] = { id, node: ctx.last = makeExpr(ctx.id_expr, vars, path.node) };
+        return id;
+    },
+
+    MemberExpression(ctx, path)
+    {
+        let vars;
+        if (path.node.computed)
+            vars = transformSignalExpr(ctx, 'member_expr', [path.get('object'), path.get('property')]);
+        else
+            vars = transformSignalExpr(ctx, 'member_expr', path.get('object'));
+
+        let id = t.identifier(`_m${ctx.id++}`);
+        ctx.vars[0][id.name] = { id, node: ctx.last = makeExpr(ctx.id_expr, vars, path.node) };
+        return id;
+    },
+
+    CallExpression(ctx, path)
+    {
+        let vars = transformSignalExpr(ctx, 'call_expr', [
+            path.get('callee'),
+            ...path.node.arguments.map((_, i) => path.get(`arguments.${i}`))
+        ]);
+
+        let id = t.identifier(`_c${ctx.id++}`);
+        ctx.vars[0][id.name] = { id, node: ctx.last = makeExpr(ctx.id_expr, vars, path.node) };
+        return id;
+    },
+
+    ArrowFunctionExpression(ctx, path) {
+        let vars = transformSignalExpr(ctx, 'arrow_expr', path.get('body'));
+        let id = t.identifier(`_a${ctx.id++}`);
+        ctx.vars[0][id.name] = { id, node: ctx.last = makeExpr(ctx.id_expr, vars, path.node) };
+        return id;
+    },
+
 };
+
+function transformSignalExpr(ctx, mode, path) {
+    let tmp = {};
+    ctx.vars.unshift(tmp);
+    ctx.mode.unshift(mode);
+
+    if (path instanceof Array) {
+        for (let p of path)
+            ctraverse(ctx, p, visitorTransformSignalExpr);
+    }
+    else
+        ctraverse(ctx, path, visitorTransformSignalExpr);
+
+    ctx.vars.shift();
+    ctx.mode.shift();
+    return tmp;
+}
+
+/**
+ * Returns an array with all signal identifiers.
+ */
+function getSignalIdentifiers (root_context, path)
+{
+    let ctx = { id_expr: root_context.id.expr, vars: [], mode: [], last: null, id: 0 };
+
+    transformSignalExpr(ctx, 'root', path);
+    path.replaceWith(ctx.last);
+
+console.log(generate(path.node).code);
+process.exit();
+    return ctx;
+}
 
 /**
  * Visitor to find the path to an specific node in the AST.
@@ -82,17 +199,6 @@ function hasCallExpression (path) {
 function checkRequiredImports (path) {
     let ctx = { helpers: false, watch: false, expr: false };
     path.traverse(v_checkRequiredImports, ctx);
-    return ctx;
-}
-
-/**
- * Returns an array with all signal identifiers.
- */
-function getSignalIdentifiers (path) {
-    let ctx = { list: [], names: { } };
-    path.traverse(v_getSignalIdentifiers, ctx);
-    ctx.names = Object.keys(ctx.names).map(s => t.identifier(s));
-    ctx.length = ctx.list.length;
     return ctx;
 }
 
@@ -409,9 +515,10 @@ module.exports = function()
                     }
 
                     let exprPath = dynamicAttributeList[nextDynAttr++];
-                    let signalIds = getSignalIdentifiers(exprPath);
+                    let signalIds = getSignalIdentifiers(this.context, exprPath);
                     if (signalIds.length > 0)
                         finalAttributes.push(t.objectProperty(attributeList[i],
+                        //VIOLET
                             t.callExpression(this.context.id.expr, [t.arrayExpression(signalIds.names), t.arrowFunctionExpression(signalIds.list, exprPath.node)])
                         ));
                     else
@@ -433,8 +540,9 @@ module.exports = function()
                     }
 
                     let exprPath = dynamicChildrenList[nextDynChild++];
-                    let signalIds = getSignalIdentifiers(exprPath);
+                    let signalIds = getSignalIdentifiers(this.context, exprPath);
                     if (signalIds.length > 0 && !exprPath.node.isDynamicChild)
+                        //VIOLET
                         finalChildren.push(t.callExpression(this.context.id.expr, [t.arrayExpression(signalIds.names), t.arrowFunctionExpression(signalIds.list, exprPath.node)]));
                     else
                         finalChildren.push(exprPath.node);
@@ -468,9 +576,10 @@ module.exports = function()
                 // ***
                 for (let i in dynamicAttributeList) {
                     let exprPath = dynamicAttributeList[i];
-                    let signalIds = getSignalIdentifiers(exprPath);
+                    let signalIds = getSignalIdentifiers(this.context, exprPath);
                     if (signalIds.length > 0)
-                        dynamicAttributeList[i] = t.callExpression(this.context.id.expr, [t.arrayExpression(signalIds.names), t.arrowFunctionExpression(signalIds.list, exprPath.node)])
+                        //VIOLET
+                        dynamicAttributeList[i] = signalIds.node;
                     else
                         dynamicAttributeList[i] = exprPath.node;
                 }
@@ -478,8 +587,9 @@ module.exports = function()
                 // ***
                 for (let i in dynamicChildrenList) {
                     let exprPath = dynamicChildrenList[i];
-                    let signalIds = getSignalIdentifiers(exprPath);
+                    let signalIds = getSignalIdentifiers(this.context, exprPath);
                     if (signalIds.length > 0 && !exprPath.node.isDynamicChild)
+                        //VIOLET
                         dynamicChildrenList[i] = t.callExpression(this.context.id.expr, [t.arrayExpression(signalIds.names), t.arrowFunctionExpression(signalIds.list, exprPath.node)])
                     else
                         dynamicChildrenList[i] = exprPath.node;
@@ -503,9 +613,10 @@ module.exports = function()
             if (path.node.callee.type !== 'Identifier' || path.node.callee.name !== 'dyn')
                 return;
 
-            let signalIds = getSignalIdentifiers(path.get('arguments.0'));
+            let signalIds = getSignalIdentifiers(this.context, path.get('arguments.0'));
             if (!signalIds.length) return;
 
+            //VIOLET
             let node = t.callExpression(this.context.id.expr, [t.arrayExpression(signalIds.names), t.arrowFunctionExpression(signalIds.list, path.node.arguments[0])]);
             node.isDynamic = true;
             path.replaceWith(node);
