@@ -5,7 +5,7 @@ import "./css/main.css"
 export default () =>
     <div class="app">
         <span>
-            <img src="js-logo.png" />
+            <img src="logo-512.png" />
         </span>
         <b>Riza Ready!</b>
     </div>

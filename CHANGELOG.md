@@ -1,3 +1,12 @@
+# v3.0.40 - May 19 2025
+
+#### QoL
+- Package manager auto detected now when using `riza new`.
+- Updated README.md
+- Updated dependencies.
+
+<br/>
+
 # v3.0.39 - Apr 12 2025
 
 #### QoL
