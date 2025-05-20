@@ -1,5 +1,5 @@
 
-import { expr, watch } from 'riza';
+import { signal, expr, watch } from 'riza';
 import { userData } from '../signals';
 
 /**
@@ -12,6 +12,42 @@ export function toggle (signal) {
         signal.value = !signal.value;
         return signal.value;
     };
+}
+
+/**
+ * Returns a function that sets the value of a signal.
+ * @param {Signal} signal
+ * @param {any} value
+ * @returns {function}
+ */
+export function set (signal, value) {
+    return function() {
+        signal.set(value);
+    };
+}
+
+/**
+ * Executes a function when the condition is `true`.
+ * @param {Signal} condition
+ * @param {Function} fn
+ */
+export function when (condition, fn) {
+    watch([condition], (condition) => {
+        if (condition)
+            fn();
+    });
+}
+
+/**
+ * Executes a function when the condition is `false`.
+ * @param {Signal} condition
+ * @param {Function} fn
+ */
+export function whenNot (condition, fn) {
+    watch([condition], (condition) => {
+        if (!condition)
+            fn();
+    });
 }
 
 /**
@@ -55,6 +91,24 @@ export function mirror (condition, source, destination)
  */
 export function not (input) {
     return expr([input], (value) => !value);
+}
+
+/**
+ * Returns a signal representing the logical AND of the inputs.
+ * @param {Signal} inputs
+ * @returns {Signal}
+ */
+export function and (...inputs) {
+    return expr(inputs, (...values) => values.every(val => val == true));
+}
+
+/**
+ * Returns a signal representing the logical OR of the inputs.
+ * @param {Signal} inputs
+ * @returns {Signal}
+ */
+export function or (...inputs) {
+    return expr(inputs, (...values) => values.some(val => val == true));
 }
 
 /**
@@ -109,25 +163,46 @@ export function ifNotNull (condition, result=true, alternative=false) {
  * @param {*} [alternative]
  * @returns {Signal}
  */
-export function ifEqual (condition, value, result=true, alternative=false) {
+export function eq (condition, value, result=true, alternative=false) {
     return expr([condition], (condition) => condition == value ? result : alternative);
 }
 
 /**
- * Returns a signal that outputs `trueVal` if the current user has certain privilege or `falseVal` otherwise.
+ * Returns a signal that outputs `result` if `condition` is NOT equal to the given value, otherwise outputs `alternative`.
+ * @param {Signal} condition
+ * @param {*} value
+ * @param {*} [result]
+ * @param {*} [alternative]
+ * @returns {Signal}
+ */
+export function neq (condition, value, result=true, alternative=false) {
+    return expr([condition], (condition) => condition != value ? result : alternative);
+}
+
+/**
+ * Returns a signal that outputs `trueVal` if the current user has certain permission or `falseVal` otherwise.
  * @param {*} privileges
  * @param {*} [trueVal]
  * @param {*} [falseVal]
  * @returns {Signal}
  */
-export function hasPrivilege (privileges, trueVal=true, falseVal=false)
+export function hasPerm (permissions, trueVal=true, falseVal=false)
 {
-    if (typeof(privileges) === 'string')
-        privileges = [ privileges ];
+    if (typeof(permissions) === 'string')
+        permissions = [ permissions ];
 
     return expr([ userData ], (userData) => {
-        if (!userData.privileges)
+        if (!userData.permissions)
             return falseVal;
-        return userData.privileges.some(privilege => privileges.includes(privilege)) ? trueVal : falseVal;
+        return userData.permissions.some(perm => permissions.includes(perm)) ? trueVal : falseVal;
     });
+}
+
+/**
+ * Converts a list of objects to a list of signals.
+ * @param {object[]} list
+ * @returns {Signal[]}
+ */
+export function signalize (list) {
+    return list.map(item => signal(item));
 }

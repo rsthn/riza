@@ -7,6 +7,5 @@ export default () =>
         <span>
             <img src="logo-512.png" />
         </span>
-        <b>Riza Ready!</b>
     </div>
 ;
