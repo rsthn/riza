@@ -293,8 +293,7 @@ const Element =
             }
 
             // Run ready methods in class hierarchy.
-            Object.keys(this._super).reverse().forEach(i =>
-            {
+            Object.keys(this._super).reverse().forEach(i => {
                 if ('ready' in this._super[i])
                     this._super[i].ready();
             });
@@ -304,7 +303,6 @@ const Element =
 
             this.ready();
             this.trigger('ready').dispatch('_ready', null, false);
-
             this.collectWatchers();
         }
         else
@@ -323,8 +321,7 @@ const Element =
         if (root && root.isReady === 2 && this.isReady !== 2)
         {
             this.getRoot();
-            if (this.root && this.dataset.ref)
-            {
+            if (this.root && this.dataset.ref) {
                 if (Element.debug)
                     console.log(this.tagName + ' REF AS `' + this.dataset.ref + '` ON ' + this.root.tagName);
 
@@ -865,16 +862,10 @@ const Element =
     /**
     **	Creates an event object for later dispatch.
     */
-    createEventObject: function(eventName, args, bubbles)
-    {
-        let evt;
-
+    createEventObject: function(eventName, args, bubbles) {
         if (eventName == 'click')
-            evt = new MouseEvent(eventName, { bubbles: bubbles, detail: args });
-        else
-            evt = new CustomEvent (eventName, { bubbles: bubbles, detail: args });
-
-        return evt;
+            return new MouseEvent(eventName, { bubbles: bubbles, detail: args });
+        return new CustomEvent (eventName, { bubbles: bubbles, detail: args });
     },
 
     /**
@@ -910,7 +901,7 @@ const Element =
     dispatchOn: function (elem, eventName, args=null, bubbles=true)
     {
         let propName = 'on' + eventName.replace(/-/g, '').toLowerCase();
-        if (propName in elem) {
+        if ((propName in elem) && elem[propName] != null) {
             elem[propName] (args, elem);
             return this;
         }
@@ -927,6 +918,13 @@ const Element =
         this.innerHTML = value;
         this.readyLocked--;
         return this;
+    },
+
+    /**
+     * Returns the cleaned up innerHTML of the element.
+     */
+    getInnerHTML: function() {
+        return this.innerHTML.replace(/<rr-dom-probe.+?><\/rr-dom-probe>/g, '').trim();
     },
 
     /**
