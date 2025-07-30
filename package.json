@@ -1,6 +1,6 @@
 {
     "name": "riza",
-    "version": "3.0.41",
+    "version": "3.0.42",
     "description": "Riza Library",
     "type": "module",
     "main": "./dist/riza.m.js",
@@ -12,7 +12,7 @@
     },
     "scripts": {
         "test": "echo Ok",
-        "changes": "rose ./scripts/changes",
+        "changes": "rose changes",
         "build:global": "parcel build --target global",
         "build:module": "parcel build --target module",
         "build": "shx rm -rf .parcel-cache && pnpm build:module && pnpm build:global"

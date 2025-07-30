@@ -1,3 +1,11 @@
+# v3.0.42 - Jul 30 2025
+
+#### QoL
+- Added `getInnerHTML` function to Element.
+- Updated dependencies.
+
+<br/>
+
 # v3.0.40 - May 19 2025
 
 #### QoL
