@@ -97,9 +97,9 @@ let dest;
 switch (args[0])
 {
     case 'new':
-    case 'new_yarn':
-    case 'new_npm':
-    case 'new_pnpm':
+    case 'new:yarn':
+    case 'new:npm':
+    case 'new:pnpm':
         if (args.length < 2) {
             msg(ERROR, 'Parameter <name> missing for command `new`');
             break;
