@@ -1,0 +1,44 @@
+
+import { Element } from 'riza';
+
+Element.register('heart-beat',
+{
+    contents: `
+        <div>
+            <span>
+                <img src="logo-512.png" />
+            </span>
+        </div>
+    `,
+
+    styles: `
+        @keyframes beating-border-out {
+            0% { box-shadow: 0 0 0 12px #ff0362; padding: 0px; opacity: 1; margin-left: 0; margin-top: 0; }
+            100% { box-shadow: 0 0 0 0px #ff0362; padding: 128px; opacity: 1; margin-left: -128px; margin-top: -128px; }
+        }
+
+        @ {
+            font-family: Inter; text-align: center; position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -45%);
+        }
+
+        @ span {
+            position: relative; display: inline-block; font-size: 0;
+        }
+
+        @ span:after {
+            position: absolute; display: inline-block; left: 3.2rem; top: -2.1rem; width: 8rem; height: 8rem; content: ""; border-radius: 20rem;
+            animation: 2.0s beating-border-out infinite cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        @ span:before {
+            position: absolute; display: inline-block; left: 3.2rem; top: -2.1rem; width: 8rem; height: 8rem; content: ""; border-radius: 20rem;
+            animation: 2.0s beating-border-out infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+            animation-delay: 1.4s;
+        }
+
+        @ img {
+            width: 14rem;
+        }
+    `
+});

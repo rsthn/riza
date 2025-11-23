@@ -1,0 +1,6 @@
+onlyBuiltDependencies:
+  - '@fortawesome/fontawesome-free'
+  - '@parcel/watcher'
+  - '@swc/core'
+  - lmdb
+  - msgpackr-extract

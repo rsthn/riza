@@ -1,3 +1,12 @@
+# v3.0.43 - Nov 22 2025
+
+#### QoL
+- Added support for scoped styles using `styles` in custom elements.
+- Updated example templates to include new styles property.
+- Updated cli.js to properly use new:* parameters.
+
+<br/>
+
 # v3.0.42 - Jul 30 2025
 
 #### QoL

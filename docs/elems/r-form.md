@@ -50,7 +50,7 @@ r-form .message.error {
     <br/>
 
     <input type="submit" value="Login" />
-	<span class="loading-indicator">Loading ...</span>
+    <span class="loading-indicator">Loading ...</span>
 
 </r-form>
 ```

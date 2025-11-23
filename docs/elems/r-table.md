@@ -71,13 +71,13 @@ window.ds_candies = new DataSource('candies');
 ```html
 <r-table data-source="ds_candies">
     <table>
-		<thead>
-			<tr>
-				<th data-sort="name">Name</th>
-				<th>Price</th>
-				<th>Availability</th>
-			</tr>
-		</thead>
+        <thead>
+            <tr>
+                <th data-sort="name">Name</th>
+                <th>Price</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
 
         <tbody class="x-data">
             <tr>

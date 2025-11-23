@@ -1,11 +1,9 @@
 
 import "./css/xui.css"
-import "./css/main.css"
+import "./heart-beat"
 
 export default () =>
-    <div class="app">
-        <span>
-            <img src="logo-512.png" />
-        </span>
+    <div>
+        <heart-beat></heart-beat>
     </div>
 ;

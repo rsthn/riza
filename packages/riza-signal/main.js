@@ -175,8 +175,7 @@ export class Signal
  * @param {*} defaultValue?
  * @returns {Signal}
  */
-export function signal (value=null, defaultValue=null)
-{
+export function signal (value=null, defaultValue=null) {
     return new Signal (value, defaultValue);
 }
 
@@ -191,8 +190,7 @@ export function expr (signals, evaluator)
     let active = [];
     let notified = false;
 
-    for (let i = 0; i < signals.length; i++)
-    {
+    for (let i = 0; i < signals.length; i++) {
         if (signals[i] instanceof Signal)
             active.push([i, signals[i]]);
     }

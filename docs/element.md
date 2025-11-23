@@ -26,9 +26,9 @@ Element.register('click-counter',
         count: 0
     },
 
-	'event click button': function() {
-		this.model.set('count', this.model.getInt('count') + 1);
-	},
+    'event click button': function() {
+        this.model.set('count', this.model.getInt('count') + 1);
+    },
 
     init: function()
     {

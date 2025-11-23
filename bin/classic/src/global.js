@@ -6,7 +6,7 @@ import { Api, Model } from 'riza';
  */
 Object.assign(global.global = global,
 {
-	currentDialog: null
+    currentDialog: null
 });
 
 /**

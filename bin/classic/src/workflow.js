@@ -37,10 +37,10 @@ let args = null;
  */
 function init (rootElement)
 {
-	state = INITIAL;
-	root = rootElement;
+    state = INITIAL;
+    root = rootElement;
 
-	update();
+    update();
 }
 
 /**
@@ -50,22 +50,22 @@ function init (rootElement)
  */
 function update (keepActive=false)
 {
-	let activeElem = activeElement;
-	if (activeElem !== null && !keepActive)
-	{
-		utils.runAfter(1000, () => {
-			activeElem.remove();
-		});
-	}
+    let activeElem = activeElement;
+    if (activeElem !== null && !keepActive)
+    {
+        utils.runAfter(1000, () => {
+            activeElem.remove();
+        });
+    }
 
-	activeElement = document.createElement('r-' + state);
-	activeElement.args = { ...args };
-	root.appendChild(activeElement);
+    activeElement = document.createElement('r-' + state);
+    activeElement.args = { ...args };
+    root.appendChild(activeElement);
 
-	if ('created' in activeElement)
-		activeElement.created();
+    if ('created' in activeElement)
+        activeElement.created();
 
-	return activeElem;
+    return activeElem;
 }
 
 /**
@@ -75,33 +75,33 @@ function update (keepActive=false)
  */
 function restore (keepActive=false)
 {
-	let activeElem = activeElement;
-	if (activeElem !== null && !keepActive)
-	{
-		utils.runAfter(1000, () => {
-			activeElem.remove();
-		});
-	}
+    let activeElem = activeElement;
+    if (activeElem !== null && !keepActive)
+    {
+        utils.runAfter(1000, () => {
+            activeElem.remove();
+        });
+    }
 
-	activeElement = root.querySelector('r-' + state);
-	if (activeElement)
-	{
-		activeElement.args = { ...activeElement.args, ...args };
+    activeElement = root.querySelector('r-' + state);
+    if (activeElement)
+    {
+        activeElement.args = { ...activeElement.args, ...args };
 
-		if ('restored' in activeElement)
-			activeElement.restored();
-	}
-	else
-	{
-		activeElement = document.createElement('r-' + state);
-		activeElement.args = { ...args };
-		root.appendChild(activeElement);
-	
-		if ('created' in activeElement)
-			activeElement.created();
-	}
+        if ('restored' in activeElement)
+            activeElement.restored();
+    }
+    else
+    {
+        activeElement = document.createElement('r-' + state);
+        activeElement.args = { ...args };
+        root.appendChild(activeElement);
+    
+        if ('created' in activeElement)
+            activeElement.created();
+    }
 
-	return activeElem;
+    return activeElem;
 }
 
 /**
@@ -111,10 +111,10 @@ function restore (keepActive=false)
  */
 function locked (value=null)
 {
-	if (value === null)
-		return _locked;
+    if (value === null)
+        return _locked;
 
-	_locked = value;
+    _locked = value;
 }
 
 /**
@@ -126,12 +126,12 @@ function locked (value=null)
  */
 function continueTo (newState, newArgs=null, keepActive=false)
 {
-	if (_locked) return null;
+    if (_locked) return null;
 
-	state = newState;
-	args = newArgs || { };
+    state = newState;
+    args = newArgs || { };
 
-	return update(keepActive);
+    return update(keepActive);
 }
 
 /**
@@ -143,32 +143,32 @@ function continueTo (newState, newArgs=null, keepActive=false)
  */
 function returnTo (newState, newArgs=null, keepActive=false)
 {
-	if (_locked) return null;
+    if (_locked) return null;
 
-	state = newState;
-	args = newArgs || { };
+    state = newState;
+    args = newArgs || { };
 
-	return restore(keepActive);
+    return restore(keepActive);
 }
 
 /**
  * Detect `continueTo` event.
  */
 EventBus.watch('continueTo', (value) => {
-	continueTo(value.state, value, value.keepActive ?? false);
+    continueTo(value.state, value, value.keepActive ?? false);
 });
 
 /**
  * Detect `returnTo` event.
  */
 EventBus.watch('returnTo', (value) => {
-	returnTo(value.state, value, value.keepActive ?? false);
+    returnTo(value.state, value, value.keepActive ?? false);
 });
 
 export default
 {
-	init,
-	locked,
-	continueTo,
-	returnTo
+    init,
+    locked,
+    continueTo,
+    returnTo
 };

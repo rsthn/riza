@@ -1,25 +1,25 @@
 html {
-	font-size: 3.0vw !important;
+    font-size: 3.0vw !important;
 }
 
 body {
-	background: #fff; color: #333;
+    background: #fff; color: #333;
 }
 
 * {
-	font-family: "Poppins", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 *:not(input):not(textarea) {
-	user-select: none !important;
+    user-select: none !important;
 }
 
 select option {
-	font-family: Poppins, Arial, Helvetica, sans-serif;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
 r-app {
-	position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden !important;
+    position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden !important;
 }
 
 .x-hidden { display: none; }
@@ -33,27 +33,27 @@ r-app {
 .cursor-pointer { cursor: pointer; }
 
 .no-pointer-events {
-	pointer-events: none !important;
+    pointer-events: none !important;
 }
 
 .fill-parent {
-	position: absolute; left: 0; top: 0; width: 100%; height: 100%; box-sizing: border-box;
+    position: absolute; left: 0; top: 0; width: 100%; height: 100%; box-sizing: border-box;
 }
 
 .vertical-center {
-	margin-top: 46vh !important; transform: translateY(-50%) !important;
+    margin-top: 46vh !important; transform: translateY(-50%) !important;
 }
 
 .overflow-auto {
-	overflow-x: hidden !important; overflow-y: auto !important;
+    overflow-x: hidden !important; overflow-y: auto !important;
 }
 
 .ellipsis {
-	display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .line-clamp {
-	display: block; overflow: hidden; text-overflow: ellipsis !important; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+    display: block; overflow: hidden; text-overflow: ellipsis !important; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
 }
 
 .fs-01 { font-size: 0.1em; }
@@ -80,18 +80,18 @@ r-app {
 
 /* *** */
 @keyframes fade-out {
-	0% { opacity: 1; transform: scale(1.0); }
-	100% { opacity: 0; transform: scale(2.0); }
+    0% { opacity: 1; transform: scale(1.0); }
+    100% { opacity: 0; transform: scale(2.0); }
 }
 
 @keyframes fade-in {
-	0% { opacity: 0; transform: scale(2.0); }
-	100% { opacity: 1; transform: scale(1.0); }
+    0% { opacity: 0; transform: scale(2.0); }
+    100% { opacity: 1; transform: scale(1.0); }
 }
 
 @keyframes fade-in-rev {
-	0% { opacity: 0; transform: scale(1.0); }
-	100% { opacity: 1; transform: scale(1.0); }
+    0% { opacity: 0; transform: scale(1.0); }
+    100% { opacity: 1; transform: scale(1.0); }
 }
 
 [data-anim='fade-out'] { animation: fade-out 0.500s ease both; pointer-events: none; }
@@ -99,27 +99,27 @@ r-app {
 [data-anim='fade-in-rev'] { animation: fade-in-rev 0.500s ease both; }
 
 .content {
-	background: #fff; flex: 1 1 auto; overflow-y: auto;
+    background: #fff; flex: 1 1 auto; overflow-y: auto;
 }
 
 /* *** */
 r-form.busy .spinner, .r-form.busy .spinner {
-	position: relative; pointer-events: none !important;
+    position: relative; pointer-events: none !important;
 }
 
 r-form.busy .spinner:after, .r-form.busy .spinner:after {
-	position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0d6efd url('form-busy-spinner.svg') center center no-repeat; content: '';
+    position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0d6efd url('form-busy-spinner.svg') center center no-repeat; content: '';
 }
 
 span.field-error {
-	color: #f00; font-size: 0.8em;
+    color: #f00; font-size: 0.8em;
 }
 
 /* *** */
 r-panel, .r-panel {
-	display: block;
+    display: block;
 }
 
 r-panel:not(.active), .r-panel:not(.active) {
-	display: none;
+    display: none;
 }

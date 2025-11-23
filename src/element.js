@@ -30,6 +30,11 @@ const Element =
     eid: null,
 
     /**
+     * Name of the element, set by `registerElement`.
+     */
+    elementName: null,
+
+    /**
      * Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
      */
     isRoot: false,
@@ -43,8 +48,6 @@ const Element =
      * Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
      */
     isReady: 0,
-    readyReenter: 0,
-    readyLocked: 0,
 
     /**
      * Model type (class) for the element's model.
@@ -60,6 +63,11 @@ const Element =
      * Contents of the element. When set, the innerHTML will be set to this value.
      */
     contents: null,
+
+    /**
+     * CSS style for the element (use selector "@" for scoped styles).
+     */
+    styles: '',
 
     /**
      * 	Events map.
@@ -205,6 +213,10 @@ const Element =
      */
     routes: null,
 
+    __readyReenter: 0,
+    __readyLocked: 0,
+    __readyStyles: false,
+
     /**
      * 	Element constructor.
      */
@@ -219,18 +231,15 @@ const Element =
             this.isRoot = this.dataset.root === 'true';
 
         this.style.display = 'block';
-
         this.eid = Math.random().toString().substr(2);
 
-        if (this.model != null)
-        {
+        if (this.model != null) {
             let tmp = this.model;
             this.model = null;
-            this.setModel (tmp, false);
+            this.setModel(tmp, false);
         }
 
-        Object.keys(this._super).reverse().forEach(i =>
-        {
+        Object.keys(this._super).reverse().forEach(i => {
             if ('init' in this._super[i])
                 this._super[i].init();
         });
@@ -241,7 +250,14 @@ const Element =
         this.init();
 
         if (this.events)
-            this.bindEvents (this.events);
+            this.bindEvents(this.events);
+
+        if (this.styles && !this.constructor.prototype.__readyStyles) {
+            const style = document.createElement('style');
+            style.innerHTML = this.styles.replace(/@(?=\s|\{)/g, this.elementName);
+            document.head.appendChild(style);
+            this.constructor.prototype.__readyStyles = true;
+        }
 
         if (this.contents)
             this.setInnerHTML(this.contents);
@@ -280,7 +296,7 @@ const Element =
      */
     markReady: function (list=null)
     {
-        this.readyLocked++;
+        this.__readyLocked++;
 
         if (!this.isReady)
         {
@@ -357,10 +373,10 @@ const Element =
             this.trigger('rootready');
         }
 
-        this.readyLocked--;
+        this.__readyLocked--;
 
-        if (this.readyReenter && !this.readyLocked) {
-            this.readyReenter = false;
+        if (this.__readyReenter && !this.__readyLocked) {
+            this.__readyReenter = false;
             this.checkReady();
         }
 
@@ -376,9 +392,9 @@ const Element =
         if (this.childNodes.length == 0)
             return;
 
-        if (this.readyLocked)
+        if (this.__readyLocked)
         {
-            this.readyReenter = true;
+            this.__readyReenter = true;
             return;
         }
 
@@ -914,9 +930,9 @@ const Element =
     **	Sets the innerHTML property of the element and runs some post set-content tasks.
     */
     setInnerHTML: function (value) {
-        this.readyLocked++;
+        this.__readyLocked++;
         this.innerHTML = value;
-        this.readyLocked--;
+        this.__readyLocked--;
         return this;
     },
 
@@ -1403,18 +1419,16 @@ const Element =
                     }
                 }
 
+                this.elementName = name;
                 this.onCreated();
             }
 
             findRoot (srcElement=null)
             {
                 let elem = srcElement ? srcElement : this.parentElement;
-
-                while (elem != null)
-                {
+                while (elem != null) {
                     if ('isRoot' in elem && elem.isRoot === true)
                         return elem;
-
                     elem = elem.parentElement;
                 }
 
@@ -1424,12 +1438,9 @@ const Element =
             findCustomParent (srcElement=null)
             {
                 let elem = srcElement ? srcElement.parentElement : this.parentElement;
-
-                while (elem != null)
-                {
+                while (elem != null) {
                     if (elem.tagName.indexOf('-') !== -1)
                         return elem;
-
                     elem = elem.parentElement;
                 }
 
@@ -1438,14 +1449,11 @@ const Element =
 
             connectReference (root=null, flags=255)
             {
-                if (!this.root && (flags & 1) == 1)
-                {
+                if (!this.root && (flags & 1) == 1) {
                     if (root == null) root = this.findRoot();
-                    if (root != null)
-                    {
+                    if (root != null) {
                         if (this.dataset.ref)
                             root[this.dataset.ref] = this;
-
                         this.root = root;
                     }
                 }
@@ -1454,9 +1462,7 @@ const Element =
             connectedCallback ()
             {
                 this.connectReference(null, 1);
-
-                if (this.invokeConstructor)
-                {
+                if (this.invokeConstructor) {
                     this.invokeConstructor = false;
                     this.__ctor();
                 }
@@ -1470,15 +1476,11 @@ const Element =
 
             disconnectedCallback()
             {
-                if (this.root)
-                {
-                    if (this.dataset.ref)
-                    {
+                if (this.root) {
+                    if (this.dataset.ref) {
                         this.root.onRefRemoved (this.dataset.ref, this);
-
                         delete this.root[this.dataset.ref];
                     }
-
                     this.root = null;
                 }
 
@@ -1494,6 +1496,7 @@ const Element =
         const proto = { };
         const _super = { };
         const events = Rinn.clone(Element.events);
+        let styles = Element.styles;
 
         let __init = true;
         let __ready = true;
@@ -1507,17 +1510,15 @@ const Element =
             if (Rinn.typeOf(protos[i]) == 'string')
             {
                 const name = protos[i];
-
                 protos[i] = elementPrototypes[name];
-                if (!protos[i]) continue;
+                if (!protos[i])
+                    continue;
 
                 _super[name] = { };
 
-                for (let f in protos[i])
-                {
+                for (let f in protos[i]) {
                     if (Rinn.typeOf(protos[i][f]) != 'function')
                         continue;
-
                     _super[name][f] = protos[i][f];
                 }
 
@@ -1526,23 +1527,24 @@ const Element =
                 __rready = false;
                 __check = false;
             }
-            else
-            {
+            else {
                 Element.preparePrototype(protos[i]);
                 __check = true;
             }
 
             if ('_super' in protos[i])
-                Rinn.override (_super, protos[i]._super);
+                Rinn.override(_super, protos[i]._super);
 
             if ('events' in protos[i])
-                Rinn.override (events, protos[i].events);
+                Rinn.override(events, protos[i].events);
+
+            if ('styles' in protos[i])
+                styles += '\n' + protos[i].styles;
 
             Rinn.override (newElement.prototype, protos[i]);
             Rinn.override (proto, protos[i]);
 
-            if (__check)
-            {
+            if (__check) {
                 if (!__init && 'init' in protos[i]) __init = true;
                 if (!__ready && 'ready' in protos[i]) __ready = true;
                 if (!__rready && 'rready' in protos[i]) __rready = true;
@@ -1571,9 +1573,11 @@ const Element =
 
         newElement.prototype._super = _super;
         newElement.prototype.events = events;
+        newElement.prototype.styles = styles;
 
         proto._super = _super;
         proto.events = events;
+        proto.styles = styles;
 
         customElements.define (name, newElement);
 
