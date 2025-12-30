@@ -302,7 +302,7 @@ const Element =
         {
             this.isReady = 1;
 
-            // Set model is `model` property was set in the element.
+            // Set model if `model` property was set in the element.
             if ('model' in this.dataset) {
                 let ref = this.getFieldByPath(this.dataset.model);
                 if (ref) this.setModel(ref);

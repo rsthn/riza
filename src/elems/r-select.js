@@ -54,7 +54,7 @@ export default Element.register ('r-select',
     */
     rready: function()
     {
-        let list = this.dataList
+        let list = this.dataList;
         if (list) {
             if (typeof(list) === 'string')
                 list = DataList.get(list, true);
