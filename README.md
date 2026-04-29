@@ -315,6 +315,8 @@ Hello, [name]!                  <!-- escaped -->
 [!html_blob]                    <!-- raw, do not escape -->
 ```
 
+> **Safe by default.** `[name]` always HTML-escapes the value &mdash; characters like `<`, `>`, and `&` are converted to their entity form, so user-supplied content can never break out of the surrounding markup or inject elements. Only use the raw form `[!name]` when the value is *trusted* HTML you intend to render as-is (a server-rendered fragment, a hard-coded snippet, etc.).
+
 #### Function calls
 
 Functions take the form `[name arg1 arg2 ...]`. A handful of the most useful ones:
