@@ -1,3 +1,11 @@
+# v3.0.44 - Apr 29 2026
+
+#### QoL
+- Updated documentation.
+- Fixed minor bug in Element causing [data-ref] not to work on regular elements.
+
+<br/>
+
 # v3.0.43 - Nov 22 2025
 
 #### QoL
