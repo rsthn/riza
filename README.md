@@ -36,7 +36,13 @@ You can either import riza directly in your ESM project by installing the packag
 pnpm dlx riza new <my-project>
 ```
 
-The source files can be easily modified and are located in the `src` folder. The app component is in the `app.jsx` file. Edit it if you like, and run the development server to view the results:
+This scaffolds a JSX-based project &mdash; the **modern** way to use Riza, covered in [Modern Approach (JSX)](#modern-approach-jsx). If you prefer the **classic** approach (plain JS, optionally without a bundler), pass the `classic` template:
+
+```bash
+pnpm dlx riza new classic <my-project>
+```
+
+The source files can be easily modified and are located in the `src` folder. The app component is in the `app.jsx` file (or `app.js` for the classic template). Edit it if you like, and run the development server to view the results:
 
 ```bash
 pnpm dev
@@ -50,24 +56,31 @@ Note that this dev mode enables HMR with [Parcel](https://github.com/parcel-bund
 
 ## Documentation
 
-The heart of Riza is the `Element` class. It is the base used to define every custom HTML5 element in your app, and provides lifecycle hooks, declarative event/route binding, model-driven data binding, scoped styles, references, and a small toolbox of utilities to keep your component code short and readable.
-
-The rest of this section is a guide to `Element`. Additional reference material for modules and pre-made elements can be found in the [docs](./docs/README.md) folder.
-
 ### Table of Contents
 
-- [Registering a Custom Element](#registering-a-custom-element)
-- [Lifecycle](#lifecycle)
-- [Events](#events)
-- [Built-in Action Handlers](#built-in-action-handlers)
-- [References (`data-ref`, `data-xref`, `data-root`)](#references)
-- [Rinn Expressions](#rinn-expressions)
-- [Models and Data Binding](#models-and-data-binding)
-- [Scoped Styles](#scoped-styles)
-- [Routes](#routes)
-- [Composition and Inheritance](#composition-and-inheritance)
-- [Extending and Hooking Existing Elements](#extending-and-hooking-existing-elements)
-- [Utility Methods](#utility-methods)
+- **[The Element Class](#the-element-class)** &mdash; build custom HTML5 elements with lifecycle hooks, events, models, and scoped styles.
+    - [Registering a Custom Element](#registering-a-custom-element)
+    - [Lifecycle](#lifecycle)
+    - [Events](#events)
+    - [Built-in Action Handlers](#built-in-action-handlers)
+    - [References (`data-ref`, `data-xref`, `data-root`)](#references)
+    - [Rinn Expressions](#rinn-expressions)
+    - [Models and Data Binding](#models-and-data-binding)
+    - [Scoped Styles](#scoped-styles)
+    - [Routes](#routes)
+    - [Composition and Inheritance](#composition-and-inheritance)
+    - [Extending and Hooking Existing Elements](#extending-and-hooking-existing-elements)
+    - [Utility Methods](#utility-methods)
+- **[Reactivity with Signals](#reactivity-with-signals)** &mdash; reactive values that can drive model fields and the HTML bound to them.
+- **[Modern Approach (JSX)](#modern-approach-jsx)** &mdash; build elements and templates with JSX through `babel-plugin-riza`.
+
+Additional reference material for the bundled modules and pre-made elements can be found in the [docs](./docs/README.md) folder.
+
+<br/>
+
+### The Element Class
+
+The heart of Riza is the `Element` class. It is the base used to define every custom HTML5 element in your app, and provides lifecycle hooks, declarative event/route binding, model-driven data binding, scoped styles, references, and a small toolbox of utilities to keep your component code short and readable.
 
 <br/>
 
@@ -553,6 +566,126 @@ A short reference of helpers available on every registered element:
 - `Element.register(name, ...protos)` &mdash; define a new custom element.
 - `Element.expand(name, ...protos)` &mdash; merge additional prototypes into an already-registered element.
 - `Element.hookAppend(name, fn, hook)` / `Element.hookPrepend(name, fn, hook)` &mdash; wrap a method on a registered element.
+
+<br/>
+
+### Reactivity with Signals
+
+Riza re-exports the [`riza-signal`](./packages/riza-signal) primitives &mdash; `signal`, `expr`, `watch`, and `validator` &mdash; so any consumer of `riza` gets reactive values, derived values, and side-effect handlers without an extra dependency. Updates are batched via `queueMicrotask`, so a chain of synchronous writes triggers a single downstream evaluation. The full reference (type coercion, validators, manual subscription) lives in the [`riza-signal` README](./packages/riza-signal/README.md).
+
+```js
+import { signal, expr, watch } from 'riza';
+
+const a = signal(2);
+const b = signal(3);
+
+const sum = expr([a, b], (x, y) => x + y);
+
+watch([sum], (v) => console.log('sum is', v));
+// → sum is 5
+
+a.value = 10;
+// → sum is 13
+```
+
+#### Driving a model field
+
+In Riza, the most useful pattern is to pipe a signal into a custom element's model. Once the model field updates, every binding in the element's HTML (`data-watch`, `data-visible`, `data-attr`, ...) re-renders for free.
+
+```js
+import { Element, signal, watch } from 'riza';
+
+const username = signal('');
+
+Element.register('greeting-card', {
+    isRoot: true,
+    model: { name: '' },
+
+    init: function() {
+        this.setInnerHTML(`<h2 data-watch="name">Hello, [name]!</h2>`);
+
+        // Whenever `username` changes, update the model field
+        // and the bound HTML re-renders automatically.
+        watch([username], (v) => this.model.set('name', v));
+    }
+});
+
+document.body.appendChild(document.createElement('greeting-card'));
+
+username.value = 'Ada';     // → "Hello, Ada!"
+username.value = 'Grace';   // → "Hello, Grace!"
+```
+
+The same approach works for any signal-driven state &mdash; route params, fetch results, app-wide flags &mdash; and any number of elements can subscribe to the same signal.
+
+#### Rinn re-exports
+
+For convenience, every public symbol from [Rinn](https://github.com/rsthn/rinn) is also re-exported by `riza`:
+
+```js
+import { Rinn, Class, Event, EventDispatcher, Model, ModelList, Schema, Flattenable, Collection, Template } from 'riza';
+```
+
+So `Model`, `Template`, and friends never need a separate import.
+
+<br/>
+
+### Modern Approach (JSX)
+
+Everything covered above is the **classic** approach &mdash; defining elements with `Element.register(...)` and authoring markup as HTML strings or via `setInnerHTML`. It works with any toolchain (or none at all, via the `<script type="module" src="dist/riza.js">` flavor) and is the most direct way to use Riza.
+
+The **modern** approach swaps HTML strings for JSX and runs your source through [`babel-plugin-riza`](./packages/babel-plugin-riza). JSX returns real DOM nodes, so element references are typed values rather than `querySelector` lookups, and JSX expressions can be wired directly to signals for reactive rendering. This is what `riza new <project>` sets up for you by default.
+
+#### Scaffold a JSX project
+
+```bash
+pnpm dlx riza new <my-project>
+cd <my-project>
+pnpm dev
+```
+
+The generated project uses Parcel for bundling and HMR; the entry point is `src/app.jsx`. The smallest possible app from the template looks like this:
+
+```jsx
+import "./css/xui.css"
+import "./heart-beat"
+
+export default () =>
+    <div>
+        <heart-beat></heart-beat>
+    </div>
+;
+```
+
+A custom element written as a JSX-friendly module &mdash; reused by `app.jsx` above &mdash; is just a regular `Element.register` call:
+
+```jsx
+import { Element } from 'riza';
+
+Element.register('heart-beat', {
+    contents: `
+        <div>
+            <span><img src="logo-512.png" /></span>
+        </div>
+    `,
+
+    styles: `
+        @ { font-family: Inter; text-align: center; }
+        @ img { width: 14rem; }
+    `
+});
+```
+
+You can find the full minimal template under [`bin/minimal/src`](./bin/minimal/src) &mdash; in particular [`bin/minimal/src/app.jsx`](./bin/minimal/src/app.jsx) and [`bin/minimal/src/heart-beat.jsx`](./bin/minimal/src/heart-beat.jsx).
+
+#### Stick with the classic flow
+
+If you'd rather skip the bundler entirely, both options remain available:
+
+- Drop a `<script type="module" src="dist/riza.js">` into your HTML and write plain JS. See [Without a bundler](#without-a-bundler).
+- Scaffold a Parcel-based classic project with `pnpm dlx riza new classic <my-project>`.
+
+A dedicated section covering JSX templates, signal bindings, and the JSX-specific helpers will be added later.
 
 <br/>
 
