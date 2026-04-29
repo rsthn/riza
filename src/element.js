@@ -285,6 +285,32 @@ const Element =
     },
 
     /**
+     * Internal wrapper around `ready`. When the element is a root, scans descendants for the `data-ref` attribute and stores
+     * each match on the element as `this[<ref-name>]`. Consumed attributes are renamed to `data-_ref` so an outer root that runs
+     * later does not claim them again. Finally invokes `ready`.
+     */
+    _ready: function()
+    {
+        if (this.isRoot)
+        {
+            const list = this.querySelectorAll('[data-ref]');
+            for (let i = 0; i < list.length; i++)
+            {
+                const elem = list[i];
+                const name = elem.dataset.ref;
+
+                this[name] = elem;
+                this.onRefAdded(name, elem);
+
+                elem.setAttribute('data-_ref', name);
+                elem.removeAttribute('data-ref');
+            }
+        }
+
+        this.ready();
+    },
+
+    /**
      * 	Executed after ready and after the root is also ready.
      */
     rready: function()
@@ -310,14 +336,14 @@ const Element =
 
             // Run ready methods in class hierarchy.
             Object.keys(this._super).reverse().forEach(i => {
-                if ('ready' in this._super[i])
-                    this._super[i].ready();
+                if ('_ready' in this._super[i])
+                    this._super[i]._ready();
             });
 
             if (Element.debug)
                 console.log('>> ' + this.tagName + ' READY');
 
-            this.ready();
+            this._ready();
             this.trigger('ready').dispatch('_ready', null, false);
             this.collectWatchers();
         }
@@ -1451,11 +1477,8 @@ const Element =
             {
                 if (!this.root && (flags & 1) == 1) {
                     if (root == null) root = this.findRoot();
-                    if (root != null) {
-                        if (this.dataset.ref)
-                            root[this.dataset.ref] = this;
+                    if (root != null)
                         this.root = root;
-                    }
                 }
             }
 
@@ -1477,9 +1500,10 @@ const Element =
             disconnectedCallback()
             {
                 if (this.root) {
-                    if (this.dataset.ref) {
-                        this.root.onRefRemoved (this.dataset.ref, this);
-                        delete this.root[this.dataset.ref];
+                    const refName = this.dataset.ref || this.dataset._ref;
+                    if (refName) {
+                        this.root.onRefRemoved (refName, this);
+                        delete this.root[refName];
                     }
                     this.root = null;
                 }

@@ -55,6 +55,7 @@
         "riza-signal": "^1.0.6"
     },
     "devDependencies": {
+        "baseline-browser-mapping": "^2.10.24",
         "parcel": "^2.16.1",
         "shx": "^0.3.4"
     },
