@@ -1,14 +1,28 @@
 
+//!interface EasingFn
+//! IN: (t: number, k?: number) => number;
+//! OUT: (t: number, k?: number) => number;
+//! IN_OUT: (t: number, k?: number) => number;
+//!/interface
+
 /**
-**	Collection of useful easing functions (imported from Cherry source code).
-*/
+ * Collection of useful easing functions (imported from Cherry source code).
+ */
+
+//!class Easing
 
 const Easing =
 {
 	/**
-	**	Interpolates numeric values between two objects (`src` and `dst`) using the specified `duration` (in seconds) and `easing` function. Note
-	**	that all four parameters `src`, `dst`, `duration` and `easing` must be objects having the same number of values.
-	*/
+	 * Interpolates numeric values between two objects (`src` and `dst`) using the specified `duration` (in seconds) and `easing` function. Note
+	 * that all four parameters `src`, `dst`, `duration` and `easing` must be objects having the same number of values.
+	 * @param {object} src
+	 * @param {object} dst
+	 * @param {object} duration
+	 * @param {object} easing
+	 * @param {(data: object, isFinished: boolean) => void} callback
+	 * !static interpolate (src: object, dst: object, duration: object, easing: object, callback: (data: object, isFinished: boolean) => void) : void;
+	 */
 	interpolate: function (src, dst, duration, easing, callback/* function(data, isFinished) */)
 	{
 		let time = { };
@@ -55,6 +69,31 @@ const Easing =
 
 		interpolator();
 	},
+
+	//! /** Linear easing functions. */
+	//! static Linear: EasingFn;
+	//! /** Back easing functions (accepts an optional `k` parameter to control overshoot, defaults to 1.70158). */
+	//! static Back: EasingFn & { k: number };
+	//! /** Bounce easing functions. */
+	//! static Bounce: EasingFn;
+	//! /** Circular easing functions. */
+	//! static Circ: EasingFn;
+	//! /** Cubic easing functions. */
+	//! static Cubic: EasingFn;
+	//! /** Exponential easing functions. */
+	//! static Expo: EasingFn;
+	//! /** Power easing functions (configurable via the `p` exponent, defaults to 12). */
+	//! static Power: EasingFn & { p: number };
+	//! /** Quadratic easing functions. */
+	//! static Quad: EasingFn;
+	//! /** Quartic easing functions. */
+	//! static Quartic: EasingFn;
+	//! /** Quintic easing functions. */
+	//! static Quintic: EasingFn;
+	//! /** Sine easing functions. */
+	//! static Sine: EasingFn;
+	//! /** Step easing functions. */
+	//! static Step: EasingFn;
 
 	/* ******************************************** */
 	Linear:
@@ -328,5 +367,7 @@ const Easing =
 		}
 	}
 };
+
+//!/class
 
 export default Easing;

@@ -1,56 +1,64 @@
 
 import { EventDispatcher } from 'rinn';
 
-/*
-**	The Router is a special module that detects local URL changes (when a hash-change occurs) and
-**	forwards events to the appropriate handlers.
-*/
+/**
+ * The Router is a special module that detects local URL changes (when a hash-change occurs) and
+ * forwards events to the appropriate handlers.
+ */
+
+//!class Route
 
 const _Router =
 {
     Route: EventDispatcher.extend
     ({
-        /*
-        **	Regular expression for the route. This is generated from a simpler expression provided
-        **	in the constructor.
-        */
+        /**
+         * Regular expression for the route. Generated from the simpler expression provided in the constructor.
+         * !routeRegex: string;
+         */
         routeRegex: null,
 
-        /*
-        **	Original route string value.
-        */
+        /**
+         * Original route string value.
+         * !value: string;
+         */
         value: null,
 
-        /*
-        **	Map with the indices and the names of each paremeter obtained from the route expression.
-        */
+        /**
+         * List of parameter names obtained from the route expression (in order of appearance).
+         * !params: Array<string>;
+         */
         params: null,
 
-        /*
-        **	Arguments obtained from the current route (uses `params` to determine name of arguments).
-        */
+        /**
+         * Arguments obtained from the current route (uses `params` to determine the name of each argument).
+         * !args: object;
+         */
         args: null,
 
-        /*
-        **	Arguments string obtained from the last route dispatch. Used to check if the arguments changed.
-        */
+        /**
+         * Arguments string obtained from the last route dispatch. Used to check if the arguments changed.
+         * !s_args: string;
+         */
         s_args: null,
 
-        /*
-        **	Indicates if the route is active because of a past positive dispatch.
-        */
+        /**
+         * Indicates if the route is active because of a past positive dispatch.
+         * !active: boolean;
+         */
         active: false,
 
-        /*
-        **	Indicates if the params have changed since last event. Transition from inactive to active route will always set this value to true.
-        */
+        /**
+         * Indicates if the params have changed since the last event. The transition from inactive to active route will always set this value to true.
+         * !changed: boolean;
+         */
         changed: false,
 
-        /*
-        **	Constructor of the route, the specified argument is a route expression.
-        **
-        **	>> void __ctor (string route);
-        */
+        /**
+         * Constructor of the route, the specified argument is a route expression.
+         * @param {string} route
+         * !constructor (route: string);
+         */
         __ctor: function (route)
         {
             this._super.EventDispatcher.__ctor();
@@ -81,34 +89,38 @@ const _Router =
             this.routeRegex = '^' + route.replace(/##/g, '');
         },
 
-        /*
-        **	Adds a handler to the route dispatcher. The handler can be removed later using removeHandler and
-        **	specifying the same parameters. If unrouted boolean is specified the event to listen to will be
-        **	the unrouted event (when the route changes and the route is not activated).
-        **
-        **	void addHandler (handler: function, unrouted: bool, context:object=null);
-        */
+        /**
+         * Adds a handler to the route dispatcher. The handler can be removed later using `removeHandler` and
+         * specifying the same parameters. If `unrouted` is `true` the event to listen to will be the
+         * `unrouted` event (when the route changes and the route is not activated).
+         * @param {(args: object) => void} handler
+         * @param {boolean} unrouted
+         * @param {object} context
+         * !addHandler (handler: (args: object) => void, unrouted?: boolean, context?: object) : void;
+         */
         addHandler: function (handler, unrouted=false, context=null)
         {
             this.addEventListener ((unrouted === true ? 'un' : '') + 'routed', handler, context);
         },
 
-        /*
-        **	Removes a handler from the route dispatcher.
-        **
-        **	void removeHandler (handler: function, unrouted: bool, context: object=null);
-        */
+        /**
+         * Removes a handler from the route dispatcher.
+         * @param {(args: object) => void} handler
+         * @param {boolean} unrouted
+         * @param {object} context
+         * !removeHandler (handler: (args: object) => void, unrouted?: boolean, context?: object) : void;
+         */
         removeHandler: function (handler, unrouted=false, context=null)
         {
             this.removeEventListener ((unrouted === true ? 'un' : '') + 'routed', handler, context);
         },
 
-        /*
-        **	Verifies if the specified route matches the internal route and if so dispatches a (depends on doUnroute parameter) "routed" or "unrouted" event with the
-        **	parameters obtained from the location to all attached handlers.
-        **
-        **	void dispatch (route:string, doUnroute:bool);
-        */
+        /**
+         * Verifies if the specified location matches the internal route and dispatches either a `routed` or `unrouted` event with the
+         * parameters obtained from the location to all attached handlers.
+         * @param {string} route
+         * !dispatch (route: string) : void;
+         */
         dispatch: function (route)
         {
             let matches = route.match(this.routeRegex);
@@ -140,35 +152,37 @@ const _Router =
         }
     }),
 
-    /*
-    **	Map with route objects. The key of the map is the route and the value a handler.
-    */
+    //!/class
+
+    //!class Router
+
+    //! /** Reference to the Route class used to construct route instances. */
+    //! static Route: typeof Route;
+    //! /** Map of route objects keyed by route expression. */
+    //! static routes: Record<string, Route>;
+    //! /** Sorted list of route keys (smaller routes first). */
+    //! static sortedRoutes: Array<string>;
+    //! /** Number of upcoming hashchange events that the location-changed handler should ignore. */
+    //! static ignoreHashChangeEvent: number;
+    //! /** Current relative location (everything after the location hash symbol). */
+    //! static location: string;
+    //! /** Current relative location as an array of segments (obtained by splitting the location by `/`). */
+    //! static args: Array<string>;
+
     routes: { },
 
-    /*
-    **	Sorted list of routes. Smaller routes are processed first than larger ones. This array stores
-    **	only the keys to the Router.routes map.
-    */
     sortedRoutes: [ ],
 
-    /*
-    **	Indicates the number of times the onLocationChanged handler should ignore the hash change event.
-    */
     ignoreHashChangeEvent: 0,
 
-    /*
-    **	Current relative location (everything after the location hash symbol).
-    */
     location: '',
 
-    /*
-    **	Current relative location as an array of elements (obtained by splitting the location by slash).
-    */
     args: [],
 
-    /*
-    **	Initializes the router module. Ensure to call `refresh` once to force a hashchange when the page loads.
-    */
+    /**
+     * Initializes the router module. Ensure to call `refresh` once to force a hashchange when the page loads.
+     * !static init () : void;
+     */
     init: function ()
     {
         if (this.alreadyAttached)
@@ -184,16 +198,20 @@ const _Router =
         }
     },
 
-    /*
-    **	Refreshes the current route by forcing a hashchange event.
-    */
+    /**
+     * Refreshes the current route by forcing a hashchange event.
+     * !static refresh () : void;
+     */
     refresh: function () {
         this.onLocationChanged();
     },
 
-    /*
-    **	Changes the current location and optionally prevents a trigger of the hashchange event.
-    */
+    /**
+     * Changes the current location and optionally prevents a trigger of the hashchange event.
+     * @param {string} route
+     * @param {boolean} silent
+     * !static setRoute (route: string, silent?: boolean) : void;
+     */
     setRoute: function (route, silent)
     {
         let location = this.realLocation (route);
@@ -203,10 +221,15 @@ const _Router =
         globalThis.location.hash = location;
     },
 
-    /*
-    **	Adds the specified route to the routing map. When the specified route is detected, the `onRoute` handler will be called, and then
-    **	when the route exits `onUnroute` will be called.
-    */
+    /**
+     * Adds the specified route to the routing map. When the specified route is detected, the `onRoute` handler will be called, and then
+     * when the route exits `onUnroute` will be called.
+     * @param {string} route
+     * @param {(args: object) => void} onRoute
+     * @param {(args: object) => void} onUnroute
+     * @returns {Route}
+     * !static addRoute (route: string, onRoute: (args: object) => void, onUnroute?: (args: object) => void) : Route;
+     */
     addRoute: function (route, onRoute, onUnroute=null)
     {
         if (!this.routes[route]) {
@@ -228,9 +251,12 @@ const _Router =
         return this.routes[route];
     },
 
-    /*
-    **	Returns the Route object for the specified route.
-    */
+    /**
+     * Returns the Route object for the specified route, creating it if it doesn't exist yet.
+     * @param {string} route
+     * @returns {Route}
+     * !static getRoute (route: string) : Route;
+     */
     getRoute: function (route)
     {
         if (!this.routes[route])
@@ -246,10 +272,11 @@ const _Router =
         return this.routes[route];
     },
 
-    /*
-    **	Adds the specified routes to the routing map. The routes map should contain the route expression
-    **	in the key of the map and a handler function in the value.
-    */
+    /**
+     * Adds the specified routes to the routing map. The `routes` object should map a route expression (key) to a handler (value).
+     * @param {Record<string, (args: object) => void>} routes
+     * !static addRoutes (routes: Record<string, (args: object) => void>) : void;
+     */
     addRoutes: function (routes)
     {
         for (let i in routes)
@@ -267,9 +294,13 @@ const _Router =
         });
     },
 
-    /*
-    **	Removes the specified route from the routing map.
-    */
+    /**
+     * Removes the specified route from the routing map.
+     * @param {string} route
+     * @param {(args: object) => void} onRoute
+     * @param {(args: object) => void} onUnroute
+     * !static removeRoute (route: string, onRoute: (args: object) => void, onUnroute?: (args: object) => void) : void;
+     */
     removeRoute: function (route, onRoute, onUnroute)
     {
         if (!this.routes[route]) return;
@@ -282,10 +313,11 @@ const _Router =
             this.routes[route].removeHandler (onRoute);
     },
 
-    /*
-    **	Removes the specified routes from the routing map. The routes map should contain the route
-    **	expression in the key of the map and a handler function in the value.
-    */
+    /**
+     * Removes the specified routes from the routing map. The `routes` object should map a route expression (key) to a handler (value).
+     * @param {Record<string, (args: object) => void>} routes
+     * !static removeRoutes (routes: Record<string, (args: object) => void>) : void;
+     */
     removeRoutes: function (routes)
     {
         for (let i in routes)
@@ -295,9 +327,13 @@ const _Router =
         }
     },
 
-    /*
-    **	Given a formatted location and a previous one it will return the correct real location.
-    */
+    /**
+     * Given a formatted location and a previous one (defaults to the current location) returns the correct real location.
+     * @param {string} cLocation
+     * @param {string} pLocation
+     * @returns {string}
+     * !static realLocation (cLocation: string, pLocation?: string) : string;
+     */
     realLocation: function (cLocation, pLocation)
     {
         if (!pLocation) pLocation = this.location;
@@ -371,9 +407,10 @@ const _Router =
         return rLocation.trim();
     },
 
-    /*
-    **	Event handler called when the location hash changes.
-    */
+    /**
+     * Event handler called when the location hash changes.
+     * !static onLocationChanged () : void;
+     */
     onLocationChanged: function ()
     {
         if (this.prevLocation !== this.location)
@@ -399,9 +436,12 @@ const _Router =
             this.routes[this.sortedRoutes[i]].dispatch (this.location);
     },
 
-    /*
-    **	Navigates to the given hash-based URL.
-    */
+    /**
+     * Navigates to the given hash-based URL.
+     * @param {string} location
+     * @param {boolean} replace
+     * !static navigate (location: string, replace?: boolean) : void;
+     */
     navigate: function (location, replace=false)
     {
         location = this.realLocation(location);
@@ -417,6 +457,8 @@ const _Router =
             globalThis.location.hash = location;
     }
 };
+
+//!/class
 
 _Router.init();
 export default _Router;

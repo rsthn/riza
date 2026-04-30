@@ -2,9 +2,30 @@
 import { Model, ModelList } from 'rinn';
 import Api from './api.js';
 
-/*
-**	Provides an interface to connect with a listing API function.
-*/
+/**
+ * Provides an interface to connect with a listing API function.
+ */
+
+//!class DataList
+
+//! /** Class name identifier. */
+//! className: string;
+//! /** Debounce delay (in milliseconds) used by `refresh`. Defaults to 250. */
+//! debounceDelay: number;
+//! /** Request model whose properties are forwarded as parameters to the listing API call. */
+//! request: any;
+//! /** Internal event-id used to namespace forwarded events. */
+//! eid: string;
+
+//! /** Map of named global data lists keyed by their name. */
+//! static globals: Record<string, DataList>;
+
+//! /**
+//!  * Returns a data list by name or creates a new one if it doesn't exist (when `create` is `true`).
+//!  * @param name The name of the data list. A scope can be added as a prefix, separated by a colon.
+//!  * @param create Whether to create the data list if it doesn't exist.
+//!  */
+//! static get (name: string, create?: boolean) : DataList;
 
 const DataList = ModelList.extend
 ({
@@ -14,10 +35,13 @@ const DataList = ModelList.extend
 	request: null,
 	eid: null,
 
-	/*
-	**	Constructs the data list with the specified optional `config` parameters, any of the properties of this object can be specified
-	**	in the config. The given `f` parameter is passed directly as a request parameter to the API.
-	*/
+	/**
+	 * Constructs the data list with the specified optional `config` parameters, any of the properties of this object can be specified
+	 * in the config. The given `f` parameter is passed directly as a request parameter to the API.
+	 * @param {string} f
+	 * @param {object} config
+	 * !constructor (f: string, config?: object);
+	 */
 	__ctor: function (f, config=null)
 	{
 		this._super.ModelList.__ctor();
@@ -42,9 +66,11 @@ const DataList = ModelList.extend
 		this.prepareEvent('request' + evt.name[0].toUpperCase() + evt.name.substr(1), args).setSource(evt.source).resume();
 	},
 
-	/*
-	**	Executes a request to retrieve the data for the list (uses debounce to prevent too-quick refreshes).
-	*/
+	/**
+	 * Executes a request to retrieve the data for the list (uses debounce to prevent too-quick refreshes).
+	 * @param {(() => void)|boolean} callback
+	 * !refresh (callback?: (() => void) | boolean) : void;
+	 */
 	refresh: function (callback=null, _callback=null)
 	{
 		if (this._timeout)
@@ -78,12 +104,8 @@ const DataList = ModelList.extend
 	}
 });
 
-/**
- * Returns a data list by name or creates a new one if it doesn't exist (if `create` is `true`).
- * @param {string} name The name of the data list. A scope can be added as a prefix, separated by a colon.
- * @param {boolean} create Whether to create the data list if it doesn't exist.
- * @returns {DataList} The data list.
- */
+//!/class
+
 DataList.globals = { };
 DataList.get = function (name, create=false) {
     if (!(name in DataList.globals)) {

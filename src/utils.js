@@ -1,10 +1,13 @@
 
+//!class Utils
+
 const Utils =
 {
     /**
      * Forces the browser to show a download dialog.
      * @param {string} filename
      * @param {string} url
+     * !static showDownload (filename: string, url: string) : void;
      */
     showDownload: function (filename, url)
     {
@@ -23,8 +26,9 @@ const Utils =
     /**
      * Forces the browser to show a file selection dialog.
      * @param {boolean} allowMultiple
-     * @param {string} accept 
-     * @param {function(File[])} callback 
+     * @param {string} accept
+     * @param {(files: FileList) => void} callback
+     * !static showFilePicker (allowMultiple: boolean, accept: string, callback: (files: FileList) => void) : void;
      */
     showFilePicker: function (allowMultiple, accept, callback)
     {
@@ -53,6 +57,7 @@ const Utils =
      * Loads a file or blob and returns the content as a dataURL.
      * @param {File|Blob} file
      * @param {function(string)} callback
+     * !static loadAsDataUrl (file: File|Blob, callback: (url: string, err: any) => void) : void;
      */
     loadAsDataUrl: function (file, callback)
     {
@@ -72,6 +77,7 @@ const Utils =
     /**
      * Loads a file or blob and returns the base64 data.
      * @param {File|Blob} file
+     * !static loadAsBase64 (file: File|Blob) : Promise<string>;
      */
     loadAsBase64: async function (file)
     {
@@ -92,6 +98,7 @@ const Utils =
      * Loads a file or blob and returns the content as text.
      * @param {File|Blob} file
      * @param {function(string)} callback
+     * !static loadAsText (file: File|Blob, callback: (text: string) => void) : void;
      */
     loadAsText: function (file, callback)
     {
@@ -108,6 +115,7 @@ const Utils =
      * Loads a file or blob and returns the content as array buffer.
      * @param {File|Blob} file
      * @param {function(ArrayBuffer)} callback
+     * !static loadAsArrayBuffer (file: File|Blob, callback: (buffer: ArrayBuffer) => void) : void;
      */
     loadAsArrayBuffer: function (file, callback)
     {
@@ -123,7 +131,8 @@ const Utils =
     /**
      * Loads a list of files or blobs and returns the content as dataURLs.
      * @param {Array<File|Blob>} fileList
-     * @param {function([{ name:string, size:number, url:string }])} callback
+     * @param {(results: Array<{ name: string, size: number, url: string }>) => void} callback
+     * !static loadAllAsDataUrl (fileList: Array<File|Blob>, callback: (results: Array<{ name: string, size: number, url: string }>) => void) : void;
      */
     loadAllAsDataUrl: function (fileList, callback)
     {
@@ -156,6 +165,7 @@ const Utils =
      * Loads an image from a url and returns it as an Image object.
      * @param {string} url
      * @param {function(Image)} callback
+     * !static loadImageFromUrl (url: string, callback: (image: HTMLImageElement) => void) : void;
      */
     loadImageFromUrl: function (url, callback)
     {
@@ -165,5 +175,7 @@ const Utils =
         image.src = url;
     }
 };
+
+//!/class
 
 export default Utils;

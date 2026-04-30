@@ -2,9 +2,44 @@
 import { Model, ModelList, EventDispatcher } from 'rinn';
 import Api from './api.js';
 
-/*
-**	Provides several methods to quickly interface with a remote data-source as defined by Wind.
-*/
+/**
+ * Provides several methods to quickly interface with a remote data-source as defined by Wind.
+ */
+
+//!class DataSource
+
+//! /** Class name identifier. */
+//! className: string;
+//! /** Debounce delay (in milliseconds) used by `refresh`. Defaults to 250. */
+//! debounceDelay: number;
+//! /** The base path used as prefix for the `f` parameter in API operations. */
+//! basePath: string;
+//! /** Request model whose properties are forwarded as parameters to API calls. */
+//! request: any;
+//! /** When `true`, `refresh` will fetch the count via the `.count` API function. */
+//! includeCount: boolean;
+//! /** When `true`, `refresh` will fetch the enumeration via the `.enum` API function. */
+//! includeEnum: boolean;
+//! /** When `true`, `refresh` will fetch the list via the `.list` API function. Defaults to `true`. */
+//! includeList: boolean;
+//! /** Internal event-id used to namespace forwarded events. */
+//! eid: string;
+//! /** Total record count, populated when `includeCount` is enabled. */
+//! count: number;
+//! /** ModelList holding the fetched list of records. */
+//! list: any;
+//! /** ModelList holding the fetched enumeration. */
+//! enum: any;
+
+//! /** Map of named global data sources keyed by their name. */
+//! static globals: Record<string, DataSource>;
+
+//! /**
+//!  * Returns a data source by name or creates a new one if it doesn't exist (when `create` is `true`).
+//!  * @param name The name of the data source. A scope can be added as a prefix, separated by a colon.
+//!  * @param create Whether to create the data source if it doesn't exist.
+//!  */
+//! static get (name: string, create?: boolean) : DataSource;
 
 const DataSource = EventDispatcher.extend
 ({
@@ -22,11 +57,14 @@ const DataSource = EventDispatcher.extend
     list: null,
     enum: null,
 
-    /*
-    **	Constructs the data source with the specified optional `config` parameters, any of the properties of this object can be specified
-    **	in the config. Uses the given basePath as prefix for the `f` parameter for subsequent API operations, a basePath of `candies` will
-    **	result in calls to `candies.list`, `candies.count`, etc.
-    */
+    /**
+     * Constructs the data source with the specified optional `config` parameters, any of the properties of this object can be specified
+     * in the config. Uses the given basePath as prefix for the `f` parameter for subsequent API operations, a basePath of `candies` will
+     * result in calls to `candies.list`, `candies.count`, etc.
+     * @param {string} basePath
+     * @param {object} config
+     * !constructor (basePath: string, config?: object);
+     */
     __ctor: function (basePath, config)
     {
         this._super.EventDispatcher.__ctor();
@@ -73,12 +111,15 @@ const DataSource = EventDispatcher.extend
         this.prepareEvent('enum' + evt.name[0].toUpperCase() + evt.name.substr(1), args).setSource(evt.source).resume();
     },
 
-    /*
-    **	Executes one or more API functions (depending on `includeCount`, `includeEnum` and `includeList` properties) to retrieve the
-    **	required data (uses debounce to prevent too-quick refreshes).
-    **
-    **	Refresh mode can be: order, filter, range, enum or full. Setting `mode` to `true` will cause a full refresh without debouncing.
-    */
+    /**
+     * Executes one or more API functions (depending on `includeCount`, `includeEnum` and `includeList` properties) to retrieve the
+     * required data (uses debounce to prevent too-quick refreshes).
+     *
+     * Refresh mode can be: `order`, `filter`, `range`, `enum` or `full`. Setting `mode` to `true` will cause a full refresh without debouncing.
+     * @param {string|boolean} mode
+     * @param {(r: any) => void} callback
+     * !refresh (mode?: string|boolean|((r: any) => void), callback?: (r: any) => void) : void;
+     */
     refresh: function (mode='full', callback=null)
     {
         if (typeof(mode) == 'function') {
@@ -112,10 +153,14 @@ const DataSource = EventDispatcher.extend
             this._timeout = setTimeout(fn, this.debounceDelay);
     },
 
-    /*
-    **	Searches for the item in `list` that matches the specified `fields` and sends it to the callback. If no item is found (or if `forced` is true),
-    **	a call to API function `.get` will be executed with the fields as request parameters. Returns a promise.
-    */
+    /**
+     * Searches for the item in `list` that matches the specified `fields` and sends it to the callback. If no item is found (or if `forced` is true),
+     * a call to API function `.get` will be executed with the fields as request parameters. Returns a promise.
+     * @param {object} fields
+     * @param {boolean} forced
+     * @returns {Promise<any>}
+     * !fetch (fields: object, forced?: boolean) : Promise<any>;
+     */
     fetch: function (fields, forced=false)
     {
         return new Promise((resolve, reject) =>
@@ -141,10 +186,13 @@ const DataSource = EventDispatcher.extend
         });
     },
 
-    /*
-    **	Removes an item from the remote data source by executing the `.delete` API function, passes the given `fields` as request
-    **	parameters. Returns a promise.
-    */
+    /**
+     * Removes an item from the remote data source by executing the `.delete` API function, passes the given `params` as request
+     * parameters. Returns a promise.
+     * @param {object} params
+     * @returns {Promise<any>}
+     * !delete (params: object) : Promise<any>;
+     */
     delete: function (params)
     {
         return new Promise((resolve, reject) =>
@@ -159,6 +207,10 @@ const DataSource = EventDispatcher.extend
         });
     },
 
+    /**
+     * Fetches the list via the `.list` API function and populates the `list` property.
+     * !fetchList () : void;
+     */
     fetchList: function ()
     {
         let data = {...this.request.get()};
@@ -172,6 +224,10 @@ const DataSource = EventDispatcher.extend
         });
     },
 
+    /**
+     * Fetches the enumeration via the `.enum` API function and populates the `enum` property.
+     * !fetchEnum () : void;
+     */
     fetchEnum: function ()
     {
         let data = {...this.request.get()};
@@ -185,6 +241,10 @@ const DataSource = EventDispatcher.extend
         });
     },
 
+    /**
+     * Fetches the record count via the `.count` API function and populates the `count` property.
+     * !fetchCount () : void;
+     */
     fetchCount: function ()
     {
         let data = {...this.request.get()};
@@ -198,6 +258,12 @@ const DataSource = EventDispatcher.extend
         });
     },
 
+    /**
+     * Fetches a single record via the `.get` API function, passing the merged request and `params` as parameters.
+     * @param {object} params
+     * @param {(r: any) => void} callback
+     * !fetchOne (params: object, callback: (r: any) => void) : void;
+     */
     fetchOne: function (params, callback)
     {
         let data = {...this.request.get(), ...params};
@@ -208,6 +274,12 @@ const DataSource = EventDispatcher.extend
         });
     },
 
+    /**
+     * Calls the `.delete` API function, passing the merged request and `params` as parameters.
+     * @param {object} params
+     * @param {(r: any) => void} callback
+     * !fetchDelete (params: object, callback: (r: any) => void) : void;
+     */
     fetchDelete: function (params, callback)
     {
         let data = {...this.request.get(), ...params};
@@ -218,6 +290,13 @@ const DataSource = EventDispatcher.extend
         });
     },
 
+    /**
+     * Sends an arbitrary API request, merging the data source's `request` properties with `params`. If `params.f` starts with `.` it is
+     * automatically prefixed with the configured `basePath`.
+     * @param {object} params
+     * @returns {Promise<any>}
+     * !fetchData (params: object) : Promise<any>;
+     */
     fetchData: function (params)
     {
         let data = {...this.request.get(), ...params};
@@ -227,6 +306,13 @@ const DataSource = EventDispatcher.extend
         return Api.fetch(data);
     },
 
+    /**
+     * Builds an absolute URL for an arbitrary API call, merging the data source's `request` properties with `params`. If `params.f` starts
+     * with `.` it is automatically prefixed with the configured `basePath`.
+     * @param {object} params
+     * @returns {string}
+     * !makeUrl (params: object) : string;
+     */
     makeUrl: function (params)
     {
         let data = {...this.request.get(), ...params};
@@ -236,6 +322,8 @@ const DataSource = EventDispatcher.extend
         return Api.makeUrl(data);
     }
 });
+
+//!/class
 
 /**
  * Returns a data source by name or creates a new one if it doesn't exist (if `create` is `true`).

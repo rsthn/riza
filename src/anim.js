@@ -2,8 +2,20 @@
 import { Rinn, Class } from 'rinn';
 
 /**
-**	Class to animate properties using rules (imported from Cherry source code).
-*/
+ * Class to animate properties using rules (imported from Cherry source code).
+ */
+
+//!class Anim
+
+//! /** Indicates whether the animation is currently paused. */
+//! paused: boolean;
+//! /** Indicates whether the animation has finished playing. */
+//! finished: boolean;
+//! /** Time scale (animation speed). */
+//! timeScale: number;
+
+//! /** Creates a new Anim instance. */
+//! constructor();
 
 const Anim = Class.extend
 ({
@@ -41,6 +53,11 @@ const Anim = Class.extend
 	{
 	},
 
+	/**
+	 * Returns a clone of the animation, sharing the same compiled list and initial data.
+	 * @returns {Anim}
+	 * !clone () : Anim;
+	 */
 	clone: function ()
 	{
 		let a = new Anim();
@@ -51,19 +68,35 @@ const Anim = Class.extend
 		return a.reset();
 	},
 
+	/**
+	 * Sets a callback to be invoked when the animation finishes.
+	 * @param {() => void} callback
+	 * @returns {Anim}
+	 * !onFinished (callback: () => void) : Anim;
+	 */
 	onFinished: function (callback)
 	{
 		this.onFinishedCallback = callback;
 		return this;
 	},
 
+	/**
+	 * Sets a callback to be invoked on each update tick.
+	 * @param {(data: object, anim: Anim) => void} callback
+	 * @returns {Anim}
+	 * !onUpdated (callback: (data: object, anim: Anim) => void) : Anim;
+	 */
 	onUpdated: function (callback)
 	{
 		this.onUpdatedCallback = callback;
 		return this;
 	},
 
-	// Resets the animation to its initial state.
+	/**
+	 * Resets the animation to its initial state.
+	 * @returns {Anim}
+	 * !reset () : Anim;
+	 */
 	reset: function ()
 	{
 		this.stack.length = 0;
@@ -84,28 +117,46 @@ const Anim = Class.extend
 		return this;
 	},
 
-	// Sets the initial data.
+	/**
+	 * Sets the initial data object whose fields will be animated.
+	 * @param {object} data
+	 * @returns {Anim}
+	 * !initial (data: object) : Anim;
+	 */
 	initial: function (data)
 	{
 		this.initialData = data;
 		return this.reset();
 	},
 
-	// Sets the time scale (animation speed).
+	/**
+	 * Sets the time scale (animation speed). Must be greater than zero.
+	 * @param {number} value
+	 * @returns {Anim}
+	 * !speed (value: number) : Anim;
+	 */
 	speed: function (value)
 	{
 		this.timeScale = value > 0.0 ? value : 1.0;
 		return this;
 	},
 
-	// Sets the output data object.
+	/**
+	 * Sets the output data object that will receive the animated values.
+	 * @param {object} data
+	 * @returns {Anim}
+	 * !setOutput (data: object) : Anim;
+	 */
 	setOutput: function (data)
 	{
 		this.data = data;
 		return this;
 	},
 
-	// Pauses the animation.
+	/**
+	 * Pauses the animation.
+	 * !pause () : void;
+	 */
 	pause: function ()
 	{
 		if (this.paused) return;
@@ -114,7 +165,10 @@ const Anim = Class.extend
 		this.paused = true;
 	},
 
-	// Resumes the animation.
+	/**
+	 * Resumes the animation.
+	 * !resume () : void;
+	 */
 	resume: function ()
 	{
 		if (!this.paused) return;
@@ -140,7 +194,12 @@ const Anim = Class.extend
 		this.paused = false;
 	},
 
-	// Updates the animation by the specified delta time (seconds).
+	/**
+	 * Updates the animation by the specified delta time (seconds).
+	 * @param {number} dt
+	 * @returns {boolean}
+	 * !update (dt: number) : boolean;
+	 */
 	update: function (dt)
 	{
 		if (this.paused) return false;
@@ -441,7 +500,11 @@ const Anim = Class.extend
 		return true;
 	},
 
-	// Runs the subsequent commands in parallel. Should end the parallel block by calling end().
+	/**
+	 * Runs the subsequent commands in parallel. Should end the parallel block by calling end().
+	 * @returns {Anim}
+	 * !parallel () : Anim;
+	 */
 	parallel: function ()
 	{
 		let block = [ ];
@@ -454,7 +517,11 @@ const Anim = Class.extend
 		return this;
 	},
 
-	// Runs the subsequent commands in series. Should end the serial block by calling end().
+	/**
+	 * Runs the subsequent commands in series. Should end the serial block by calling end().
+	 * @returns {Anim}
+	 * !serial () : Anim;
+	 */
 	serial: function ()
 	{
 		let block = [ ];
@@ -467,7 +534,12 @@ const Anim = Class.extend
 		return this;
 	},
 
-	// Repeats a block the specified number of times.
+	/**
+	 * Repeats a block the specified number of times.
+	 * @param {number} count
+	 * @returns {Anim}
+	 * !repeat (count: number) : Anim;
+	 */
 	repeat: function (count)
 	{
 		let block = [ ];
@@ -480,7 +552,12 @@ const Anim = Class.extend
 		return this;
 	},
 
-	// Sets the callback of the current block.
+	/**
+	 * Sets the callback of the current block.
+	 * @param {() => void} fn
+	 * @returns {Anim}
+	 * !callback (fn: () => void) : Anim;
+	 */
 	callback: function (fn)
 	{
 		let block = this.stack[this.stack.length-1];
@@ -489,49 +566,98 @@ const Anim = Class.extend
 		return this;
 	},
 
-	// Ends a parallel(), serial() or repeat() block.
+	/**
+	 * Ends a parallel(), serial() or repeat() block.
+	 * @returns {Anim}
+	 * !end () : Anim;
+	 */
 	end: function ()
 	{
 		this.block = this.stack.pop();
 		return this;
 	},
 
-	// Sets the value of a variable.
+	/**
+	 * Sets the value of a variable.
+	 * @param {string} field
+	 * @param {any} value
+	 * @returns {Anim}
+	 * !set (field: string, value: any) : Anim;
+	 */
 	set: function (field, value)
 	{
 		this.block.push({ op: "set", field: field, value: value });
 		return this;
 	},
 
-	// Restarts the current block.
+	/**
+	 * Restarts the current block.
+	 * @param {number} duration
+	 * @returns {Anim}
+	 * !restart (duration?: number) : Anim;
+	 */
 	restart: function (duration)
 	{
 		this.block.push({ op: "restart" });
 		return this;
 	},
 
-	// Waits for the specified duration.
+	/**
+	 * Waits for the specified duration (in seconds, or the name of a field whose value is the duration).
+	 * @param {number|string} duration
+	 * @returns {Anim}
+	 * !wait (duration: number|string) : Anim;
+	 */
 	wait: function (duration)
 	{
 		this.block.push({ op: "wait", duration: duration });
 		return this;
 	},
 
-	// Sets the range of a variable.
+	/**
+	 * Animates a variable over a numeric range using the specified duration and optional easing function.
+	 * @param {string} field
+	 * @param {number|string} duration
+	 * @param {number} startValue
+	 * @param {number} endValue
+	 * @param {(t: number) => number} easing
+	 * @returns {Anim}
+	 * !range (field: string, duration: number|string, startValue: number, endValue: number, easing?: (t: number) => number) : Anim;
+	 */
 	range: function (field, duration, startValue, endValue, easing)
 	{
 		this.block.push({ op: "range", started: false, field: field, duration: duration, startValue: startValue, endValue: endValue, easing: easing ? easing : null });
 		return this;
 	},
 
-	// Generates a certain amount of random numbers in the given range (inclusive).
+	/**
+	 * Generates a certain amount of random numbers in the given range (inclusive).
+	 * @param {string} field
+	 * @param {number|string} duration
+	 * @param {number} count
+	 * @param {number} startValue
+	 * @param {number} endValue
+	 * @param {(t: number) => number} easing
+	 * @returns {Anim}
+	 * !rand (field: string, duration: number|string, count: number, startValue: number, endValue: number, easing?: (t: number) => number) : Anim;
+	 */
 	rand: function (field, duration, count, startValue, endValue, easing)
 	{
 		this.block.push({ op: "rand", started: false, field: field, duration: duration, count: count, startValue: startValue, endValue: endValue, easing: easing ? easing : null });
 		return this;
 	},
 
-	// Generates a certain amount of random numbers in the given range (inclusive). This uses a static random table to determine the next values.
+	/**
+	 * Generates a certain amount of random numbers in the given range (inclusive). This uses a static random table to determine the next values.
+	 * @param {string} field
+	 * @param {number|string} duration
+	 * @param {number} count
+	 * @param {number} startValue
+	 * @param {number} endValue
+	 * @param {(t: number) => number} easing
+	 * @returns {Anim}
+	 * !randt (field: string, duration: number|string, count: number, startValue: number, endValue: number, easing?: (t: number) => number) : Anim;
+	 */
 	randt: function (field, duration, count, startValue, endValue, easing)
 	{
 		let table = [ ];
@@ -553,19 +679,31 @@ const Anim = Class.extend
 		return this;
 	},
 
-	// Plays a sound.
+	/**
+	 * Plays a sound.
+	 * @param {{ play: () => void }} snd
+	 * @returns {Anim}
+	 * !play (snd: { play: () => void }) : Anim;
+	 */
 	play: function (snd)
 	{
 		this.block.push({ op: "play", snd: snd });
 		return this;
 	},
 
-	// Executes a function.
+	/**
+	 * Executes a function.
+	 * @param {(anim: Anim) => void} fn
+	 * @returns {Anim}
+	 * !exec (fn: (anim: Anim) => void) : Anim;
+	 */
 	exec: function (fn)
 	{
 		this.block.push({ op: "exec", fn: fn });
 		return this;
 	}
 });
+
+//!/class
 
 export default Anim;

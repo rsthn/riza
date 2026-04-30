@@ -22,55 +22,70 @@ let longPressState = { elem: null, state: null };
  * self or child-elements, and several utility methods.
  */
 
-const Element = 
+//!class Element
+
+//! /** Enables verbose debug logging for element lifecycle events. */
+//! static debug: boolean;
+
+const Element =
 {
     /**
      * Internal element ID. Added as namespace to model events. Ensures that certain model events are run locally only, not affecting other event handlers.
+     * !eid: string;
      */
     eid: null,
 
     /**
      * Name of the element, set by `registerElement`.
+     * !elementName: string;
      */
     elementName: null,
 
     /**
      * Indicates if the element is a root element, that is, the target element to attach child elements having `data-ref` attribute.
+     * !isRoot: boolean;
      */
     isRoot: false,
 
     /**
      * Root element to which this element is attached (when applicable).
+     * !root: Element;
      */
     root: null,
 
     /**
-     * Indicates ready-state of the element. Possible values are: 0: "Not ready", 1: "Children Initialized", and 2: "Parent Ready".
+     * Indicates ready-state of the element. Possible values are: 0 (Not ready), 1 (Children Initialized) and 2 (Parent Ready).
+     * !isReady: number;
      */
     isReady: 0,
 
     /**
      * Model type (class) for the element's model.
+     * !modelt: any;
      */
     modelt: Model,
 
     /**
      * Data model related to the element.
+     * !model: any;
      */
     model: null,
 
     /**
      * Contents of the element. When set, the innerHTML will be set to this value.
+     * !contents: string;
      */
     contents: null,
 
     /**
      * CSS style for the element (use selector "@" for scoped styles).
+     * !styles: string;
      */
     styles: '',
 
     /**
-     * 	Events map.
+     * Events map.
+     * !events: Record<string, ((evt: any) => void) | string>;
      */
     events:
     {
@@ -209,7 +224,8 @@ const Element =
     },
 
     /**
-     * Internal routes map, set by `bindRoutes`.
+     * Routes map. Maps route expressions (or `!route` for unrouted handlers) to handler functions or method names on the element.
+     * !routes: Record<string, ((evt: any, args: any) => void) | string>;
      */
     routes: null,
 
@@ -218,7 +234,8 @@ const Element =
     __readyStyles: false,
 
     /**
-     * 	Element constructor.
+     * Element constructor. Invoked automatically when the custom element is connected to the DOM.
+     * !constructor ();
      */
     __ctor: function()
     {
@@ -271,14 +288,16 @@ const Element =
     },
 
     /**
-     * 	Initializes the element. Called after construction of the instance.
+     * Initializes the element. Called after construction of the instance. Override in subclasses.
+     * !init () : void;
      */
     init: function()
     {
     },
 
     /**
-     * 	Executed when the children of the element are ready.
+     * Executed when the children of the element are ready. Override in subclasses.
+     * !ready () : void;
      */
     ready: function()
     {
@@ -311,14 +330,17 @@ const Element =
     },
 
     /**
-     * 	Executed after ready and after the root is also ready.
+     * Executed after `ready` and after the root is also ready. Override in subclasses.
+     * !rready () : void;
      */
     rready: function()
     {
     },
 
     /**
-     * 	Marks the element as ready.
+     * Marks the element as ready and walks the lifecycle phases.
+     * @param {Array<any>} list
+     * !markReady (list?: Array<any>) : void;
      */
     markReady: function (list=null)
     {
@@ -411,7 +433,8 @@ const Element =
     },
 
     /**
-     *	Checks if all children are ready and fires the appropriate function (`ready` and/or `rready`).
+     * Checks if all children are ready and fires the appropriate function (`ready` and/or `rready`).
+     * !checkReady () : void;
      */
     checkReady: function()
     {
@@ -458,7 +481,10 @@ const Element =
     },
 
     /**
-     * 	Returns the value of a field given its path. Starts from `global`, unless the first item in the path is `this`, in which case it will start from the element.
+     * Returns the value of a field given its path. Starts from `global`, unless the first item in the path is `this`, in which case it will start from the element. If the first item is `root`, it will start from the root element.
+     * @param {string} path
+     * @returns {any}
+     * !getFieldByPath (path: string) : any;
      */
     getFieldByPath: function(path)
     {
@@ -489,14 +515,20 @@ const Element =
     },
 
     /**
-     * 	Returns the root of the element (that is, the `root` property). If not set it will attempt to find the root first.
+     * Returns the root of the element (that is, the `root` property). If not set, it will attempt to find the root first.
+     * @returns {Element}
+     * !getRoot () : Element;
      */
     getRoot: function() {
         return this.root ? this.root : (this.root = this.findRoot());
     },
 
     /**
-     * 	Sets the model of the element and executes the `modelChanged` event handler (unless `update` is set to false).
+     * Sets the model of the element and executes the `modelChanged` event handler (unless `update` is set to false).
+     * @param {any} model
+     * @param {boolean} update
+     * @returns {Element}
+     * !setModel (model: any, update?: boolean) : Element;
      */
     setModel: function (model, update=true)
     {
@@ -529,7 +561,9 @@ const Element =
     },
 
     /**
-     * 	Returns the model of the element. Added for symmetry only, exactly the same as accesing public property `model` of this class.
+     * Returns the model of the element. Equivalent to accessing the public `model` property.
+     * @returns {any}
+     * !getModel () : any;
      */
     getModel: function ()
     {
@@ -537,7 +571,10 @@ const Element =
     },
 
     /**
-     * 	Adds one or more CSS classes (separated by space) to the element.
+     * Adds one or more CSS classes (separated by space) to the element. Class names prefixed with `+` are added; class names prefixed with `-` are removed.
+     * @param {string} classString
+     * @returns {Element}
+     * !addClass (classString: string) : Element;
      */
     addClass: function (classString)
     {
@@ -558,7 +595,10 @@ const Element =
     },
 
     /**
-     * 	Removes one or more CSS classes (separated by space) from the element.
+     * Removes one or more CSS classes (separated by space) from the element. Class names prefixed with `+` are added; class names prefixed with `-` are removed.
+     * @param {string} classString
+     * @returns {Element}
+     * !removeClass (classString: string) : Element;
      */
     removeClass: function (classString)
     {
@@ -579,7 +619,10 @@ const Element =
     },
 
     /**
-     * 	Sets one or more style properties to the element (separated by semi-colon).
+     * Sets one or more style properties on the element (separated by semi-colon, in `name: value` form).
+     * @param {string} styleString
+     * @returns {Element}
+     * !setStyle (styleString: string) : Element;
      */
     setStyle: function (styleString)
     {
@@ -601,7 +644,10 @@ const Element =
     },
 
     /**
-     * 	Returns the width of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+     * Returns the width of the specified element (or of itself if none provided) using `getBoundingClientRect`.
+     * @param {HTMLElement} elem
+     * @returns {number}
+     * !getWidth (elem?: HTMLElement) : number;
      */
     getWidth: function (elem=null)
     {
@@ -609,7 +655,10 @@ const Element =
     },
 
     /**
-     * 	Returns the height of the specified element (or of itself it none provided), uses `getBoundingClientRect`.
+     * Returns the height of the specified element (or of itself if none provided) using `getBoundingClientRect`.
+     * @param {HTMLElement} elem
+     * @returns {number}
+     * !getHeight (elem?: HTMLElement) : number;
      */
     getHeight: function (elem=null)
     {
@@ -617,18 +666,11 @@ const Element =
     },
 
     /**
-    **	Binds all events in the specified map to the element, the events map can have one of the following forms:
-    **
-    **		"click .button": "doSomething",		(Delegated Event)
-    **		"click .button": function() { },	(Delegated Event)
-    **		"myevt &this": "...",				(Self Event)
-    **		"myevt": "...",						(Element Event)
-    **		"myevt @objName": "...",			(EventDispatcher Event)
-    **		"#propname": "...",					(Property Changed Event)
-    **		"keyup(10) .input": "..."			(Delegated Event with Parameters)
-    **
-    **	>> Element bindEvents (object events);
-    */
+     * Binds all events in the specified map to the element. The events map keys follow the syntax: `"click .button"` (delegated event), `"myevt &this"` (self event), `"myevt"` (element event), `"myevt @objName"` (EventDispatcher event), `"#propname"` (property-changed event), or `"keyup(10) .input"` (delegated event with parameters).
+     * @param {Record<string, ((evt: any) => void) | string>} events
+     * @returns {Element}
+     * !bindEvents (events: Record<string, ((evt: any) => void) | string>) : Element;
+     */
     bindEvents: function (events)
     {
         for (let evtstr in events)
@@ -702,15 +744,9 @@ const Element =
     },
 
     /**
-    **	Binds all routes in the specified map to the Router object.
-    **
-    **		"route-path": "doSomething"						On-Route
-    **		"route-path": function (evt, args) { }			On-Route
-    **		"!route-path": "doSomething"					On-UnRoute
-    **		"!route-path": function (evt, args) { }			On-UnRoute
-    **
-    **	>> Element bindRoutes ();
-    */
+     * Binds all routes in the `routes` map to the Router. Route keys prefixed with `!` are bound as unroute handlers.
+     * !bindRoutes () : void;
+     */
     bindRoutes: function ()
     {
         if (!this.routes)
@@ -732,7 +768,8 @@ const Element =
     },
 
     /**
-     * Unbinds all routes added by bindRoutes.
+     * Unbinds all routes added by `bindRoutes`.
+     * !unbindRoutes () : void;
      */
     unbindRoutes: function ()
     {
@@ -767,60 +804,48 @@ const Element =
         evt.continuePropagation = true;
         evt.source = evt.target;
 
-        if (selector && selector instanceof HTMLElement)
-        {
-            if (evt.source === selector)
-            {
+        if (selector && selector instanceof HTMLElement) {
+            if (evt.source === selector) {
                 evt.continuePropagation = false;
-
                 if (handler.call (this, evt, evt.detail) === true)
                     evt.continuePropagation = true;
             }
         }
-        else if (selector && selector != '*')
-        {
+        else if (selector && selector != '*') {
             let elems = this.querySelectorAll(selector);
-
-            while (evt.source !== this)
-            {
+            while (evt.source && evt.source !== this) {
                 let i = Rinn.indexOf (elems, evt.source, true);
-                if (i !== -1)
-                {
+                if (i !== -1) {
                     evt.continuePropagation = false;
-
                     if (handler.call (this, evt, evt.detail) === true)
                         evt.continuePropagation = true;
-
                     break;
                 }
-                else
-                {
+                else {
                     evt.source = evt.source.parentElement;
                 }
             }
         }
-        else
-        {
+        else {
             evt.continuePropagation = false;
-
             if (handler.call (this, evt, evt.detail) === true)
                 evt.continuePropagation = true;
         }
 
-        if (evt.continuePropagation === false)
-        {
+        if (evt.continuePropagation === false) {
             evt.preventDefault();
             evt.stopPropagation();
         }
     },
 
     /**
-    **	Listens for an event on elements matching the specified selector, returns an object with a single method `remove` used
-    **	to remove the listener when it is no longer needed.
-    **
-    **	>> object listen (string eventName, string selector, function handler);
-    **	>> object listen (string eventName, function handler);
-    */
+     * Listens for an event on elements matching the specified selector. Returns an object with a `remove` method to unbind the listener when no longer needed. The `selector` parameter is optional; when omitted, the second argument is treated as the handler.
+     * @param {string} eventName
+     * @param {string|((evt: any) => void)} selector
+     * @param {(evt: any) => void} handler
+     * @returns {{ remove: () => void }}
+     * !listen (eventName: string, selector: string | ((evt: any) => void), handler?: (evt: any) => void) : { remove: () => void };
+     */
     listen: function (eventName, selector, handler)
     {
         let eventCatcher = false;
@@ -902,8 +927,13 @@ const Element =
     },
 
     /**
-    **	Creates an event object for later dispatch.
-    */
+     * Creates an event object for later dispatch.
+     * @param {string} eventName
+     * @param {any} args
+     * @param {boolean} bubbles
+     * @returns {Event}
+     * !createEventObject (eventName: string, args: any, bubbles: boolean) : Event;
+     */
     createEventObject: function(eventName, args, bubbles) {
         if (eventName == 'click')
             return new MouseEvent(eventName, { bubbles: bubbles, detail: args });
@@ -911,8 +941,13 @@ const Element =
     },
 
     /**
-    **	Dispatches a new event with the specified name and the given arguments.
-    */
+     * Dispatches a new event with the specified name and the given arguments.
+     * @param {string} eventName
+     * @param {any} args
+     * @param {boolean} bubbles
+     * @returns {Element}
+     * !dispatch (eventName: string, args?: any, bubbles?: boolean) : Element;
+     */
     dispatch: function (eventName, args=null, bubbles=true)
     {
         let propName = 'on' + eventName.toLowerCase();
@@ -926,8 +961,12 @@ const Element =
     },
 
     /**
-    **	Dispatches a local event, does not bubble up and invokes only the local event handler if present.
-    */
+     * Dispatches a local event, does not bubble up, and invokes only the local event handler (if present).
+     * @param {string} eventName
+     * @param {any} args
+     * @returns {Element}
+     * !trigger (eventName: string, args?: any) : Element;
+     */
     trigger: function (eventName, args=null)
     {
         let propName = 'on' + eventName.replace(/-/g, '').toLowerCase();
@@ -938,8 +977,14 @@ const Element =
     },
 
     /**
-    **	Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
-    */
+     * Dispatches a new event on the specified element with the given name and arguments (uses `CustomEvent`).
+     * @param {HTMLElement} elem
+     * @param {string} eventName
+     * @param {any} args
+     * @param {boolean} bubbles
+     * @returns {Element}
+     * !dispatchOn (elem: HTMLElement, eventName: string, args?: any, bubbles?: boolean) : Element;
+     */
     dispatchOn: function (elem, eventName, args=null, bubbles=true)
     {
         let propName = 'on' + eventName.replace(/-/g, '').toLowerCase();
@@ -953,8 +998,11 @@ const Element =
     },
 
     /**
-    **	Sets the innerHTML property of the element and runs some post set-content tasks.
-    */
+     * Sets the `innerHTML` property of the element and runs the post set-content tasks.
+     * @param {string} value
+     * @returns {Element}
+     * !setInnerHTML (value: string) : Element;
+     */
     setInnerHTML: function (value) {
         this.__readyLocked++;
         this.innerHTML = value;
@@ -963,22 +1011,21 @@ const Element =
     },
 
     /**
-     * Returns the cleaned up innerHTML of the element.
+     * Returns the cleaned-up `innerHTML` of the element (with internal `rr-dom-probe` markers stripped).
+     * @returns {string}
+     * !getInnerHTML () : string;
      */
     getInnerHTML: function() {
         return this.innerHTML.replace(/<rr-dom-probe.+?><\/rr-dom-probe>/g, '').trim();
     },
 
     /**
-    **	Collects all watchers (data-watch, data-visible, data-attr, data-property), that depend on the model, should be invoked when the
-    **  structure of the element changed (added/removed children). This is automatically called when the setInnerHTML method is called.
-    **
-    **	Note that for 3rd party libs that add children to this element (which could probably have a watcher) will possibly result in
-    **	duplication of the added elements when compiling the innerHTML template. To prevent this add the 'pseudo' CSS class to any
-    **	element that should not be added to the HTML template.
-    **
-    **	>> void collectWatchers ();
-    */
+     * Collects all watchers (`data-watch`, `data-visible`, `data-attr`, `data-property`) that depend on the model. Should be invoked when the
+     * structure of the element changes (children added/removed). Automatically called by `setInnerHTML`.
+     *
+     * Third-party libs that add children to this element may cause duplication of added elements when compiling the `innerHTML` template. To prevent this, add the `pseudo` CSS class to any element that should not be added to the HTML template.
+     * !collectWatchers () : void;
+     */
     collectWatchers: function ()
     {
         let self = this;
@@ -1170,16 +1217,18 @@ const Element =
     },
 
     /**
-    **	Executed when the element is created and yet not attached to the DOM tree.
-    */
+     * Executed when the element is created and not yet attached to the DOM tree. Override in subclasses.
+     * !onCreated () : void;
+     */
     onCreated: function()
     {
     },
 
     /**
      * Executes the callback (just once) when the element is ready.
-     * @param {function} callback 
+     * @param {() => void} callback
      * @returns {Element}
+     * !whenReady (callback: () => void) : Element;
      */
     whenReady: function(callback)
     {
@@ -1197,7 +1246,8 @@ const Element =
     },
 
     /**
-     * Executed when the element is attached to the DOM tree.
+     * Internal lifecycle hook invoked when the element is attached to the DOM tree. Calls `bindRoutes`, `onConnected` and triggers the `connected` event.
+     * !elementConnected () : void;
      */
     elementConnected: function()
     {
@@ -1207,7 +1257,8 @@ const Element =
     },
 
     /**
-     * Executed when the element is no longer a part of the DOM tree.
+     * Internal lifecycle hook invoked when the element is removed from the DOM tree. Calls `unbindRoutes`, `onDisconnected` and triggers the `disconnected` event.
+     * !elementDisconnected () : void;
      */
     elementDisconnected: function()
     {
@@ -1217,39 +1268,48 @@ const Element =
     },
 
     /**
-    **	Executed when the element is attached to the DOM tree.
-    */
+     * Executed when the element is attached to the DOM tree. Override in subclasses.
+     * !onConnected () : void;
+     */
     onConnected: function()
     {
     },
 
     /**
-    **	Executed when the element is no longer a part of the DOM tree.
-    */
+     * Executed when the element is no longer part of the DOM tree. Override in subclasses.
+     * !onDisconnected () : void;
+     */
     onDisconnected: function()
     {
     },
 
     /**
-    **	Executed on the root element when a child element has `data-ref` attribute and it was added to it.
-    */
+     * Executed on the root element when a child with a `data-ref` attribute is added to it.
+     * @param {string} name
+     * @param {HTMLElement} element
+     * !onRefAdded (name: string, element: HTMLElement) : void;
+     */
     onRefAdded: function (name, element)
     {
     },
 
     /**
-    **	Executed on the root element when a child element has `data-ref` attribute and it was removed from it.
-    */
+     * Executed on the root element when a child with a `data-ref` attribute is removed from it.
+     * @param {string} name
+     * @param {HTMLElement} element
+     * !onRefRemoved (name: string, element: HTMLElement) : void;
+     */
     onRefRemoved: function (name, element)
     {
     },
 
     /**
-    **	Event handler invoked when the model has changed, executed before onModelChanged() to update internal dependencies,
-    **	should not be overriden or elements watching the model will not be updated.
-    **
-    **	>> void onModelPreChanged (evt, args);
-    */
+     * Event handler invoked when the model has changed. Executed before `onModelChanged` to update internal dependencies.
+     * Should NOT be overridden — overriding will break elements that watch the model.
+     * @param {any} evt
+     * @param {any} args
+     * !onModelPreChanged (evt: any, args: any) : void;
+     */
     onModelPreChanged: function (evt, args)
     {
         let data = this.getModel().get();
@@ -1284,24 +1344,33 @@ const Element =
     },
 
     /**
-    **	Event handler invoked when the model has changed.
-    */
+     * Event handler invoked when the model has changed. Override in subclasses.
+     * @param {any} evt
+     * @param {any} args
+     * !onModelChanged (evt: any, args: any) : void;
+     */
     onModelChanged: function (evt, args) // @override
     {
     },
 
     /**
-    **	Event handler invoked when a property of the model is changing. Fields `name` and `value` can be found in the `args` object.
-    */
+     * Event handler invoked when a property of the model is changing. Fields `name` and `value` are found in `args`.
+     * @param {any} evt
+     * @param {any} args
+     * !onModelPropertyChanging (evt: any, args: any) : void;
+     */
     onModelPropertyChanging: function (evt, args) // @override
     {
     },
 
     /**
-    **	Event handler invoked when a property of the model has changed, executed before onModelPropertyChanged() to update internal
-    **	dependencies. Automatically triggers internal events named `propertyChanged.<propertyName>` and `propertyChanged`.
-    **	Should not be overriden or elements depending on the property will not be updated.
-    */
+     * Event handler invoked when a property of the model has changed. Executed before `onModelPropertyChanged` to update internal
+     * dependencies and trigger `propertyChanged.<propertyName>` and `propertyChanged` events.
+     * Should NOT be overridden — overriding will break elements that depend on the property.
+     * @param {any} evt
+     * @param {any} args
+     * !onModelPropertyPreChanged (evt: any, args: any) : void;
+     */
     onModelPropertyPreChanged: function (evt, args)
     {
         for (let i = 0; i < this._list_property.length; i++)
@@ -1364,26 +1433,30 @@ const Element =
     },
 
     /**
-    **	Event handler invoked when a property of the model has changed.
-    */
+     * Event handler invoked when a property of the model has changed. Override in subclasses.
+     * @param {any} evt
+     * @param {any} args
+     * !onModelPropertyChanged (evt: any, args: any) : void;
+     */
     onModelPropertyChanged: function (evt, args) // @override
     {
     },
 
     /**
-    **	Event handler invoked when a property of the model is removed. Field `name` can be found in the `args` object.
-    */
+     * Event handler invoked when a property of the model is removed. Field `name` is found in `args`. Override in subclasses.
+     * @param {any} evt
+     * @param {any} args
+     * !onModelPropertyRemoved (evt: any, args: any) : void;
+     */
     onModelPropertyRemoved: function (evt, args) // @override
     {
     },
 
-    /*
-    **	Runs the following preparation procedures on the specified prototype:
-    **		- All functions named 'event <event-name> [event-selector]' will be moved to the 'events' map.
-    **		- All functions named 'route <route-path>' will be moved to the 'routes' map.
-    **
-    **	>> void preparePrototype (object proto);
-    */
+    /**
+     * Prepares a prototype before registration: methods named `event <event-name> [<event-selector>]` are moved to the `events` map and methods named `route <route-path>` are moved to the `routes` map.
+     * @param {object} proto
+     * !static preparePrototype (proto: object) : void;
+     */
     preparePrototype: function (proto)
     {
         if (proto.__prototypePrepared === true)
@@ -1412,13 +1485,14 @@ const Element =
         }
     },
 
-    /*
-    **	Registers a new custom element with the specified name. Extra functionality can be added with one or more prototypes, by default
-    **	all elements also get the `Element` prototype. Note that the final prototypes of all registered elements are stored, and if you want
-    **	to inherit another element's prototype just provide its name (string) in the protos argument list.
-    **
-    **	>> class register (string name, ...(object|string) protos);
-    */
+    /**
+     * Registers a new custom element with the specified name. Extra functionality can be added with one or more prototypes — by default
+     * all elements also get the `Element` prototype. Final prototypes of registered elements are stored; to inherit another element's prototype, pass its name (string) in the `protos` list.
+     * @param {string} name
+     * @param {...(object|string)} protos
+     * @returns {typeof HTMLElement}
+     * !static register (name: string, ...protos: Array<object|string>) : typeof HTMLElement;
+     */
     register: function (name, ...protos)
     {
         if ('riza_element_prefix' in globalThis && name.startsWith('r-'))
@@ -1611,11 +1685,12 @@ const Element =
         return newElement;
     },
 
-    /*
-    **	Expands an already created custom element with the specified prototype(s).
-    **
-    **	>> void expand (string elementName, ...object protos);
-    */
+    /**
+     * Expands an already-registered custom element with the specified prototype(s).
+     * @param {string} name
+     * @param {...object} protos
+     * !static expand (name: string, ...protos: Array<object>) : void;
+     */
     expand: function (name, ...protos)
     {
         if (!(name in elementPrototypes))
@@ -1648,9 +1723,14 @@ const Element =
         self.events = events;
     },
 
-    /*
-    **	Appends a hook to a function of a custom element.
-    */
+    /**
+     * Appends a hook to a function of a registered custom element. Returns an object with an `unhook` method to remove the hook.
+     * @param {string} name
+     * @param {string} functionName
+     * @param {(...args: any[]) => any} newFunction
+     * @returns {{ unhook: () => void }}
+     * !static hookAppend (name: string, functionName: string, newFunction: (...args: Array<any>) => any) : { unhook: () => void };
+     */
     hookAppend: function (name, functionName, newFunction)
     {
         if (!(name in elementPrototypes))
@@ -1667,9 +1747,14 @@ const Element =
         };
     },
 
-    /*
-    **	Prepends a hook to a function of a custom element.
-    */
+    /**
+     * Prepends a hook to a function of a registered custom element. Returns an object with an `unhook` method to remove the hook.
+     * @param {string} name
+     * @param {string} functionName
+     * @param {(...args: any[]) => any} newFunction
+     * @returns {{ unhook: () => void }}
+     * !static hookPrepend (name: string, functionName: string, newFunction: (...args: Array<any>) => any) : { unhook: () => void };
+     */
     hookPrepend: function (name, functionName, newFunction)
     {
         if (!(name in elementPrototypes))
@@ -1786,6 +1871,11 @@ const Element =
         elem.classList.add(args[1]);
     }
 };
+
+//!/class
+
+//! /** Alias for `Element` (avoids conflict with the DOM `Element` global in user code). */
+//! export const CElement: typeof Element;
 
 Element.debug = false;
 
