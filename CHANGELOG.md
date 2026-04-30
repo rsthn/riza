@@ -1,3 +1,10 @@
+# v3.0.46 - Apr 30 2026
+
+#### QoL
+- Fixed &name event-delegation selectors breaking after _ready claims data-ref refs.
+
+<br/>
+
 # v3.0.45 - Apr 30 2026
 
 #### QoL
