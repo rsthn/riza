@@ -51,7 +51,7 @@
     "dependencies": {
         "base-64": "^1.0.0",
         "fs-extra": "^10.1.0",
-        "rinn": "^2.0.53",
+        "rinn": "^2.0.54",
         "riza-signal": "^1.0.6"
     },
     "devDependencies": {

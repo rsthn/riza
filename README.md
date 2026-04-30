@@ -213,6 +213,8 @@ Inside any handler the receiver is the element instance (`this`). The event obje
 - `evt.params` / `evt.detail` &mdash; payload from `dispatch`.
 - `evt.continuePropagation = true` &mdash; opt back into bubbling/further matches; otherwise propagation is stopped.
 
+> **Default behavior — preventDefault + stopPropagation.** After a Riza event handler runs, the framework automatically calls `evt.preventDefault()` and `evt.stopPropagation()` for you. **Do not call them yourself** &mdash; it's redundant noise. If you actually want the event to keep propagating (let other handlers see it, let the browser do its default thing, let it bubble out of the modal/widget you're listening on), set `evt.continuePropagation = true` before returning &mdash; or `return true` from the handler, which is equivalent. This is the only knob you need; treat `preventDefault`/`stopPropagation` calls in handler code as a code smell.
+
 Dispatching events:
 
 ```js
@@ -410,6 +412,17 @@ Element.register('user-card', {
 const card = document.querySelector('user-card');
 card.model.set('name', 'Ada');
 ```
+
+> **Caveat — `data-watch` re-renders do NOT re-collect inner wirings.** When `data-watch` fires it does `element.innerHTML = template(data)` and that's it. It does not re-run the binding/ref collection pass. Anything inside the re-rendered HTML that depends on per-element wiring is silently broken after the first re-render:
+>
+> - `data-ref` &mdash; the original element (with the registered ref) is detached; the new element is never registered, and `root.<refName>` keeps pointing at the detached one.
+> - `data-property` &mdash; `onchange` / `onblur` handlers never get attached to the new input, so typing doesn't update the model.
+> - `data-visible`, `data-attr` &mdash; never registered for the new element.
+> - Nested `data-watch` &mdash; the inner template was captured at the *outer*'s collection time, but after the outer re-renders, the new inner DOM node isn't tracked, so it stops reacting.
+>
+> `data-action` is fine inside a `data-watch` (delegation lives at the root, not on the element), and so are inert children with `[expr]` substitutions baked into the captured template.
+>
+> **Rule of thumb:** put `data-watch` only on small "leaves". Anything that needs `data-ref` / `data-property` / `data-visible` / `data-attr` must live OUTSIDE any `data-watch` &mdash; as a sibling of the watcher, not inside it. For each independently-reactive piece, use a separate sibling `data-watch` rather than nesting them.
 
 You can also bind a model declaratively from markup using `data-model="path.to.global"` &mdash; the path resolves against `global`, or starting with `this`/`root` to start from the element or its root.
 
