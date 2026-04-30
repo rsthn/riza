@@ -312,7 +312,7 @@ const Element =
     {
         if (this.isRoot)
         {
-            const list = this.querySelectorAll('[data-ref]');
+            const list = this.querySelectorAll('[data-ref]:not([data-_ref])');
             for (let i = 0; i < list.length; i++)
             {
                 const elem = list[i];
@@ -321,8 +321,7 @@ const Element =
                 this[name] = elem;
                 this.onRefAdded(name, elem);
 
-                elem.setAttribute('data-_ref', name);
-                elem.removeAttribute('data-ref');
+                elem.setAttribute('data-_ref', '1');
             }
         }
 
