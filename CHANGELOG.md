@@ -1,3 +1,13 @@
+# v3.0.45 - Apr 30 2026
+
+#### Qol
+- Updated documentation and dependencies.
+
+#### QoL
+- Annotated JS sources with tsdoc markers so dist/riza.d.ts now covers 11/12 modules (was 3/12).
+
+<br/>
+
 # v3.0.44 - Apr 29 2026
 
 #### QoL

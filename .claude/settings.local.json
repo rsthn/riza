@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node ./scripts/tsdoc.js ./src/main.js)",
+      "Bash(node ./scripts/tsdoc.js ./src/utils.js)",
+      "Bash(node ./scripts/tsdoc.js ./src/easing.js)",
+      "Bash(node ./scripts/tsdoc.js ./src/elements.js)",
+      "Bash(node ./scripts/tsdoc.js ./src/anim.js)",
+      "Bash(node ./scripts/tsdoc.js ./src/main.js ./dist/riza.d.ts)",
+      "Bash(node ./scripts/tsdoc.js ./src/data-source.js)"
+    ]
+  }
+}
