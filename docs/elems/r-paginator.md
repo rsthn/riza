@@ -24,8 +24,14 @@ Offset of the last item in the data source (list).
 ### `count`: _int_
 Total number of items in the data source.
 
+### `offset`: _int_
+Zero-based offset of the first item on the current page. This is the value mirrored to the data source's request `offset`.
+
 ### `pageSize`: _int_
-Number of items to show per page (default is 25).
+Number of items to show per page (default is 25). Updating this triggers a `range` refresh.
+
+### `currentPageSize`: _int_
+The page size most recently applied to the data source. Internally tracked so that updates to `pageSize` only trigger a refresh when the value actually changes.
 
 <br/>
 
@@ -50,6 +56,9 @@ Refreshes the data source.
 
 ### `clear` (`fieldNames`: _Array\<string\>_)
 Clears (set to empty) the specified fields from the data source's request parameters.
+
+### `setSource` (`source`: _DataSource_)
+Replaces the bound data source. Detaches listeners from the previous source (and clears its `includeCount` flag), then attaches to the new source and enables `includeCount`. No-op if the same source is passed in.
 
 <br/>
 

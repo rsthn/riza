@@ -7,6 +7,8 @@ Connects to a `DataSource` and renders its contents as a table. Supports filteri
 |`data-source`|Required|Path to a `DataSource` object. Its `list` property will be used as input.
 |`data-container`|Optional|Selector of the container where rows will be placed, ensure to include the element type (e.g. `div.x-data`), if none is provided `tbody.x-data` will be used.
 
+The container element itself may carry `data-mode="dynamic"` to switch the row template into dynamic mode — the container's `innerHTML` is re-read on every render rather than compiled once. Use this when rows contain other custom elements that need to be re-instantiated per render. Default is static mode (template is compiled once).
+
 <br/>
 
 # Model
@@ -24,6 +26,9 @@ Refreshes the data source, and causes the table to re-render.
 
 ### `clear` (`fieldNames`: _Array\<string\>_)
 Clears (set to empty) the specified fields from the data source's request parameters.
+
+### `setSource` (`source`: _DataSource_)
+Replaces the bound data source. Detaches listeners from the previous source and attaches them to the new one. No-op if the same source is passed in.
 
 <br/>
 
@@ -50,14 +55,14 @@ Note that the attribute `data-order` will be added to the column and set to eith
 }
 
 th[data-sort] {
-    pointer: cursor; text-decoration: underline;
+    cursor: pointer; text-decoration: underline;
 }
 
-th[data-sort][data-order="asc"]:after {
+th[data-sort][data-order="asc"]:before {
     content: "▲";
 }
 
-th[data-sort][data-order="desc"]:after {
+th[data-sort][data-order="desc"]:before {
     content: "▼";
 }
 ```

@@ -6,9 +6,21 @@ Tab selection is done by locating an immediate children of the `container` havin
 
 |Attribute|Required|Description
 |---------|--------|-----------
-|`data-container`|Optional|Selector of the container holding the tabs content. If not specified it will be assumed that the next sibling is the container.
+|`data-container`|Optional|Selector of the container holding the tabs content. If not specified it will be assumed that the next sibling is the container. See **Container sentinels** below for special values.
 |`data-base-route`|Optional|Specifies the base-route to use when detecting route change events. Use the at symbol `@` in place of the name of the selected tab. For example, base-route `/settings/@/` will cause tab named `test` to be selected if route `/settings/test/` is detected.
 |`data-initial`|Optional|Name of the initial tab to show. If not set, use the `selectTab` method to manually select a tab.
+
+<br/>
+
+# Container sentinels
+
+In addition to a regular CSS selector, `data-container` accepts a few special values:
+
+|Value|Effect
+|-----|------
+|`:previousElement` or `:prev`|Use the element immediately before the `<r-tabs>` as the tab content container.
+|`:nextElement` or `:next`|Use the element immediately after the `<r-tabs>` as the tab content container. (This is also the implicit default when `data-container` is omitted entirely.)
+|`:none`|Disable the container entirely. The element will still emit `tabChanged` and toggle `is-active`/`is-inactive` on its `[data-name]` links, but no `[data-name]` content children will be shown/hidden — useful when tabs only drive routing or styling.
 
 <br/>
 
@@ -44,7 +56,7 @@ Shows a tab given its name. The route will be changed automatically if `data-bas
     display: none;
 }
 
-r-tabs [data-name].active {
+r-tabs [data-name].is-active {
     font-weight: bold;
 }
 ```

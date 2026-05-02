@@ -1,6 +1,6 @@
 # r-panel
 
-Content panel with router support. Useful to easily show/hide content based on the current route. Flexible CSS classes control the state to allow animations when desired. To manually set some `r-panel` as visible by default simply set its CSS class to `active`.
+Content panel with router support. Useful to easily show/hide content based on the current route. Flexible CSS classes control the state to allow animations when desired. To manually set some `r-panel` as visible by default simply set its CSS class to `is-active`.
 
 |Attribute|Required|Description
 |---------|--------|-----------
@@ -8,10 +8,23 @@ Content panel with router support. Useful to easily show/hide content based on t
 
 <br/>
 
+# CSS Classes
+
+The panel toggles a small set of classes that you can hook into for styling and animation:
+
+|Class|Meaning
+|-----|-------
+|`is-active`|The panel is currently shown.
+|`is-inactive`|The panel is currently hidden.
+|`anim-out`|Added during the hide transition. Useful as an "exit" animation hook.
+|`anim-ended`|Added once the most recent animation finishes (or immediately when no animation is in flight). Useful to apply terminal styles only after the transition settles.
+
+<br/>
+
 # Events
 
-### `panelHidden`
-Dispatched when the panel is hidden because of a change in the current route.
+### `panelHidden` { `...args` }
+Dispatched when the panel is hidden because of a change in the current route. The event arguments contain the route arguments (same shape as `panelShown`), or an empty object if the panel has no `data-route`.
 
 <br/>
 
@@ -31,12 +44,17 @@ The `id` part is a route parameter, and thus its value (argument) will be passed
 # Methods
 
 ### `show` (`silent`: _bool_ = false)
-Sets the `active` class of the panel element, thus making it visible (if the CSS is properly configured). If `silent` is true and `data-route` enabled, the current route will **not** be updated. Fires the `panelShown` event.
+Adds the `is-active` class to the panel element (and removes `is-inactive`), making it visible (if the CSS is properly configured). If `silent` is true and `data-route` enabled, the current route will **not** be updated. Fires the `panelShown` event.
 
 <br/>
 
 ### `hide` ()
-Hides the panel by removing the `active` class from the element. Fires `panelHidden` event.
+Hides the panel by removing the `is-active` class and adding `is-inactive` and `anim-out` to the element. Fires the `panelHidden` event.
+
+<br/>
+
+### `toggleVisibility` (`silent`: _bool_ = false)
+Toggles between `show` and `hide` based on the current state. The `silent` argument is forwarded to `show` only.
 
 <br/>
 
@@ -47,7 +65,7 @@ r-panel {
     display: block;
 }
 
-r-panel:not(.active) {
+r-panel:not(.is-active) {
     display: none;
 }
 ```
