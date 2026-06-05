@@ -1,3 +1,10 @@
+# v3.0.48 - Jun 05 2026
+
+#### QoL
+- Minor fixup in short-press event dispatching.
+
+<br/>
+
 # v3.0.47 - Jun 05 2026
 
 #### QoL
