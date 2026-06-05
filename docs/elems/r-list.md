@@ -82,9 +82,15 @@ Add to elements that should be shown only **while the underlying data source / d
 ### `setList` (`list`: _ModelList_)
 Replaces the bound list. Detaches event listeners from the previous list (and its `dataSource`/`dataList` if any) and attaches them to the new one. No-op if the same list is passed in.
 
+### `setEmpty` (`value`: _boolean|null_)
+Sets the empty state and toggles the `is-hidden` class accordingly: `true` shows `.x-empty` (and hides `.x-not-empty`/`.x-empty-null`), `false` shows `.x-not-empty` (and hides `.x-empty`/`.x-empty-null`), and `null` shows `.x-empty-null` (the pre-load undefined state, hiding the other two). No-op if the state is unchanged.
+
+### `setLoading` (`value`: _boolean_)
+Toggles `is-hidden` on `.is-loading` elements: `true` shows them, anything else hides them.
+
 ### `refresh` ()
 Forces a full re-render of all items currently in the list (equivalent to a fresh `itemsChanged` event).
 
 <br/>
 
-<small>NOTE: When using JSX, you can use the `dataList` property directly with a `ModelList` object instead of passing a name via `data-list`. Additionally the `content` property (function callback `content(itemData, itemModel) → HTMLElement`) of `r-list` can be used in place of a `<template>` to format each item — when present it takes precedence over the template, and the returned element is used directly (with `data-iid` set on it).</small>
+<small>NOTE: When using JSX, you can use the `dataList` property directly with a `ModelList` object instead of passing a name via `data-list`. Additionally the `content` property (function callback `content(itemData, itemModel) → HTMLElement`) of `r-list` can be used in place of a `<template>` to format each item — the returned element is used directly (with `data-iid` set on it). A per-container render hook `this.container.content` (same `content(itemData, itemModel) → HTMLElement` signature) is also supported. The render precedence is: `this.content` → `this.container.content` → template.</small>

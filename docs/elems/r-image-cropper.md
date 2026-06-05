@@ -79,5 +79,5 @@ document.getElementById('save').addEventListener('click', () => {
 
 ## Notes
 
-- The element renders a child `<canvas>` and a child `<div>` (used internally for diagnostics) as soon as it initializes — give the element an explicit width via CSS so the initial bounding-box measurement is meaningful.
+- The element renders a child `<canvas>` and a reserved, currently-unused internal `<div>` as soon as it initializes — give the element an explicit width via CSS so the initial bounding-box measurement is meaningful.
 - The element does not currently emit any events; observe state changes by wrapping calls to `setImage*` / `getBlobAndUrl` directly.

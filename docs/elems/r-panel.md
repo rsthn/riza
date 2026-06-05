@@ -24,12 +24,12 @@ The panel toggles a small set of classes that you can hook into for styling and 
 # Events
 
 ### `panelHidden` { `...args` }
-Dispatched when the panel is hidden because of a change in the current route. The event arguments contain the route arguments (same shape as `panelShown`), or an empty object if the panel has no `data-route`.
+Dispatched whenever the panel is hidden (any `hide()` call, including the initial hide and via `toggleVisibility`). The event arguments contain the route arguments (same shape as `panelShown`), or an empty object if the panel has no `data-route`.
 
 <br/>
 
 ### `panelShown` { `...args` }
-Dispatched when the current route matches the panel's route, and thus the panel is shown. The event arguments contain the route arguments. For example, for the following:
+Dispatched whenever the panel is shown (any `show()` call, including panels with no `data-route` and via `toggleVisibility`). The event arguments contain the route arguments. For example, for the following:
 
 ```html
 <r-panel data-route="users/edit/:id">

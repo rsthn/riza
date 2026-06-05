@@ -8,6 +8,14 @@ Generic item with support to be connected to any model by using its `data-model`
 
 <br/>
 
+## Properties
+
+|Property|Description
+|--------|-----------
+|`dataModel`|`Model` object to be used with the element. When set directly on the element (e.g. by a parent such as an `r-list` row), it takes precedence over the `data-model` attribute. If neither resolves, an empty internal model is used.
+
+<br/>
+
 ## Example
 
 ```html

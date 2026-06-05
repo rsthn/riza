@@ -9,10 +9,10 @@ Provides functionality to send forms using [Api](../api.md). Per-field error mes
 
 |Attribute|Required|Description
 |---------|--------|-----------
-|`data-form-action`|Required|Name of the target API function to which the form data will be sent, this value is the `f` request<br/>parameter. If none provided the form will not be sent.<br/>When manual submit is desired, or if form data needs to be processed manually, this attribute can be<br/>ignored, but the property `formAction` of this element must be set to a function receiving parameters<br/>`object data` and `void callback (object res)`.<br/>If the value contains a `/` it is treated as a modern endpoint path and the data is sent as JSON.
-|`data-method`|Optional|HTTP method used to submit the form (e.g. `POST`, `GET`, `PUT`). Defaults to `POST`.
+|`data-form-action`|Required|Name of the target API function to which the form data will be sent.<br/>Accepts both the dot-style function name (sent as the `f` request parameter, e.g.<br/>`data-form-action="auth.login"`) and a path-style URL fragment appended to the API<br/>base URL (e.g. `data-form-action="auth/login"`, which posts to `<apiUrl>/auth/login`).<br/>If none provided the form will not be sent.<br/>When manual submit is desired, or if form data needs to be processed manually, this attribute can be<br/>ignored, but the property `formAction` of this element must be set to a function receiving parameters<br/>`object data` and `void callback (object res)`.
 |`data-strict`|Optional|When set to `false`, any field found in the form's model will be sent to the API function.<br/>Otherwise, only fields having their respective `[data-field]` element are sent.<br/>Defaults to `true`.
 |`data-errors-at`|Optional|Indicates where to add the `span.field-error` elements when a field has an error.<br/>Possible values are `top` (added to the top of the container), `bottom` (added to the<br/> bottom of the container) or `default` (added right after the `[data-field]` element).
+|`data-method`|Optional|HTTP method used for the API call.<br/>Defaults to `POST`.
 
 <br/>
 
@@ -51,6 +51,7 @@ r-form .message.error {
     <br/>
 
     <input type="submit" value="Login" />
+    <span class="loading-indicator">Loading ...</span>
 
 </r-form>
 ```
@@ -60,9 +61,9 @@ r-form .message.error {
 # Events
 
 ### `beforeSubmit` { `data`: _object_ }
-Fired right before the form data is sent. The `data` argument contains the payload that will be submitted (after `[data-field]` collection and any `constraints` filtering, and before `preprocess` runs). Useful to inspect or augment the request.
+Fired right before the form data is sent. The `data` parameter has the collected field values, and can be inspected before the request goes out.
 
-### `formSuccess` { `res`: _object_ }
+### `formSuccess` { `res`: _object_ } 
 Fired when the API function returns response code `200`. The `res` parameter has the API's response object.
 
 ### `formError` { `res`: _object_ }
@@ -79,33 +80,49 @@ Clears the markers of the form to return it to its initial visual state. It will
 - Add class `.is-hidden` to all `.message` elements.
 - Remove all `span.field-error` elements.
 - Remove class `.field-error` and `.is-invalid` from all elements.
-- Remove class `.field-passed` from all elements.
+- And, remove class `.field-passed` from all elements.
 
 <br/>
 
-### `reset` (`nsilent`: _bool_ = undefined)
-Resets the form fields to their default values. When no default values are specified, empty strings will be used, or string `'0'` for checkbox elements (string `'1'` when checked). When `nsilent` is `false`, every field DOM element is also re-synced from the model after the reset.
+### `getField` ( `name` )
+Returns the current value of the field identified by `name` (its `[data-field]` value).
+
+<br/>
+
+### `reset` ( [`nsilent`] )
+Reset's the form fields to their default values, when no default values are specified, empty strings will be used, or an integer zero (0) in checkbox elements.
+
+When `nsilent` is `false`, the underlying field elements are also explicitly re-populated with the reset model values.
 
 <br/>
 
 ### `submit` ()
-Submits the form to the target API function using the configured HTTP method (`data-method`, default `POST`).
+Submits the form to the target API function.
 
 <br/>
 
-### `getField` (`name`: _string_)
-Returns the current value of the field with the given `[data-field]` name, normalized by field type (checkboxes return `'0'`/`'1'`, multi-selects return a comma-joined string, custom `field`-typed inputs use `getValue()`, etc).
+# Properties & Hooks
+
+These are optional properties/callbacks that can be set on the element to customize its behavior.
+
+### `formAction`
+Function alternative to the `data-form-action` attribute. When set, it is invoked on submit with `(object data, void callback (object res))` instead of performing an API call.
+
+### `constraints`
+When set, the collected form data is passed through a `Model` (from `rinn`) using these constraints before submission, allowing field values to be validated/filtered/transformed.
+
+### `preprocess` ( `data` )
+Optional `async` hook invoked after `beforeSubmit` and before the request is sent. Receives the collected `data` object and may mutate it (or perform asynchronous work).
+
+### `onfieldchanged` ( `field`, `value`, `form` )
+Optional callback invoked whenever a field is set programmatically. Its return value is used as the value written to the field element.
 
 <br/>
 
 # Notes
 
-- When the form submission is in progress, the form element will get CSS class `.busy`, and this class will be removed when the call is completed. This feature can be used to create loading spinners.
+- When the form submission is in progress, the form element will get CSS class `.busy`, and this class will be removed when the call is completed. This feature can be used to create loading spinners (e.g. the `.loading-indicator` element in the example above is driven purely by CSS off the form's `.busy` class — the component does not toggle it directly).
 
 - When the API returns non-200 response code and an `error` field, it will be placed in the `.message.error` element.
 
 - When the API returns 200 response code, and a `message` field, it will be placed in the `.message.success` element.
-
-- If a `preprocess(data)` function is defined on the element, it will be `await`ed after `beforeSubmit` and before the request is sent — useful for asynchronous transforms such as uploading attachments.
-
-- If a `constraints` object is defined on the element, the collected data will be filtered through `new Model(data, null, constraints).get()` before submit.

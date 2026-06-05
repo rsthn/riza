@@ -13,7 +13,7 @@ The container element itself may carry `data-mode="dynamic"` to switch the row t
 
 # Model
 
-Filtering can be achieved by creating input elements that alter the model of the table (using `data-property` watchers). Any updated field will be copied to the `request` map of the data source (and viceversa).
+Filtering can be achieved by creating input elements that alter the model of the table (using `data-property` watchers). Any updated field will be copied to the `request` map of the data source (and viceversa). The `count` and `offset` fields are special-cased: they are still copied to the request, but unlike other fields they do not trigger a `'filter'` refresh.
 
 <br/>
 

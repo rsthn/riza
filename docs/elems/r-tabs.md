@@ -24,6 +24,16 @@ In addition to a regular CSS selector, `data-container` accepts a few special va
 
 <br/>
 
+# Properties
+
+### `activeTab` _string_
+Name of the currently active tab. Readable and settable.
+
+### `container` _HTMLElement_
+The resolved content container element (result of the `data-container` resolution). May be `null` when `data-container` is `:none`.
+
+<br/>
+
 # Events
 
 ### `tabShown` { `name`: _string_, `el`: _HTMLElement_ }
@@ -45,11 +55,20 @@ Shows the tab with the specified name, ignores `data-base-route` and current rou
 <br/>
 
 ### `selectTab` (`name`: _string_)
-Shows a tab given its name. The route will be changed automatically if `data-base-route` is enabled.
+Shows a tab given its name. If `data-base-route` is enabled and the computed hash differs from the current `location.hash`, the route is changed (which in turn triggers the tab change); if the hash already matches, it falls through and calls `showTab(name)` directly.
 
 <br/>
 
 ## CSS
+
+The following CSS classes are applied as styling hooks:
+
+|Class|Applied to|Description
+|-----|----------|-----------
+|`is-hidden`|Tab content children (`container > [data-name]`)|Set on every tab content element except the active one.
+|`is-active`|Link items (`[data-name]`/`[href]`)|Set on the link item of the active tab.
+|`is-inactive`|Link items (`[data-name]`/`[href]`)|Set on the link items that are not the active tab. Counterpart to `is-active`.
+|`anim-ended`|Link items (`[data-name]`/`[href]`)|Added to a link item once its CSS animation ends. It is removed and re-added on each tab change so animations can re-trigger.
 
 ```css
 .is-hidden {
