@@ -263,7 +263,13 @@ A few utility actions are built in &mdash; their names start with `:` so they ca
 <button data-action=":toggleClass active">Toggle</button>
 ```
 
-`data-long-press` additionally fires a `long-press` (after ~500ms hold) and `short-press` (on quick release) event so you can offer two interactions on the same element.
+`data-long-press` additionally fires a `long-press` (after ~500ms hold) and `short-press` (on quick release) event so you can offer two interactions on the same element. When an element has `data-long-press`, **use `data-short-press` (not `data-action`) for the tap action** — the click that follows a long-press is intentionally swallowed, so pairing `data-action` with `data-long-press` loses the tap whenever the user holds.
+
+```html
+<div data-short-press="open 42" data-long-press="edit 42">…</div>
+```
+
+Both attributes use the same `name args...` syntax as `data-action` and invoke methods on the root element.
 
 <br/>
 
@@ -306,6 +312,7 @@ All template expressions used by Riza (in `data-watch` content, `data-visible`, 
 - The placeholder delimiters are square brackets: `[ ... ]`.
 - The first token inside the brackets is either an **expression function** (`eq`, `if`, `each`, ...) or a **variable name** (a property in the data context, i.e. the model).
 - Subsequent tokens are arguments. Tokens are separated by whitespace.
+- A bare word in argument position is a **literal string**, not a variable. To pass the value of a model field as an argument, wrap it in its own brackets: `[eq [view] 'loading']`, not `[eq view 'loading']`. The same applies to every nested function call.
 - Strings can be written with `"..."` or `'...'`. Inner brackets (`[...]`) act as nested expressions.
 - Output is HTML-escaped by default. Prefix the variable with `!` to output raw HTML: `[!body_html]`.
 
@@ -340,8 +347,8 @@ Functions take the form `[name arg1 arg2 ...]`. A handful of the most useful one
 | `[len x]` / `[int x]` / `[str x]` / `[float x]` | Length / type coercion. |
 | `[join sep list]` / `[split sep s]` | Array <-> string. |
 | `[keys obj]` / `[values obj]` | Object introspection. |
-| `[each i list <template>]` | Concatenate the template once per item; `i#` is the key, `i##` is the numeric index. |
-| `[map i list <expr>]` / `[filter i list <expr>]` | Functional list ops. |
+| `[each i list <template>]` | Concatenate the template once per item; `i#` is the key, `i##` is the numeric index. The `<template>` body **must** be a bracketed expression whose first character (right after `[`) is either `<` (HTML shorthand for `[@<…>]`) or `@` (explicit template-block). Anything else — including whitespace, newlines, or a leading text token — is parsed as a function name (regular expression) and silently misbehaves. Example: `[each i [items] [@<li>[i.name]</li>]]` or the shorthand `[each i [items] [<li>[i.name]</li>]]`. |
+| `[map i list <expr>]` / `[filter i list <expr>]` | Functional list ops. Same body rule applies — wrap in `[@…]` or `[<…>]` with no leading whitespace. |
 | `[set name value]` / `[unset name]` | Mutate the data context. |
 
 Many functions also have a `?`-suffixed alias (`eq?`, `lt?`, `null?`) when you prefer a more readable boolean form.
@@ -356,17 +363,17 @@ Many functions also have a `?`-suffixed alias (`eq?`, `lt?`, `null?`) when you p
 
 <!-- conditional content -->
 <span data-watch="status">
-    [if [eq status 'ok'] 'All good' elif [eq status 'warn'] 'Heads up' else 'Error']
+    [if [eq [status] 'ok'] 'All good' elif [eq [status] 'warn'] 'Heads up' else 'Error']
 </span>
 
-<!-- list rendering -->
+<!-- list rendering — body must be a bracketed expression -->
 <ul data-watch="items">
-    [each item items <li>[item.label] - $[item.price]</li>]
+    [each item [items] [<li>[item.label] - $[item.price]</li>]]
 </ul>
 
 <!-- visibility based on a model field -->
-<div data-visible="[ne email '']">Has email</div>
-<div data-visible="[gt count 0]">There are items</div>
+<div data-visible="[ne [email] '']">Has email</div>
+<div data-visible="[gt [count] 0]">There are items</div>
 
 <!-- bind a DOM property to an expression -->
 <a data-attr="href: /user/[id]; title: [name]">profile</a>
@@ -402,7 +409,7 @@ Element.register('user-card', {
                 <strong>[name]</strong> &lt;[email]&gt;
             </div>
             <input data-property="name" placeholder="Name" />
-            <span data-visible="[ne email '']">has email</span>
+            <span data-visible="[ne [email] '']">has email</span>
         `);
     }
 });
@@ -411,6 +418,10 @@ Element.register('user-card', {
 ```js
 const card = document.querySelector('user-card');
 card.model.set('name', 'Ada');
+
+// Batch form — same effect, but emits a single `modelChanged` for the whole
+// batch instead of one per field. Prefer it over back-to-back `set` calls.
+card.model.set({ name: 'Ada', email: 'ada@example.com' });
 ```
 
 > **Caveat — `data-watch` re-renders do NOT re-collect inner wirings.** When `data-watch` fires it does `element.innerHTML = template(data)` and that's it. It does not re-run the binding/ref collection pass. Anything inside the re-rendered HTML that depends on per-element wiring is silently broken after the first re-render:
