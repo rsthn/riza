@@ -138,7 +138,7 @@ const Element =
             }
 
             if (longPressState.elem === evt.source)
-                this.dispatchOn(evt.source, 'short-press', [], false);
+                this.dispatchOn(evt.source, 'short-press');
         },
 
         'touchstart [data-long-press]': function (evt)
@@ -186,7 +186,7 @@ const Element =
             }
 
             if (longPressState.elem === evt.source)
-                this.dispatchOn(evt.source, 'short-press', null, false);
+                this.dispatchOn(evt.source, 'short-press');
         },
 
         'click [data-action]': function(evt)
