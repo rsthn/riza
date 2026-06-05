@@ -196,7 +196,7 @@ export default Element.register ('r-table',
     onModelPropertyRemoved: function (evt, args)
     {
         if (typeof(args.fields) == 'string')
-            this.source.request.remove(i);
+            this.source.request.remove(args.fields);
         else
             args.fields.forEach(i => this.source.request.remove(i));
 

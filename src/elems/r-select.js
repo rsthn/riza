@@ -4,6 +4,7 @@
 
 import { Rinn, ModelList } from 'rinn';
 import Element from '../element.js';
+import DataList from '../data-list.js';
 
 /*
 **	Connects to a ModelList and renders its contents as a <select> element.
