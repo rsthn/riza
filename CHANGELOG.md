@@ -1,3 +1,18 @@
+# v3.0.47 - Jun 05 2026
+
+#### QoL
+- Updated docs/elems for r-form, r-list, r-paginator, r-panel, r-select, r-table, r-tabs to match current source (CSS class names, new attributes, methods, events) and added missing r-image-cropper.md.
+- Added support for `data-short-press` event as attribute
+- Updated docs/elems for r-form, r-tabs, r-select, r-list, r-item, r-panel, r-paginator, r-table, r-image-cropper to match current source (new attributes, properties, methods, events and corrected behavior descriptions).
+- Fixed undefined references in r-select and r-table.
+- Clarified README template syntax (bracketed variable args, each/map body rules), data-short-press pairing, and batch model.set.
+
+#### General
+- r-select: import missing DataList module (string data-list path threw ReferenceError).
+- r-table: onModelPropertyRemoved removed undefined 'i' instead of the field name on the string-field branch.
+
+<br/>
+
 # v3.0.46 - Apr 30 2026
 
 #### QoL
