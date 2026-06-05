@@ -195,7 +195,6 @@ const Element =
                 return;
 
             let opts = evt.source.dataset.action.split(' ');
-
             if (opts[0] in this)
                 this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
             else
@@ -205,7 +204,15 @@ const Element =
         'long-press [data-long-press]': function(evt)
         {
             let opts = evt.source.dataset.longPress.split(' ');
+            if (opts[0] in this)
+                this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
+            else
+                evt.continuePropagation = true;
+        },
 
+        'short-press [data-short-press]': function(evt)
+        {
+            let opts = evt.source.dataset.shortPress.split(' ');
             if (opts[0] in this)
                 this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
             else
@@ -215,7 +222,6 @@ const Element =
         'keyup(13) input[data-enter]': function(evt)
         {
             let opts = evt.source.dataset.enter.split(' ');
-
             if (opts[0] in this)
                 this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
             else
