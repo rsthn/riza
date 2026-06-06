@@ -15,7 +15,7 @@ const elementClasses = { };
 /**
  * Contains the state of the current long-press operation.
  */
-let longPressState = { elem: null, state: null };
+let longPressState = { elem: null, state: false };
 
 /**
  * Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
@@ -137,8 +137,10 @@ const Element =
                 longPressState.state = null;
             }
 
-            if (longPressState.elem === evt.source)
+            if (longPressState.elem === evt.source) {
+                longPressState.state = false;
                 this.dispatchOn(evt.source, 'short-press');
+            }
         },
 
         'touchstart [data-long-press]': function (evt)
@@ -185,8 +187,10 @@ const Element =
                 longPressState.state = null;
             }
 
-            if (longPressState.elem === evt.source)
+            if (longPressState.elem === evt.source) {
+                longPressState.state = false;
                 this.dispatchOn(evt.source, 'short-press');
+            }
         },
 
         'click [data-action]': function(evt)
