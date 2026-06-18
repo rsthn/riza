@@ -15,7 +15,31 @@ const elementClasses = { };
 /**
  * Contains the state of the current long-press operation.
  */
-let longPressState = { elem: null, state: null };
+let longPressState =
+{
+    state: 0, elem: null, timeout: null,
+    id: 0, cid: -1,
+
+    dispatch: function (root, elem, eventName, reset)
+    {
+        if (longPressState.timeout)
+            clearTimeout(longPressState.timeout);
+        longPressState.timeout = null;
+
+        let dx = elem._pos_fx - elem._pos_sx;
+        let dy = elem._pos_fy - elem._pos_sy;
+    
+        let d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 5 && longPressState.elem === elem) {
+            longPressState.state = 2;
+            longPressState.cid = longPressState.id;
+            root.dispatchOn(elem, eventName);
+        } else if (reset) {
+            longPressState.state = 0;
+        }
+    }
+};
+
 
 /**
  * Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
@@ -89,27 +113,22 @@ const Element =
      */
     events:
     {
+        'mousedown [data-action]': function (evt) {
+            longPressState.id++;
+            evt.continuePropagation = true;
+        },
+
         'mousedown [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (longPressState.state) return;
+            if (longPressState.state === 1) return;
             evt.continuePropagation = false;
 
             let elem = evt.source;
             longPressState.elem = elem;
-            longPressState.state = setTimeout(() =>
-            {
-                let dx = elem._pos_fx - elem._pos_sx;
-                let dy = elem._pos_fy - elem._pos_sy;
-                longPressState.state = null;
-
-                let d = Math.sqrt(dx*dx + dy*dy);
-                if (d < 5 && longPressState.elem === elem) {
-                    longPressState.state = false;
-                    this.dispatchOn(elem, 'long-press');
-                }
-            },
-            500);
+            longPressState.state = 1;
+            longPressState.id++;
+            longPressState.timeout = setTimeout(() => { longPressState.dispatch(this, elem, 'long-press', false); }, 500);
 
             elem._pos_sx = evt.clientX;
             elem._pos_sy = evt.clientY;
@@ -120,7 +139,7 @@ const Element =
         'mousemove [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (!longPressState.state) return;
+            if (longPressState.state !== 1) return;
             evt.continuePropagation = false;
 
             evt.source._pos_fx = evt.clientX;
@@ -129,38 +148,20 @@ const Element =
 
         'mouseup [data-long-press]': function (evt)
         {
-            if (longPressState.state === false)
-                return;
-
-            if (longPressState.state) {
-                clearTimeout(longPressState.state);
-                longPressState.state = null;
-            }
-
-            if (longPressState.elem === evt.source) {
-                longPressState.state = false;
-                this.dispatchOn(evt.source, 'short-press');
-            }
+            if (longPressState.state !== 2)
+                longPressState.dispatch(this, evt.source, 'short-press', true);
         },
 
         'touchstart [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (longPressState.state) return;
+            if (longPressState.state === 1) return;
 
             let elem = evt.source;
             longPressState.elem = elem;
-            longPressState.state = setTimeout(() => {
-                let dx = elem._pos_fx - elem._pos_sx;
-                let dy = elem._pos_fy - elem._pos_sy;
-                longPressState.state = null;
-
-                let d = Math.sqrt(dx*dx + dy*dy);
-                if (d < 5 && longPressState.elem === elem) {
-                    longPressState.state = false;
-                    this.dispatchOn(elem, 'long-press');
-                }
-            }, 500);
+            longPressState.state = 1;
+            longPressState.id++;
+            longPressState.timeout = setTimeout(() => { longPressState.dispatch(this, elem, 'long-press', false); }, 500);
 
             elem._pos_sx = evt.touches[0].clientX;
             elem._pos_sy = evt.touches[0].clientY;
@@ -171,7 +172,7 @@ const Element =
         'touchmove [data-long-press]': function (evt)
         {
             evt.continuePropagation = true;
-            if (!longPressState.state) return;
+            if (longPressState.state !== 1) return;
 
             evt.source._pos_fx = evt.touches[0].clientX;
             evt.source._pos_fy = evt.touches[0].clientY;
@@ -179,23 +180,16 @@ const Element =
 
         'touchend [data-long-press]': function (evt)
         {
-            if (longPressState.state === false)
-                return;
-    
-            if (longPressState.state) {
-                clearTimeout(longPressState.state);
-                longPressState.state = null;
-            }
+            if (longPressState.state !== 2)
+                longPressState.dispatch(this, evt.source, 'short-press', true);
+        },
 
-            if (longPressState.elem === evt.source) {
-                longPressState.state = false;
-                this.dispatchOn(evt.source, 'short-press');
-            }
+        'contextmenu [data-long-press]': function (evt) {
         },
 
         'click [data-action]': function(evt)
         {
-            if (longPressState.state === false)
+            if (longPressState.state === 2 && longPressState.cid === longPressState.id)
                 return;
 
             let opts = evt.source.dataset.action.split(' ');
@@ -207,7 +201,6 @@ const Element =
 
         'long-press [data-long-press]': function(evt)
         {
-            queueMicrotask(() => longPressState.state = null);
             let opts = evt.source.dataset.longPress.split(' ');
             if (opts[0] in this)
                 this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
@@ -217,7 +210,6 @@ const Element =
 
         'short-press [data-short-press]': function(evt)
         {
-            queueMicrotask(() => longPressState.state = null);
             let opts = evt.source.dataset.shortPress.split(' ');
             if (opts[0] in this)
                 this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
@@ -303,16 +295,17 @@ const Element =
      * Initializes the element. Called after construction of the instance. Override in subclasses.
      * !init () : void;
      */
-    init: function()
-    {
+    init: function() {
     },
 
     /**
      * Executed when the children of the element are ready. Override in subclasses.
      * !ready () : void;
      */
-    ready: function()
-    {
+    ready: function() {
+    },
+
+    nop: function() {
     },
 
     /**
