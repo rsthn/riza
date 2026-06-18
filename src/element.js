@@ -15,7 +15,7 @@ const elementClasses = { };
 /**
  * Contains the state of the current long-press operation.
  */
-let longPressState = { elem: null, state: false };
+let longPressState = { elem: null, state: null };
 
 /**
  * Base class for custom elements. Provides support for model-triggered events, easy definition of handlers for events originated in
@@ -207,6 +207,7 @@ const Element =
 
         'long-press [data-long-press]': function(evt)
         {
+            queueMicrotask(() => longPressState.state = null);
             let opts = evt.source.dataset.longPress.split(' ');
             if (opts[0] in this)
                 this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);
@@ -216,6 +217,7 @@ const Element =
 
         'short-press [data-short-press]': function(evt)
         {
+            queueMicrotask(() => longPressState.state = null);
             let opts = evt.source.dataset.shortPress.split(' ');
             if (opts[0] in this)
                 this[opts[0]] ({ ...evt.params, ...evt.source.dataset, ...opts, length: opts.length }, evt);

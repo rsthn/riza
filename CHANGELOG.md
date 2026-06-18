@@ -1,4 +1,4 @@
-# v3.0.49 - Jun 06 2026
+# v3.0.50 - Jun 17 2026
 
 #### QoL
 - Minor fixup in long-press / short-press event dispatching.
