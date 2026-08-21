@@ -14,7 +14,7 @@ import { Api } from 'riza';
 Target URL for all the API requests. Set by calling `setEndPoint` (default is "/api").
 
 ### `retries` : int
-Number of retries to execute each API call before giving up and invoking error handlers (default is 1).
+Number of **re**-tries to execute after a failed API call, before giving up and invoking error handlers. Defaults to `0`, so a call is attempted once.
 
 ### `flags` : int
 Bit set of the feature flags below. Defaults to everything except `DISABLE_CORS` and `WIND_V3`.
