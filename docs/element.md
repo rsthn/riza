@@ -64,6 +64,24 @@ And it will show a bold label with a button, which when clicked will increase a 
 
 <br/>
 
+# Display
+
+Every registered element gets an **inline** `display: block` as it initialises. Because it is
+inline, it wins over any stylesheet rule, so a custom element cannot be given a different display
+from CSS — a media query on the tag will appear to do nothing:
+
+```css
+/* has no effect: the inline style wins */
+@media (max-width: 600px) {
+    my-element { display: none; }
+}
+```
+
+Override it with `!important`, set `style.display` on the element yourself, or wrap the element in
+a plain node and put the layout rules on the wrapper.
+
+<br/>
+
 # Event Handlers
 
 Event handlers can be defined in either the `events` field, or right in the class itself (as a function) by prefixing the name with "event". In either case an `event-selector` string is required, that is, the **event name** followed by a **selector**.
@@ -206,6 +224,17 @@ Listens for an event on elements matching the specified selector, returns an obj
 
 ### `dispatch` (`eventName`: string, `args`: object=null, `bubbles`: boolean=true) : void
 Dispatches a new event with the specified name and the given arguments.
+
+An `on<eventname>` **property takes precedence over the event**: if the element has one (all
+lowercase, i.e. `onformsuccess` for a `formSuccess` event), it is invoked as
+`handler(args, element)` and **no `CustomEvent` is dispatched at all**. A property handler and
+`addEventListener` are therefore mutually exclusive — setting the former silences the latter.
+
+In JSX the property is written in the natural casing, since handler names are lowercased for you:
+
+```jsx
+<r-form onFormSuccess={ (result, form) => this.clear(form) }>...</r-form>
+```
 
 <br/>
 
