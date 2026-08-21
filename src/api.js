@@ -191,6 +191,9 @@ const Api =
                         }
                     }
                     catch (e) {
+                        // Swallowed on purpose: one failing callback must not stop the rest of the
+                        // package from being delivered. Reported so it is not lost entirely.
+                        console.error('Api: unhandled exception while delivering packaged response r' + i + ':', e);
                     }
                 }
 
@@ -462,7 +465,11 @@ const Api =
             if (!success) return
 
             if (this.responseFilter(result, params)) {
-                try { success(result, params); } catch(e) { }
+                // Kept isolated from the promise chain: without this, anything the callback throws
+                // would land in the `catch` below and be retried and reported as a connection
+                // failure. Reported so it is not lost entirely.
+                try { success(result, params); }
+                catch (e) { console.error('Api: unhandled exception in success callback:', e); }
             }
         })
         .catch(err =>
