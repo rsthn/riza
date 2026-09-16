@@ -121,7 +121,17 @@ Optional callback invoked whenever a field is set programmatically. Its return v
 
 # Notes
 
-- When the form submission is in progress, the form element will get CSS class `.busy`, and this class will be removed when the call is completed. This feature can be used to create loading spinners (e.g. the `.loading-indicator` element in the example above is driven purely by CSS off the form's `.busy` class — the component does not toggle it directly).
+- While a submission is in progress the form element carries the CSS class `.busy`, which is removed when the call completes. The same class **is the double-submit guard**: `submit()` returns immediately while it is set, so repeated clicks or Enter presses during a request produce a single call and no extra guard is needed. This feature can be used to create loading spinners (e.g. the `.loading-indicator` element in the example above is driven purely by CSS off the form's `.busy` class — the component does not toggle it directly).
+
+- The two `data-form-action` styles differ in **how the payload is encoded**, not just in the URL. The dot-style name (`auth.login`) sends the fields as regular request parameters — `application/x-www-form-urlencoded`, or `multipart/form-data` when a field holds a `File` or `Blob` — with the function name added as the `f` parameter. Anything containing a `/` is treated as a relative URL instead, and the fields are sent as a JSON request body. An endpoint that reads only the JSON body will therefore see nothing at all when given a dot-style action, and vice versa. `data-method` does not affect this; it is `POST` either way unless set otherwise.
+
+- To address a function by name *and* still send a JSON body, write the action as a relative URL carrying the query parameter — `data-form-action="./?f=auth.login"`. The `/` selects the JSON path, and the URL resolves against the API base URL, so the request goes to the same place the dot-style action would.
+
+- The response is only branched on when it decodes to an object carrying a `response` field. `Api` writes the HTTP status into that field for you when the `Api.WIND_V3` flag is set — `Api.setBaseUrl(url, Api.flags | Api.WIND_V3)` — which is what a service that signals purely through status codes needs. Without it, a body that never carries `response` is treated as a failure regardless of the status.
+
+- Starting values come from `[data-default]` only. The defaults are collected and the model reset over them as the form initialises, so a value assigned to a field before that point is discarded — put it in `data-default` instead.
+
+- When the request itself fails (network error, DNS, CORS) the form shows the fixed English string `"Unable to execute request."` in `.message.error`. It is not routed through `filterString`, so it cannot be localised through `globalThis.messages`; handle `formError` and replace `error` before it renders if you need other wording.
 
 - When the API returns non-200 response code and an `error` field, it will be placed in the `.message.error` element.
 

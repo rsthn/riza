@@ -1,3 +1,7 @@
+# Guides
+
+- [JSX](./jsx.md) - How markup is compiled: attributes as properties, `data-*`, `trait:` bindings and event handlers.
+
 # Modules
 
 - [Api](./api.md) - Interface for [Wind](https://github.com/rsthn/rose-core/blob/master/Wind.md)-compliant APIs.
